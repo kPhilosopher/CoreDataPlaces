@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "CPIndexedTableViewController.h"
 
-@interface CPTopPlacesTableViewController : CPIndexedTableViewController
+@interface CPPlacesTableViewHandler : CPTableViewHandler
 
+@end
+
+@interface CPTopPlacesTableViewController : CPIndexedTableViewController
 
 extern NSString *CPTopPlacesViewAccessibilityLabel;
 
 #pragma mark - Property
 
-@property (retain) id<CPTableViewControllerDataReloading> delegateToUpdateMostRecentPlaces;
+//@property (retain) id<CPTableViewControllerDataReloading> delegateToUpdateMostRecentPlaces;
 @property (retain) PLFlickrDataSource *flickrDataSource;
-@property (assign) id<PictureListTableViewControllerDelegate> delegateToTransfer;
+//@property (assign) id<PictureListTableViewControllerDelegate> delegateToTransfer;
 
 #pragma mark - Initialization
 

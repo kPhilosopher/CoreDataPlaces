@@ -55,15 +55,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self fetchTheElementSections] count];
+//    return [[self fetchTheElementSections] count];
+	[self.tableViewHandler handleNumberOfSectionsInIndexedTableViewController:self];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:section] count];
+//    return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:section] count];
+	return [self.tableViewHandler handleIndexedTableViewController:self numberOfRowsInSection:section];
 }
-
-#pragma mark - Table view data source
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
@@ -143,7 +143,6 @@
 
 #pragma mark - Helper method
 
-//TODO: see if I can change the location of this method.
 - (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 {
 	return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];

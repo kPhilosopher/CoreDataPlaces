@@ -18,6 +18,9 @@
 		CE7EF3AD14D0D4D800D7574E /* CPTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3AB14D0D4D700D7574E /* CPTableViewHandler.m */; };
 		CE7EF3B514D0DB7100D7574E /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3B414D0DB7100D7574E /* CPPlacesTableViewHandler.m */; };
 		CE7EF3B614D0DB7100D7574E /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3B414D0DB7100D7574E /* CPPlacesTableViewHandler.m */; };
+		CE7EF3BD14D0F4F500D7574E /* PlaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3B914D0F4F500D7574E /* PlaceTableViewController.m */; };
+		CE7EF3BE14D0F4F500D7574E /* TopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3BC14D0F4F500D7574E /* TopPlacesTableViewController.m */; };
+		CE7EF3C114D0F50700D7574E /* IndexedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EF3C014D0F50700D7574E /* IndexedTableViewController.m */; };
 		CE80D84E14CCC7C500BDF83D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE80D85014CCC7C500BDF83D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
 		CE80D85214CCC7C500BDF83D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85114CCC7C500BDF83D /* CoreGraphics.framework */; };
@@ -74,6 +77,14 @@
 		CE7EF3AB14D0D4D700D7574E /* CPTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTableViewHandler.m; sourceTree = "<group>"; };
 		CE7EF3B314D0DB7000D7574E /* CPPlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesTableViewHandler.h; sourceTree = "<group>"; };
 		CE7EF3B414D0DB7100D7574E /* CPPlacesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesTableViewHandler.m; sourceTree = "<group>"; };
+		CE7EF3B714D0F4F400D7574E /* PlaceTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlaceTableViewController-Internal.h"; sourceTree = "<group>"; };
+		CE7EF3B814D0F4F400D7574E /* PlaceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewController.h; sourceTree = "<group>"; };
+		CE7EF3B914D0F4F500D7574E /* PlaceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewController.m; sourceTree = "<group>"; };
+		CE7EF3BA14D0F4F500D7574E /* TopPlacesTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TopPlacesTableViewController-Internal.h"; sourceTree = "<group>"; };
+		CE7EF3BB14D0F4F500D7574E /* TopPlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesTableViewController.h; sourceTree = "<group>"; };
+		CE7EF3BC14D0F4F500D7574E /* TopPlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesTableViewController.m; sourceTree = "<group>"; };
+		CE7EF3BF14D0F50700D7574E /* IndexedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedTableViewController.h; sourceTree = "<group>"; };
+		CE7EF3C014D0F50700D7574E /* IndexedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableViewController.m; sourceTree = "<group>"; };
 		CE80D84914CCC7C500BDF83D /* CoreDataPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE80D84D14CCC7C500BDF83D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE80D84F14CCC7C500BDF83D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,11 +194,13 @@
 		CE0B38E014CCD65B006A85BB /* IndexedTableMVC */ = {
 			isa = PBXGroup;
 			children = (
+				CE7EF3BF14D0F50700D7574E /* IndexedTableViewController.h */,
+				CE7EF3C014D0F50700D7574E /* IndexedTableViewController.m */,
 				CEF1451414CE931600D21E00 /* CPIndexedTableViewController.h */,
 				CEF1451514CE931700D21E00 /* CPIndexedTableViewController.m */,
+				CE7EF3AB14D0D4D700D7574E /* CPTableViewHandler.m */,
 				CE7EF3A914D0D46300D7574E /* CPTableViewControllerDataMutating.h */,
 				CE7EF3AA14D0D4D700D7574E /* CPTableViewHandler.h */,
-				CE7EF3AB14D0D4D700D7574E /* CPTableViewHandler.m */,
 				CEF1451C14CF185900D21E00 /* Model */,
 			);
 			path = IndexedTableMVC;
@@ -327,11 +340,17 @@
 		CEF1454014CF88DC00D21E00 /* TopPlacesTableMVC */ = {
 			isa = PBXGroup;
 			children = (
+				CE7EF3B714D0F4F400D7574E /* PlaceTableViewController-Internal.h */,
+				CE7EF3B814D0F4F400D7574E /* PlaceTableViewController.h */,
+				CE7EF3B914D0F4F500D7574E /* PlaceTableViewController.m */,
+				CE7EF3BA14D0F4F500D7574E /* TopPlacesTableViewController-Internal.h */,
+				CE7EF3BB14D0F4F500D7574E /* TopPlacesTableViewController.h */,
+				CE7EF3BC14D0F4F500D7574E /* TopPlacesTableViewController.m */,
 				CEF1455514CF8F8600D21E00 /* CPTopPlacesTableViewController.h */,
 				CEF1455814CF90CC00D21E00 /* CPTopPlacesTableViewController-Internal.h */,
 				CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */,
-				CE7EF3B314D0DB7000D7574E /* CPPlacesTableViewHandler.h */,
 				CE7EF3B414D0DB7100D7574E /* CPPlacesTableViewHandler.m */,
+				CE7EF3B314D0DB7000D7574E /* CPPlacesTableViewHandler.h */,
 				CEF1454A14CF88FC00D21E00 /* Model */,
 			);
 			path = TopPlacesTableMVC;
@@ -475,6 +494,9 @@
 				CEF1455714CF8F8700D21E00 /* CPTopPlacesTableViewController.m in Sources */,
 				CE7EF3AC14D0D4D800D7574E /* CPTableViewHandler.m in Sources */,
 				CE7EF3B514D0DB7100D7574E /* CPPlacesTableViewHandler.m in Sources */,
+				CE7EF3BD14D0F4F500D7574E /* PlaceTableViewController.m in Sources */,
+				CE7EF3BE14D0F4F500D7574E /* TopPlacesTableViewController.m in Sources */,
+				CE7EF3C114D0F50700D7574E /* IndexedTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

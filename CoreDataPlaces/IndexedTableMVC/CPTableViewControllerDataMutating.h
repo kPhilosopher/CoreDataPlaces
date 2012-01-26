@@ -13,7 +13,9 @@
 #pragma mark - Protocol method
 
 - (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
+
 - (NSMutableArray *)fetchTheElementSections;
+
 - (NSArray *)fetchTheRawData;
 
 @end
