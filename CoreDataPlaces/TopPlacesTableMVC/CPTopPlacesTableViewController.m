@@ -20,7 +20,6 @@ extern NSString *CPAlertMessage;
 
 @end
 
-
 @implementation CPTopPlacesTableViewController
 
 NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
@@ -47,18 +46,8 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 		self.flickrDataSource = theFlickrDataSource;
 		[self.flickrDataSource addObserver:self forKeyPath:@"alertViewSwitch" options:NSKeyValueObservingOptionNew context:NULL];
 		[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
-		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-		NSLog([NSString stringWithFormat:@"init of Top places"]);
-		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	}
     return self;
-}
-
-//TODO: put where the convenient method should be.
-- (void)CP_refreshTheTopPlacesList;
-{
-	[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
-	[self reIndexTheTableViewData];
 }
 
 #pragma mark - View lifecycle
@@ -69,39 +58,13 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 	[super dealloc];
 }
 
-#pragma mark - Table view data source
+#pragma mark - Convenience method
 
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-//{
-//	return [super sectionIndexTitlesForTableView:tableView];
-//}
-//
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//	return [super tableView:tableView titleForHeaderInSection:section];
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-//{
-//	return [super tableView:tableView sectionForSectionIndexTitle:title atIndex:index];
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//	return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-//}
-
-#pragma mark - Table view delegate method
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//	RefinedElement *refinedElement = [self getTheRefinedElementInTheElementSectionsWithTheIndexPath:indexPath];
-//	NSDictionary *dictionaryToAddToMostRecentList = refinedElement.dictionary;
-//	[self.flickrDataSource addToTheMostRecentPlacesCollectionsTheFollowingDictionary:dictionaryToAddToMostRecentList];
-//	[self.delegateToUpdateMostRecentPlaces reIndexTheTableViewData];
-//	
-//	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
-//}
+- (void)CP_refreshTheTopPlacesList;
+{
+	[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
+	[self indexTheTableViewData];
+}
 
 #pragma mark - KVO observer implementation
 
@@ -132,14 +95,5 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 {
 	return self.flickrDataSource.flickrTopPlaces;
 }
-
-//#pragma mark - DataReloadForTableViewControllerProtocol implementation
-//
-//- (void)reIndexTheTableViewData
-//{
-//	[self setTheElementSectionsToTheFollowingArray:
-//	 [self.dataIndexDelegate indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
-//	[self.tableView reloadData];
-//}
 
 @end

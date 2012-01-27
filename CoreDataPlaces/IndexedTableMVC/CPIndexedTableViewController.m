@@ -49,10 +49,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	if ([self fetchTheElementSections] == nil) {
-		NSMutableArray *indexedSections = [self.dataIndexDelegate indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]];
-		[self setTheElementSectionsToTheFollowingArray:indexedSections];
-	}
+	if ([self fetchTheElementSections] == nil)
+		[self indexTheTableViewData];
 	return [self.tableViewHandlingDelegate numberOfSectionsInIndexedTableViewController:self];
 }
 
@@ -115,7 +113,7 @@
 
 #pragma mark - DataReloadForTableViewControllerProtocol implementation
 
-- (void)reIndexTheTableViewData
+- (void)indexTheTableViewData
 {
 	[self setTheElementSectionsToTheFollowingArray:
 	 [self.dataIndexDelegate indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];

@@ -22,7 +22,7 @@
 	{
 		CPTopPlacesTableViewController *topPlacesTableViewController = (CPTopPlacesTableViewController *)indexedTableViewController;
 		[topPlacesTableViewController.flickrDataSource addToTheMostRecentPlacesCollectionsTheFollowingDictionary:dictionaryToAddToMostRecentList];
-//		[topPlacesTableViewController.delegateToUpdateMostRecentPlaces reIndexTheTableViewData];
+//		[topPlacesTableViewController.delegateToUpdateMostRecentPlaces indexTheTableViewData];
 	}
 	
 	[super indexedTableViewController:indexedTableViewController didSelectRowAtIndexPath:indexPath];

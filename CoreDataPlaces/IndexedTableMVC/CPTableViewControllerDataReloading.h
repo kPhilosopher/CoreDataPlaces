@@ -10,6 +10,6 @@
 
 @protocol CPTableViewControllerDataReloading <NSObject>
 
-- (void)reIndexTheTableViewData;
+- (void)indexTheTableViewData;
 
 @end
