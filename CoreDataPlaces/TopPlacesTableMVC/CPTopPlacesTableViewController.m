@@ -10,44 +10,63 @@
 @interface CPTopPlacesTableViewController ()
 {
 @private
-	id<CPTableViewControllerDataReloading> CP_delegateToUpdateMostRecentPlaces;
+//	id<CPTableViewControllerDataReloading> CP_delegateToUpdateMostRecentPlaces;
 	CPFlickrDataSource *CP_flickrDataSource;
-	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
+//	id<PictureListTableViewControllerDelegate> CP_delegateToTransfer;
 }
+
+extern NSString *CPAlertTitle;
+extern NSString *CPAlertMessage;
+
 @end
 
 
 @implementation CPTopPlacesTableViewController
 
 NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
+NSString *CPAlertTitle = @"Cannot Obtain Data";
+NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Synthesize
 
-@synthesize delegateToUpdateMostRecentPlaces = _delegateToUpdateMostRecentPlaces;
+//@synthesize delegateToUpdateMostRecentPlaces = _delegateToUpdateMostRecentPlaces;
+@synthesize flickrDataSource = CP_flickrDataSource;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(CPDataIndexer *)dataIndexer withTableViewHandler:(CPTableViewHandler *)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate;
 {
-	self = [super initWithStyle:style withDataIndexer:dataIndexer withTableViewHandler:tableViewHandler];
+	self = [super initWithStyle:style withDataIndexer:dataIndexDelegate withTableViewHandler:tableViewHandlingDelegate];
     if (self)
 	{
 		self.title = @"Top Places";
-		self.view.accessibilityLabel = TopPlacesViewAccessibilityLabel;
+		self.view.accessibilityLabel = CPTopPlacesViewAccessibilityLabel;
 		
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)];
 		
 		self.flickrDataSource = theFlickrDataSource;
-		[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
 		[self.flickrDataSource addObserver:self forKeyPath:@"alertViewSwitch" options:NSKeyValueObservingOptionNew context:NULL];
+		[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
+		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+		NSLog([NSString stringWithFormat:@"init of Top places"]);
+		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	}
     return self;
 }
 
+//TODO: put where the convenient method should be.
 - (void)CP_refreshTheTopPlacesList;
 {
 	[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
 	[self reIndexTheTableViewData];
+}
+
+#pragma mark - View lifecycle
+
+- (void)dealloc
+{
+	[CP_flickrDataSource release];
+	[super dealloc];
 }
 
 #pragma mark - Table view data source
@@ -74,26 +93,26 @@ NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
 
 #pragma mark - Table view delegate method
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
 //	RefinedElement *refinedElement = [self getTheRefinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 //	NSDictionary *dictionaryToAddToMostRecentList = refinedElement.dictionary;
 //	[self.flickrDataSource addToTheMostRecentPlacesCollectionsTheFollowingDictionary:dictionaryToAddToMostRecentList];
 //	[self.delegateToUpdateMostRecentPlaces reIndexTheTableViewData];
-	
-	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
-}
+//	
+//	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
+//}
 
 #pragma mark - KVO observer implementation
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ([[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:PLAlertSwitchOn])
+	if ([[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:CPAlertSwitchOn])
 	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];	
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:CPAlertTitle message:CPAlertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];	
 		[alert show];
 		[alert release];
-		[object setValue:PLAlertSwitchOff forKey:keyPath];
+		[object setValue:CPAlertSwitchOff forKey:keyPath];
 	}
 }
 
@@ -113,5 +132,14 @@ NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
 {
 	return self.flickrDataSource.flickrTopPlaces;
 }
+
+//#pragma mark - DataReloadForTableViewControllerProtocol implementation
+//
+//- (void)reIndexTheTableViewData
+//{
+//	[self setTheElementSectionsToTheFollowingArray:
+//	 [self.dataIndexDelegate indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
+//	[self.tableView reloadData];
+//}
 
 @end

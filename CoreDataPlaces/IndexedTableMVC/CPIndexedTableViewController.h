@@ -8,49 +8,43 @@
 
 #import <UIKit/UIKit.h>
 #import "CPDataIndexer.h"
-//#import "CPTableViewHandler.h"
 #import "CPTableViewControllerDataMutating.h"
+#import "CPTableViewControllerDataReloading.h"
 
 @class CPIndexedTableViewController;
 
-@interface CPTableViewHandler : NSObject
+@protocol CPTableViewDelegate <NSObject>
 
 #pragma mark - Table view data source handler method
 
-- (NSInteger)handleNumberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 
-- (NSArray *)handleSectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 
-- (NSString *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
+- (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
 
-- (UITableViewCell *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 #pragma mark - Table view delegate handler method
 
-- (void)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
-@interface CPIndexedTableViewController : UITableViewController <CPTableViewControllerDataMutating>
+@interface CPIndexedTableViewController : UITableViewController <CPTableViewControllerDataMutating, CPTableViewControllerDataReloading>
 
 #pragma mark - Properties
 
-@property (retain) CPDataIndexer *dataIndexer;
-@property (retain) CPTableViewHandler *tableViewHandler;
-
-//#pragma mark - Methods to override
-//
-//- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
-//- (NSMutableArray *)fetchTheElementSections;
-//- (NSArray *)fetchTheRawData;
+@property (retain) id<CPDataIndexDelegate> dataIndexDelegate;
+@property (retain) id<CPTableViewDelegate> tableViewHandlingDelegate;
 
 #pragma mark - Intialization
 
-- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(CPDataIndexer *)dataIndexer withTableViewHandler:(CPTableViewHandler *)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate;
 
 #pragma mark - Helper method
 

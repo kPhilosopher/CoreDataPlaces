@@ -14,7 +14,6 @@
 	NSInteger CP_sectionNumber;
 	NSString *CP_comparable;
 }
-
 @end
 
 @implementation CPRefinedElement

@@ -8,12 +8,12 @@
 #import "CPAppDelegate.h"
 
 @interface CPAppDelegate ()
-{
-@private
-	CPTabBarController *CP_tabBarController;
-//	CPScrollableImageViewController *CP_scrollableImageVC;
-	CPSplitViewController *CP_splitVC;
-}
+//{
+//@private
+//	CPTabBarController *CP_tabBarController;
+////	CPScrollableImageViewController *CP_scrollableImageVC;
+//	CPSplitViewController *CP_splitVC;
+//}
 
 #pragma mark - Readability method
 

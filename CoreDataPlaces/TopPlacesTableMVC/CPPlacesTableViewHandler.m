@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPTopPlacesTableViewController.h"
-//#import "CPPlacesTableViewHandler.h"
+//#import "CPTopPlacesTableViewController.h"
+#import "CPPlacesTableViewHandler.h"
 #import "NSString+TitleExtraction.h"
 #import "NSString+FindCharacterInSet.h"
 
@@ -15,22 +15,22 @@
 
 #pragma mark - Table view data source handler method
 
-- (NSInteger)handleNumberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
     return [[indexedTableViewController fetchTheElementSections] count];
 }
 
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 {
     return [(NSArray *)[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count];
 }
 
-- (NSArray *)handleSectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
 	return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
 }
 
-- (NSString *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
+- (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 {
 	
     if ([[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count] > 0)
@@ -38,13 +38,13 @@
     return nil;
 }
 
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
 {
     return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
 }
 
 //TODO: refactor this method
-- (UITableViewCell *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     static NSString *CellIdentifier = @"Cell";
     
@@ -72,7 +72,7 @@
 
 #pragma mark - Table view delegate handler method
 
-- (void)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
 	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 	NSString *placeId = [refinedElement.dictionary objectForKey:@"place_id"];

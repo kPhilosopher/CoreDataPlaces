@@ -6,17 +6,18 @@
 //
 
 #import "CPTabBarController.h"
+#import "CPTopPlacesTableViewController.h"
 
 @interface CPTabBarController ()
-{
-@private
-	UINavigationController *CP_topPlacesNavigationViewController;
-	UINavigationController *CP_mostRecentPlacesNavigationViewController;
-	UINavigationController *CP_favoritePlacesNavigationViewController;
-//	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
-//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
-//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
-}
+//{
+//@private
+//	UINavigationController *CP_topPlacesNavigationViewController;
+//	UINavigationController *CP_mostRecentPlacesNavigationViewController;
+//	UINavigationController *CP_favoritePlacesNavigationViewController;
+////	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
+////	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
+////	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
+//}
 
 #pragma mark - Private method
 

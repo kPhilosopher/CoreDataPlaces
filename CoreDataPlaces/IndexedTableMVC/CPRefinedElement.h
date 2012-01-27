@@ -9,6 +9,8 @@
 
 @interface CPRefinedElement : NSObject <NSCopying>
 
+#pragma mark - Property
+
 @property (retain) NSDictionary *dictionary;
 @property NSInteger sectionNumber;
 @property (copy) NSString *comparable;

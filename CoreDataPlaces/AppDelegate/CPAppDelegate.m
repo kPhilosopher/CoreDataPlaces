@@ -7,6 +7,15 @@
 
 #import "CPAppDelegate-Internal.h"
 
+@interface CPAppDelegate ()
+{
+@private
+	CPTabBarController *CP_tabBarController;
+	//	CPScrollableImageViewController *CP_scrollableImageVC;
+	CPSplitViewController *CP_splitVC;
+}
+@end
+
 @implementation CPAppDelegate
 
 #pragma mark - Synthesize

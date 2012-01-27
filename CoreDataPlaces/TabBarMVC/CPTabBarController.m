@@ -6,29 +6,40 @@
 //
 
 #import "CPTabBarController-Internal.h"
+#import "CPFlickrDataHandler.h"
+#import "CPPlacesDataIndexer.h"
 
 @interface CPTabBarController()
+{
+@private
+	UINavigationController *CP_topPlacesNavigationViewController;
+	UINavigationController *CP_mostRecentPlacesNavigationViewController;
+	UINavigationController *CP_favoritePlacesNavigationViewController;
+	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
+	//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
+	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
+}
 
 @property (retain) UINavigationController *topPlacesNavigationViewController;
 @property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
 @property (retain) UINavigationController *favortiePlacesNavigationViewController;
-//@property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
+@property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
 //@property (retain) CPMostRecentPlacesTableViewController *mostRecentPlacesTableViewController;
 
 @end
 
 @implementation CPTabBarController
 
+NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
+
 #pragma mark - Synthesize
 
 @synthesize topPlacesNavigationViewController = CP_topPlacesNavigationViewController;
 @synthesize mostRecentPlacesNavigationViewController = CP_mostRecentPlacesNavigationViewController;
 @synthesize favortiePlacesNavigationViewController = CP_favoritePlacesNavigationViewController;
-//@synthesize topPlacesTableViewController = CP_topPlacesTableViewController;
+@synthesize topPlacesTableViewController = CP_topPlacesTableViewController;
 //@synthesize mostRecentPlacesTableViewController = CP_mostRecentPlacesTableViewController;
 //@synthesize delegateToTransfer = CP_delegateToTransfer;
-
-NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - Initalization
 
@@ -52,7 +63,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 -(void)dealloc
 {
-//	[CP_topPlacesTableViewController release];
+	[CP_topPlacesTableViewController release];
 //	[CP_mostRecentPlacesTableViewController release];
 	[CP_topPlacesNavigationViewController release];
 	[CP_mostRecentPlacesNavigationViewController release];
@@ -85,10 +96,21 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 }
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 {
-//	FlickrDataHandler *flickrDataHandler = [[FlickrDataHandler alloc] init];
+	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
+	[flickrDataHandler release];
+	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
+	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
+	
+	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate];
+	
+	[flickrDataSource release]; 
+	[tableViewHandlerDelegate release];
+	[dataIndexerDelegate release];
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
 //	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
 //	CPFlickrDataSource *theFlickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
+	
 	
 //	self.topPlacesTableViewController = 
 //	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource withDataIndexer:placesDataIndexerForTopPlaces] autorelease];
@@ -106,7 +128,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 }
 -(void)RD_pushViewControllersToNavigationViewControllers;
 {
-//	[self.topPlacesNavigationViewController pushViewController:self.topPlacesTableViewController animated:YES];
+	[self.topPlacesNavigationViewController pushViewController:self.topPlacesTableViewController animated:YES];
 //	[self.mostRecentPlacesNavigationViewController pushViewController:self.mostRecentPlacesTableViewController animated:YES];
 }
 -(void)RD_setTabBarItemToSystemItems;
@@ -127,8 +149,8 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 {
 	[self.topPlacesNavigationViewController release];
 	[self.mostRecentPlacesNavigationViewController release];
+	[self.topPlacesTableViewController release];
 //	[self.mostRecentPlacesTableViewController release];
-//	[self.topPlacesTableViewController release];
 }
 
 @end

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CPIndexedTableViewController.h"
+#import "CPPlacesTableViewHandler.h"
+#import "CPFlickrDataSource.h"
 
-@interface CPPlacesTableViewHandler : CPTableViewHandler
+@interface CPTopPlacesTableViewHandler : CPPlacesTableViewHandler
 
 @end
 
@@ -20,11 +22,12 @@ extern NSString *CPTopPlacesViewAccessibilityLabel;
 #pragma mark - Property
 
 //@property (retain) id<CPTableViewControllerDataReloading> delegateToUpdateMostRecentPlaces;
-@property (retain) PLFlickrDataSource *flickrDataSource;
+@property (retain) CPFlickrDataSource *flickrDataSource;
 //@property (assign) id<PictureListTableViewControllerDelegate> delegateToTransfer;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(CPDataIndexer *)dataIndexer withTableViewHandler:(CPTableViewHandler *)tableViewHandler;
+//- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(CPDataIndexer *)dataIndexer withTableViewHandler:(CPTableViewHandler *)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate;
 
 @end
