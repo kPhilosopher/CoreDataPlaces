@@ -10,14 +10,14 @@
 @interface CPDataIndexer ()
 {
 @private
-//	NSArray *CP_rawData;
-//	NSMutableArray *CP_theElementSections;
 	CPRefinedElement *CP_refinedElement;
 }
 
 @end
 
 @implementation CPDataIndexer
+
+#pragma mark - Synthesize
 
 @synthesize refinedElement = CP_refinedElement;
 
@@ -62,11 +62,10 @@
 
 	
 	//3. create the sectionsArray
-	NSInteger highSection = [self setSectionCount];
+	NSInteger highSection = [self sectionCount];
 	NSMutableArray *sectionArrays = [[NSMutableArray alloc]initWithCapacity:highSection];
 	
 	//4. make the empty arrays for each sections.
-//	[self RD_setArraysForEachSectionsWithinSectionArrays:sectionArrays];
 	for (int i = 0 ; i < highSection; i++) 
 		[sectionArrays addObject:[[NSMutableArray alloc] initWithCapacity:0]];
 
@@ -80,26 +79,23 @@
 	return theElementSections;
 }
 
-//- (void)RD_setArraysForEachSectionsWithinSectionArrays:(NSMutableArray *)sectionArrays;
-//{
-//	for (int i = 0 ; i < [sectionArrays count]; i++) 
-//		[sectionArrays addObject:[[NSMutableArray alloc] initWithCapacity:0]];
-//}
-
-
-#pragma mark - Methods to be overridden
-
 - (void)refineTheRawElementDictionary:(NSDictionary *)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
 {
-	return;
+	CPRefinedElement *refinedElement = [self.refinedElement copy];
+	refinedElement.comparable = [refinedElement extractComparableFromDictionary:rawElement];
+	refinedElement.dictionary = rawElement;
+	[temporaryDataElements addObject:refinedElement];
+	[refinedElement release];
 }
+
+#pragma mark - Instance method to be overridden
 
 - (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
 	return;
 }
 
-- (NSInteger)setSectionCount;
+- (NSInteger)sectionCount;
 {
 	return 0;
 }

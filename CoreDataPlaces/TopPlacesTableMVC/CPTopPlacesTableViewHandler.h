@@ -2,7 +2,7 @@
 //  CPTopPlacesTableViewHandler.h
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 1/26/12.
+//  Created by Jinwoo Baek on 1/27/12.
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 

@@ -96,17 +96,18 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 }
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 {
-	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
-	[flickrDataHandler release];
-	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
-	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
-	
-	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate];
-	
-	[flickrDataSource release]; 
-	[tableViewHandlerDelegate release];
-	[dataIndexerDelegate release];
+//	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+//	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
+//	[flickrDataHandler release];
+//	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
+//	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
+//	
+//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate];
+//	
+//	[flickrDataSource release]; 
+//	[tableViewHandlerDelegate release];
+//	[dataIndexerDelegate release];
+	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewController];
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
 //	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
 //	CPFlickrDataSource *theFlickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];

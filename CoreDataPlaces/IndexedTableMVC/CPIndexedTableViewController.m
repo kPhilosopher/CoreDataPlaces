@@ -54,6 +54,11 @@
 	return [self.tableViewHandlingDelegate numberOfSectionsInIndexedTableViewController:self];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return [self.tableViewHandlingDelegate indexedTableViewController:self cellForRowAtIndexPath:indexPath];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return [self.tableViewHandlingDelegate indexedTableViewController:self numberOfRowsInSection:section];
@@ -74,10 +79,6 @@
 	return [self.tableViewHandlingDelegate indexedTableViewController:self sectionForSectionIndexTitle:title atIndex:index];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return [self.tableViewHandlingDelegate indexedTableViewController:self cellForRowAtIndexPath:indexPath];
-}
 
 #pragma mark - Table view delegate method
 

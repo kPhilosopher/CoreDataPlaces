@@ -19,4 +19,8 @@
 
 - (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement;
 
+#pragma mark - Recommended to override
+
+- (id)copyWithZone:(NSZone *)zone;
+
 @end

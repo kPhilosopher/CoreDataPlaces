@@ -16,10 +16,12 @@
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 //- (void)convertThe:(NSDictionary *)rawElement IntoRefinedElementsAndAddTo:(NSMutableArray *)temporaryDataElements;
 - (void)refineTheRawElementDictionary:(NSDictionary *)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
+
+
 //- (void)setTheSectionNumberForAllTheElementsIn:(NSMutableArray *)temporaryDataElements;
 - (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 //- (NSInteger)setTheTotalNumberOfSections;
-- (NSInteger)setSectionCount;
+- (NSInteger)sectionCount;
 //- (void)sortTheElementsInEach:(NSMutableArray *)sectionArray andAddTo:(NSMutableArray *)elementSections;
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray thenAddToArrayOfSections:(NSMutableArray *)elementSections;
 
@@ -34,21 +36,5 @@
 #pragma mark - Intialization
 
 - (id)initWithRefinedElement:(CPRefinedElement *)refinedElement;
-
-//#pragma mark - Methods
-//
-////- (NSMutableArray *)returnTheIndexedSectionsOfTheGiven:(NSArray *)rawData;
-//- (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
-//
-//#pragma mark - Methods to override
-//
-////- (void)convertThe:(NSDictionary *)rawElement IntoRefinedElementsAndAddTo:(NSMutableArray *)temporaryDataElements;
-//- (void)refineTheRawElementDictionary:(NSDictionary *)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
-////- (void)setTheSectionNumberForAllTheElementsIn:(NSMutableArray *)temporaryDataElements;
-//- (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
-////- (NSInteger)setTheTotalNumberOfSections;
-//- (NSInteger)setSectionCount;
-////- (void)sortTheElementsInEach:(NSMutableArray *)sectionArray andAddTo:(NSMutableArray *)elementSections;
-//- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray thenAddToArrayOfSections:(NSMutableArray *)elementSections;
 
 @end

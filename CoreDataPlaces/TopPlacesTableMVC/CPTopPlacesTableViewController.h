@@ -11,10 +11,6 @@
 #import "CPPlacesTableViewHandler.h"
 #import "CPFlickrDataSource.h"
 
-@interface CPTopPlacesTableViewHandler : CPPlacesTableViewHandler
-
-@end
-
 @interface CPTopPlacesTableViewController : CPIndexedTableViewController
 
 extern NSString *CPTopPlacesViewAccessibilityLabel;
@@ -27,7 +23,10 @@ extern NSString *CPTopPlacesViewAccessibilityLabel;
 
 #pragma mark - Initialization
 
-//- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(CPDataIndexer *)dataIndexer withTableViewHandler:(CPTableViewHandler *)tableViewHandler;
-- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate;
+- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+
+#pragma mark - Factory method
+
++ (id)topPlacesTableViewController;
 
 @end

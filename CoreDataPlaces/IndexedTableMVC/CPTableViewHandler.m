@@ -2,51 +2,55 @@
 //  CPTableViewHandler.m
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 1/25/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Created by Jinwoo Baek on 1/27/12.
 //
 
-#import "CPIndexedTableViewController.h"
-//#import "CPTableViewHandler.h"
+#import "CPTableViewHandler.h"
 
 @implementation CPTableViewHandler
 
 #pragma mark - Table view data source handler method
 
-- (NSInteger)handleNumberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 {
-//    return [[self fetchTheElementSections] count];
-	return nil;
+    return [(NSArray *)[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count];
 }
 
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-//    return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:section] count];
-	return nil;
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [indexedTableViewController.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) 
+        cell = 
+		[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+	
+	return cell;
 }
 
-- (NSArray *)handleSectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
+- (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
-	return nil;
+    return [[indexedTableViewController fetchTheElementSections] count];
 }
 
-- (NSString *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
-{
-    return nil;
-}
-
-- (NSInteger)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
-{
-    return nil;
-}
-- (UITableViewCell *)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
 	return nil;
 }
 
-#pragma mark - Table view delegate handler method
+- (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
+{
+	return nil;
+}
 
-- (void)handleIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
+{
+	return 0;
+}
+
+#pragma mark Table view delegate handler method
+
+- (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
 	return;
 }

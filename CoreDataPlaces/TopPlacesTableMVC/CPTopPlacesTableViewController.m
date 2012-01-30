@@ -6,6 +6,8 @@
 //
 
 #import "CPTopPlacesTableViewController-Internal.h"
+#import "CPPlacesDataIndexer.h"
+#import "CPTopPlacesTableViewHandler.h"
 
 @interface CPTopPlacesTableViewController ()
 {
@@ -33,7 +35,7 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate;
+- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
 {
 	self = [super initWithStyle:style withDataIndexer:dataIndexDelegate withTableViewHandler:tableViewHandlingDelegate];
     if (self)
@@ -48,6 +50,28 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 		[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
 	}
     return self;
+}
+
+#pragma mark - Factory method
+
++ (id)topPlacesTableViewController;
+{
+	
+	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
+	
+	[flickrDataHandler release];
+	
+	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
+	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
+	
+	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withTheFlickrDataSource:flickrDataSource];
+	
+	[flickrDataSource release]; 
+	[tableViewHandlerDelegate release];
+	[dataIndexerDelegate release];
+	
+	return [topPlacesTableViewController autorelease];
 }
 
 #pragma mark - View lifecycle

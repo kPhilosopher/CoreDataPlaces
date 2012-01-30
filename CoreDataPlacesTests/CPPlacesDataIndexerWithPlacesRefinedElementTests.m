@@ -45,7 +45,7 @@
 	
 }
 
-- (void)test_setSectionCount;
+- (void)test_sectionCount;
 {
 	
 }

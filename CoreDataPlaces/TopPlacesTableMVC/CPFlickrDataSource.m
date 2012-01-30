@@ -73,6 +73,7 @@ NSString *CPAlertSwitchOn = @"AlertOn";
 
 - (void)setupFlickrTopPlacesWithFlickrFetcher;
 {
+	//setup so that the following statements can be executed in another thread.
 	id undeterminedFlickrTopPlaces = [self.flickrDataHandler flickrTopPlaces];
 	if ([undeterminedFlickrTopPlaces isKindOfClass:[NSArray class]])
 	{
