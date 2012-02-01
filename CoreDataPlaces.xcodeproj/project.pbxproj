@@ -13,6 +13,9 @@
 		CE0B38DD14CCD5D2006A85BB /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */; };
 		CE0B38DE14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */; };
 		CE0B38DF14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */; };
+		CE60E23614D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */; };
+		CE60E23A14D9F0160000B213 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23914D9F0160000B213 /* CPScrollableImageViewController.m */; };
+		CE60E23C14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60E23B14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib */; };
 		CE80D84E14CCC7C500BDF83D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE80D85014CCC7C500BDF83D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
 		CE80D85214CCC7C500BDF83D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85114CCC7C500BDF83D /* CoreGraphics.framework */; };
@@ -101,6 +104,11 @@
 		CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindCharacterInSet.m"; sourceTree = "<group>"; };
 		CE0B38DA14CCD5D2006A85BB /* NSString+TitleExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TitleExtraction.h"; sourceTree = "<group>"; };
 		CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TitleExtraction.m"; sourceTree = "<group>"; };
+		CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewController.h; sourceTree = "<group>"; };
+		CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewController.m; sourceTree = "<group>"; };
+		CE60E23814D9F0160000B213 /* CPScrollableImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPScrollableImageViewController.h; sourceTree = "<group>"; };
+		CE60E23914D9F0160000B213 /* CPScrollableImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPScrollableImageViewController.m; sourceTree = "<group>"; };
+		CE60E23B14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPScrollableImageViewController_iPhone.xib; sourceTree = "<group>"; };
 		CE7EF3A514D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.h; sourceTree = "<group>"; };
 		CE7EF3A614D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.m; sourceTree = "<group>"; };
 		CE7EF3A914D0D46300D7574E /* CPTableViewControllerDataMutating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewControllerDataMutating.h; sourceTree = "<group>"; };
@@ -254,6 +262,25 @@
 			path = IndexedTableMVC;
 			sourceTree = "<group>";
 		};
+		CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */,
+				CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */,
+			);
+			path = CoreDataPhotosMVC;
+			sourceTree = "<group>";
+		};
+		CE60E23714D9EF6E0000B213 /* ScrollableImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE60E23814D9F0160000B213 /* CPScrollableImageViewController.h */,
+				CE60E23914D9F0160000B213 /* CPScrollableImageViewController.m */,
+				CE60E23B14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib */,
+			);
+			path = ScrollableImageViewController;
+			sourceTree = "<group>";
+		};
 		CE80D83E14CCC7C500BDF83D = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +326,8 @@
 				CEEF706C14D35A0C006756EA /* PhotosTableMVC */,
 				CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */,
 				CE989F4014D7B01D00AB58C9 /* FavoritesTableMVC */,
+				CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */,
+				CE60E23714D9EF6E0000B213 /* ScrollableImageViewController */,
 				CE80D88914CCC9FE00BDF83D /* Flickr */,
 				CE989F6114D88A6400AB58C9 /* Entities */,
 				CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */,
@@ -570,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE80D85A14CCC7C500BDF83D /* InfoPlist.strings in Resources */,
+				CE60E23C14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +668,8 @@
 				CE989F4714D7B1E000AB58C9 /* CPFavoritesTableViewController.m in Sources */,
 				CE989F6414D88A8F00AB58C9 /* Photo.m in Sources */,
 				CE989F6814D88A9300AB58C9 /* Place.m in Sources */,
+				CE60E23614D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m in Sources */,
+				CE60E23A14D9F0160000B213 /* CPScrollableImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

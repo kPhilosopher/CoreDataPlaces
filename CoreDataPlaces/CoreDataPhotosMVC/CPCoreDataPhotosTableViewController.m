@@ -1,14 +1,17 @@
 //
-//  CPFavoritesTableViewController.m
+//  CPCoreDataPhotosTableViewController.m
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 1/30/12.
+//  Created by Jinwoo Baek on 2/1/12.
+//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPFavoritesTableViewController.h"
-#import "Place.h"
+#import "CPCoreDataPhotosTableViewController.h"
+#import "Photo.h"
 
-@implementation CPFavoritesTableViewController
+@implementation CPCoreDataPhotosTableViewController
+
+#pragma mark - Initilization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;
 {
@@ -18,12 +21,11 @@
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"title";
 		
-		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedContext];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@", [NSNumber numberWithBool:NO]];
+//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@", [NSNumber numberWithBool:NO]];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
@@ -35,14 +37,14 @@
 											managedObjectContext:managedContext
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
-
+		
 		// test it
 		NSError *error;
 		if ([localFetchedResultsController performFetch:&error]) {
 			NSLog(@"results");
 			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-			for (Place *place in localFetchedResultsController.fetchedObjects) {
-				NSLog(@"%@", place);
+			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
+				NSLog(@"%@", photo);
 			}
 		}
 		else {
@@ -50,7 +52,7 @@
 		}
 		
 		[fetchRequest release]; fetchRequest = nil;
-
+		
 		self.fetchedResultsController = localFetchedResultsController;
 		[localFetchedResultsController release];
 		
@@ -58,7 +60,8 @@
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
 		self.searchKey = nil;
-		self.title = @"Favorites";
+		//TODO: title of the given Place
+//		self.title = @"";
 	}
     return self;
 }

@@ -68,24 +68,62 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]]) 
 	{
 		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
-	
-		Place *chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedContext];
-//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedContext];
-		chosenPlace.title = placesRefinedElement.title;
-		chosenPlace.subtitle = placesRefinedElement.subtitle;
-		chosenPlace.placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
-		chosenPlace.hasFavoritePhoto = NO;
+		NSString *placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
+		//TODO: check if a place with placeID exists.
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedContext];
+		fetchRequest.fetchBatchSize = 1;
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
+		NSSortDescriptor *sortDescriptor = nil;
+		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+		[fetchRequest setSortDescriptors:sortDescriptors];
+		[sortDescriptors release];
+		
+		Place *chosenPlace;
 		
 		NSError *error = nil;
-		
-		NSLog(@"about to save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
-		if (![managedContext save:&error])
+		NSUInteger returnedObjectCount = [managedContext countForFetchRequest:fetchRequest error:&error];
+		if ((returnedObjectCount == 0) && !error)
 		{
-			//handle the error.
+			chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedContext];
+	//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedContext];
+			chosenPlace.title = placesRefinedElement.title;
+			chosenPlace.subtitle = placesRefinedElement.subtitle;
+			chosenPlace.placeID = placeID;
+			chosenPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
+			
+			NSError *error = nil;
+			
+			NSLog(@"about to save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
+			if (![managedContext save:&error])
+			{
+				//handle the error.
+				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+			}
+			NSLog(@"after save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
+		}
+		else if (error)
+		{
 			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 		}
-		NSLog(@"after save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
-		
+		else
+		{
+			NSError *error = nil;
+			NSArray *fetchRequestOutput = [managedContext executeFetchRequest:fetchRequest error:&error];
+			if (!fetchRequestOutput)
+			{
+				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+			}
+			else if ([fetchRequestOutput count] > 1)
+			{
+				NSLog(@"placeID is not a key anymore");
+			}
+			else
+			{
+				chosenPlace = [fetchRequestOutput lastObject];
+			}
+		}
+			
 		CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
 		CPPhotosDataIndexer *dataIndexerDelegate = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
 		[refinedElementForDataIndexer release];
