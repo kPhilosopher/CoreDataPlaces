@@ -13,6 +13,7 @@
 @private
 	id<CPDataIndexDelegate> CP_dataIndexDelegate;
 	id<CPTableViewDelegate> CP_tableViewHandlingDelegate;
+	NSManagedObjectContext *CP_managedObjectContext;
 }
 @end
 
@@ -22,6 +23,7 @@
 
 @synthesize dataIndexDelegate = CP_dataIndexDelegate;
 @synthesize tableViewHandlingDelegate = CP_tableViewHandlingDelegate;
+@synthesize managedObjectContext = CP_managedObjectContext;
 
 #pragma mark - Initialization
 
@@ -56,7 +58,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return [self.tableViewHandlingDelegate indexedTableViewController:self cellForRowAtIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) 
+        cell = 
+		[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+	
+	return [self.tableViewHandlingDelegate indexedTableViewController:self cellForRowAtIndexPath:indexPath withCell:cell];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -79,14 +88,12 @@
 	return [self.tableViewHandlingDelegate indexedTableViewController:self sectionForSectionIndexTitle:title atIndex:index];
 }
 
-
 #pragma mark - Table view delegate method
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {	
 	return [self.tableViewHandlingDelegate indexedTableViewController:self didSelectRowAtIndexPath:indexPath];
 }
-
 
 #pragma mark - Helper method
 

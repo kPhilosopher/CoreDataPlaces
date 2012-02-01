@@ -16,15 +16,8 @@
     return [(NSArray *)[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count];
 }
 
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [indexedTableViewController.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) 
-        cell = 
-		[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-	
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
+{	
 	return cell;
 }
 

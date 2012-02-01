@@ -44,7 +44,7 @@
 //TODO: Refactor this method.
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 {
-	NSMutableArray *theElementSections = [[NSMutableArray alloc] init];
+	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
 	NSMutableArray *temporaryDataElements;
 	
 	//1. refinement process
@@ -67,7 +67,7 @@
 	
 	//4. make the empty arrays for each sections.
 	for (int i = 0 ; i < highSection; i++) 
-		[sectionArrays addObject:[[NSMutableArray alloc] initWithCapacity:0]];
+		[sectionArrays addObject:[[[NSMutableArray alloc] initWithCapacity:0] autorelease]];
 
 	//5. put elements into its section
 	for (CPRefinedElement *element in temporaryDataElements) 
@@ -76,6 +76,8 @@
 	//6. sort the elements within each sections
 	for (NSMutableArray *sectionArray in sectionArrays) 
 		[self sortTheElementsInSectionArray:sectionArray thenAddToArrayOfSections:theElementSections];
+	[sectionArrays release];
+	[temporaryDataElements release];
 	return theElementSections;
 }
 

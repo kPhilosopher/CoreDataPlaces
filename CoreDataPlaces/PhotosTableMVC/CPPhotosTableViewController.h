@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CPIndexedTableViewController.h"
+#import "CPPlacesRefinedElement.h"
+#import "Place.h"
 
 //@class PictureListTableViewController;
 //
@@ -26,6 +28,7 @@ extern NSString *PictureListBackBarButtonAccessibilityLabel;
 
 @property (retain) NSArray *listOfPhotos;
 @property (retain) NSMutableArray *indexedListOfPhotos;
+@property (retain) Place *currentPlace;
 //@property (retain) id <PictureListTableViewControllerDelegate> iPadScrollableImageViewControllerDelegate;
 
 #pragma mark - Initialization
@@ -34,6 +37,7 @@ extern NSString *PictureListBackBarButtonAccessibilityLabel;
 
 #pragma mark - Factory method
 
-+ (id)photosTableViewControllerWithRefinedElement:(CPRefinedElement *)refinedElement;
+//+ (id)photosTableViewControllerWithRefinedElement:(CPRefinedElement *)refinedElement;
++ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedContext;
 
 @end

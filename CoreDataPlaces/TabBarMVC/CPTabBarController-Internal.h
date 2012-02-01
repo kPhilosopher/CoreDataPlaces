@@ -6,20 +6,10 @@
 //
 
 #import "CPTabBarController.h"
-#import "CPTopPlacesTableViewController.h"
 
 @interface CPTabBarController ()
-//{
-//@private
-//	UINavigationController *CP_topPlacesNavigationViewController;
-//	UINavigationController *CP_mostRecentPlacesNavigationViewController;
-//	UINavigationController *CP_favoritePlacesNavigationViewController;
-////	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
-////	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
-////	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
-//}
 
-#pragma mark - Private method
+#pragma mark - Internal method
 
 - (void)CP_setup;
 
@@ -29,7 +19,6 @@
 - (void)RD_setupTheCustomTableViewControllers;
 - (void)RD_pushViewControllersToNavigationViewControllers;
 - (void)RD_setTabBarItemToSystemItems;
-- (void)RD_releaseViewControllersThatArePushedIntoTheViewControllerHierarchy;
 - (void)RD_setDelegateToTransferForTableViewControllersForiPad;
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 - (void)RD_addTheNavigationControllersToThisTabBarController;

@@ -16,6 +16,8 @@ extern NSString *CPTabBarViewAccessibilityLabel;
 
 #pragma mark - Initialization
 
-- (id)initWithDelegate:(id)delegate;
+- (id)initWithDelegate:(id)delegate withManagedObjectContext:(NSManagedObjectContext *)managedContext;
+
+@property (retain) NSManagedObjectContext *managedObjectContext;
 
 @end

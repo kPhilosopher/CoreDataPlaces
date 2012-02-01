@@ -6,6 +6,8 @@
 //
 
 #import "CPTabBarController-Internal.h"
+#import "CPTopPlacesTableViewController.h"
+#import "CPFavoritesTableViewController.h"
 #import "CPFlickrDataHandler.h"
 #import "CPPlacesDataIndexer.h"
 
@@ -14,17 +16,21 @@
 @private
 	UINavigationController *CP_topPlacesNavigationViewController;
 	UINavigationController *CP_mostRecentPlacesNavigationViewController;
-	UINavigationController *CP_favoritePlacesNavigationViewController;
+	UINavigationController *CP_favoritesNavigationViewController;
 	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
 	//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
+	CPFavoritesTableViewController *CP_favoritesTableViewController;
 	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
+	
+	NSManagedObjectContext *CP_managedObjectContext;
 }
 
 @property (retain) UINavigationController *topPlacesNavigationViewController;
 @property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
-@property (retain) UINavigationController *favortiePlacesNavigationViewController;
+@property (retain) UINavigationController *favoritesNavigationViewController;
 @property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
 //@property (retain) CPMostRecentPlacesTableViewController *mostRecentPlacesTableViewController;
+@property (retain) CPFavoritesTableViewController *favoritesTableViewController;
 
 @end
 
@@ -36,24 +42,31 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 @synthesize topPlacesNavigationViewController = CP_topPlacesNavigationViewController;
 @synthesize mostRecentPlacesNavigationViewController = CP_mostRecentPlacesNavigationViewController;
-@synthesize favortiePlacesNavigationViewController = CP_favoritePlacesNavigationViewController;
+@synthesize favoritesNavigationViewController = CP_favoritesNavigationViewController;
 @synthesize topPlacesTableViewController = CP_topPlacesTableViewController;
 //@synthesize mostRecentPlacesTableViewController = CP_mostRecentPlacesTableViewController;
+@synthesize favoritesTableViewController = CP_favoritesTableViewController;
 //@synthesize delegateToTransfer = CP_delegateToTransfer;
+@synthesize managedObjectContext = CP_managedObjectContext;
 
 #pragma mark - Initalization
 
-- (id)initWithDelegate:(id)delegate
+- (id)initWithDelegate:(id)delegate withManagedObjectContext:(NSManagedObjectContext *)managedContext;
 {
-//	self.delegateToTransfer = delegate;
-	return [self init];
+	self = [self init];
+	if (self) {
+		//	self.delegateToTransfer = delegate;
+		self.managedObjectContext = managedContext;
+		[self CP_setup];
+	}
+	return self;
 }
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-		[self CP_setup];
+		
 		self.view.accessibilityLabel = CPTabBarViewAccessibilityLabel;
     }
     return self;
@@ -65,8 +78,10 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 {
 	[CP_topPlacesTableViewController release];
 //	[CP_mostRecentPlacesTableViewController release];
+	[CP_favoritesTableViewController release];
 	[CP_topPlacesNavigationViewController release];
 	[CP_mostRecentPlacesNavigationViewController release];
+	[CP_favoritesNavigationViewController release];
 	[super dealloc];
 }
 
@@ -78,13 +93,12 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	[self RD_setupTheCustomTableViewControllers];
 	[self RD_setTabBarItemToSystemItems];
 	[self RD_addTheNavigationControllersToThisTabBarController];
-	[self RD_releaseViewControllersThatArePushedIntoTheViewControllerHierarchy];
 }
 -(void)RD_allocInitTheNavigationViewControllers;
 {
 	self.topPlacesNavigationViewController = [[[UINavigationController alloc] init] autorelease];
 	self.mostRecentPlacesNavigationViewController = [[[UINavigationController alloc] init] autorelease];
-	self.favortiePlacesNavigationViewController = [[[UINavigationController alloc] init] autorelease];
+	self.favoritesNavigationViewController = [[[UINavigationController alloc] init] autorelease];
 	
 }
 -(void)RD_setupTheCustomTableViewControllers;
@@ -108,6 +122,13 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 //	[tableViewHandlerDelegate release];
 //	[dataIndexerDelegate release];
 	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewController];
+	self.topPlacesTableViewController.managedObjectContext = self.managedObjectContext;
+	self.favoritesTableViewController = [[CPFavoritesTableViewController alloc] 
+										 initWithStyle:UITableViewStylePlain 
+										 managedObjectContext:self.managedObjectContext 
+											customSettingsDictionary:nil];
+	
+	
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
 //	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
 //	CPFlickrDataSource *theFlickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
@@ -131,27 +152,21 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 {
 	[self.topPlacesNavigationViewController pushViewController:self.topPlacesTableViewController animated:YES];
 //	[self.mostRecentPlacesNavigationViewController pushViewController:self.mostRecentPlacesTableViewController animated:YES];
+	[self.favoritesNavigationViewController pushViewController:self.favoritesTableViewController animated:YES];
 }
 -(void)RD_setTabBarItemToSystemItems;
 {
 	self.topPlacesNavigationViewController.tabBarItem = 
-	[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1];
+	[[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1] autorelease];
 	self.mostRecentPlacesNavigationViewController.tabBarItem = 
-	[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:2];
-	self.favortiePlacesNavigationViewController.tabBarItem = 
-	[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:3];
+	[[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:2] autorelease];
+	self.favoritesNavigationViewController.tabBarItem = 
+	[[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:3] autorelease];
 }
 - (void)RD_addTheNavigationControllersToThisTabBarController;
 {
 	self.viewControllers =
-	[NSArray arrayWithObjects: self.topPlacesNavigationViewController, self.mostRecentPlacesNavigationViewController, self.favortiePlacesNavigationViewController, nil];
-}
--(void)RD_releaseViewControllersThatArePushedIntoTheViewControllerHierarchy;
-{
-	[self.topPlacesNavigationViewController release];
-	[self.mostRecentPlacesNavigationViewController release];
-	[self.topPlacesTableViewController release];
-//	[self.mostRecentPlacesTableViewController release];
+	[NSArray arrayWithObjects: self.topPlacesNavigationViewController, self.mostRecentPlacesNavigationViewController, self.favoritesNavigationViewController, nil];
 }
 
 @end

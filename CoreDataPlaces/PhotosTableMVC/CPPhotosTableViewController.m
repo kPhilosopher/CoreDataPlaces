@@ -11,13 +11,13 @@
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
 #import "CPFlickrDataHandler.h"
-#import "CPPlacesRefinedElement.h"
 
 @interface CPPhotosTableViewController ()
 {
 @private
 	NSArray *CP_listOfPhotos;
 	NSMutableArray *CP_indexedListOfPhotos;
+	Place *CP_currentPlace;
 //	id <PictureListTableViewControllerDelegate> CP_iPadScrollableImageViewControllerDelegate;
 }
 @end
@@ -31,10 +31,11 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 @synthesize listOfPhotos = CP_listOfPhotos;
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
+@synthesize currentPlace = CP_currentPlace;
 //@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
 
 #pragma mark - Initialization
-
+//TODO: change the initializers to not include with****
 - (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withPlaceIDString:(NSString *)placeID;
 {
 	self = [super initWithStyle:style withDataIndexer:dataIndexDelegate withTableViewHandler:tableViewHandlingDelegate];
@@ -47,8 +48,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			
 			
 //			start downloading the list of photos in another thread.
+			//!!!!change this so that the handler is given by the initializer
 			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 			self.listOfPhotos = [flickrDataHandler photoListWithPlaceIDString:placeID];
+			[flickrDataHandler release];
 			self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
 			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
 		}
@@ -58,18 +61,43 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Factory method
 
-+ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement;
++ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedContext;
 {
-	NSString *placeID = [refinedElement.dictionary objectForKey:@"place_id"];
-	CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
-	CPPhotosDataIndexer *dataIndexerDelegate = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
-	[refinedElementForDataIndexer release];
-	CPPhotosTableViewHandler *tableViewHandlerDelegate = [[CPPhotosTableViewHandler alloc] init];
-	CPPhotosTableViewController *photosTableViewController = [[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withPlaceIDString:placeID];
-	photosTableViewController.title = [refinedElement.dictionary objectForKey:@"_content"];
-	[tableViewHandlerDelegate release];
-	[dataIndexerDelegate release];
-	return [photosTableViewController autorelease];
+	CPPhotosTableViewController *photosTableViewController;
+	CPPlacesRefinedElement *placesRefinedElement;
+	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]]) 
+	{
+		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
+	
+		Place *chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedContext];
+//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedContext];
+		chosenPlace.title = placesRefinedElement.title;
+		chosenPlace.subtitle = placesRefinedElement.subtitle;
+		chosenPlace.placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
+		chosenPlace.hasFavoritePhoto = NO;
+		
+		NSError *error = nil;
+		
+		NSLog(@"about to save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
+		if (![managedContext save:&error])
+		{
+			//handle the error.
+			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+		}
+		NSLog(@"after save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
+		
+		CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
+		CPPhotosDataIndexer *dataIndexerDelegate = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
+		[refinedElementForDataIndexer release];
+		CPPhotosTableViewHandler *tableViewHandlerDelegate = [[CPPhotosTableViewHandler alloc] init];
+		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withPlaceIDString:chosenPlace.placeID] autorelease];
+		photosTableViewController.title = [refinedElement.dictionary objectForKey:@"_content"];
+		photosTableViewController.currentPlace = chosenPlace;
+		photosTableViewController.managedObjectContext = managedContext;
+		[tableViewHandlerDelegate release];
+		[dataIndexerDelegate release];
+	}
+	return photosTableViewController;
 }
 
 #pragma mark - View lifecycle

@@ -17,9 +17,9 @@
 //}
 
 //TODO: refactor this method.
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
 {
-	UITableViewCell *cell = [super indexedTableViewController:indexedTableViewController cellForRowAtIndexPath:indexPath];
+//	UITableViewCell *cell = [super indexedTableViewController:indexedTableViewController cellForRowAtIndexPath:indexPath];
 	cell.detailTextLabel.text = @"";
 	cell.textLabel.text = @"";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

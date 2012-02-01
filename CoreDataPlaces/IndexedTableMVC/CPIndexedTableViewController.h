@@ -23,7 +23,7 @@
 
 - (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
 
 #pragma mark - Optional
 
@@ -32,7 +32,6 @@
 #pragma mark Table view data source handler method
 
 - (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
-
 
 - (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 
@@ -54,6 +53,7 @@
 
 @property (retain) id<CPDataIndexDelegate> dataIndexDelegate;
 @property (retain) id<CPTableViewDelegate> tableViewHandlingDelegate;
+@property (retain) NSManagedObjectContext *managedObjectContext;
 
 #pragma mark - Intialization
 

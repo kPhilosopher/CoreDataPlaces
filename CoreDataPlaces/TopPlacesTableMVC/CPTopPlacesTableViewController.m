@@ -7,7 +7,7 @@
 
 #import "CPTopPlacesTableViewController-Internal.h"
 #import "CPPlacesDataIndexer.h"
-#import "CPTopPlacesTableViewHandler.h"
+#import "CPPlacesTableViewHandler.h"
 
 @interface CPTopPlacesTableViewController ()
 {
@@ -35,7 +35,7 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
 {
 	self = [super initWithStyle:style withDataIndexer:dataIndexDelegate withTableViewHandler:tableViewHandlingDelegate];
     if (self)
@@ -43,7 +43,7 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 		self.title = @"Top Places";
 		self.view.accessibilityLabel = CPTopPlacesViewAccessibilityLabel;
 		
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)];
+		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)] autorelease];
 		
 		self.flickrDataSource = theFlickrDataSource;
 		[self.flickrDataSource addObserver:self forKeyPath:@"alertViewSwitch" options:NSKeyValueObservingOptionNew context:NULL];
@@ -56,16 +56,15 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 + (id)topPlacesTableViewController;
 {
-	
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
 	
 	[flickrDataHandler release];
 	
-	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
+	CPPlacesTableViewHandler *tableViewHandlerDelegate = [[CPPlacesTableViewHandler alloc] init];
 	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
 	
-	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withTheFlickrDataSource:flickrDataSource];
+	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexer:dataIndexerDelegate tableViewHandler:tableViewHandlerDelegate theFlickrDataSource:flickrDataSource];
 	
 	[flickrDataSource release]; 
 	[tableViewHandlerDelegate release];
