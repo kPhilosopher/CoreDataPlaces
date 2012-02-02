@@ -22,6 +22,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPPhotosTableViewController
 
 NSString *PictureListViewAccessibilityLabel = @"Picture list";

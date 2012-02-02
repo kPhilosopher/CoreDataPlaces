@@ -109,6 +109,7 @@
 		CE60E23814D9F0160000B213 /* CPScrollableImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPScrollableImageViewController.h; sourceTree = "<group>"; };
 		CE60E23914D9F0160000B213 /* CPScrollableImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPScrollableImageViewController.m; sourceTree = "<group>"; };
 		CE60E23B14D9F1E70000B213 /* CPScrollableImageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPScrollableImageViewController_iPhone.xib; sourceTree = "<group>"; };
+		CE60E24114DA4D010000B213 /* CPPhotosTableViewHandler-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewHandler-Internal.h"; sourceTree = "<group>"; };
 		CE7EF3A514D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.h; sourceTree = "<group>"; };
 		CE7EF3A614D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.m; sourceTree = "<group>"; };
 		CE7EF3A914D0D46300D7574E /* CPTableViewControllerDataMutating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewControllerDataMutating.h; sourceTree = "<group>"; };
@@ -489,6 +490,7 @@
 				CE989F2414D36CFC00AB58C9 /* CPPhotosTableViewController.h */,
 				CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */,
 				CE989F3614D3959700AB58C9 /* CPPhotosTableViewHandler.h */,
+				CE60E24114DA4D010000B213 /* CPPhotosTableViewHandler-Internal.h */,
 				CE989F2D14D3889C00AB58C9 /* CPPhotosTableViewHandler.m */,
 				CE989F3014D388A300AB58C9 /* Model */,
 			);

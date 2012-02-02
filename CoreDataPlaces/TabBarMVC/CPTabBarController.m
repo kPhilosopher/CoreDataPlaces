@@ -34,6 +34,8 @@
 
 @end
 
+#pragma mark -
+
 @implementation CPTabBarController
 
 NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";

@@ -3,7 +3,6 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/1/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
 #import "CPScrollableImageViewController.h"
@@ -11,9 +10,13 @@
 @interface CPScrollableImageViewController ()
 {
 @private
+	NSDictionary *CP_imageDictionary;
 	UIImage *CP_image;
 	UIImageView *CP_imageView;
-	NSDictionary *CP_imageDictionary;
+	UIScrollView *CP_scrollView;
+	UISwitch *CP_switchForFavorite;
+	UINavigationController *CP_xibNavigationController;
+//	UIImageView *CP_imageView;
 }
 
 #pragma mark - Property
@@ -22,13 +25,18 @@
 
 @end
 
+#pragma mark -
+
 @implementation CPScrollableImageViewController
 
 #pragma mark - Synthesize
 
+@synthesize imageDictionary = CP_imageDictionary;
 @synthesize image = CP_image;
 @synthesize imageView = CP_imageView;
-@synthesize imageDictionary = CP_imageDictionary;
+@synthesize scrollView = CP_scrollView;
+@synthesize switchForFavorite = CP_switchForFavorite;
+@synthesize xibNavigationController = CP_xibNavigationController;
 
 #pragma mark - Initialization
 

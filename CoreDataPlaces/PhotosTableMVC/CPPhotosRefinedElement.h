@@ -10,6 +10,11 @@
 
 @interface CPPhotosRefinedElement : CPRefinedElement
 
+#pragma mark - Property
+
+@property (copy) NSString *title;
+@property (copy) NSString *subtitle;
+
 #pragma mark - Instance method
 
 - (NSComparisonResult)compare:(CPPhotosRefinedElement *)aRefinedElementPicture;

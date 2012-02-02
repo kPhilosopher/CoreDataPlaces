@@ -16,6 +16,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPAppDelegate
 
 #pragma mark - Synthesize

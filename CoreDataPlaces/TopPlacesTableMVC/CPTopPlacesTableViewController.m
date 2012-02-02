@@ -22,6 +22,8 @@ extern NSString *CPAlertMessage;
 
 @end
 
+#pragma mark -
+
 @implementation CPTopPlacesTableViewController
 
 NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";

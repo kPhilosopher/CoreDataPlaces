@@ -16,6 +16,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPRefinedElement
 
 #pragma mark - Synthesize

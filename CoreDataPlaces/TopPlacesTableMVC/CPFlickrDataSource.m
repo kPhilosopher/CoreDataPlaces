@@ -30,6 +30,8 @@
 
 @end
 
+#pragma mark -
+
 @implementation CPFlickrDataSource
 
 @synthesize flickrTopPlaces = CP_flickrTopPlaces;

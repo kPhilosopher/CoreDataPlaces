@@ -17,6 +17,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPIndexedTableViewController
 
 #pragma mark - Synthesize

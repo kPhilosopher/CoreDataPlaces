@@ -15,6 +15,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPPlacesDataIndexerWithPlacesRefinedElementTests
 
 #pragma mark - Synthesize

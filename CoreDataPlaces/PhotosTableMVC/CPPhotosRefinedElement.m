@@ -7,7 +7,22 @@
 
 #import "CPPhotosRefinedElement.h"
 
+@interface CPPhotosRefinedElement ()
+{
+@private
+	NSString *CP_title;
+	NSString *CP_subtitle;
+}
+@end
+
+#pragma mark -
+
 @implementation CPPhotosRefinedElement
+
+#pragma mark - Synthesize
+
+@synthesize title = CP_title;
+@synthesize subtitle = CP_subtitle;
 
 #pragma mark - Instance method
 

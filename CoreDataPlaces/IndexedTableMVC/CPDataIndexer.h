@@ -27,6 +27,8 @@
 
 @end
 
+#pragma mark -
+
 @interface CPDataIndexer : NSObject <CPDataIndexDelegate>
 
 #pragma mark - Property

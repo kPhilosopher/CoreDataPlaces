@@ -15,6 +15,8 @@
 
 @end
 
+#pragma mark -
+
 @implementation CPDataIndexer
 
 #pragma mark - Synthesize

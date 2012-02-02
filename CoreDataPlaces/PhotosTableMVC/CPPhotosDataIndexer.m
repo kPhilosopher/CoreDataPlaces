@@ -14,6 +14,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPPhotosDataIndexer
 
 #pragma mark - Synthesize

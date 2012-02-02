@@ -3,7 +3,6 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/1/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,8 +14,11 @@ extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
 
 #pragma mark - Property
 
-@property (retain) UIImageView *imageView;
 @property (retain) NSDictionary *imageDictionary;
+@property (retain) IBOutlet UIImageView *imageView;
+@property (retain) IBOutlet UIScrollView *scrollView;
+@property (retain) IBOutlet UISwitch *switchForFavorite;
+@property (retain) IBOutlet UINavigationController *xibNavigationController;
 
 #pragma mark - Instance method
 
