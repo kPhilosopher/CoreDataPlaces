@@ -25,9 +25,9 @@
 
 - (void)testExample
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog([NSString stringWithFormat:@"does it show this"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+//	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+//	NSLog([NSString stringWithFormat:@"does it show this"]);
+//	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 //    STFail(@"Unit tests are not implemented yet in CoreDataPlacesTests");
 	STAssertTrue(YES, @"");
 }

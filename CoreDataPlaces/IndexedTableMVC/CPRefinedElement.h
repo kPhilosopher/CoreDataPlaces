@@ -12,8 +12,8 @@
 #pragma mark - Property
 
 @property (retain) NSDictionary *dictionary;
-@property NSInteger sectionNumber;
 @property (copy) NSString *comparable;
+@property NSInteger sectionNumber;
 
 #pragma mark - Instance method
 

@@ -18,10 +18,9 @@ extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
 @property (retain) IBOutlet UIImageView *imageView;
 @property (retain) IBOutlet UIScrollView *scrollView;
 @property (retain) IBOutlet UISwitch *switchForFavorite;
-@property (retain) IBOutlet UINavigationController *xibNavigationController;
 
 #pragma mark - Instance method
 
--(void) initiateTheImageSetupWithGiven:(UIImage *)givenImage;
+//-(void) initiateTheImageSetupWithGiven:(UIImage *)givenImage;
 
 @end

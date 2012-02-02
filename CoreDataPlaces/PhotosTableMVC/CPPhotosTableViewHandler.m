@@ -88,7 +88,7 @@
 	
 //	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 	
-	CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController_iPhone" bundle:nil];
+	CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil];
 //	scrollableImageViewController.title = 
 	[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
 	[scrollableImageViewController release];
