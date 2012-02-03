@@ -66,7 +66,7 @@
 			cell.detailTextLabel.text = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		}
 		photoRefinedElement.title = cell.textLabel.text;
-		photoRefinedElement.title = cell.detailTextLabel.text;
+		photoRefinedElement.subtitle = cell.detailTextLabel.text;
 	}
 	return cell;
 }
@@ -92,24 +92,30 @@
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-//	CPRefinedElement *refined = [[CPRefinedElement alloc] init];
-//	[CPScrollableImageViewController testStuff];
-//	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	CPPhotosRefinedElement *photosRefinedElement = nil;
+	if ([refinedElement isKindOfClass:[CPPhotosRefinedElement class]])
+	{
+		photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 	
-//	CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil];
-//	scrollableImageViewController.title = 
-//	[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
-//	[scrollableImageViewController release];
-	//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
-	
-	//	ScrollableImageViewController *imageController = [self.delegate scrollableImageViewControllerForRequestor:self];
-	//	if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:imageController]) 
-	//	{
-	//		imageController = [[[ScrollableImageViewController alloc] init] autorelease];
-	//		imageController.title = @"Photo";
-	//		[self.navigationController pushViewController:imageController animated:YES];
-	//	}
-	//	[imageController initiateTheImageSetupWithGiven:image];
+		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:indexedTableViewController.managedObjectContext];
+		scrollableImageViewController.photosRefinedElement = photosRefinedElement;
+		scrollableImageViewController.title = photosRefinedElement.title;
+		[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+		[scrollableImageViewController release];
+		
+		
+		//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
+		
+		//	ScrollableImageViewController *imageController = [self.delegate scrollableImageViewControllerForRequestor:self];
+		//	if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:imageController]) 
+		//	{
+		//		imageController = [[[ScrollableImageViewController alloc] init] autorelease];
+		//		imageController.title = @"Photo";
+		//		[self.navigationController pushViewController:imageController animated:YES];
+		//	}
+		//	[imageController initiateTheImageSetupWithGiven:image];
+	}
 }
 
 #pragma mark - Readability method

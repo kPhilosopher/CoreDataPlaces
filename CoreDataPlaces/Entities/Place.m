@@ -2,8 +2,8 @@
 //  Place.m
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 1/31/12.
-//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
+//  Created by Jinwoo Baek on 2/2/12.
+//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
 #import "Place.h"
@@ -12,10 +12,10 @@
 
 @implementation Place
 
+@dynamic hasFavoritePhoto;
+@dynamic placeID;
 @dynamic subtitle;
 @dynamic title;
-@dynamic placeID;
-@dynamic hasFavoritePhoto;
 @dynamic photos;
 
 @end

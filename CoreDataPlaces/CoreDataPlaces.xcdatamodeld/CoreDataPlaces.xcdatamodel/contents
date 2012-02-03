@@ -17,7 +17,7 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="itsPlace" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="72" positionY="207" width="128" height="105"/>
+        <element name="Photo" positionX="72" positionY="207" width="128" height="150"/>
         <element name="Place" positionX="304" positionY="243" width="128" height="120"/>
     </elements>
 </model>
