@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CPRefinedElement.h"
 
+
 @interface CPPhotosRefinedElement : CPRefinedElement
 
 #pragma mark - Property

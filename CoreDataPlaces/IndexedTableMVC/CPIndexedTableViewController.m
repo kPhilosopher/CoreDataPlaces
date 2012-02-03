@@ -7,6 +7,8 @@
 //
 
 #import "CPIndexedTableViewController.h"
+#import "CPDataIndexer.h"
+
 
 @interface CPIndexedTableViewController ()
 {

@@ -9,9 +9,10 @@
 #import "CPCoreDataPhotosTableViewController.h"
 #import "Photo.h"
 
+
 @implementation CPCoreDataPhotosTableViewController
 
-#pragma mark - Initilization
+#pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;
 {

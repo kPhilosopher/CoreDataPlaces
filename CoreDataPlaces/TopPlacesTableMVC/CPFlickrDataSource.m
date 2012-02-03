@@ -7,6 +7,8 @@
 //
 
 #import "CPFlickrDataSource-Internal.h"
+#import "CPFlickrDataHandler.h"
+
 
 @interface CPFlickrDataSource ()
 {

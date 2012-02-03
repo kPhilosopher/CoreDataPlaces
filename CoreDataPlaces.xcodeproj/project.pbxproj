@@ -66,6 +66,7 @@
 		CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
 		CEDA8ACC14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
+		CEDC73E314DB7CB000FF6989 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDC73E214DB7CB000FF6989 /* CPScrollableImageViewController.m */; };
 		CEEF706514D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706614D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706714D27B5C006756EA /* CPPlacesRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706214D27B5C006756EA /* CPPlacesRefinedElement.m */; };
@@ -169,6 +170,8 @@
 		CEDA8AC814D2693D005A2EB0 /* CPTableViewControllerDataReloading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewControllerDataReloading.h; sourceTree = "<group>"; };
 		CEDA8AC914D26B6B005A2EB0 /* CPFlickrDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataHandler.h; sourceTree = "<group>"; };
 		CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataHandler.m; sourceTree = "<group>"; };
+		CEDC73E114DB7CB000FF6989 /* CPScrollableImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPScrollableImageViewController.h; sourceTree = "<group>"; };
+		CEDC73E214DB7CB000FF6989 /* CPScrollableImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPScrollableImageViewController.m; sourceTree = "<group>"; };
 		CEEF705F14D27B5C006756EA /* CPPlacesDataIndexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexer.h; sourceTree = "<group>"; };
 		CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexer.m; sourceTree = "<group>"; };
 		CEEF706114D27B5C006756EA /* CPPlacesRefinedElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesRefinedElement.h; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 				CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */,
 				CE989F4014D7B01D00AB58C9 /* FavoritesTableMVC */,
 				CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */,
+				CEDC73E014DB7CAD00FF6989 /* ScrollableImageMVC */,
 				CE80D88914CCC9FE00BDF83D /* Flickr */,
 				CE989F6114D88A6400AB58C9 /* Entities */,
 				CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */,
@@ -445,6 +449,15 @@
 				CE989F6314D88A8D00AB58C9 /* Photo.m */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		CEDC73E014DB7CAD00FF6989 /* ScrollableImageMVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEDC73E114DB7CB000FF6989 /* CPScrollableImageViewController.h */,
+				CEDC73E214DB7CB000FF6989 /* CPScrollableImageViewController.m */,
+			);
+			path = ScrollableImageMVC;
 			sourceTree = "<group>";
 		};
 		CEEF705E14D27AEE006756EA /* PlacesTableMVC */ = {
@@ -654,6 +667,7 @@
 				CE989F6414D88A8F00AB58C9 /* Photo.m in Sources */,
 				CE989F6814D88A9300AB58C9 /* Place.m in Sources */,
 				CE60E23614D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m in Sources */,
+				CEDC73E314DB7CB000FF6989 /* CPScrollableImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,13 @@
 //
 
 #import "CPPhotosTableViewController.h"
-#import "FlickrFetcher.h"
 #import "CPPhotosRefinedElement.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
 #import "CPFlickrDataHandler.h"
+#import "CPPlacesRefinedElement.h"
+#import "Place.h"
+
 
 @interface CPPhotosTableViewController ()
 {

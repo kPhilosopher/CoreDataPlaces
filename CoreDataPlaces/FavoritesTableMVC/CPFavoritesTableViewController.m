@@ -9,6 +9,7 @@
 #import "CPFavoritesTableViewController.h"
 #import "Place.h"
 
+
 @implementation CPFavoritesTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;

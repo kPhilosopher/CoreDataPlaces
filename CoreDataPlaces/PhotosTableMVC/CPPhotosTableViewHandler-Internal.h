@@ -8,6 +8,7 @@
 
 #import "CPPhotosTableViewHandler.h"
 
+
 @interface CPPhotosTableViewHandler ()
 
 #pragma mark - Readability method

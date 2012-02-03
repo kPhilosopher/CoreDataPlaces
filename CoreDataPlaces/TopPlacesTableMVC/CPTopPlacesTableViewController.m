@@ -9,6 +9,9 @@
 #import "CPTopPlacesTableViewController-Internal.h"
 #import "CPPlacesDataIndexer.h"
 #import "CPPlacesTableViewHandler.h"
+#import "CPFlickrDataSource.h"
+#import "CPFlickrDataHandler.h"
+
 
 @interface CPTopPlacesTableViewController ()
 {

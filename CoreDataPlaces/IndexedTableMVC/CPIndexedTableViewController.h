@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CPDataIndexer.h"
+//#import "CPDataIndexer.h"
 #import "CPTableViewControllerDataMutating.h"
 #import "CPTableViewControllerDataReloading.h"
 
+
+@class CPDataIndexer;
 @class CPIndexedTableViewController;
+@class CPRefinedElement;
+@protocol CPDataIndexDelegate;
 
 @protocol CPTableViewDelegate <NSObject>
 

@@ -7,8 +7,8 @@
 //
 
 #import "CPDataIndexer.h"
-
 #import "CPRefinedElement.h"
+
 
 @interface CPDataIndexer ()
 {

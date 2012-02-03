@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CPFlickrDataHandler.h"
+//#import "CPFlickrDataHandler.h"
+
+
+@class CPFlickrDataHandler;
 
 @interface CPFlickrDataSource : NSObject
 

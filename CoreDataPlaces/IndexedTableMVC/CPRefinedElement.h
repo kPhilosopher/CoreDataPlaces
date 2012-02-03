@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface CPRefinedElement : NSObject <NSCopying>
 
 #pragma mark - Property

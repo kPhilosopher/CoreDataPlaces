@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CPIndexedTableViewController.h"
-#import "CPPlacesRefinedElement.h"
-#import "Place.h"
+//#import "CPPlacesRefinedElement.h"
+//#import "Place.h"
+
+
+@class Place;
+@class CPPlacesRefinedElement;
 
 //@class PictureListTableViewController;
 //

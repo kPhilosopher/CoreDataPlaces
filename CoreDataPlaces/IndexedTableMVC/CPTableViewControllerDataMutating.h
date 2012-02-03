@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @protocol CPTableViewControllerDataMutating <NSObject>
 
 #pragma mark - Protocol method

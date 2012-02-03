@@ -8,6 +8,7 @@
 
 #import "CPPhotosRefinedElement.h"
 
+
 @interface CPPhotosRefinedElement ()
 {
 @private

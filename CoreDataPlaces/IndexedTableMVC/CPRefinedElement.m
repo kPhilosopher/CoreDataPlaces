@@ -8,6 +8,7 @@
 
 #import "CPRefinedElement.h"
 
+
 @interface CPRefinedElement ()
 {
 @private

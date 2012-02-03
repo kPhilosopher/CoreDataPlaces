@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CPDataIndexer.h"
-#import "CPPhotosRefinedElement.h"
-#import "JBBPriorityQueue.h"
+
 
 @interface CPPhotosDataIndexer : CPDataIndexer
 

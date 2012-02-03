@@ -7,6 +7,9 @@
 //
 
 #import "CPPhotosDataIndexer.h"
+#import "JBBPriorityQueue.h"
+#import "CPPhotosRefinedElement.h"
+
 
 @interface CPPhotosDataIndexer ()
 {

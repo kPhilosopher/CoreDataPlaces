@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
+
 @interface CPCoreDataPhotosTableViewController : CoreDataTableViewController
 
 #pragma mark - Initialization

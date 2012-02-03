@@ -8,8 +8,8 @@
 
 #import "CPPhotosTableViewHandler-Internal.h"
 #import "CPPhotosRefinedElement.h"
-//#import "CPScrollableImageViewController.h"
-#import "CPSomeViewController.h"
+#import "CPScrollableImageViewController.h"
+
 
 @implementation CPPhotosTableViewHandler
 
@@ -92,7 +92,6 @@
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-//	CPSomeViewController *some = [[CPSomeViewController alloc]init];
 //	CPRefinedElement *refined = [[CPRefinedElement alloc] init];
 //	[CPScrollableImageViewController testStuff];
 //	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];

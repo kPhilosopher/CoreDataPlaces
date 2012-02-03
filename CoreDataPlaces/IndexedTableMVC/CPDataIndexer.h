@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 //#import "CPRefinedElement.h"
+
+
 @class CPRefinedElement;
 
 @protocol CPDataIndexDelegate <NSObject>

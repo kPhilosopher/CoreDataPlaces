@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CPIndexedTableViewController.h"
-#import "CPPlacesTableViewHandler.h"
-#import "CPFlickrDataSource.h"
+//#import "CPPlacesTableViewHandler.h"
+//#import "CPFlickrDataSource.h"
+
+
+@class CPFlickrDataSource;
 
 @interface CPTopPlacesTableViewController : CPIndexedTableViewController
 
