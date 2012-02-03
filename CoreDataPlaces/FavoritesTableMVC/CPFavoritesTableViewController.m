@@ -8,18 +8,21 @@
 
 #import "CPFavoritesTableViewController.h"
 #import "Place.h"
+#import "CPCoreDataPhotosTableViewController.h"
 
 
 @implementation CPFavoritesTableViewController
+
+#pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;
 {
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
+		self.managedContext = managedContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"title";
-		
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -65,7 +68,6 @@
     return self;
 }
 
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -73,6 +75,17 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)managedObjectSelected:(NSManagedObject *)managedObject;
+{
+	if ([managedObject isKindOfClass:[Place class]])
+	{
+		Place *chosenPlace = (Place *)managedObject;
+		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedContext chosenPlace:chosenPlace];
+		[self.navigationController pushViewController:coreDataPhotosTableViewController animated:YES];
+		[coreDataPhotosTableViewController release];
+	}
 }
 
 @end

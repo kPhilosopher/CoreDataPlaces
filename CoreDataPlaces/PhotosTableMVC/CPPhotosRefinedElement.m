@@ -7,13 +7,14 @@
 //
 
 #import "CPPhotosRefinedElement.h"
-
+#import "Place.h"
 
 @interface CPPhotosRefinedElement ()
 {
 @private
 	NSString *CP_title;
 	NSString *CP_subtitle;
+	Place *CP_itsPlace;
 }
 @end
 
@@ -25,6 +26,7 @@
 
 @synthesize title = CP_title;
 @synthesize subtitle = CP_subtitle;
+@synthesize itsPlace = CP_itsPlace;
 
 #pragma mark - Instance method
 

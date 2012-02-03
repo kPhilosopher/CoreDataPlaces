@@ -15,7 +15,10 @@
 	NSString *subtitleKey;
 	NSString *searchKey;
 	NSFetchedResultsController *fetchedResultsController;
+	NSManagedObjectContext *CP_managedContext;
 }
+
+@property (retain) NSManagedObjectContext *managedContext;
 
 // the controller (this class does nothing if this is not set)
 @property (retain) NSFetchedResultsController *fetchedResultsController;

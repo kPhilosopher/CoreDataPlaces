@@ -9,6 +9,7 @@
 #import "CPPhotosTableViewHandler-Internal.h"
 #import "CPPhotosRefinedElement.h"
 #import "CPScrollableImageViewController.h"
+#import "CPPhotosTableViewController.h"
 
 
 @implementation CPPhotosTableViewHandler
@@ -96,13 +97,17 @@
 	CPPhotosRefinedElement *photosRefinedElement = nil;
 	if ([refinedElement isKindOfClass:[CPPhotosRefinedElement class]])
 	{
-		photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
-	
-		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:indexedTableViewController.managedObjectContext];
-		scrollableImageViewController.photosRefinedElement = photosRefinedElement;
-		scrollableImageViewController.title = photosRefinedElement.title;
-		[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
-		[scrollableImageViewController release];
+		CPPhotosTableViewController *photosTableViewController = nil;
+		if ([indexedTableViewController isKindOfClass:[CPPhotosTableViewController class]]) {
+			
+			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
+			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
+			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
+			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:indexedTableViewController.managedObjectContext];
+			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
+			scrollableImageViewController.title = photosRefinedElement.title;
+			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+			[scrollableImageViewController release];
 		
 		
 		//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
@@ -115,6 +120,7 @@
 		//		[self.navigationController pushViewController:imageController animated:YES];
 		//	}
 		//	[imageController initiateTheImageSetupWithGiven:image];
+		}
 	}
 }
 

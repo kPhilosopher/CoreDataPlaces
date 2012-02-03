@@ -10,12 +10,15 @@
 #import "CPRefinedElement.h"
 
 
+@class Place;
+
 @interface CPPhotosRefinedElement : CPRefinedElement
 
 #pragma mark - Property
 
 @property (copy) NSString *title;
 @property (copy) NSString *subtitle;
+@property (retain) Place *itsPlace;
 
 #pragma mark - Instance method
 

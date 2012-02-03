@@ -8,25 +8,29 @@
 
 #import "CPCoreDataPhotosTableViewController.h"
 #import "Photo.h"
+#import "Place.h"
+#import "CPScrollableImageViewController.h"
 
 
 @implementation CPCoreDataPhotosTableViewController
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;
+- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext chosenPlace:(Place *)chosenPlace;
 {
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
+		self.managedContext = managedContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		NSString *sectionNameKeyPath = @"title";
+		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedContext];
 		fetchRequest.fetchBatchSize = 20;
-//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@", [NSNumber numberWithBool:NO]];
+//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID == %@", chosenPlace.placeID];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
@@ -75,6 +79,19 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)managedObjectSelected:(NSManagedObject *)managedObject;
+{
+	if ([managedObject isKindOfClass:[Photo class]])
+	{
+		Photo *chosenPhoto = (Photo *)managedObject;
+		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:self.managedContext];
+		scrollableImageViewController.title = chosenPhoto.title;
+		scrollableImageViewController.currentPhoto = chosenPhoto;
+		[self.navigationController pushViewController:scrollableImageViewController animated:YES];
+		[scrollableImageViewController release];
+	}
 }
 
 @end

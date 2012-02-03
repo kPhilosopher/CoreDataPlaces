@@ -77,7 +77,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - View lifecycle
 
--(void)dealloc
+- (void)dealloc
 {
 	[CP_topPlacesTableViewController release];
 //	[CP_mostRecentPlacesTableViewController release];
@@ -86,6 +86,13 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	[CP_mostRecentPlacesNavigationViewController release];
 	[CP_favoritesNavigationViewController release];
 	[super dealloc];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+{
+    return ((toInterfaceOrientation == UIInterfaceOrientationPortrait) || 
+			(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
+			(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft));
 }
 
 #pragma mark - Setup sequence

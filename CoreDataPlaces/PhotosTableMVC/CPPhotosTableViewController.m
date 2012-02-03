@@ -79,10 +79,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedContext];
 		fetchRequest.fetchBatchSize = 1;
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
-		NSSortDescriptor *sortDescriptor = nil;
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		[sortDescriptors release];
+//		NSSortDescriptor *sortDescriptor = nil;
+//		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+		[fetchRequest setSortDescriptors:nil];
+//		[sortDescriptors release];
 		
 		Place *chosenPlace;
 		
