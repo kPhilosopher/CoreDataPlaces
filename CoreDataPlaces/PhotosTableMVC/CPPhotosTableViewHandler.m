@@ -3,15 +3,22 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 1/27/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPPhotosTableViewHandler-Internal.h"
 #import "CPPhotosRefinedElement.h"
-#import "CPScrollableImageViewController.h"
+//#import "CPScrollableImageViewController.h"
+#import "CPSomeViewController.h"
 
 @implementation CPPhotosTableViewHandler
 
 #pragma mark - Table view data source handler method
+
+//- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
+//{
+//	return [super indexedTableViewController:indexedTableViewController numberOfRowsInSection:section];
+//}
 
 //TODO: refactor this method.
 - (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
@@ -22,7 +29,7 @@
 	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 	
 	CPPhotosRefinedElement *photoRefinedElement = nil;
-	if ([photoRefinedElement isKindOfClass:[CPPhotosRefinedElement class]]) {
+	if ([refinedElement isKindOfClass:[CPPhotosRefinedElement class]]) {
 		
 		photoRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 		
@@ -85,13 +92,15 @@
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	
+//	CPSomeViewController *some = [[CPSomeViewController alloc]init];
+//	CPRefinedElement *refined = [[CPRefinedElement alloc] init];
+//	[CPScrollableImageViewController testStuff];
 //	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 	
-	CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil];
+//	CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil];
 //	scrollableImageViewController.title = 
-	[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
-	[scrollableImageViewController release];
+//	[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+//	[scrollableImageViewController release];
 	//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
 	
 	//	ScrollableImageViewController *imageController = [self.delegate scrollableImageViewControllerForRequestor:self];

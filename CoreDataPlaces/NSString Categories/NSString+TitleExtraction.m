@@ -1,8 +1,9 @@
 //
 //  NSString+TitleExtractor.m
-//  Places_09
+//  Places
 //
 //  Created by Jinwoo Baek on 12/26/11.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "NSString+TitleExtraction.h"

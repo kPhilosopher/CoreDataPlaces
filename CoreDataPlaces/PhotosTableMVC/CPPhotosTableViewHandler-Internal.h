@@ -3,6 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/1/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPPhotosTableViewHandler.h"

@@ -3,6 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 1/22/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPTabBarController-Internal.h"
@@ -18,11 +19,10 @@
 	UINavigationController *CP_mostRecentPlacesNavigationViewController;
 	UINavigationController *CP_favoritesNavigationViewController;
 	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
-	//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
 	CPFavoritesTableViewController *CP_favoritesTableViewController;
-	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
-	
 	NSManagedObjectContext *CP_managedObjectContext;
+	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
+	//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
 }
 
 @property (retain) UINavigationController *topPlacesNavigationViewController;
@@ -96,6 +96,9 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	[self RD_setTabBarItemToSystemItems];
 	[self RD_addTheNavigationControllersToThisTabBarController];
 }
+
+#pragma mark - Readability method
+
 -(void)RD_allocInitTheNavigationViewControllers;
 {
 	self.topPlacesNavigationViewController = [[[UINavigationController alloc] init] autorelease];

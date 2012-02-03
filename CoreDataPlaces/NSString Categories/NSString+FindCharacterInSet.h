@@ -3,6 +3,7 @@
 //  Places_09
 //
 //  Created by Jinwoo Baek on 1/8/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

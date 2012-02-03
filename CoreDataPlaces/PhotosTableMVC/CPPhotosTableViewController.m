@@ -3,6 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 1/27/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPPhotosTableViewController.h"
@@ -131,7 +132,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		[refinedElementForDataIndexer release];
 		CPPhotosTableViewHandler *tableViewHandlerDelegate = [[CPPhotosTableViewHandler alloc] init];
 		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withPlaceIDString:chosenPlace.placeID] autorelease];
-		photosTableViewController.title = [refinedElement.dictionary objectForKey:@"_content"];
+		photosTableViewController.title = chosenPlace.title;
 		photosTableViewController.currentPlace = chosenPlace;
 		photosTableViewController.managedObjectContext = managedContext;
 		[tableViewHandlerDelegate release];

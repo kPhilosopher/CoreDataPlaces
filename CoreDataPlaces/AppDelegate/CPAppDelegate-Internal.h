@@ -3,17 +3,12 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 1/22/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPAppDelegate.h"
 
 @interface CPAppDelegate ()
-//{
-//@private
-//	CPTabBarController *CP_tabBarController;
-////	CPScrollableImageViewController *CP_scrollableImageVC;
-//	CPSplitViewController *CP_splitVC;
-//}
 
 #pragma mark - Readability method
 

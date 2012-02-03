@@ -1,8 +1,9 @@
 //
 //  NSString+FindCharacterInSet.m
-//  Places_09
+//  Places
 //
 //  Created by Jinwoo Baek on 1/8/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "NSString+FindCharacterInSet.h"

@@ -3,9 +3,14 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 1/22/12.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPAppDelegate-Internal.h"
+
+//TODO: see if this causes any problems
+#import "CPSplitViewController.h"
+#import "CPTabBarController.h"
 
 @interface CPAppDelegate ()
 {
@@ -57,61 +62,6 @@ NSString *PLTitleOfScrollableViewController = @"Photo";
 	[self RD_runKIFIfRunningIntegrationTest];
     return YES;
 }
-
-	- (void)RD_setupTheAppDelegateWindow;
-	{
-		self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-		self.window.backgroundColor = [UIColor whiteColor];
-	}
-	- (void)RD_initializeTabBarController;
-	{
-//		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self] autorelease];
-		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self withManagedObjectContext:self.managedObjectContext] autorelease];
-	}
-	- (void)RD_determineTheSetupSequenceForDifferingDevices;
-	{
-		if ([self RD_determineIfTheDeviceIsiPadOrNot])	
-			[self RD_setupForiPad];
-		else
-			[self RD_setupForiPhoneOriPod];
-	}
-	- (BOOL)RD_determineIfTheDeviceIsiPadOrNot;
-	{
-		return ([[UIScreen mainScreen] bounds].size.height > 500);
-	}
-	- (void)RD_setupForiPad;
-	{
-		[self RD_setupForScrollableImageViewController];
-		UINavigationController *navcon = [[UINavigationController alloc] init];
-//		[navcon pushViewController:self.scrollableImageVC animated:NO];
-		[self RD_setupSplitViewControllerWithNavigationController:navcon];
-		self.window.rootViewController = self.splitVC;
-		[navcon release];
-	}
-	- (void)RD_setupForScrollableImageViewController;
-	{
-//		self.scrollableImageVC = [[[CPScrollableImageViewController alloc] init] autorelease];
-//		self.scrollableImageVC.title = CPTitleOfScrollableViewController;
-	}
-	- (void)RD_setupSplitViewControllerWithNavigationController:(UINavigationController *)navcon;
-	{
-		self.splitVC = [[[CPSplitViewController alloc] init] autorelease];
-//		self.splitVC.delegate = self.scrollableImageVC;
-		self.splitVC.viewControllers = [NSArray arrayWithObjects:self.tabBarController, navcon, nil];
-	}
-	- (void)RD_setupForiPhoneOriPod;
-	{
-		self.window.rootViewController = self.tabBarController;
-	}
-	- (void)RD_runKIFIfRunningIntegrationTest;
-	{
-	#if RUN_KIF_TESTS
-		[[PlacesKIFTestController sharedInstance] startTestingWithCompletionBlock:^{
-			// Exit after the tests complete so that CI knows we're done
-			exit([[PlacesKIFTestController sharedInstance] failureCount]);
-		}];
-	#endif
-	}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -260,6 +210,64 @@ NSString *PLTitleOfScrollableViewController = @"Photo";
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Readability method
+
+
+- (void)RD_setupTheAppDelegateWindow;
+{
+	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+	self.window.backgroundColor = [UIColor whiteColor];
+}
+- (void)RD_initializeTabBarController;
+{
+	//		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self] autorelease];
+	self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self withManagedObjectContext:self.managedObjectContext] autorelease];
+}
+- (void)RD_determineTheSetupSequenceForDifferingDevices;
+{
+	if ([self RD_determineIfTheDeviceIsiPadOrNot])	
+		[self RD_setupForiPad];
+	else
+		[self RD_setupForiPhoneOriPod];
+}
+- (BOOL)RD_determineIfTheDeviceIsiPadOrNot;
+{
+	return ([[UIScreen mainScreen] bounds].size.height > 500);
+}
+- (void)RD_setupForiPad;
+{
+	[self RD_setupForScrollableImageViewController];
+	UINavigationController *navcon = [[UINavigationController alloc] init];
+	//		[navcon pushViewController:self.scrollableImageVC animated:NO];
+	[self RD_setupSplitViewControllerWithNavigationController:navcon];
+	self.window.rootViewController = self.splitVC;
+	[navcon release];
+}
+- (void)RD_setupForScrollableImageViewController;
+{
+	//		self.scrollableImageVC = [[[CPScrollableImageViewController alloc] init] autorelease];
+	//		self.scrollableImageVC.title = CPTitleOfScrollableViewController;
+}
+- (void)RD_setupSplitViewControllerWithNavigationController:(UINavigationController *)navcon;
+{
+	self.splitVC = [[[CPSplitViewController alloc] init] autorelease];
+	//		self.splitVC.delegate = self.scrollableImageVC;
+	self.splitVC.viewControllers = [NSArray arrayWithObjects:self.tabBarController, navcon, nil];
+}
+- (void)RD_setupForiPhoneOriPod;
+{
+	self.window.rootViewController = self.tabBarController;
+}
+- (void)RD_runKIFIfRunningIntegrationTest;
+{
+#if RUN_KIF_TESTS
+	[[PlacesKIFTestController sharedInstance] startTestingWithCompletionBlock:^{
+		// Exit after the tests complete so that CI knows we're done
+		exit([[PlacesKIFTestController sharedInstance] failureCount]);
+	}];
+#endif
 }
 
 @end
