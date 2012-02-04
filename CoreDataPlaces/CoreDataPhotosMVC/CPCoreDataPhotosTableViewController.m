@@ -16,18 +16,18 @@
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext chosenPlace:(Place *)chosenPlace;
+- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
 {
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
-		self.managedContext = managedContext;
+		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedContext];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
 //		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID == %@", chosenPlace.placeID];
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
@@ -39,7 +39,7 @@
 	    
 		NSFetchedResultsController *localFetchedResultsController = 
 		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-											managedObjectContext:managedContext
+											managedObjectContext:managedObjectContext
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
 		
@@ -86,7 +86,7 @@
 	if ([managedObject isKindOfClass:[Photo class]])
 	{
 		Photo *chosenPhoto = (Photo *)managedObject;
-		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:self.managedContext];
+		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;
 		scrollableImageViewController.currentPhoto = chosenPhoto;
 		[self.navigationController pushViewController:scrollableImageViewController animated:YES];

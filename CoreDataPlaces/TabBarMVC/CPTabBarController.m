@@ -54,12 +54,12 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - Initalization
 
-- (id)initWithDelegate:(id)delegate withManagedObjectContext:(NSManagedObjectContext *)managedContext;
+- (id)initWithDelegate:(id)delegate withManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [self init];
 	if (self) {
 		//	self.delegateToTransfer = delegate;
-		self.managedObjectContext = managedContext;
+		self.managedObjectContext = managedObjectContext;
 		[self CP_setup];
 	}
 	return self;
@@ -129,7 +129,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 //	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
 //	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
 //	
-//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate];
+//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource dataIndexer:dataIndexerDelegate tableViewHandler:tableViewHandlerDelegate];
 //	
 //	[flickrDataSource release]; 
 //	[tableViewHandlerDelegate release];
@@ -148,9 +148,9 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	
 	
 //	self.topPlacesTableViewController = 
-//	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource withDataIndexer:placesDataIndexerForTopPlaces] autorelease];
+//	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexer:placesDataIndexerForTopPlaces] autorelease];
 //	self.mostRecentPlacesTableViewController = 
-//	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource withDataIndexer:placesDataIndexerForMostRecentPlaces] autorelease];
+//	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexer:placesDataIndexerForMostRecentPlaces] autorelease];
 //	
 //	[theFlickrDataSource release];
 //	[placesDataIndexerForMostRecentPlaces release];

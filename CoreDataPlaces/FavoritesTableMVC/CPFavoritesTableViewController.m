@@ -15,18 +15,18 @@
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedContext customSettingsDictionary:(NSDictionary *)customSettings;
+- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext customSettingsDictionary:(NSDictionary *)customSettings;
 {
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
-		self.managedContext = managedContext;
+		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"title";
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedContext];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@", [NSNumber numberWithBool:NO]];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
@@ -37,7 +37,7 @@
 	    
 		NSFetchedResultsController *localFetchedResultsController = 
 		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-											managedObjectContext:managedContext
+											managedObjectContext:managedObjectContext
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
 
@@ -82,7 +82,7 @@
 	if ([managedObject isKindOfClass:[Place class]])
 	{
 		Place *chosenPlace = (Place *)managedObject;
-		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedContext chosenPlace:chosenPlace];
+		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext chosenPlace:chosenPlace];
 		[self.navigationController pushViewController:coreDataPhotosTableViewController animated:YES];
 		[coreDataPhotosTableViewController release];
 	}

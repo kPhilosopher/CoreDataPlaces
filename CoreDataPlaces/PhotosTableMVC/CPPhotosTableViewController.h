@@ -37,11 +37,11 @@ extern NSString *PictureListBackBarButtonAccessibilityLabel;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withPlaceIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withPlaceIDString:(NSString *)placeID;
 
 #pragma mark - Factory method
 
 //+ (id)photosTableViewControllerWithRefinedElement:(CPRefinedElement *)refinedElement;
-+ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedContext;
++ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

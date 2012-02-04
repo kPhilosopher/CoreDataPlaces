@@ -103,7 +103,7 @@
 			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
-			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedContext:indexedTableViewController.managedObjectContext];
+			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:indexedTableViewController.managedObjectContext];
 			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
 			scrollableImageViewController.title = photosRefinedElement.title;
 			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];

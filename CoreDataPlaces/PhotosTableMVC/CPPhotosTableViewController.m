@@ -41,9 +41,9 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Initialization
 //TODO: change the initializers to not include with****
-- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withPlaceIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withPlaceIDString:(NSString *)placeID;
 {
-	self = [super initWithStyle:style withDataIndexer:dataIndexDelegate withTableViewHandler:tableViewHandlingDelegate];
+	self = [super initWithStyle:style dataIndexer:dataIndexDelegate tableViewHandler:tableViewHandler];
     if (self)
 	{
 		if (placeID)
@@ -66,7 +66,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Factory method
 
-+ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedContext;
++ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	CPPhotosTableViewController *photosTableViewController;
 	CPPlacesRefinedElement *placesRefinedElement;
@@ -76,7 +76,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		NSString *placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
 		//TODO: check if a place with placeID exists.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedContext];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 1;
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
 //		NSSortDescriptor *sortDescriptor = nil;
@@ -87,11 +87,11 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		Place *chosenPlace;
 		
 		NSError *error = nil;
-		NSUInteger returnedObjectCount = [managedContext countForFetchRequest:fetchRequest error:&error];
+		NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
 		if ((returnedObjectCount == 0) && !error)
 		{
-			chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedContext];
-	//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedContext];
+			chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedObjectContext];
+	//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedObjectContext];
 			chosenPlace.title = placesRefinedElement.title;
 			chosenPlace.subtitle = placesRefinedElement.subtitle;
 			chosenPlace.placeID = placeID;
@@ -99,13 +99,13 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			
 			NSError *error = nil;
 			
-			NSLog(@"about to save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
-			if (![managedContext save:&error])
+			NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+			if (![managedObjectContext save:&error])
 			{
 				//handle the error.
 				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 			}
-			NSLog(@"after save: inserted %d registered %d deleted %d", managedContext.insertedObjects.count, managedContext.registeredObjects.count, managedContext.deletedObjects.count);
+			NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
 		}
 		else if (error)
 		{
@@ -114,7 +114,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		else
 		{
 			NSError *error = nil;
-			NSArray *fetchRequestOutput = [managedContext executeFetchRequest:fetchRequest error:&error];
+			NSArray *fetchRequestOutput = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
 			if (!fetchRequestOutput)
 			{
 				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
@@ -133,10 +133,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		CPPhotosDataIndexer *dataIndexerDelegate = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
 		[refinedElementForDataIndexer release];
 		CPPhotosTableViewHandler *tableViewHandlerDelegate = [[CPPhotosTableViewHandler alloc] init];
-		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain withDataIndexer:dataIndexerDelegate withTableViewHandler:tableViewHandlerDelegate withPlaceIDString:chosenPlace.placeID] autorelease];
+		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexer:dataIndexerDelegate tableViewHandler:tableViewHandlerDelegate withPlaceIDString:chosenPlace.placeID] autorelease];
 		photosTableViewController.title = chosenPlace.title;
 		photosTableViewController.currentPlace = chosenPlace;
-		photosTableViewController.managedObjectContext = managedContext;
+		photosTableViewController.managedObjectContext = managedObjectContext;
 		[tableViewHandlerDelegate release];
 		[dataIndexerDelegate release];
 	}

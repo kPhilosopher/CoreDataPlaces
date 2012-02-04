@@ -26,8 +26,8 @@ extern NSString *CPTopPlacesViewAccessibilityLabel;
 
 #pragma mark - Initialization
 
-//- (id)initWithStyle:(UITableViewStyle)style withDataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate withTableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
-- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewDelegate>)tableViewHandlingDelegate theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+//- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withTheFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
 
 #pragma mark - Factory method
 

@@ -10,6 +10,6 @@
 #import "CPIndexedTableViewController.h"
 
 
-@interface CPTableViewHandler : NSObject <CPTableViewDelegate>
+@interface CPTableViewHandler : NSObject <CPTableViewHandling>
 
 @end
