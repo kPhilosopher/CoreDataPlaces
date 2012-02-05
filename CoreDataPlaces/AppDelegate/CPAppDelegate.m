@@ -223,7 +223,7 @@ NSString *PLTitleOfScrollableViewController = @"Photo";
 - (void)RD_initializeTabBarController;
 {
 	//		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self] autorelease];
-	self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self withManagedObjectContext:self.managedObjectContext] autorelease];
+	self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self managedObjectContext:self.managedObjectContext] autorelease];
 }
 - (void)RD_determineTheSetupSequenceForDifferingDevices;
 {

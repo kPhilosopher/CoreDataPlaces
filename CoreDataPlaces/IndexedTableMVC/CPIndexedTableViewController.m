@@ -69,7 +69,7 @@
         cell = 
 		[[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 	
-	return [self.tableViewHandler indexedTableViewController:self cellForRowAtIndexPath:indexPath withCell:cell];
+	return [self.tableViewHandler indexedTableViewController:self cellForRowAtIndexPath:indexPath cell:cell];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

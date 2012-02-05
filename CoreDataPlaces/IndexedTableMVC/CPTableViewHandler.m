@@ -18,7 +18,7 @@
     return [(NSArray *)[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count];
 }
 
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
 {	
 	return cell;
 }

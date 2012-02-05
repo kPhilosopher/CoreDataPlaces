@@ -22,7 +22,7 @@
 //}
 
 //TODO: refactor this method.
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath withCell:(UITableViewCell *)cell;
+- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
 {
 	cell.detailTextLabel.text = @"";
 	cell.textLabel.text = @"";

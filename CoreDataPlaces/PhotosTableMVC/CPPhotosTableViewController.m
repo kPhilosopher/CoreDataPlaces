@@ -41,7 +41,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Initialization
 //TODO: change the initializers to not include with****
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
 {
 	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self)
@@ -66,7 +66,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Factory method
 
-+ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement withManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	CPPhotosTableViewController *photosTableViewController;
 	CPPlacesRefinedElement *placesRefinedElement;
@@ -130,7 +130,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		CPPhotosDataIndexer *dataIndexHandler = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
 		[refinedElementForDataIndexer release];
 		CPPhotosTableViewHandler *tableViewHandler = [[CPPhotosTableViewHandler alloc] init];
-		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler withPlaceIDString:chosenPlace.placeID] autorelease];
+		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler placeIDString:chosenPlace.placeID] autorelease];
 		photosTableViewController.title = chosenPlace.title;
 		photosTableViewController.currentPlace = chosenPlace;
 		photosTableViewController.managedObjectContext = managedObjectContext;

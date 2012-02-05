@@ -54,7 +54,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - Initalization
 
-- (id)initWithDelegate:(id)delegate withManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (id)initWithDelegate:(id)delegate managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [self init];
 	if (self) {
