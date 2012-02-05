@@ -15,7 +15,7 @@
 @class CPDataIndexer;
 @class CPIndexedTableViewController;
 @class CPRefinedElement;
-@protocol CPDataIndexDelegate;
+@protocol CPDataIndexHandler;
 
 @protocol CPTableViewHandling <NSObject>
 
@@ -55,13 +55,13 @@
 
 #pragma mark - Properties
 
-@property (retain) id<CPDataIndexDelegate> dataIndexDelegate;
+@property (retain) id<CPDataIndexHandler> dataIndexHandler;
 @property (retain) id<CPTableViewHandling> tableViewHandler;
 @property (retain) NSManagedObjectContext *managedObjectContext;
 
 #pragma mark - Intialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
 
 #pragma mark - Helper method
 

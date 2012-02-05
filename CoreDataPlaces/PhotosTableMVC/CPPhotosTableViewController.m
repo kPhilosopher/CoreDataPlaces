@@ -41,14 +41,14 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Initialization
 //TODO: change the initializers to not include with****
-- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withPlaceIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
 {
-	self = [super initWithStyle:style dataIndexer:dataIndexDelegate tableViewHandler:tableViewHandler];
+	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self)
 	{
 		if (placeID)
 		{
-//			self.dataIndexDelegate = [[[PictureListDataIndexer alloc] init] autorelease];
+//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
 //			self.listOfPictures_theModel = pictureList;
 			
 			
@@ -74,15 +74,12 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	{
 		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
 		NSString *placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
-		//TODO: check if a place with placeID exists.
+		//TODO: check if this placeID duplication check works. (write a test)
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 1;
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
-//		NSSortDescriptor *sortDescriptor = nil;
-//		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:nil];
-//		[sortDescriptors release];
 		
 		Place *chosenPlace;
 		
@@ -130,15 +127,15 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		}
 			
 		CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
-		CPPhotosDataIndexer *dataIndexerDelegate = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
+		CPPhotosDataIndexer *dataIndexHandler = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
 		[refinedElementForDataIndexer release];
-		CPPhotosTableViewHandler *tableViewHandlerDelegate = [[CPPhotosTableViewHandler alloc] init];
-		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexer:dataIndexerDelegate tableViewHandler:tableViewHandlerDelegate withPlaceIDString:chosenPlace.placeID] autorelease];
+		CPPhotosTableViewHandler *tableViewHandler = [[CPPhotosTableViewHandler alloc] init];
+		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler withPlaceIDString:chosenPlace.placeID] autorelease];
 		photosTableViewController.title = chosenPlace.title;
 		photosTableViewController.currentPlace = chosenPlace;
 		photosTableViewController.managedObjectContext = managedObjectContext;
-		[tableViewHandlerDelegate release];
-		[dataIndexerDelegate release];
+		[tableViewHandler release];
+		[dataIndexHandler release];
 	}
 	return photosTableViewController;
 }

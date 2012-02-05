@@ -275,6 +275,13 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		CE2AD82014DF42FF00957968 /* CoreDataDataInsertion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreDataDataInsertion;
+			sourceTree = "<group>";
+		};
 		CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +332,7 @@
 				CE0B38CC14CCD4BF006A85BB /* SplitViewMVC */,
 				CE0B38E014CCD65B006A85BB /* IndexedTableMVC */,
 				CEEF705E14D27AEE006756EA /* PlacesTableMVC */,
+				CE2AD82014DF42FF00957968 /* CoreDataDataInsertion */,
 				CEF1454014CF88DC00D21E00 /* TopPlacesTableMVC */,
 				CEEF706C14D35A0C006756EA /* PhotosTableMVC */,
 				CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */,

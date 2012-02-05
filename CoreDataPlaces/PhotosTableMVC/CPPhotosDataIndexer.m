@@ -26,17 +26,6 @@
 
 @synthesize highSection = CP_highSection;
 
-#pragma mark - Initialization
-
-- (id)init;
-{
-	self = [super init];
-	if (self) {
-		self.refinedElement = [[[CPPhotosRefinedElement alloc] init] autorelease];
-	}
-	return self;
-}
-
 #pragma mark - Instance method to override
 
 - (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;

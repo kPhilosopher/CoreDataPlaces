@@ -18,6 +18,7 @@
 
 @property (copy) NSString *title;
 @property (copy) NSString *subtitle;
+//TODO: this should be changed to a string of placeID
 @property (retain) Place *itsPlace;
 
 #pragma mark - Instance method

@@ -13,7 +13,7 @@
 @interface CPIndexedTableViewController ()
 {
 @private
-	id<CPDataIndexDelegate> CP_dataIndexDelegate;
+	id<CPDataIndexHandler> CP_dataIndexHandler;
 	id<CPTableViewHandling> CP_tableViewHandler;
 	NSManagedObjectContext *CP_managedObjectContext;
 }
@@ -25,18 +25,18 @@
 
 #pragma mark - Synthesize
 
-@synthesize dataIndexDelegate = CP_dataIndexDelegate;
+@synthesize dataIndexHandler = CP_dataIndexHandler;
 @synthesize tableViewHandler = CP_tableViewHandler;
 @synthesize managedObjectContext = CP_managedObjectContext;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexer:(id<CPDataIndexDelegate>)dataIndexDelegate tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
 {
 	self = [super initWithStyle:style];
 	if (self) 
 	{
-		self.dataIndexDelegate = dataIndexDelegate;
+		self.dataIndexHandler = dataIndexHandler;
 		self.tableViewHandler = tableViewHandler;
 	}
 	return self;
@@ -46,7 +46,7 @@
 
 - (void)dealloc
 {
-	[CP_dataIndexDelegate release];
+	[CP_dataIndexHandler release];
 	[CP_tableViewHandler release];
 	[super dealloc];
 }
@@ -128,7 +128,7 @@
 - (void)indexTheTableViewData
 {
 	[self setTheElementSectionsToTheFollowingArray:
-	 [self.dataIndexDelegate indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
+	 [self.dataIndexHandler indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
 	[self.tableView reloadData];
 }
 

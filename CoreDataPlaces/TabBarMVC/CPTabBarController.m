@@ -126,14 +126,14 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 //	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 //	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
 //	[flickrDataHandler release];
-//	CPTopPlacesTableViewHandler *tableViewHandlerDelegate = [[CPTopPlacesTableViewHandler alloc] init];
-//	CPPlacesDataIndexer *dataIndexerDelegate = [[CPPlacesDataIndexer alloc] init];
+//	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
+//	CPPlacesDataIndexer *dataIndexHandler = [[CPPlacesDataIndexer alloc] init];
 //	
-//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource dataIndexer:dataIndexerDelegate tableViewHandler:tableViewHandlerDelegate];
+//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
 //	
 //	[flickrDataSource release]; 
-//	[tableViewHandlerDelegate release];
-//	[dataIndexerDelegate release];
+//	[tableViewHandler release];
+//	[dataIndexHandler release];
 	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewController];
 	self.topPlacesTableViewController.managedObjectContext = self.managedObjectContext;
 	self.favoritesTableViewController = [[CPFavoritesTableViewController alloc] 
@@ -148,9 +148,9 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	
 	
 //	self.topPlacesTableViewController = 
-//	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexer:placesDataIndexerForTopPlaces] autorelease];
+//	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForTopPlaces] autorelease];
 //	self.mostRecentPlacesTableViewController = 
-//	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexer:placesDataIndexerForMostRecentPlaces] autorelease];
+//	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForMostRecentPlaces] autorelease];
 //	
 //	[theFlickrDataSource release];
 //	[placesDataIndexerForMostRecentPlaces release];

@@ -12,7 +12,7 @@
 
 @class CPRefinedElement;
 
-@protocol CPDataIndexDelegate <NSObject>
+@protocol CPDataIndexHandler <NSObject>
 
 #pragma mark - Methods
 
@@ -33,7 +33,7 @@
 
 #pragma mark -
 
-@interface CPDataIndexer : NSObject <CPDataIndexDelegate>
+@interface CPDataIndexer : NSObject <CPDataIndexHandler>
 
 #pragma mark - Property
 
