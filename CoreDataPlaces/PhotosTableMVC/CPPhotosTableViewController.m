@@ -68,8 +68,8 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 + (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	CPPhotosTableViewController *photosTableViewController;
-	CPPlacesRefinedElement *placesRefinedElement;
+	CPPhotosTableViewController *photosTableViewController = nil;
+	CPPlacesRefinedElement *placesRefinedElement = nil;
 	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]]) 
 	{
 		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
@@ -81,7 +81,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
 		[fetchRequest setSortDescriptors:nil];
 		
-		Place *chosenPlace;
+		Place *chosenPlace = nil;
 		
 		NSError *error = nil;
 		NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
@@ -125,17 +125,17 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 				chosenPlace = [fetchRequestOutput lastObject];
 			}
 		}
-			
+		[fetchRequest release];
 		CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
 		CPPhotosDataIndexer *dataIndexHandler = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
 		[refinedElementForDataIndexer release];
 		CPPhotosTableViewHandler *tableViewHandler = [[CPPhotosTableViewHandler alloc] init];
 		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler placeIDString:chosenPlace.placeID] autorelease];
+		[tableViewHandler release];
+		[dataIndexHandler release];
 		photosTableViewController.title = chosenPlace.title;
 		photosTableViewController.currentPlace = chosenPlace;
 		photosTableViewController.managedObjectContext = managedObjectContext;
-		[tableViewHandler release];
-		[dataIndexHandler release];
 	}
 	return photosTableViewController;
 }
@@ -144,8 +144,8 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 - (void)dealloc
 {
-	[CP_listOfPhotos release];
 	[CP_indexedListOfPhotos release];
+	[CP_listOfPhotos release];
 	[super dealloc];
 }
 

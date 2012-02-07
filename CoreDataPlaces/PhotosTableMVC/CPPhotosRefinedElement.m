@@ -54,7 +54,7 @@
 	return result;
 }
 
-//TODO: may have to add an internal header file.
+//TODO: refactor
 - (void)extractTitleAndSubTitleFromDictionary;
 {
 	//TODO: this should be divided to be giving only title and subtitle.
@@ -85,13 +85,12 @@
 		subTitleString = @"";
 	}
 	
-	CP_title = [titleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	self.title = [titleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	if (!([subTitleString length] == 0))
 	{
-		CP_subtitle = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		self.subtitle = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	}
 }
-
 
 - (NSString *)title;
 {
@@ -99,7 +98,7 @@
 	{
 		[self extractTitleAndSubTitleFromDictionary];
 	}
-	return CP_title;
+	return [[CP_title copy] autorelease];
 }
 
 - (NSString *)subtitle;
@@ -108,7 +107,7 @@
 	{
 		[self extractTitleAndSubTitleFromDictionary];
 	}
-	return CP_subtitle;
+	return [[CP_subtitle copy] autorelease];
 }
 
 #pragma mark - NSCopying protocol method
