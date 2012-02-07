@@ -4,8 +4,8 @@
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="timeLapseSinceLastView" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="timeLapseSinceUpload" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeLapseSinceLastView" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeLapseSinceUpload" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="itsPlace" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="photos" inverseEntity="Place" syncable="YES"/>
     </entity>

@@ -16,7 +16,7 @@
 
 extern NSString *CPAlertSwitchOff;
 extern NSString *CPAlertSwitchOn;
-extern NSString *CPPlaceID;
+//extern NSString *CPPlaceID;
 
 #pragma mark - Property
 

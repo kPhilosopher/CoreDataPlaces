@@ -42,7 +42,7 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
 {
 	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self)

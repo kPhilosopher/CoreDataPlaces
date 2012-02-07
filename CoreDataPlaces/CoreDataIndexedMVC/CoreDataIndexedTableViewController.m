@@ -1,62 +1,22 @@
 //
-//  CPIndexedTableViewController.m
+//  CoreDataIndexedTableViewController.m
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 1/23/12.
-//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
+//  Created by Jinwoo Baek on 2/5/12.
+//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPIndexedTableViewController.h"
-#import "CPDataIndexer.h"
+#import "CoreDataIndexedTableViewController.h"
+#import "CPTableViewControllerDataMutating.h"
+#import "CPTableViewHandler.h"
 
 
-@interface CPIndexedTableViewController ()
-{
-@private
-	id<CPDataIndexHandling> CP_dataIndexHandler;
-	id<CPTableViewHandling> CP_tableViewHandler;
-	NSManagedObjectContext *CP_managedObjectContext;
-}
-@end
-
-#pragma mark -
-
-@implementation CPIndexedTableViewController
-
-#pragma mark - Synthesize
-
-@synthesize dataIndexHandler = CP_dataIndexHandler;
-@synthesize tableViewHandler = CP_tableViewHandler;
-@synthesize managedObjectContext = CP_managedObjectContext;
-
-#pragma mark - Initialization
-
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
-{
-	self = [super initWithStyle:style];
-	if (self) 
-	{
-		self.dataIndexHandler = dataIndexHandler;
-		self.tableViewHandler = tableViewHandler;
-	}
-	return self;
-}
-
-#pragma mark - View lifecycle
-
-- (void)dealloc
-{
-	[CP_dataIndexHandler release];
-	[CP_tableViewHandler release];
-	[super dealloc];
-}
+@implementation CoreDataIndexedTableViewController
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	if ([self fetchTheElementSections] == nil)
-		[self indexTheTableViewData];
 	return [self.tableViewHandler numberOfSectionsInIndexedTableViewController:self];
 }
 
@@ -99,41 +59,25 @@
 	return [self.tableViewHandler indexedTableViewController:self didSelectRowAtIndexPath:indexPath];
 }
 
-#pragma mark - Helper method
-
-//- (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
-- (id)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
-{
-	return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-}
-
 #pragma mark - CPTableViewControllerDataMutating protocol method
 
 - (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
 {
+	NSLog(@"should not be calling setTheElementSectionsToTheFollowingArray in coredatacontroller");
+	abort();
 	return;
 }
 
 - (NSMutableArray *)fetchTheElementSections;
 {
-	return nil;
+	return [NSMutableArray arrayWithArray:[self.fetchedResultsController fetchedObjects]];
 }
 
 - (NSArray *)fetchTheRawData;
 {
+	NSLog(@"should not be calling fetchTheRawData in coredatacontroller");
+	abort();
 	return nil;
-}
-
-#pragma mark - DataReloadForTableViewControllerProtocol implementation
-
-- (void)indexTheTableViewData
-{
-	if (self.dataIndexHandler != nil) 
-	{
-		[self setTheElementSectionsToTheFollowingArray:
-		 [self.dataIndexHandler indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
-		[self.tableView reloadData];
-	}
 }
 
 @end

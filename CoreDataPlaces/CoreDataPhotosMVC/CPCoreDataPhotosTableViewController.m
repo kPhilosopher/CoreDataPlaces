@@ -7,7 +7,7 @@
 //
 
 #import "CPCoreDataPhotosTableViewController.h"
-#import "Photo.h"
+#import "Photo+RefinedElementInterfacing.h"
 #import "Place.h"
 #import "CPScrollableImageViewController.h"
 

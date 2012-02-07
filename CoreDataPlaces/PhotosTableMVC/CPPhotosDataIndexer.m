@@ -67,7 +67,7 @@
 	return self.highSection;
 }
 
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray thenAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 {
 	NSMutableArray *temporarySection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[CPPhotosRefinedElement class] ordering:NSOrderedAscending];

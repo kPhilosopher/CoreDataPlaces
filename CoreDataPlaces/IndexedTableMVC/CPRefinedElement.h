@@ -7,14 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPRefinedElementInterfacing.h"
 
-
-@interface CPRefinedElement : NSObject <NSCopying>
+@interface CPRefinedElement : NSObject <NSCopying, CPRefinedElementInterfacing>
+{
+	@protected
+	NSString *CP_title;
+	NSString *CP_subtitle;
+}
 
 #pragma mark - Property
 
-@property (retain) NSDictionary *dictionary;
+@property (copy) NSString *title;
+@property (copy) NSString *subtitle;
 @property (copy) NSString *comparable;
+@property (retain) NSDictionary *dictionary;
 @property NSInteger sectionNumber;
 
 #pragma mark - Instance method

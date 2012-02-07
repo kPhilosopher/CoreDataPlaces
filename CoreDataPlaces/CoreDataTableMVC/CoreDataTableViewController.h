@@ -6,8 +6,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "CPIndexedTableViewController.h"
 
-@interface CoreDataTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
+@interface CoreDataTableViewController : CPIndexedTableViewController <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
 {
 	NSPredicate *normalPredicate;
 	NSString *currentSearchText;

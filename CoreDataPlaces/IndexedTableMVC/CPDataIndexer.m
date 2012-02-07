@@ -80,7 +80,7 @@
 	
 	//6. sort the elements within each sections
 	for (NSMutableArray *sectionArray in sectionArrays) 
-		[self sortTheElementsInSectionArray:sectionArray thenAddToArrayOfSections:theElementSections];
+		[self sortTheElementsInSectionArray:sectionArray andAddToArrayOfSections:theElementSections];
 	[sectionArrays release];
 	[temporaryDataElements release];
 	return theElementSections;
@@ -107,7 +107,7 @@
 	return 0;
 }
 
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray thenAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 {
 	return;
 }

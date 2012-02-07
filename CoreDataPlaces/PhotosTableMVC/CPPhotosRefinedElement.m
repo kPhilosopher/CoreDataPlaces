@@ -12,8 +12,6 @@
 @interface CPPhotosRefinedElement ()
 {
 @private
-	NSString *CP_title;
-	NSString *CP_subtitle;
 	Place *CP_itsPlace;
 }
 @end
@@ -24,8 +22,6 @@
 
 #pragma mark - Synthesize
 
-@synthesize title = CP_title;
-@synthesize subtitle = CP_subtitle;
 @synthesize itsPlace = CP_itsPlace;
 
 #pragma mark - Instance method
@@ -55,6 +51,47 @@
 		result = [[NSNumber numberWithDouble:[self.comparable doubleValue]] compare:[NSNumber numberWithDouble:[aRefinedElementPhoto.comparable doubleValue]]];
 	else	result = 0;
 	return result;
+}
+
+- (NSString *)title;
+{
+	if (CP_title == nil)
+	{
+		//TODO: this should be either divided or callable by subtitle as well
+		NSDictionary *cellDictionary = self.dictionary;
+		id temporaryTitleString = [cellDictionary objectForKey:@"title"];
+		id temporaryDescriptionDictionary = [cellDictionary objectForKey:@"description"];
+		id temporaryDescriptionString = nil;
+		if ([temporaryDescriptionDictionary isKindOfClass:[NSDictionary class]]) {
+			temporaryDescriptionString = [temporaryDescriptionDictionary objectForKey:@"_content"];
+		}
+		
+		NSString *titleString = nil;
+		NSString *subTitleString = nil;
+		if ([temporaryTitleString isKindOfClass:[NSString class]])
+		{
+			titleString = (NSString *)temporaryTitleString;
+		}
+		if ([temporaryDescriptionString isKindOfClass:[NSString class]]) {
+			subTitleString = (NSString *)temporaryDescriptionString;
+		}
+		
+		if ([titleString length] == 0) 
+		{
+			titleString = subTitleString;		
+			if ([subTitleString length] == 0) {
+				titleString = @"Unknown";
+			}
+			subTitleString = @"";
+		}
+		
+		CP_title = [titleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		if (!([subTitleString length] == 0))
+		{
+			CP_subtitle = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		}
+	}
+	return CP_title;
 }
 
 #pragma mark - NSCopying protocol method

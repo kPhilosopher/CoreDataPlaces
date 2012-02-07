@@ -49,7 +49,8 @@
 
 //NSString *CPKeyForMostRecentArray = @"mostRecentArrayKey";
 //NSString *CPKeyForMostRecentSet = @"mostRecentSetKey";
-NSString *CPPlaceID = @"place_id";
+//TODO: change the location of this extern
+//NSString *CPPlaceID = @"place_id";
 NSString *CPAlertSwitchOff = @"AlertOff";
 NSString *CPAlertSwitchOn = @"AlertOn";
 

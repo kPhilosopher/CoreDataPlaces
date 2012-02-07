@@ -37,8 +37,8 @@ extern NSString *PictureListBackBarButtonAccessibilityLabel;
 
 #pragma mark - Initialization
 
-//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withPlaceIDString:(NSString *)placeID;
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
+//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler withPlaceIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
 
 #pragma mark - Factory method
 

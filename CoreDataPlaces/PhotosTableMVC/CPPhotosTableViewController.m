@@ -41,7 +41,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Initialization
 //TODO: change the initializers to not include with****
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
 {
 	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self)

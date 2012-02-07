@@ -12,9 +12,11 @@
 @interface CPRefinedElement ()
 {
 @private
+//	NSString *CP_title;
+//	NSString *CP_subtitle;
+	NSString *CP_comparable;
 	NSDictionary *CP_dictionary;
 	NSInteger CP_sectionNumber;
-	NSString *CP_comparable;
 }
 @end
 
@@ -24,14 +26,18 @@
 
 #pragma mark - Synthesize
 
+@synthesize title = CP_title;
+@synthesize subtitle = CP_subtitle;
+@synthesize comparable = CP_comparable;
 @synthesize dictionary = CP_dictionary;
 @synthesize sectionNumber = CP_sectionNumber;
-@synthesize comparable = CP_comparable;
 
 #pragma mark - View lifecycle
 
 - (void)dealloc
 {
+	[CP_title release];
+	[CP_subtitle release];
 	[CP_comparable release];
 	[CP_dictionary release];
 	[super dealloc];

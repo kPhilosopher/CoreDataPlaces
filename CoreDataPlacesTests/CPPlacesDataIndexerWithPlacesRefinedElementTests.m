@@ -53,7 +53,7 @@
 	
 }
 
-- (void)test_sortTheElementsInSectionArrayThenAddToArrayOfSections;
+- (void)test_sortTheElementsInSectionArrayAndAddToArrayOfSections;
 {
 	
 }

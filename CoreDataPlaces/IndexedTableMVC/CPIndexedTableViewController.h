@@ -15,9 +15,10 @@
 @class CPDataIndexer;
 @class CPIndexedTableViewController;
 @class CPRefinedElement;
-@protocol CPDataIndexHandler;
+@protocol CPDataIndexHandling;
 
 @protocol CPTableViewHandling <NSObject>
+//the table view controller that utilizes an object that complies to this protocol should comply to CPTableViewControllerDataMutating.
 
 #pragma mark - Required
 
@@ -55,16 +56,17 @@
 
 #pragma mark - Properties
 
-@property (retain) id<CPDataIndexHandler> dataIndexHandler;
+@property (retain) id<CPDataIndexHandling> dataIndexHandler;
 @property (retain) id<CPTableViewHandling> tableViewHandler;
 @property (retain) NSManagedObjectContext *managedObjectContext;
 
 #pragma mark - Intialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandler>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
 
 #pragma mark - Helper method
 
-- (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
+//- (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
+- (id)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 
 @end

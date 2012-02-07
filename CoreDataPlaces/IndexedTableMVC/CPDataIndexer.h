@@ -12,7 +12,7 @@
 
 @class CPRefinedElement;
 
-@protocol CPDataIndexHandler <NSObject>
+@protocol CPDataIndexHandling <NSObject>
 
 #pragma mark - Methods
 
@@ -27,13 +27,13 @@
 //- (NSInteger)setTheTotalNumberOfSections;
 - (NSInteger)sectionCount;
 //- (void)sortTheElementsInEach:(NSMutableArray *)sectionArray andAddTo:(NSMutableArray *)elementSections;
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray thenAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 
 @end
 
 #pragma mark -
 
-@interface CPDataIndexer : NSObject <CPDataIndexHandler>
+@interface CPDataIndexer : NSObject <CPDataIndexHandling>
 
 #pragma mark - Property
 

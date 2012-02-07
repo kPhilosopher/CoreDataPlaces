@@ -209,6 +209,9 @@ NSString *PLTitleOfScrollableViewController = @"Photo";
  */
 - (NSURL *)applicationDocumentsDirectory
 {
+//	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+//	NSLog([NSString stringWithFormat:@"this is the url: %@",[[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] absoluteString]]);
+//	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
