@@ -49,49 +49,66 @@
 	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
 	if ([formatter numberFromString:self.comparable] && [formatter numberFromString:aRefinedElementPhoto.comparable])
 		result = [[NSNumber numberWithDouble:[self.comparable doubleValue]] compare:[NSNumber numberWithDouble:[aRefinedElementPhoto.comparable doubleValue]]];
-	else	result = 0;
+	else	
+		result = 0;
 	return result;
 }
+
+//TODO: may have to add an internal header file.
+- (void)extractTitleAndSubTitleFromDictionary;
+{
+	//TODO: this should be divided to be giving only title and subtitle.
+	NSDictionary *cellDictionary = self.dictionary;
+	id temporaryTitleString = [cellDictionary objectForKey:@"title"];
+	id temporaryDescriptionDictionary = [cellDictionary objectForKey:@"description"];
+	id temporaryDescriptionString = nil;
+	if ([temporaryDescriptionDictionary isKindOfClass:[NSDictionary class]]) {
+		temporaryDescriptionString = [temporaryDescriptionDictionary objectForKey:@"_content"];
+	}
+	
+	NSString *titleString = nil;
+	NSString *subTitleString = nil;
+	if ([temporaryTitleString isKindOfClass:[NSString class]])
+	{
+		titleString = (NSString *)temporaryTitleString;
+	}
+	if ([temporaryDescriptionString isKindOfClass:[NSString class]]) {
+		subTitleString = (NSString *)temporaryDescriptionString;
+	}
+	
+	if ([titleString length] == 0) 
+	{
+		titleString = subTitleString;		
+		if ([subTitleString length] == 0) {
+			titleString = @"Unknown";
+		}
+		subTitleString = @"";
+	}
+	
+	CP_title = [titleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	if (!([subTitleString length] == 0))
+	{
+		CP_subtitle = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	}
+}
+
 
 - (NSString *)title;
 {
 	if (CP_title == nil)
 	{
-		//TODO: this should be either divided or callable by subtitle as well
-		NSDictionary *cellDictionary = self.dictionary;
-		id temporaryTitleString = [cellDictionary objectForKey:@"title"];
-		id temporaryDescriptionDictionary = [cellDictionary objectForKey:@"description"];
-		id temporaryDescriptionString = nil;
-		if ([temporaryDescriptionDictionary isKindOfClass:[NSDictionary class]]) {
-			temporaryDescriptionString = [temporaryDescriptionDictionary objectForKey:@"_content"];
-		}
-		
-		NSString *titleString = nil;
-		NSString *subTitleString = nil;
-		if ([temporaryTitleString isKindOfClass:[NSString class]])
-		{
-			titleString = (NSString *)temporaryTitleString;
-		}
-		if ([temporaryDescriptionString isKindOfClass:[NSString class]]) {
-			subTitleString = (NSString *)temporaryDescriptionString;
-		}
-		
-		if ([titleString length] == 0) 
-		{
-			titleString = subTitleString;		
-			if ([subTitleString length] == 0) {
-				titleString = @"Unknown";
-			}
-			subTitleString = @"";
-		}
-		
-		CP_title = [titleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		if (!([subTitleString length] == 0))
-		{
-			CP_subtitle = [subTitleString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		}
+		[self extractTitleAndSubTitleFromDictionary];
 	}
 	return CP_title;
+}
+
+- (NSString *)subtitle;
+{
+	if (CP_subtitle == nil) 
+	{
+		[self extractTitleAndSubTitleFromDictionary];
+	}
+	return CP_subtitle;
 }
 
 #pragma mark - NSCopying protocol method

@@ -50,6 +50,11 @@
 	return nil;
 }
 
+- (void)extractTitleAndSubTitleFromDictionary;
+{
+	return;
+}
+
 #pragma mark - NSCopying protocol method
 
 - (id)copyWithZone:(NSZone *)zone;
