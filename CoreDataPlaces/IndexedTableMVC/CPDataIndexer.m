@@ -56,7 +56,7 @@
 	if (rawElements)//TODO: this might work if && ([rawData count] > 0) will allow efficiency do this by filtering alert message with count of the array returned.
 	{
 		temporaryDataElements = [[NSMutableArray alloc] initWithCapacity:1];
-		for (NSDictionary *rawElement in rawElements) 
+		for (NSDictionary *rawElement in rawElements)
 			[self refineTheRawElementDictionary:rawElement thenAddToTemporaryMutableArray:temporaryDataElements];
 	}
 	else

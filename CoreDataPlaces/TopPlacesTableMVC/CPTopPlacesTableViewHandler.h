@@ -1,5 +1,5 @@
 //
-//  CPFavoritesTableViewHandler.h
+//  CPTopPlacesTableViewHandler.h
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/6/12.
@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CPTableViewHandler.h"
+#import "CPPlacesTableViewHandler.h"
 
-@interface CPFavoritesTableViewHandler : CPTableViewHandler
+@interface CPTopPlacesTableViewHandler : CPPlacesTableViewHandler
 
 @end

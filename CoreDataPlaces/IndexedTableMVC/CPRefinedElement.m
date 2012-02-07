@@ -12,8 +12,8 @@
 @interface CPRefinedElement ()
 {
 @private
-//	NSString *CP_title;
-//	NSString *CP_subtitle;
+	NSString *CP_title;
+	NSString *CP_subtitle;
 	NSString *CP_comparable;
 	NSDictionary *CP_dictionary;
 	NSInteger CP_sectionNumber;
@@ -53,6 +53,24 @@
 - (void)extractTitleAndSubTitleFromDictionary;
 {
 	return;
+}
+
+- (NSString *)title;
+{
+	if (CP_title == nil)
+	{
+		[self extractTitleAndSubTitleFromDictionary];
+	}
+	return [[CP_title copy] autorelease];
+}
+
+- (NSString *)subtitle;
+{
+	if (CP_subtitle == nil) 
+	{
+		[self extractTitleAndSubTitleFromDictionary];
+	}
+	return [[CP_subtitle copy] autorelease];
 }
 
 #pragma mark - NSCopying protocol method

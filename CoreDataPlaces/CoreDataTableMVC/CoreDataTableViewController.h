@@ -8,7 +8,7 @@
 #import <CoreData/CoreData.h>
 #import "CPIndexedTableViewController.h"
 
-@interface CoreDataTableViewController : CPIndexedTableViewController <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
+@interface CoreDataTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate>
 {
 	NSPredicate *normalPredicate;
 	NSString *currentSearchText;

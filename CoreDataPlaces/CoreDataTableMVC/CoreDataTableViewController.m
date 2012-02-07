@@ -286,5 +286,22 @@
     [super dealloc];
 }
 
+#pragma mark - CPTableViewControllerDataMutating protocol method
+
+- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
+{
+	return;
+}
+
+- (NSMutableArray *)fetchTheElementSections;
+{
+	return [NSMutableArray arrayWithArray:[self.fetchedResultsController sections]];
+}
+
+- (NSArray *)fetchTheRawData;
+{
+	return nil;
+}
+
 @end
 

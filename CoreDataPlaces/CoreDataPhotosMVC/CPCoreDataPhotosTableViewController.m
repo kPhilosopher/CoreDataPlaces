@@ -80,10 +80,46 @@
     return self;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+{
+	NSString *returningString = nil;
+	id <NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController.sections objectAtIndex:section];
+	
+	if ([sectionInfo.objects count] > 0)
+	{
+		//TODO: create an interface to return a string.
+		//after checking key-value coding to see if:
+		Photo *photo = [sectionInfo.objects lastObject];
+//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
+		if ([photo.timeLapseSinceUpload intValue] == 0) 
+			returningString = @"Right Now";
+		else
+			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]] stringByAppendingString:@" Hour(s) Ago"];
+	}
+    return returningString;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+	return nil;
+}
+
+#pragma mark UITableViewDelegate methods
+
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+	return 0;
+}
+
+
 - (void)managedObjectSelected:(NSManagedObject *)managedObject;
 {
 	if ([managedObject isKindOfClass:[Photo class]])
 	{
+//		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
+//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;

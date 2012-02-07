@@ -22,16 +22,14 @@
 	NSString *returningString = nil;
 	if ([[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count] > 0)
 	{
-//		NSString *elapsedHours = @"";
 		//TODO: create an interface to return a string.
 		//after checking key-value coding to see if:
 		CPRefinedElement *refinedElement = [[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] objectAtIndex:0];
-		if ([refinedElement.comparable intValue] == 0) 
-		{
+		NSString *elapsedHours = refinedElement.comparable;
+		if ([elapsedHours intValue] == 0) 
 			returningString = @"Right Now";
-		}
         else
-			returningString = [[NSString stringWithFormat:@"%d",[refinedElement.comparable intValue]] stringByAppendingString:@" Hour(s) Ago"];
+			returningString = [[NSString stringWithFormat:@"%d",[elapsedHours intValue]] stringByAppendingString:@" Hour(s) Ago"];
     }
     return returningString;
 }
@@ -45,8 +43,8 @@
 	if ([refinedElement isKindOfClass:[CPPhotosRefinedElement class]])
 	{
 		CPPhotosTableViewController *photosTableViewController = nil;
-		if ([indexedTableViewController isKindOfClass:[CPPhotosTableViewController class]]) {
-			
+		if ([indexedTableViewController isKindOfClass:[CPPhotosTableViewController class]]) 
+		{
 			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
@@ -56,8 +54,7 @@
 			scrollableImageViewController.title = photosRefinedElement.title;
 			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
 			[scrollableImageViewController release];
-		
-		
+			
 		//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
 		
 		//	ScrollableImageViewController *imageController = [self.delegate scrollableImageViewControllerForRequestor:self];

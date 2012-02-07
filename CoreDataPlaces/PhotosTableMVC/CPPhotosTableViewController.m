@@ -91,6 +91,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedObjectContext];
 			chosenPlace.title = placesRefinedElement.title;
 			chosenPlace.subtitle = placesRefinedElement.subtitle;
+			chosenPlace.category = [chosenPlace.title substringToIndex:1];
 			chosenPlace.placeID = placeID;
 			chosenPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
 			

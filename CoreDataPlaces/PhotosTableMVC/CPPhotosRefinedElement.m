@@ -92,24 +92,6 @@
 	}
 }
 
-- (NSString *)title;
-{
-	if (CP_title == nil)
-	{
-		[self extractTitleAndSubTitleFromDictionary];
-	}
-	return [[CP_title copy] autorelease];
-}
-
-- (NSString *)subtitle;
-{
-	if (CP_subtitle == nil) 
-	{
-		[self extractTitleAndSubTitleFromDictionary];
-	}
-	return [[CP_subtitle copy] autorelease];
-}
-
 #pragma mark - NSCopying protocol method
 
 - (id)copyWithZone:(NSZone *)zone;

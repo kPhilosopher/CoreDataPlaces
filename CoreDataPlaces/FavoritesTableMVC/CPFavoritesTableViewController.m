@@ -22,7 +22,8 @@
         // Custom initialization
 		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		NSString *sectionNameKeyPath = @"title";
+//		NSString *sectionNameKeyPath = @"title";
+		NSString *sectionNameKeyPath = @"category";
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -64,6 +65,10 @@
 		self.subtitleKey = @"subtitle";
 		self.searchKey = nil;
 		self.title = @"Favorites";
+		
+		//TODO: change the design. this is for testing
+//		self.tableViewHandler = [[CPFavoritesTableViewHandler alloc] init];
+//		self.dataIndexHandler = [Cp];
 	}
     return self;
 }

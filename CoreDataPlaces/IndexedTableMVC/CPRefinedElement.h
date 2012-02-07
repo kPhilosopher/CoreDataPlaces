@@ -9,17 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "CPRefinedElementInterfacing.h"
 
+//TODO: erase CPRefinedElementInterfacing.
+//TODO: make changes to tableViewHandlers to allow to just handle RefinedElements, not managed objects as well.
 @interface CPRefinedElement : NSObject <NSCopying, CPRefinedElementInterfacing>
-{
-	@protected
-	NSString *CP_title;
-	NSString *CP_subtitle;
-}
 
 #pragma mark - Property
 
-@property (copy) NSString *title;
-@property (copy) NSString *subtitle;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
 @property (copy) NSString *comparable;
 @property (retain) NSDictionary *dictionary;
 @property NSInteger sectionNumber;

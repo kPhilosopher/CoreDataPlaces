@@ -8,7 +8,7 @@
 
 #import "CPTopPlacesTableViewController-Internal.h"
 #import "CPPlacesDataIndexer.h"
-#import "CPPlacesTableViewHandler.h"
+#import "CPTopPlacesTableViewHandler.h"
 #import "CPFlickrDataSource.h"
 #import "CPFlickrDataHandler.h"
 #import "CPPlacesRefinedElement.h"
@@ -68,7 +68,7 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 	
 	[flickrDataHandler release];
 	
-	CPPlacesTableViewHandler *tableViewHandler = [[CPPlacesTableViewHandler alloc] init];
+	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
 	CPPlacesRefinedElement *placesRefinedElement = [[CPPlacesRefinedElement alloc] init];
 	CPPlacesDataIndexer *dataIndexHandler = [[CPPlacesDataIndexer alloc] initWithRefinedElement:placesRefinedElement];
 	[placesRefinedElement release]; placesRefinedElement = nil;
