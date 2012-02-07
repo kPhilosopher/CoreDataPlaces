@@ -7,6 +7,7 @@
 //
 
 #import "CPTableViewHandler.h"
+#import "CPRefinedElementInterfacing.h"
 
 
 @implementation CPTableViewHandler
@@ -21,6 +22,14 @@
 - (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
 {	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	id element = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	
+	if ([element conformsToProtocol:@protocol(CPRefinedElementInterfacing)]) {
+		id<CPRefinedElementInterfacing> elementWithInterface = (id<CPRefinedElementInterfacing>)element;
+		cell.textLabel.text = elementWithInterface.title;
+		cell.detailTextLabel.text = elementWithInterface.subtitle;
+	}
+	return cell;
 	return cell;
 }
 

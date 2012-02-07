@@ -16,19 +16,6 @@
 
 #pragma mark - Table view data source handler method
 
-- (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
-{
-	cell = [super indexedTableViewController:indexedTableViewController cellForRowAtIndexPath:indexPath cell:cell];
-	id element = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
-	
-	if ([element conformsToProtocol:@protocol(CPRefinedElementInterfacing)]) {
-		id<CPRefinedElementInterfacing> elementWithInterface = (id<CPRefinedElementInterfacing>)element;
-		cell.textLabel.text = elementWithInterface.title;
-		cell.detailTextLabel.text = elementWithInterface.subtitle;
-	}
-	return cell;
-}
-
 //TODO: refactor this method.
 - (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 {
