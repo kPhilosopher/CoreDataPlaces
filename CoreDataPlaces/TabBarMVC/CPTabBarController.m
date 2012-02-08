@@ -9,6 +9,7 @@
 #import "CPTabBarController-Internal.h"
 #import "CPTopPlacesTableViewController.h"
 #import "CPFavoritesTableViewController.h"
+#import "CPMostRecentPhotosTableViewController.h"
 #import "CPFlickrDataHandler.h"
 #import "CPPlacesDataIndexer.h"
 
@@ -21,16 +22,16 @@
 	UINavigationController *CP_favoritesNavigationViewController;
 	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
 	CPFavoritesTableViewController *CP_favoritesTableViewController;
+	CPMostRecentPhotosTableViewController *CP_mostRecentPhotosTableViewController;
 	NSManagedObjectContext *CP_managedObjectContext;
 	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
-	//	CPMostRecentPlacesTableViewController *CP_mostRecentPlacesTableViewController;
 }
 
 @property (retain) UINavigationController *topPlacesNavigationViewController;
 @property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
 @property (retain) UINavigationController *favoritesNavigationViewController;
 @property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
-//@property (retain) CPMostRecentPlacesTableViewController *mostRecentPlacesTableViewController;
+@property (retain) CPMostRecentPhotosTableViewController *mostRecentPhotosTableViewController;
 @property (retain) CPFavoritesTableViewController *favoritesTableViewController;
 
 @end
@@ -47,7 +48,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 @synthesize mostRecentPlacesNavigationViewController = CP_mostRecentPlacesNavigationViewController;
 @synthesize favoritesNavigationViewController = CP_favoritesNavigationViewController;
 @synthesize topPlacesTableViewController = CP_topPlacesTableViewController;
-//@synthesize mostRecentPlacesTableViewController = CP_mostRecentPlacesTableViewController;
+@synthesize mostRecentPhotosTableViewController = CP_mostRecentPhotosTableViewController;
 @synthesize favoritesTableViewController = CP_favoritesTableViewController;
 //@synthesize delegateToTransfer = CP_delegateToTransfer;
 @synthesize managedObjectContext = CP_managedObjectContext;
@@ -80,7 +81,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 - (void)dealloc
 {
 	[CP_topPlacesTableViewController release];
-//	[CP_mostRecentPlacesTableViewController release];
+	[CP_mostRecentPhotosTableViewController release];
 	[CP_favoritesTableViewController release];
 	[CP_topPlacesNavigationViewController release];
 	[CP_mostRecentPlacesNavigationViewController release];
@@ -117,7 +118,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 -(void)RD_setupTheCustomTableViewControllers;
 {
 	[self RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource];
-//	self.topPlacesTableViewController.delegateToUpdateMostRecentPlaces = self.mostRecentPlacesTableViewController;
+//	self.topPlacesTableViewController.delegateToUpdateMostRecentPlaces = self.mostRecentPhotosTableViewController;
 	[self RD_setDelegateToTransferForTableViewControllersForiPad];
 	[self RD_pushViewControllersToNavigationViewControllers];
 }
@@ -140,7 +141,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 										 initWithStyle:UITableViewStylePlain 
 										 managedObjectContext:self.managedObjectContext 
 											customSettingsDictionary:nil];
-	
+	self.mostRecentPhotosTableViewController = [[CPMostRecentPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext];
 	
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
 //	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
@@ -149,7 +150,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	
 //	self.topPlacesTableViewController = 
 //	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForTopPlaces] autorelease];
-//	self.mostRecentPlacesTableViewController = 
+//	self.mostRecentPhotosTableViewController = 
 //	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForMostRecentPlaces] autorelease];
 //	
 //	[theFlickrDataSource release];
@@ -159,12 +160,12 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 - (void)RD_setDelegateToTransferForTableViewControllersForiPad;
 { 
 //	self.topPlacesTableViewController.delegateToTransfer = self.delegateToTransfer;
-//	self.mostRecentPlacesTableViewController.delegateToTransfer = self.delegateToTransfer;
+//	self.mostRecentPhotosTableViewController.delegateToTransfer = self.delegateToTransfer;
 }
 -(void)RD_pushViewControllersToNavigationViewControllers;
 {
 	[self.topPlacesNavigationViewController pushViewController:self.topPlacesTableViewController animated:YES];
-//	[self.mostRecentPlacesNavigationViewController pushViewController:self.mostRecentPlacesTableViewController animated:YES];
+	[self.mostRecentPlacesNavigationViewController pushViewController:self.mostRecentPhotosTableViewController animated:YES];
 	[self.favoritesNavigationViewController pushViewController:self.favoritesTableViewController animated:YES];
 }
 -(void)RD_setTabBarItemToSystemItems;

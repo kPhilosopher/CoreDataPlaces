@@ -18,6 +18,8 @@
 @dynamic timeLapseSinceLastView;
 @dynamic title;
 @dynamic timeLapseSinceUpload;
+@dynamic timeOfUpload;
+@dynamic timeOfLastView;
 @dynamic itsPlace;
 
 @end

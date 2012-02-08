@@ -1,36 +1,33 @@
 //
-//  CPCoreDataPhotosTableViewController.m
+//  CPMostRecentPhotosTableViewController.m
 //  CoreDataPlaces
 //
-//  Created by Jinwoo Baek on 2/1/12.
-//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
+//  Created by Jinwoo Baek on 2/7/12.
+//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPCoreDataPhotosTableViewController.h"
+#import "CPMostRecentPhotosTableViewController.h"
 #import "Photo+TimeLapseCalculator.h"
-#import "Place.h"
 #import "CPScrollableImageViewController.h"
 
-
-@implementation CPCoreDataPhotosTableViewController
+@implementation CPMostRecentPhotosTableViewController
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
+- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
 		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
+		NSString *sectionNameKeyPath = @"timeLapseSinceLastView";//change compare to CoreDataPhotosTableViewController
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
-//				fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceUpload < %@",@"10"];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",@"48"];//change
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
@@ -66,18 +63,8 @@
 		self.subtitleKey = @"subtitle";
 		self.searchKey = nil;
 		//TODO: title of the given Place
-//		self.title = @"";
+		//		self.title = @"";
 	}
-    return self;
-}
-
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -91,11 +78,11 @@
 		//TODO: create an interface to return a string.
 		//after checking key-value coding to see if:
 		Photo *photo = [sectionInfo.objects lastObject];
-//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
-		if ([photo.timeLapseSinceUpload intValue] == 0) 
+		//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
+		if ([photo.timeLapseSinceLastView intValue] == 0) //change
 			returningString = @"Right Now";
 		else
-			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]] stringByAppendingString:@" Hour(s) Ago"];
+			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceLastView intValue]] stringByAppendingString:@" Hour(s) Ago"];//change
 	}
     return returningString;
 }
@@ -118,9 +105,9 @@
 {
 	if ([managedObject isKindOfClass:[Photo class]])
 	{
-//		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
-//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+		//		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+		//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
+		//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;

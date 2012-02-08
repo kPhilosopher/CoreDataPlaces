@@ -26,6 +26,10 @@
 
 #pragma mark - Instance method
 
+//TODO: refactor dateUpload should be secondsSinceUpload
+//NSString *secondsSinceUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
+//NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
+//secondsBetween1970AndUpload
 - (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement;
 {
 	NSDate *endDate = [NSDate date];

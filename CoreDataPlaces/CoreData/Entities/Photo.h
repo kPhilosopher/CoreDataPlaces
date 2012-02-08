@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSNumber * timeLapseSinceLastView;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * timeLapseSinceUpload;
+@property (nonatomic, retain) NSDate * timeOfUpload;
+@property (nonatomic, retain) NSDate * timeOfLastView;
 @property (nonatomic, retain) Place *itsPlace;
 
 @end

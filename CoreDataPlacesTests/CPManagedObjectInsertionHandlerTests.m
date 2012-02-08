@@ -40,6 +40,8 @@
 	[__managedObjectContext release];
 	[__managedObjectModel release];
 	[__persistentStoreCoordinator release];
+	[CP_insertionHandler release];
+	[super dealloc];
 }
 
 #pragma mark - Tests

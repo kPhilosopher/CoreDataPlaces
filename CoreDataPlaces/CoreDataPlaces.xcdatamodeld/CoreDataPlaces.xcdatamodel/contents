@@ -6,6 +6,8 @@
         <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeLapseSinceLastView" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timeLapseSinceUpload" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timeOfLastView" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="timeOfUpload" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="itsPlace" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="photos" inverseEntity="Place" syncable="YES"/>
     </entity>
@@ -19,6 +21,6 @@
     </entity>
     <elements>
         <element name="Photo" positionX="72" positionY="207" width="128" height="150"/>
-        <element name="Place" positionX="304" positionY="243" width="128" height="135"/>
+        <element name="Place" positionX="304" positionY="243" width="128" height="120"/>
     </elements>
 </model>
