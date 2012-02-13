@@ -3,7 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/7/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPMostRecentPhotosTableViewController.h"
@@ -27,12 +27,12 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",@"48"];//change
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",@"51"];//change
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
-		[sortDescriptors release];
-		[sortDescriptor release];
+		[sortDescriptors release];sortDescriptors = nil;
+		[sortDescriptor release];sortDescriptor = nil;
 	    
 		NSFetchedResultsController *localFetchedResultsController = 
 		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

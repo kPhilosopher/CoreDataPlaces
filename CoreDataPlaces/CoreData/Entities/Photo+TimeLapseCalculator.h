@@ -11,4 +11,22 @@
 
 @interface Photo (TimeLapseCalculator)
 
+#pragma mark - Property
+
+//@property (nonatomic, readonly) NSNumber * timeLapseSinceLastView;
+//@property (nonatomic, readonly) NSNumber * timeLapseSinceUpload;
+
+#pragma mark - Instance method
+
+- (void)setTheTimeLapse;
+
+@end
+
+@interface Photo ()
+
+- (NSNumber *)primitiveTimeLapseSinceUpload;
+- (void)setPrimitiveTimeLapseSinceUpload:(NSNumber *)newTimeLapseSinceUpload;
+- (NSNumber *)primitiveTimeLapseSinceLastView;
+- (void)setPrimitiveTimeLapseSinceLastView:(NSNumber *)newTimeLapseSinceLastView;
+
 @end

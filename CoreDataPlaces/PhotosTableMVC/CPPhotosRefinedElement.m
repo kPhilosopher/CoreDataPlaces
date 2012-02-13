@@ -49,12 +49,10 @@
 
 - (NSComparisonResult)compare:(CPPhotosRefinedElement *)aRefinedElementPhoto;
 {
-	int result;
+	int result = 0;
 	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
 	if ([formatter numberFromString:self.comparable] && [formatter numberFromString:aRefinedElementPhoto.comparable])
 		result = [[NSNumber numberWithDouble:[self.comparable doubleValue]] compare:[NSNumber numberWithDouble:[aRefinedElementPhoto.comparable doubleValue]]];
-	else	
-		result = 0;
 	return result;
 }
 

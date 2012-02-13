@@ -10,6 +10,7 @@
 #import "Photo+TimeLapseCalculator.h"
 #import "Place.h"
 #import "CPScrollableImageViewController.h"
+#import "NSDate+HourComparator.h"
 
 
 @implementation CPCoreDataPhotosTableViewController
@@ -22,15 +23,14 @@
     if (self) {
         // Custom initialization
 		self.managedObjectContext = managedObjectContext;
-		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
+//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
-		
+
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
-//				fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceUpload < %@",@"10"];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
@@ -92,6 +92,7 @@
 		//after checking key-value coding to see if:
 		Photo *photo = [sectionInfo.objects lastObject];
 //		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
+
 		if ([photo.timeLapseSinceUpload intValue] == 0) 
 			returningString = @"Right Now";
 		else
