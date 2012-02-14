@@ -38,44 +38,42 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIToolbar" id="1005400064">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">266</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUISwitch" id="750789974">
+								<reference key="NSNextResponder" ref="1005400064"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{-3, 9}, {94, 27}}</string>
+								<reference key="NSSuperview" ref="1005400064"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:606</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+							</object>
+						</array>
+						<string key="NSFrame">{{0, 416}, {320, 44}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:371</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<array class="NSMutableArray" key="IBUIItems">
+							<object class="IBUIBarButtonItem" id="351102517">
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<reference key="IBUICustomView" ref="750789974"/>
+								<reference key="IBUIToolbar" ref="1005400064"/>
+							</object>
+						</array>
+					</object>
 					<object class="IBUIScrollView" id="226316552">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIToolbar" id="918145896">
-								<reference key="NSNextResponder" ref="226316552"/>
-								<int key="NSvFlags">266</int>
-								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUISwitch" id="748192405">
-										<reference key="NSNextResponder" ref="918145896"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{-3, 9}, {94, 27}}</string>
-										<reference key="NSSuperview" ref="918145896"/>
-										<reference key="NSWindow"/>
-										<string key="NSReuseIdentifierKey">_NS:606</string>
-										<bool key="IBUIOpaque">NO</bool>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<int key="IBUIContentHorizontalAlignment">0</int>
-										<int key="IBUIContentVerticalAlignment">0</int>
-									</object>
-								</array>
-								<string key="NSFrame">{{0, 416}, {320, 44}}</string>
-								<reference key="NSSuperview" ref="226316552"/>
-								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:371</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<array class="NSMutableArray" key="IBUIItems">
-									<object class="IBUIBarButtonItem" id="129462688">
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<reference key="IBUICustomView" ref="748192405"/>
-										<reference key="IBUIToolbar" ref="918145896"/>
-									</object>
-								</array>
-							</object>
-						</array>
-						<string key="NSFrameSize">{320, 460}</string>
+						<string key="NSFrameSize">{320, 416}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -122,9 +120,18 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">switchForFavorite</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="748192405"/>
+						<reference key="destination" ref="750789974"/>
 					</object>
 					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleFavoriteSwitch:</string>
+						<reference key="source" ref="750789974"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">40</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -139,6 +146,7 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="1005400064"/>
 							<reference ref="226316552"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -157,31 +165,29 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">3</int>
 						<reference key="object" ref="226316552"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="918145896"/>
-						</array>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
-						<reference key="object" ref="918145896"/>
+						<reference key="object" ref="1005400064"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="129462688"/>
+							<reference ref="351102517"/>
 						</array>
-						<reference key="parent" ref="226316552"/>
+						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">38</int>
-						<reference key="object" ref="129462688"/>
+						<reference key="object" ref="351102517"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="748192405"/>
+							<reference ref="750789974"/>
 						</array>
-						<reference key="parent" ref="918145896"/>
+						<reference key="parent" ref="1005400064"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="748192405"/>
-						<reference key="parent" ref="129462688"/>
+						<reference key="object" ref="750789974"/>
+						<reference key="parent" ref="351102517"/>
 					</object>
 				</array>
 			</object>
@@ -200,13 +206,24 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">CPScrollableImageViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">toggleFavoriteSwitch:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">toggleFavoriteSwitch:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">toggleFavoriteSwitch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="scrollView">UIScrollView</string>
 						<string key="switchForFavorite">UISwitch</string>

@@ -7,7 +7,7 @@
 //
 
 #import "CPCoreDataPhotosTableViewController.h"
-#import "Photo+TimeLapseCalculator.h"
+#import "Photo+Logic.h"
 #import "Place.h"
 #import "CPScrollableImageViewController.h"
 #import "NSDate+HourComparator.h"

@@ -29,7 +29,7 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@", [NSNumber numberWithBool:NO]];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@",[NSNumber numberWithBool:YES]];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];

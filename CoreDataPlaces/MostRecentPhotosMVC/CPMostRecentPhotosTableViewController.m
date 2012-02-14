@@ -7,10 +7,12 @@
 //
 
 #import "CPMostRecentPhotosTableViewController.h"
-#import "Photo+TimeLapseCalculator.h"
+#import "Photo+Logic.h"
 #import "CPScrollableImageViewController.h"
 
 @implementation CPMostRecentPhotosTableViewController
+
+const int CPMaximumHoursForMostRecentPhoto = 48;
 
 #pragma mark - Initialization
 
@@ -27,7 +29,9 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",@"51"];//change
+		//TODO: fix the predicate to actually filter out older photos.
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < 51"];//change
+//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",[NSString stringWithFormat:@"%d",CPMaximumHoursForMostRecentPhoto]];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
