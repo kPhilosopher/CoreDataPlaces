@@ -19,6 +19,10 @@
 @property (nonatomic, retain) NSString * subtitle;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *photos;
+
+//TODO: put this in a category
+- (void)checkPhotosToEnsureFavoritePlace;
+
 @end
 
 @interface Place (CoreDataGeneratedAccessors)
@@ -30,5 +34,6 @@
 - (void)removePhotosObject:(Photo *)value;
 - (void)addPhotos:(NSSet *)values;
 - (void)removePhotos:(NSSet *)values;
+
 
 @end

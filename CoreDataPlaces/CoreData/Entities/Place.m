@@ -19,6 +19,18 @@
 @dynamic title;
 @dynamic photos;
 
+- (void)checkPhotosToEnsureFavoritePlace;
+{
+	NSMutableSet *setOfPhotos = [self primitivePhotos];
+	BOOL verdict = NO;
+	for (Photo *photo in setOfPhotos)
+	{
+		if ([photo.isFavorite boolValue])
+			verdict = YES;
+	}
+	self.hasFavoritePhoto = [NSNumber numberWithBool:verdict];
+}
+
 //TODO: put this in a category
 
 //- (void)addPhotosObject:(Photo *)value;
