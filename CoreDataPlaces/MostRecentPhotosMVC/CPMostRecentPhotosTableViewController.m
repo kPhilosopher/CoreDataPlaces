@@ -29,7 +29,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		//TODO: fix the predicate to actually filter out older photos.
+		//TODO: fix the predicate to actually filter out older photos. and allow the const to be the number of maximum.
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < 51"];//change
 //		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",[NSString stringWithFormat:@"%d",CPMaximumHoursForMostRecentPhoto]];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];

@@ -17,6 +17,24 @@
 
 #pragma mark - Initialization
 
+- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;
+{
+	self = [self initWithStyle:style];
+    if (self) {
+        // Custom initialization
+		self.managedObjectContext = managedObjectContext;
+		self.fetchedResultsController = localFetchedResultsController;
+		
+		self.titleKey = @"title";
+		self.subtitleKey = @"subtitle";
+		self.searchKey = nil;
+		//TODO: title of the given Place
+		//		self.title = @"";
+	}
+    return self;
+}
+
+//TODO: might delete this method
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
 {
     self = [self initWithStyle:style];
@@ -30,7 +48,9 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
+//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
+		fetchRequest.predicate = [NSPredicate
+								  predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
