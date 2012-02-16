@@ -36,5 +36,6 @@ extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
 //- (void)initiateTheImageSetupWithGiven:(UIImage *)givenImage;
 
 - (IBAction)toggleFavoriteSwitch:(id)sender;
+- (void)setNewCurrentPhoto:(Photo *)newPhoto;
 
 @end

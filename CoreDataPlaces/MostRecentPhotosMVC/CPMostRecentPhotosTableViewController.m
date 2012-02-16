@@ -113,9 +113,12 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
 		//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		Photo *chosenPhoto = (Photo *)managedObject;
-		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
+		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+		[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+//		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;
-		scrollableImageViewController.currentPhoto = chosenPhoto;
+//		scrollableImageViewController.currentPhoto = chosenPhoto;
+		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
 		[self.navigationController pushViewController:scrollableImageViewController animated:YES];
 		[scrollableImageViewController release];
 	}

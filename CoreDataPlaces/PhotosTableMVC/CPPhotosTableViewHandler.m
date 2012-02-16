@@ -48,7 +48,9 @@
 			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
-			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:indexedTableViewController.managedObjectContext];
+			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+//			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:indexedTableViewController.managedObjectContext];
 			//TODO: just need to pass the managedobject and the url.
 			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
 			scrollableImageViewController.title = photosRefinedElement.title;

@@ -178,7 +178,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	NSLog(@"%@",[NSString stringWithFormat:@"viewWillAppear"]);
 	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	[super viewWillAppear:animated];
-	if (self.imageView == nil && (self.currentPhoto.photoURL != nil)) 
+	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
 		self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
 		self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
@@ -204,7 +204,10 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
 {
 	self.currentPhoto = newPhoto;
-	
+	self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
+	[self.imageView removeFromSuperview];
+	self.imageView = nil;
+	self.image = nil;
 }
 
 - (void)viewDidLoad
@@ -217,7 +220,6 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	self.scrollView.minimumZoomScale = 0.2;
 	self.scrollView.maximumZoomScale = 4;
 	self.scrollView.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
-	self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
 }
 
 - (void)viewDidUnload
@@ -253,34 +255,35 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	[sortDescriptors release];
 	
+	Photo *photoToDisplay = nil;
 	NSError *error = nil;
 	NSUInteger returnedObjectCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
 	if ((returnedObjectCount == 0) && !error)
 	{
-		self.currentPhoto = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
-		self.currentPhoto.photoURL = photoURL;
-		self.currentPhoto.title = photosRefinedElement.title;
-		self.currentPhoto.subtitle = photosRefinedElement.subtitle;
-		self.currentPhoto.isFavorite = [NSNumber numberWithBool:NO];
-		self.currentPhoto.itsPlace = photosRefinedElement.itsPlace;
+		photoToDisplay = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
+		photoToDisplay.photoURL = photoURL;
+		photoToDisplay.title = photosRefinedElement.title;
+		photoToDisplay.subtitle = photosRefinedElement.subtitle;
+		photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
+		photoToDisplay.itsPlace = photosRefinedElement.itsPlace;
 		//TODO: fix the way the hour changes show.
 //		NSString *dateUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
 //		NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dateUpload intValue]];
-//		self.currentPhoto.timeLapseSinceUpload = date;
+//		photoToDisplay.timeLapseSinceUpload = date;
 //		NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
 //		[dateComponents setHour:[photosRefinedElement.comparable intValue]];
 //		NSCalendar *gregorian = [[NSCalendar alloc]
 //								 initWithCalendarIdentifier:NSGregorianCalendar];
 //		NSDate *date = [gregorian dateFromComponents:dateComponents];
-//		self.currentPhoto.timeLapseSinceUpload = date;
-//		self.currentPhoto.timeLapseSinceUpload = [NSString stringWithFormat:@"%d",[photosRefinedElement.comparable intValue]];
-//		self.currentPhoto.timeLapseSinceUpload = [NSNumber numberWithInt:[photosRefinedElement.comparable intValue]];
+//		photoToDisplay.timeLapseSinceUpload = date;
+//		photoToDisplay.timeLapseSinceUpload = [NSString stringWithFormat:@"%d",[photosRefinedElement.comparable intValue]];
+//		photoToDisplay.timeLapseSinceUpload = [NSNumber numberWithInt:[photosRefinedElement.comparable intValue]];
 //		NSError *error = nil;
 		NSString *secondsSinceUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
 		NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
 		
-		self.currentPhoto.timeOfUpload = uploadDate;
-//		[self.currentPhoto setupTimeLapseSinceUpload];
+		photoToDisplay.timeOfUpload = uploadDate;
+//		[photoToDisplay setupTimeLapseSinceUpload];
 //		@try
 //		{
 //			[self.managedObjectContext save:&error];
@@ -314,9 +317,12 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 		}
 		else
 		{
-			self.currentPhoto = [fetchRequestOutput lastObject];
+			photoToDisplay = [fetchRequestOutput lastObject];
 		}
 	}
+	
+	[self setNewCurrentPhoto:photoToDisplay];
+	
 	[fetchRequest release];fetchRequest = nil;
 }
 
