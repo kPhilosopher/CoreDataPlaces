@@ -63,18 +63,18 @@
 	[super tearDown];
 }
 
-- (void)testAddingSingleFavoritePhoto
-{
-	Place *place = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-	Photo *photo = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
-	STAssertNil(place.hasFavoritePhoto,@"The place's boolean for favorite photo should be nil.");
-	
-	photo.isFavorite = [NSNumber numberWithBool:YES];
-	photo.itsPlace = place;
-	
-	STAssertTrue([place.hasFavoritePhoto isEqualToNumber:[NSNumber numberWithBool:YES]],@"The place's boolean for favorite photo should be no.");
-	
-}
+//- (void)testAddingSingleFavoritePhoto
+//{
+//	Place *place = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+//	Photo *photo = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
+//	STAssertNil(place.hasFavoritePhoto,@"The place's boolean for favorite photo should be nil.");
+//	
+//	photo.isFavorite = [NSNumber numberWithBool:YES];
+//	photo.itsPlace = place;
+//	
+//	STAssertTrue([place.hasFavoritePhoto isEqualToNumber:[NSNumber numberWithBool:YES]],@"The place's boolean for favorite photo should be no.");
+//	
+//}
 
 - (void)testRemovingOnlyFavoritePhoto
 {

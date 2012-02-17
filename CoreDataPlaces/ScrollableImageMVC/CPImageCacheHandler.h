@@ -13,7 +13,8 @@
 
 #pragma mark - Instance method
 
-- (void)cacheImage:(NSString *)imageLocation;
+- (void)cacheImage:(NSString *)imageLocation UIImage:(UIImage *)image;
 - (UIImage *)getCachedImage:(NSString *)imageLocation;
+- (BOOL)deleteCacheImage:(NSString *)imageLocation;
 
 @end

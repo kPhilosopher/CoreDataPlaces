@@ -11,6 +11,8 @@
 #import "CPPhotosRefinedElement.h"
 #import "FlickrFetcher.h"
 #import "CPAppDelegate.h"
+#import "CPImageCacheHandler.h"
+
 
 static CPScrollableImageViewController *sharedScrollableImageController = nil;
 
@@ -119,8 +121,6 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
     return self;
 }
 
-
-
 #pragma mark - View lifecycle
 
 -(void)dealloc
@@ -154,13 +154,23 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	return theRectToReturn;
 }
 
-//TODO: download the image in here with multi-threading.
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
 	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
-		self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
+		
+		if (self.currentPhoto.isFavorite == [NSNumber numberWithBool:YES]) 
+		{
+			//TODO: download the image in here with multi-threading.
+			CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
+			[imageCacheHandler release];imageCacheHandler = nil;
+		}
+		else
+		{
+			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
+		}
 		self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
 		self.scrollView.contentSize = self.imageView.bounds.size;
 		[self.scrollView addSubview:self.imageView];
@@ -290,7 +300,23 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
 {
+	CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+	if (sender.on == YES) 
+	{
+		//TODO:multithread
+		
+		[imageCacheHandler cacheImage:self.currentPhoto.photoURL UIImage:self.image];
+
+	}
+	else if (sender.on == NO && [self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]])
+	{
+		//delete the cache.
+		[imageCacheHandler deleteCacheImage:self.currentPhoto.photoURL];
+	}
+	[imageCacheHandler release];imageCacheHandler = nil;
+	
 	self.currentPhoto.isFavorite = [NSNumber numberWithBool:sender.on];
+	
 	NSError *error = nil;
 	if (![self.managedObjectContext save:&error])
 	{
