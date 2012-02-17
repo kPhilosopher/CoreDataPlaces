@@ -65,7 +65,6 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 		//		self.view.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
 		//		self.navigationItem.backBarButtonItem.accessibilityLabel = ScrollableImageBackBarButtonAccessibilityLabel;
 		//		self.navigationItem.backBarButtonItem.title = @"whatwhat";
-		//TODO: add a navigation item button to act as a switch for favorites.
 	}
 	return self;
 }
@@ -155,28 +154,9 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	return theRectToReturn;
 }
 
-- (void)viewDidAppear:(BOOL)animated;
-{
-	[super viewDidAppear:animated];
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewDidAppear"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
-}
-
-- (void)viewDidDisappear:(BOOL)animated;
-{
-	[super viewDidDisappear:animated];
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewDidDisappear"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
-}
-
 //TODO: download the image in here with multi-threading.
 - (void)viewWillAppear:(BOOL)animated;
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewWillAppear"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	[super viewWillAppear:animated];
 	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
@@ -186,10 +166,10 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 		[self.scrollView addSubview:self.imageView];
 		if (self.image != nil)
 		{
-//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(50*3600))];
+//			int r = arc4random() % 50;
+//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
 			self.currentPhoto.timeOfLastView = [NSDate date];
 			[self.currentPhoto setTheTimeLapse];
-//			[self.currentPhoto setupTimeLapseSinceLastView];
 			NSError *error = nil;
 			if (![self.managedObjectContext save:&error])
 			{
@@ -212,9 +192,6 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (void)viewDidLoad
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewDidLoad"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
     [super viewDidLoad];
 	self.scrollView.delegate = self;
 	self.scrollView.minimumZoomScale = 0.2;
@@ -224,9 +201,6 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (void)viewDidUnload
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewDidUnload"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
     [super viewDidUnload];
 	CP_scrollView = nil;
 	CP_switchForFavorite = nil;
@@ -267,32 +241,10 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 		photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
 		photoToDisplay.itsPlace = photosRefinedElement.itsPlace;
 		//TODO: fix the way the hour changes show.
-//		NSString *dateUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
-//		NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dateUpload intValue]];
-//		photoToDisplay.timeLapseSinceUpload = date;
-//		NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-//		[dateComponents setHour:[photosRefinedElement.comparable intValue]];
-//		NSCalendar *gregorian = [[NSCalendar alloc]
-//								 initWithCalendarIdentifier:NSGregorianCalendar];
-//		NSDate *date = [gregorian dateFromComponents:dateComponents];
-//		photoToDisplay.timeLapseSinceUpload = date;
-//		photoToDisplay.timeLapseSinceUpload = [NSString stringWithFormat:@"%d",[photosRefinedElement.comparable intValue]];
-//		photoToDisplay.timeLapseSinceUpload = [NSNumber numberWithInt:[photosRefinedElement.comparable intValue]];
-//		NSError *error = nil;
 		NSString *secondsSinceUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
 		NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
 		
 		photoToDisplay.timeOfUpload = uploadDate;
-//		[photoToDisplay setupTimeLapseSinceUpload];
-//		@try
-//		{
-//			[self.managedObjectContext save:&error];
-//		}
-//		@catch(NSException* ex)
-//		{
-//			NSLog(@"%@",@"debugging!!!");
-//			NSLog(@"%@",[ex debugDescription]);
-//		}
 		if (![self.managedObjectContext save:&error])
 		{
 			//handle the error.

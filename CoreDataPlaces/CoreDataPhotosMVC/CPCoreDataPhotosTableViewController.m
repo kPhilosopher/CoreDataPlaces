@@ -10,7 +10,6 @@
 #import "Photo+Logic.h"
 #import "Place.h"
 #import "CPScrollableImageViewController.h"
-#import "NSDate+HourComparator.h"
 
 
 @implementation CPCoreDataPhotosTableViewController
@@ -48,7 +47,6 @@
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"itsPlace.placeID like %@",chosenPlace.placeID];
 		fetchRequest.predicate = [NSPredicate
 								  predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
@@ -63,18 +61,24 @@
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
 		
-		// test it
 		NSError *error;
-		if ([localFetchedResultsController performFetch:&error]) {
-			NSLog(@"results");
-			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
-				NSLog(@"%@", photo);
-			}
-		}
-		else {
+		if (![localFetchedResultsController performFetch:&error])
+		{
 			NSLog(@"%@", [error localizedFailureReason]);
+			abort();
 		}
+		// test it
+		//		if ([localFetchedResultsController performFetch:&error]) {
+		//			NSLog(@"results");
+		//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
+		//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
+		//				NSLog(@"%@", photo.title);
+		//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
+		//			}
+		//		}
+		//		else {
+		//			NSLog(@"%@", [error localizedFailureReason]);
+		//		}
 		
 		[fetchRequest release]; fetchRequest = nil;
 		
@@ -85,8 +89,7 @@
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
 		self.searchKey = nil;
-		//TODO: title of the given Place
-//		self.title = @"";
+		self.title = chosenPlace.title;
 	}
     return self;
 }
@@ -139,15 +142,10 @@
 {
 	if ([managedObject isKindOfClass:[Photo class]])
 	{
-//		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
-//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 		[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-//		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;
-//		scrollableImageViewController.currentPhoto = chosenPhoto;
 		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
 		[self.navigationController pushViewController:scrollableImageViewController animated:YES];
 		[scrollableImageViewController release];

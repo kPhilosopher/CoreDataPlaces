@@ -35,14 +35,13 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
-NSString *PLTitleOfScrollableViewController = @"Photo";
+NSString *CPTitleOfScrollableViewController = @"Photo";
 
 #pragma mark - View lifecycle
 
 - (void)dealloc
 {
 	[CP_tabBarController release];
-//	[CP_scrollableImageVC release];
 	[CP_splitVC release];
 	[_window release];
 	[__managedObjectContext release];
@@ -209,9 +208,6 @@ NSString *PLTitleOfScrollableViewController = @"Photo";
  */
 - (NSURL *)applicationDocumentsDirectory
 {
-//	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-//	NSLog([NSString stringWithFormat:@"this is the url: %@",[[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] absoluteString]]);
-//	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

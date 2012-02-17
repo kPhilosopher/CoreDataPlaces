@@ -12,9 +12,24 @@
 
 @implementation CPMostRecentPhotosTableViewController
 
-const int CPMaximumHoursForMostRecentPhoto = 48;
+const int CPMaximumHoursForMostRecentPhoto = 51;
 
 #pragma mark - Initialization
+
+//TODO: erase this, this is here for testing.
+- (NSNumber *)CP_timeLapseSinceDate:(NSDate *)date;
+{
+	NSDate *endDate = [NSDate date];
+	NSDate *startDate = date;
+	NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+	NSUInteger unitFlags = NSHourCalendarUnit;
+	NSDateComponents *components = [gregorian components:unitFlags
+												fromDate:startDate
+												  toDate:endDate 
+												 options:0];
+	int number = [components hour];
+	return [NSNumber numberWithInt:number];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
@@ -29,9 +44,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.fetchBatchSize = 20;
-		//TODO: fix the predicate to actually filter out older photos. and allow the const to be the number of maximum.
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < 51"];//change
-//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %@",[NSString stringWithFormat:@"%d",CPMaximumHoursForMostRecentPhoto]];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %d",CPMaximumHoursForMostRecentPhoto];//changed
 		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 		[fetchRequest setSortDescriptors:sortDescriptors];
@@ -44,18 +57,24 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
 		
-		// test it
 		NSError *error;
-		if ([localFetchedResultsController performFetch:&error]) {
-			NSLog(@"results");
-			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
-				NSLog(@"%@", photo);
-			}
-		}
-		else {
+		if (![localFetchedResultsController performFetch:&error])
+		{
 			NSLog(@"%@", [error localizedFailureReason]);
+			abort();
 		}
+		// test it
+//		if ([localFetchedResultsController performFetch:&error]) {
+//			NSLog(@"results");
+//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
+//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
+//				NSLog(@"%@", photo.title);
+//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
+//			}
+//		}
+//		else {
+//			NSLog(@"%@", [error localizedFailureReason]);
+//		}
 		
 		[fetchRequest release]; fetchRequest = nil;
 		
@@ -67,7 +86,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		self.subtitleKey = @"subtitle";
 		self.searchKey = nil;
 		//TODO: title of the given Place
-		//		self.title = @"";
+		self.title = @"Recent Photos";
 	}
     return self;
 }
@@ -109,15 +128,10 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 {
 	if ([managedObject isKindOfClass:[Photo class]])
 	{
-		//		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-		//		NSLog(@"%@",[NSString stringWithFormat:@"%d",[[self.fetchedResultsController sections] count]]);
-		//		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 		[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-//		CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:self.managedObjectContext];
 		scrollableImageViewController.title = chosenPhoto.title;
-//		scrollableImageViewController.currentPhoto = chosenPhoto;
 		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
 		[self.navigationController pushViewController:scrollableImageViewController animated:YES];
 		[scrollableImageViewController release];

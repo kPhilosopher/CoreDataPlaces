@@ -20,12 +20,18 @@
 		CE2AD81014DB88E400957968 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */; };
 		CE2AD81114DB94B800957968 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */; };
 		CE2AD81614DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */; };
-		CE3E9F0114E8707B00101891 /* NSDate+HourComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0014E8707B00101891 /* NSDate+HourComparator.m */; };
-		CE3E9F0214E8707B00101891 /* NSDate+HourComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0014E8707B00101891 /* NSDate+HourComparator.m */; };
 		CE3E9F0B14E976BA00101891 /* CPPlaceFavoriteLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */; };
 		CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
 		CE3E9F0F14E9BD2300101891 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
 		CE3E9F1214E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F1114E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m */; };
+		CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
+		CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
+		CE60708114ED82B200420AD8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D86A14CCC7C500BDF83D /* SenTestingKit.framework */; };
+		CE60708214ED82B200420AD8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
+		CE60708314ED82B200420AD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
+		CE60708914ED82B300420AD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE60708714ED82B300420AD8 /* InfoPlist.strings */; };
+		CE60709314ED82E000420AD8 /* CPImageCacheHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60709214ED82E000420AD8 /* CPImageCacheHandlerTests.m */; };
+		CE60709714EDC69300420AD8 /* testImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CE60709614EDC69300420AD8 /* testImage.jpeg */; };
 		CE60E23614D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */; };
 		CE80D84E14CCC7C500BDF83D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE80D85014CCC7C500BDF83D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
@@ -106,6 +112,13 @@
 			remoteGlobalIDString = CE80D86814CCC7C500BDF83D;
 			remoteInfo = CoreDataPlacesTests;
 		};
+		CE60709414ED837300420AD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE80D84014CCC7C500BDF83D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE80D84814CCC7C500BDF83D;
+			remoteInfo = CoreDataPlaces;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -125,14 +138,23 @@
 		CE2AD80E14DB88E400957968 /* CPScrollableImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPScrollableImageViewController.h; sourceTree = "<group>"; };
 		CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPScrollableImageViewController.m; sourceTree = "<group>"; };
 		CE2AD81514DB98EB00957968 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "CoreDataPlaces/en.lproj/CPScrollableImageViewController-iPhone.xib"; sourceTree = SOURCE_ROOT; };
-		CE3E9EFF14E8707B00101891 /* NSDate+HourComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HourComparator.h"; sourceTree = "<group>"; };
-		CE3E9F0014E8707B00101891 /* NSDate+HourComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HourComparator.m"; sourceTree = "<group>"; };
 		CE3E9F0814E976BA00101891 /* CPPlaceFavoriteLogicTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlaceFavoriteLogicTests.h; sourceTree = "<group>"; };
 		CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlaceFavoriteLogicTests.m; sourceTree = "<group>"; };
 		CE3E9F0C14E9BD2300101891 /* Photo+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Logic.h"; sourceTree = "<group>"; };
 		CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Logic.m"; sourceTree = "<group>"; };
 		CE3E9F1014E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotoTimeIntervalCalculatorTests.h; sourceTree = "<group>"; };
 		CE3E9F1114E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPhotoTimeIntervalCalculatorTests.m; sourceTree = "<group>"; };
+		CE60707414ED808800420AD8 /* CPImageCacheHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPImageCacheHandler.h; sourceTree = "<group>"; };
+		CE60707514ED808800420AD8 /* CPImageCacheHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPImageCacheHandler.m; sourceTree = "<group>"; };
+		CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataPlacesApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE60708614ED82B300420AD8 /* CoreDataPlacesApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDataPlacesApplicationTests-Info.plist"; sourceTree = "<group>"; };
+		CE60708814ED82B300420AD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE60708A14ED82B300420AD8 /* CoreDataPlacesApplicationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataPlacesApplicationTests.h; sourceTree = "<group>"; };
+		CE60708B14ED82B300420AD8 /* CoreDataPlacesApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataPlacesApplicationTests.m; sourceTree = "<group>"; };
+		CE60708D14ED82B300420AD8 /* CoreDataPlacesApplicationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreDataPlacesApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
+		CE60709114ED82E000420AD8 /* CPImageCacheHandlerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPImageCacheHandlerTests.h; sourceTree = "<group>"; };
+		CE60709214ED82E000420AD8 /* CPImageCacheHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPImageCacheHandlerTests.m; sourceTree = "<group>"; };
+		CE60709614EDC69300420AD8 /* testImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpeg; sourceTree = "<group>"; };
 		CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewController.h; sourceTree = "<group>"; };
 		CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewController.m; sourceTree = "<group>"; };
 		CE60E24114DA4D010000B213 /* CPPhotosTableViewHandler-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewHandler-Internal.h"; sourceTree = "<group>"; };
@@ -229,6 +251,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE60707C14ED82B200420AD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE60708114ED82B200420AD8 /* SenTestingKit.framework in Frameworks */,
+				CE60708214ED82B200420AD8 /* UIKit.framework in Frameworks */,
+				CE60708314ED82B200420AD8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE80D84614CCC7C500BDF83D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,6 +330,29 @@
 			path = IndexedTableMVC;
 			sourceTree = "<group>";
 		};
+		CE60708414ED82B200420AD8 /* CoreDataPlacesApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE60708A14ED82B300420AD8 /* CoreDataPlacesApplicationTests.h */,
+				CE60708B14ED82B300420AD8 /* CoreDataPlacesApplicationTests.m */,
+				CE60709114ED82E000420AD8 /* CPImageCacheHandlerTests.h */,
+				CE60709214ED82E000420AD8 /* CPImageCacheHandlerTests.m */,
+				CE60708514ED82B300420AD8 /* Supporting Files */,
+			);
+			path = CoreDataPlacesApplicationTests;
+			sourceTree = "<group>";
+		};
+		CE60708514ED82B300420AD8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE60709614EDC69300420AD8 /* testImage.jpeg */,
+				CE60708614ED82B300420AD8 /* CoreDataPlacesApplicationTests-Info.plist */,
+				CE60708714ED82B300420AD8 /* InfoPlist.strings */,
+				CE60708D14ED82B300420AD8 /* CoreDataPlacesApplicationTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,8 +360,6 @@
 				CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */,
 				CEB1119C14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.h */,
 				CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */,
-				CE3E9EFF14E8707B00101891 /* NSDate+HourComparator.h */,
-				CE3E9F0014E8707B00101891 /* NSDate+HourComparator.m */,
 			);
 			path = CoreDataPhotosMVC;
 			sourceTree = "<group>";
@@ -316,6 +369,7 @@
 			children = (
 				CE80D85514CCC7C500BDF83D /* CoreDataPlaces */,
 				CE80D87114CCC7C500BDF83D /* CoreDataPlacesTests */,
+				CE60708414ED82B200420AD8 /* CoreDataPlacesApplicationTests */,
 				CE80D84C14CCC7C500BDF83D /* Frameworks */,
 				CE80D84A14CCC7C500BDF83D /* Products */,
 			);
@@ -326,6 +380,7 @@
 			children = (
 				CE80D84914CCC7C500BDF83D /* CoreDataPlaces.app */,
 				CE80D86914CCC7C500BDF83D /* CoreDataPlacesTests.octest */,
+				CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -536,6 +591,8 @@
 				CE2AD80E14DB88E400957968 /* CPScrollableImageViewController.h */,
 				CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */,
 				CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */,
+				CE60707414ED808800420AD8 /* CPImageCacheHandler.h */,
+				CE60707514ED808800420AD8 /* CPImageCacheHandler.m */,
 			);
 			path = ScrollableImageMVC;
 			sourceTree = "<group>";
@@ -612,6 +669,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE60707F14ED82B200420AD8 /* CoreDataPlacesApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE60708E14ED82B300420AD8 /* Build configuration list for PBXNativeTarget "CoreDataPlacesApplicationTests" */;
+			buildPhases = (
+				CE60707B14ED82B200420AD8 /* Sources */,
+				CE60707C14ED82B200420AD8 /* Frameworks */,
+				CE60707D14ED82B200420AD8 /* Resources */,
+				CE60707E14ED82B200420AD8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE60709514ED837300420AD8 /* PBXTargetDependency */,
+			);
+			name = CoreDataPlacesApplicationTests;
+			productName = CoreDataPlacesApplicationTests;
+			productReference = CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		CE80D84814CCC7C500BDF83D /* CoreDataPlaces */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE80D87C14CCC7C500BDF83D /* Build configuration list for PBXNativeTarget "CoreDataPlaces" */;
@@ -671,11 +747,21 @@
 			targets = (
 				CE80D84814CCC7C500BDF83D /* CoreDataPlaces */,
 				CE80D86814CCC7C500BDF83D /* CoreDataPlacesTests */,
+				CE60707F14ED82B200420AD8 /* CoreDataPlacesApplicationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE60707D14ED82B200420AD8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE60708914ED82B300420AD8 /* InfoPlist.strings in Resources */,
+				CE60709714EDC69300420AD8 /* testImage.jpeg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE80D84714CCC7C500BDF83D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -696,6 +782,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CE60707E14ED82B200420AD8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		CE80D86714CCC7C500BDF83D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,6 +811,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE60707B14ED82B200420AD8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE60709314ED82E000420AD8 /* CPImageCacheHandlerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE80D84514CCC7C500BDF83D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,8 +863,8 @@
 				CEA5677914E1E36E00EB370E /* CPMostRecentPhotosTableViewController.m in Sources */,
 				CE197A0E14E4AE1700BAE98D /* Photo.m in Sources */,
 				CE197A1214E4AE1700BAE98D /* Place.m in Sources */,
-				CE3E9F0114E8707B00101891 /* NSDate+HourComparator.m in Sources */,
 				CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */,
+				CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,10 +904,10 @@
 				CEA5677014E1924400EB370E /* CPCoreDataTableViewHandler.m in Sources */,
 				CE197A0F14E4AE1700BAE98D /* Photo.m in Sources */,
 				CE197A1314E4AE1700BAE98D /* Place.m in Sources */,
-				CE3E9F0214E8707B00101891 /* NSDate+HourComparator.m in Sources */,
 				CE3E9F0B14E976BA00101891 /* CPPlaceFavoriteLogicTests.m in Sources */,
 				CE3E9F0F14E9BD2300101891 /* Photo+Logic.m in Sources */,
 				CE3E9F1214E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m in Sources */,
+				CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +919,11 @@
 			target = CE80D86814CCC7C500BDF83D /* CoreDataPlacesTests */;
 			targetProxy = CE2AD81214DB94C100957968 /* PBXContainerItemProxy */;
 		};
+		CE60709514ED837300420AD8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE80D84814CCC7C500BDF83D /* CoreDataPlaces */;
+			targetProxy = CE60709414ED837300420AD8 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -821,6 +933,14 @@
 				CE2AD81514DB98EB00957968 /* en */,
 			);
 			name = "CPScrollableImageViewController-iPhone.xib";
+			sourceTree = "<group>";
+		};
+		CE60708714ED82B300420AD8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE60708814ED82B300420AD8 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		CE80D85814CCC7C500BDF83D /* InfoPlist.strings */ = {
@@ -842,6 +962,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE60708F14ED82B300420AD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoreDataPlaces.app/CoreDataPlaces";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataPlacesApplicationTests/CoreDataPlacesApplicationTests-Prefix.pch";
+				INFOPLIST_FILE = "CoreDataPlacesApplicationTests/CoreDataPlacesApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CE60709014ED82B300420AD8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoreDataPlaces.app/CoreDataPlaces";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataPlacesApplicationTests/CoreDataPlacesApplicationTests-Prefix.pch";
+				INFOPLIST_FILE = "CoreDataPlacesApplicationTests/CoreDataPlacesApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		CE80D87A14CCC7C500BDF83D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -946,6 +1100,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE60708E14ED82B300420AD8 /* Build configuration list for PBXNativeTarget "CoreDataPlacesApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE60708F14ED82B300420AD8 /* Debug */,
+				CE60709014ED82B300420AD8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CE80D84314CCC7C500BDF83D /* Build configuration list for PBXProject "CoreDataPlaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

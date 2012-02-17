@@ -50,23 +50,11 @@
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-//			CPScrollableImageViewController *scrollableImageViewController = [[CPScrollableImageViewController alloc] initWithNibName:@"CPScrollableImageViewController-iPhone" bundle:nil managedObjectContext:indexedTableViewController.managedObjectContext];
 			//TODO: just need to pass the managedobject and the url.
 			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
 			scrollableImageViewController.title = photosRefinedElement.title;
 			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
 			[scrollableImageViewController release];
-			
-		//	UIImage *image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithFlickrInfo:refinedElement.dictionary format:FlickrFetcherPhotoFormatLarge]];
-		
-		//	ScrollableImageViewController *imageController = [self.delegate scrollableImageViewControllerForRequestor:self];
-		//	if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:imageController]) 
-		//	{
-		//		imageController = [[[ScrollableImageViewController alloc] init] autorelease];
-		//		imageController.title = @"Photo";
-		//		[self.navigationController pushViewController:imageController animated:YES];
-		//	}
-		//	[imageController initiateTheImageSetupWithGiven:image];
 		}
 	}
 }

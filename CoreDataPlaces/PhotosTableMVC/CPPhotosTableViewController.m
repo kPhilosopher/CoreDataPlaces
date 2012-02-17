@@ -95,15 +95,17 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			chosenPlace.placeID = placeID;
 			chosenPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
 			
-			NSError *error = nil;
+//			NSError *error = nil;
 			
-			NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
-			if (![managedObjectContext save:&error])
-			{
-				//handle the error.
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-			NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+//Hal's approach to finding the source of error.
+			
+//			NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+//			if (![managedObjectContext save:&error])
+//			{
+//				//handle the error.
+//				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+//			}
+//			NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
 		}
 		else if (error)
 		{

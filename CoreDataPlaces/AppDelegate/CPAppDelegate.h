@@ -17,7 +17,7 @@
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
-extern NSString *PLTitleOfScrollableViewController;
+extern NSString *CPTitleOfScrollableViewController;
 
 #pragma mark - Property
 

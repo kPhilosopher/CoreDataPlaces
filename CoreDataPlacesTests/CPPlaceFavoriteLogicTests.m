@@ -181,9 +181,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
 	//    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-	//	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	//	NSLog([[NSFileManager defaultManager] currentDirectoryPath]);
-	//	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	return [NSURL fileURLWithPath:[[NSFileManager defaultManager] currentDirectoryPath]];
 }
 

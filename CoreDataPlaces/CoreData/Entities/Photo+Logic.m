@@ -114,12 +114,13 @@
 
 - (void)setTheTimeLapse;
 {
-	[self setTimeLapseSinceLastView:[self CP_timeLapseSinceDate:self.timeOfLastView]];
 	[self setTimeLapseSinceUpload:[self CP_timeLapseSinceDate:self.timeOfUpload]];
+	[self setTimeLapseSinceLastView:[self CP_timeLapseSinceDate:self.timeOfLastView]];
 }
 
 #pragma mark - Convenience method
 
+//TODO: maybe accumulate these methods into a category of NSDate
 - (NSNumber *)CP_timeLapseSinceDate:(NSDate *)date;
 {
 	NSDate *endDate = [NSDate date];
