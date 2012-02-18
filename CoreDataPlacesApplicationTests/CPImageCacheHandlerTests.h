@@ -11,6 +11,13 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
+
 @interface CPImageCacheHandlerTests : SenTestCase
+
+#pragma mark - Property
+
+@property (copy) NSString *uniquePath;
+@property (retain) UIImage *imageInUniquePath;
+@property (copy) NSString *imageLocation;
 
 @end

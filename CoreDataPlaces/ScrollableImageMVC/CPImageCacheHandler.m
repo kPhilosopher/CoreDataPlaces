@@ -7,6 +7,7 @@
 //
 
 #import "CPImageCacheHandler.h"
+#import "NSString+DirectoryFinder.h"
 
 
 @implementation CPImageCacheHandler
@@ -17,25 +18,14 @@
 {
 	NSURL *imageLocationURL = [NSURL URLWithString: imageLocation];
     NSString *filename = [imageLocationURL lastPathComponent];
-	
-	//TODO: create a convenience method.
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *cacheLocation = [paths objectAtIndex:0];
-	BOOL isDir = NO;
-	NSError *error;
-	if (! [[NSFileManager defaultManager] fileExistsAtPath:cacheLocation isDirectory:&isDir] && isDir == NO) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:cacheLocation withIntermediateDirectories:NO attributes:nil error:&error];
-	}
-	
-	
-	
+	NSString *cacheLocation = [NSString cacheLocation];
     NSString *uniquePath = [cacheLocation stringByAppendingPathComponent: filename];
 	
     // Check for file existence
     if(![[NSFileManager defaultManager] fileExistsAtPath: uniquePath])
     {
         // Fetch image
-        if (image)
+        if (!image)
 		{
 			NSData *data = [NSData dataWithContentsOfURL:imageLocationURL];
 			image = [[[UIImage alloc] initWithData: data] autorelease];
@@ -52,15 +42,7 @@
 
 - (UIImage *)getCachedImage:(NSString *)imageLocation;
 {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *cacheLocation = [paths objectAtIndex:0];
-	BOOL isDir = NO;
-	NSError *error;
-	if (! [[NSFileManager defaultManager] fileExistsAtPath:cacheLocation isDirectory:&isDir] && isDir == NO)
-	{
-		[[NSFileManager defaultManager] createDirectoryAtPath:cacheLocation withIntermediateDirectories:NO attributes:nil error:&error];
-	}
-	
+	NSString *cacheLocation = [NSString cacheLocation];
     NSURL *imageLocationURL = [NSURL URLWithString: imageLocation];
     NSString *filename = [imageLocationURL lastPathComponent];
 	NSString *uniquePath = [cacheLocation stringByAppendingPathComponent:filename];
@@ -73,21 +55,13 @@
 
 - (BOOL)deleteCacheImage:(NSString *)imageLocation;
 {
-//	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//	NSString *cacheLocation = [paths objectAtIndex:0];
-//	BOOL isDir = NO;
-//	NSError *error;
-//	if (! [[NSFileManager defaultManager] fileExistsAtPath:cacheLocation isDirectory:&isDir] && isDir == NO) {
-//		[[NSFileManager defaultManager] createDirectoryAtPath:cacheLocation withIntermediateDirectories:NO attributes:nil error:&error];
-//	}
-	NSString *cacheLocation = 
-	
+	NSString *cacheLocation = [NSString cacheLocation];	
 	NSURL *imageLocationURL = [NSURL URLWithString: imageLocation];
     NSString *filename = [imageLocationURL lastPathComponent];
     NSString *uniquePath = [cacheLocation stringByAppendingPathComponent:filename];
 
 	NSFileManager *fileManager = [NSFileManager defaultManager];
-	error = nil;
+	NSError *error = nil;
     BOOL fileExists = [fileManager fileExistsAtPath:uniquePath];
 	BOOL success = NO;
     if (fileExists) 
@@ -96,18 +70,6 @@
         if (!success) NSLog(@"Error: %@", [error localizedDescription]);
     }
 	return success;
-}
-
-- (NSString *)CP_cacheLocation;
-{
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *cacheLocation = [paths objectAtIndex:0];
-	BOOL isDir = NO;
-	NSError *error;
-	if (! [[NSFileManager defaultManager] fileExistsAtPath:cacheLocation isDirectory:&isDir] && isDir == NO)
-	{
-		[[NSFileManager defaultManager] createDirectoryAtPath:cacheLocation withIntermediateDirectories:NO attributes:nil error:&error];
-	}
 }
 
 @end

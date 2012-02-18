@@ -9,6 +9,8 @@
 #import "CPPlaceFavoriteLogicTests.h"
 #import "Photo+Logic.h"
 #import "Place.h"
+#import "NSFileManager+RemoveFile.h"
+
 
 @interface CPPlaceFavoriteLogicTests ()
 {
@@ -48,6 +50,9 @@
 {
 	//delete the sqlite file
 	NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataPlaces.sqlite"];
+	
+	//TOOD: use the file delete category.
+//	[NSFileManager removeFileAtPath:[path path]];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
     BOOL fileExists = [fileManager fileExistsAtPath:[path path]];

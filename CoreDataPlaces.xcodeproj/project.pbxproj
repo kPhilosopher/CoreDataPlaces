@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		CE0B38C814CCCDBB006A85BB /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */; };
 		CE0B38CF14CCD4D2006A85BB /* CPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */; };
-		CE0B38DC14CCD5D2006A85BB /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */; };
-		CE0B38DD14CCD5D2006A85BB /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */; };
-		CE0B38DE14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */; };
-		CE0B38DF14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */; };
 		CE197A0E14E4AE1700BAE98D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
 		CE197A0F14E4AE1700BAE98D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
 		CE197A1214E4AE1700BAE98D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
@@ -100,6 +96,13 @@
 		CEF1451F14CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF1452014CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF1455714CF8F8700D21E00 /* CPTopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */; };
+		CEF2018814EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
+		CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
+		CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
+		CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
+		CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */; };
+		CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
+		CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
 		CEFD052F14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */; };
 		CEFD053014E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */; };
 /* End PBXBuildFile section */
@@ -127,10 +130,6 @@
 		CE0B38C914CCCE14006A85BB /* CPTabBarController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTabBarController-Internal.h"; sourceTree = "<group>"; };
 		CE0B38CD14CCD4D2006A85BB /* CPSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSplitViewController.h; sourceTree = "<group>"; };
 		CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSplitViewController.m; sourceTree = "<group>"; };
-		CE0B38D814CCD5D2006A85BB /* NSString+FindCharacterInSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindCharacterInSet.h"; sourceTree = "<group>"; };
-		CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindCharacterInSet.m"; sourceTree = "<group>"; };
-		CE0B38DA14CCD5D2006A85BB /* NSString+TitleExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TitleExtraction.h"; sourceTree = "<group>"; };
-		CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TitleExtraction.m"; sourceTree = "<group>"; };
 		CE197A0C14E4AE1600BAE98D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		CE197A0D14E4AE1700BAE98D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		CE197A1014E4AE1700BAE98D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -244,6 +243,16 @@
 		CEF1455514CF8F8600D21E00 /* CPTopPlacesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTopPlacesTableViewController.h; sourceTree = "<group>"; };
 		CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTopPlacesTableViewController.m; sourceTree = "<group>"; };
 		CEF1455814CF90CC00D21E00 /* CPTopPlacesTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTopPlacesTableViewController-Internal.h"; sourceTree = "<group>"; };
+		CEF2018614EF21B700044A8B /* FlickrFetcher+TestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlickrFetcher+TestHelper.h"; sourceTree = "<group>"; };
+		CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlickrFetcher+TestHelper.m"; sourceTree = "<group>"; };
+		CEF2018E14EF237500044A8B /* NSString+FindCharacterInSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindCharacterInSet.h"; sourceTree = "<group>"; };
+		CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindCharacterInSet.m"; sourceTree = "<group>"; };
+		CEF2019014EF237500044A8B /* NSString+TitleExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TitleExtraction.h"; sourceTree = "<group>"; };
+		CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TitleExtraction.m"; sourceTree = "<group>"; };
+		CEF2019414EF23AC00044A8B /* NSFileManager+RemoveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+RemoveFile.h"; sourceTree = "<group>"; };
+		CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+RemoveFile.m"; sourceTree = "<group>"; };
+		CEF2019814EF25DA00044A8B /* NSString+DirectoryFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DirectoryFinder.h"; sourceTree = "<group>"; };
+		CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DirectoryFinder.m"; sourceTree = "<group>"; };
 		CEFD052914E0F31F0033E4F8 /* CPFavoritesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritesTableViewHandler.h; sourceTree = "<group>"; };
 		CEFD052A14E0F31F0033E4F8 /* CPFavoritesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritesTableViewHandler.m; sourceTree = "<group>"; };
 		CEFD052D14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTopPlacesTableViewHandler.h; sourceTree = "<group>"; };
@@ -303,17 +312,6 @@
 				CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */,
 			);
 			path = SplitViewMVC;
-			sourceTree = "<group>";
-		};
-		CE0B38D714CCD5BE006A85BB /* NSString Categories */ = {
-			isa = PBXGroup;
-			children = (
-				CE0B38D814CCD5D2006A85BB /* NSString+FindCharacterInSet.h */,
-				CE0B38D914CCD5D2006A85BB /* NSString+FindCharacterInSet.m */,
-				CE0B38DA14CCD5D2006A85BB /* NSString+TitleExtraction.h */,
-				CE0B38DB14CCD5D2006A85BB /* NSString+TitleExtraction.m */,
-			);
-			path = "NSString Categories";
 			sourceTree = "<group>";
 		};
 		CE0B38E014CCD65B006A85BB /* IndexedTableMVC */ = {
@@ -400,8 +398,8 @@
 		CE80D85514CCC7C500BDF83D /* CoreDataPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				CEF2018B14EF237500044A8B /* Categories */,
 				CE989F1B14D369B200AB58C9 /* PriorityQueue */,
-				CE0B38D714CCD5BE006A85BB /* NSString Categories */,
 				CE80D8AA14CCCA6500BDF83D /* AppDelegate */,
 				CE0B38C514CCCDAE006A85BB /* TabBarMVC */,
 				CE0B38CC14CCD4BF006A85BB /* SplitViewMVC */,
@@ -466,6 +464,8 @@
 				CE80D88A14CCCA2900BDF83D /* FlickrAPIKey.h */,
 				CE80D88B14CCCA2900BDF83D /* FlickrFetcher.h */,
 				CE80D88C14CCCA2900BDF83D /* FlickrFetcher.m */,
+				CEF2018614EF21B700044A8B /* FlickrFetcher+TestHelper.h */,
+				CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */,
 				CE80D88D14CCCA2900BDF83D /* JSON */,
 			);
 			path = Flickr;
@@ -666,6 +666,37 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		CEF2018B14EF237500044A8B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CEF2018C14EF237500044A8B /* NSFileManager Categories */,
+				CEF2018D14EF237500044A8B /* NSString Categories */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		CEF2018C14EF237500044A8B /* NSFileManager Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CEF2019414EF23AC00044A8B /* NSFileManager+RemoveFile.h */,
+				CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */,
+			);
+			path = "NSFileManager Categories";
+			sourceTree = "<group>";
+		};
+		CEF2018D14EF237500044A8B /* NSString Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CEF2018E14EF237500044A8B /* NSString+FindCharacterInSet.h */,
+				CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */,
+				CEF2019014EF237500044A8B /* NSString+TitleExtraction.h */,
+				CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */,
+				CEF2019814EF25DA00044A8B /* NSString+DirectoryFinder.h */,
+				CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */,
+			);
+			path = "NSString Categories";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -816,6 +847,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE60709314ED82E000420AD8 /* CPImageCacheHandlerTests.m in Sources */,
+				CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */,
+				CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */,
+				CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,8 +869,6 @@
 				CE80D8AC14CCCAE500BDF83D /* CPAppDelegate.m in Sources */,
 				CE0B38C814CCCDBB006A85BB /* CPTabBarController.m in Sources */,
 				CE0B38CF14CCD4D2006A85BB /* CPSplitViewController.m in Sources */,
-				CE0B38DC14CCD5D2006A85BB /* NSString+FindCharacterInSet.m in Sources */,
-				CE0B38DE14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */,
 				CEF1451614CE931700D21E00 /* CPIndexedTableViewController.m in Sources */,
 				CEF1451A14CF184E00D21E00 /* CPDataIndexer.m in Sources */,
 				CEF1451F14CF407500D21E00 /* CPRefinedElement.m in Sources */,
@@ -865,6 +897,10 @@
 				CE197A1214E4AE1700BAE98D /* Place.m in Sources */,
 				CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */,
 				CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
+				CEF2018814EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */,
+				CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */,
+				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
+				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,8 +918,6 @@
 				CE80D8A414CCCA2900BDF83D /* SBJsonBase.m in Sources */,
 				CE80D8A614CCCA2900BDF83D /* SBJsonParser.m in Sources */,
 				CE80D8A814CCCA2900BDF83D /* SBJsonWriter.m in Sources */,
-				CE0B38DD14CCD5D2006A85BB /* NSString+FindCharacterInSet.m in Sources */,
-				CE0B38DF14CCD5D2006A85BB /* NSString+TitleExtraction.m in Sources */,
 				CEF1451B14CF184E00D21E00 /* CPDataIndexer.m in Sources */,
 				CEF1452014CF407500D21E00 /* CPRefinedElement.m in Sources */,
 				CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */,
@@ -1107,6 +1141,7 @@
 				CE60709014ED82B300420AD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE80D84314CCC7C500BDF83D /* Build configuration list for PBXProject "CoreDataPlaces" */ = {
 			isa = XCConfigurationList;
