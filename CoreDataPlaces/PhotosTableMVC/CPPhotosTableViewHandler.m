@@ -49,12 +49,18 @@
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
-			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-			//TODO: just need to pass the managedobject and the url.
 			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
 			scrollableImageViewController.title = photosRefinedElement.title;
-			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
-			[scrollableImageViewController release];
+			if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+			{
+				[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+				//TODO: change to only pass the managedobject with the url.
+				[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+			}
+//			else if ([UIApplication sharedApplication].keyWindow.bounds.size.width > 500.0)
+//			{
+//				
+//			}
 		}
 	}
 }

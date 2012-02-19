@@ -10,4 +10,10 @@
 
 @interface CPNotificationManager : NSObject
 
+extern NSString *CPNetworkErrorOccuredNotification;
+
+#pragma mark - Class method
+
++ (CPNotificationManager*)sharedManager;
+
 @end

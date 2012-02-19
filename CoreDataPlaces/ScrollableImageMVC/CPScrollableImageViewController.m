@@ -78,7 +78,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	if (sharedScrollableImageController == nil)
 	{
 		CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-		if ([appDelegate window].bounds.size.width > 490)//iPad
+		if ([appDelegate window].bounds.size.width > 500)//iPad
 		{
 			sharedScrollableImageController	= [[super allocWithZone:NULL] initWithNibName:@"CPScrollableImageViewController-iPad" bundle:nil managedObjectContext:appDelegate.managedObjectContext];
 		}
@@ -154,42 +154,93 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	return theRectToReturn;
 }
 
+- (void)newPhotoSequence;
+{
+	NSString *photoURL = self.currentPhoto.photoURL;
+	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
+	{
+		dispatch_queue_t downloadQueue = dispatch_queue_create("Flickr downloader", NULL);
+		dispatch_async(downloadQueue, ^
+		{
+			UIImage *imageData = nil;
+			if ([self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]]) 
+			{
+				//TODO: download the image in here with multi-threading.
+				CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+				//			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
+				imageData = [imageCacheHandler getCachedImage:photoURL];
+				[imageCacheHandler release];imageCacheHandler = nil;
+			}
+			else
+			{
+				//			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
+				imageData = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:photoURL]];
+			}
+			dispatch_async(dispatch_get_main_queue(), ^
+			{
+				self.image = imageData;
+				self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
+				self.scrollView.contentSize = self.imageView.bounds.size;
+				[self.scrollView addSubview:self.imageView];
+				if (self.image != nil)
+				{
+					//			int r = arc4random() % 50;
+					//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+					self.currentPhoto.timeOfLastView = [NSDate date];
+					[self.currentPhoto setTheTimeLapse];
+					NSError *error = nil;
+					if (![self.managedObjectContext save:&error])
+					{
+						//handle the error.
+						NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+					}
+				}
+				[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+			});
+		});
+	}
+	
+	
+}
+
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
-	{
-		
-		if (self.currentPhoto.isFavorite == [NSNumber numberWithBool:YES]) 
-		{
-			//TODO: download the image in here with multi-threading.
-			CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
-			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
-			[imageCacheHandler release];imageCacheHandler = nil;
-		}
-		else
-		{
-			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
-		}
-		self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
-		self.scrollView.contentSize = self.imageView.bounds.size;
-		[self.scrollView addSubview:self.imageView];
-		if (self.image != nil)
-		{
-//			int r = arc4random() % 50;
-//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
-			self.currentPhoto.timeOfLastView = [NSDate date];
-			[self.currentPhoto setTheTimeLapse];
-			NSError *error = nil;
-			if (![self.managedObjectContext save:&error])
-			{
-				//handle the error.
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-		}
-	}
-	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+	[self newPhotoSequence];
+//	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
+//	{
+//		
+//		if (self.currentPhoto.isFavorite == [NSNumber numberWithBool:YES]) 
+//		{
+//			//TODO: download the image in here with multi-threading.
+//			CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+//			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
+//			[imageCacheHandler release];imageCacheHandler = nil;
+//		}
+//		else
+//		{
+//			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
+//		}
+//		self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
+//		self.scrollView.contentSize = self.imageView.bounds.size;
+//		[self.scrollView addSubview:self.imageView];
+//		if (self.image != nil)
+//		{
+////			int r = arc4random() % 50;
+////			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+//			self.currentPhoto.timeOfLastView = [NSDate date];
+//			[self.currentPhoto setTheTimeLapse];
+//			NSError *error = nil;
+//			if (![self.managedObjectContext save:&error])
+//			{
+//				//handle the error.
+//				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+//			}
+//		}
+//	}
+//	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
+
 
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
 {
@@ -198,6 +249,13 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	[self.imageView removeFromSuperview];
 	self.imageView = nil;
 	self.image = nil;
+	//TODO: convenicen method for this if statement.
+	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if ([appDelegate window].bounds.size.width > 500)//iPad
+	{
+//		[self viewWillAppear:YES];
+		[self newPhotoSequence];
+	}
 }
 
 - (void)viewDidLoad
@@ -298,15 +356,17 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{
+	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+}
+
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
 {
 	CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
 	if (sender.on == YES) 
 	{
-		//TODO:multithread
-		
 		[imageCacheHandler cacheImage:self.currentPhoto.photoURL UIImage:self.image];
-
 	}
 	else if (sender.on == NO && [self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]])
 	{
@@ -327,17 +387,17 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Split View Delegate Methods
 
-- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController
+- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController;
 {
 }
 
-- (void)splitViewController:(UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController:(UIPopoverController*)pc
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
 {
 	barButtonItem.title = aViewController.title;
 	self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
-- (void)splitViewController:(UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button
 {
 	self.navigationItem.rightBarButtonItem = nil;
 }

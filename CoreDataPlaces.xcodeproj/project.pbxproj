@@ -103,6 +103,9 @@
 		CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */; };
 		CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
 		CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
+		CEF2019E14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */; };
+		CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
+		CEF201A614F0CF5800044A8B /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
 		CEFD052F14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */; };
 		CEFD053014E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */; };
 /* End PBXBuildFile section */
@@ -253,6 +256,9 @@
 		CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+RemoveFile.m"; sourceTree = "<group>"; };
 		CEF2019814EF25DA00044A8B /* NSString+DirectoryFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DirectoryFinder.h"; sourceTree = "<group>"; };
 		CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DirectoryFinder.m"; sourceTree = "<group>"; };
+		CEF2019D14EF9C6F00044A8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "CoreDataPlaces/en.lproj/CPScrollableImageViewController-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		CEF201A314F0C5F800044A8B /* CPNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPNotificationManager.h; path = CoreDataPlaces/CPNotificationManager.h; sourceTree = SOURCE_ROOT; };
+		CEF201A414F0C5F800044A8B /* CPNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPNotificationManager.m; path = CoreDataPlaces/CPNotificationManager.m; sourceTree = SOURCE_ROOT; };
 		CEFD052914E0F31F0033E4F8 /* CPFavoritesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritesTableViewHandler.h; sourceTree = "<group>"; };
 		CEFD052A14E0F31F0033E4F8 /* CPFavoritesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritesTableViewHandler.m; sourceTree = "<group>"; };
 		CEFD052D14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTopPlacesTableViewHandler.h; sourceTree = "<group>"; };
@@ -398,6 +404,7 @@
 		CE80D85514CCC7C500BDF83D /* CoreDataPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				CEF2019F14F0C50E00044A8B /* Notifications */,
 				CEF2018B14EF237500044A8B /* Categories */,
 				CE989F1B14D369B200AB58C9 /* PriorityQueue */,
 				CE80D8AA14CCCA6500BDF83D /* AppDelegate */,
@@ -591,6 +598,7 @@
 				CE2AD80E14DB88E400957968 /* CPScrollableImageViewController.h */,
 				CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */,
 				CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */,
+				CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */,
 				CE60707414ED808800420AD8 /* CPImageCacheHandler.h */,
 				CE60707514ED808800420AD8 /* CPImageCacheHandler.m */,
 			);
@@ -697,6 +705,15 @@
 			path = "NSString Categories";
 			sourceTree = "<group>";
 		};
+		CEF2019F14F0C50E00044A8B /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				CEF201A314F0C5F800044A8B /* CPNotificationManager.h */,
+				CEF201A414F0C5F800044A8B /* CPNotificationManager.m */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -799,6 +816,7 @@
 			files = (
 				CE80D85A14CCC7C500BDF83D /* InfoPlist.strings in Resources */,
 				CE2AD81614DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib in Resources */,
+				CEF2019E14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,6 +919,7 @@
 				CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */,
 				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
 				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
+				CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,6 +961,7 @@
 				CE3E9F0F14E9BD2300101891 /* Photo+Logic.m in Sources */,
 				CE3E9F1214E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m in Sources */,
 				CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
+				CEF201A614F0CF5800044A8B /* CPNotificationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1011,14 @@
 				CE80D87514CCC7C500BDF83D /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF2019D14EF9C6F00044A8B /* en */,
+			);
+			name = "CPScrollableImageViewController-iPad.xib";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

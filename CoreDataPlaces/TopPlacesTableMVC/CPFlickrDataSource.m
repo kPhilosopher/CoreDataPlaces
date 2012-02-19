@@ -8,6 +8,7 @@
 
 #import "CPFlickrDataSource-Internal.h"
 #import "CPFlickrDataHandler.h"
+#import "CPNotificationManager.h"
 
 
 @interface CPFlickrDataSource ()
@@ -79,12 +80,15 @@ NSString *CPAlertSwitchOn = @"AlertOn";
 - (void)setupFlickrTopPlacesWithFlickrFetcher;
 {
 	//setup so that the following statements can be executed in another thread.
+//	dispatch_queue_t flickrPlacesDownloadQueue = dispatch_queue_create(“Flickr Places downloader”, NULL);
+//	dispatch_async(flickrPlacesDownloadQueue, ^{
 	id undeterminedFlickrTopPlaces = [self.flickrDataHandler flickrTopPlaces];
 	if ([undeterminedFlickrTopPlaces isKindOfClass:[NSArray class]])
 	{
 		self.flickrTopPlaces = (NSArray *)undeterminedFlickrTopPlaces;
 	}
-	else	[self CP_mutateKeyValueObservedPropertyAlertViewSwitchToAlertSwitchOn];
+//	else	[self CP_mutateKeyValueObservedPropertyAlertViewSwitchToAlertSwitchOn];
+	else	[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 }
 
 //- (void)setupThePropertiesOfMostRecentPlacesWithNSUserDefaults;

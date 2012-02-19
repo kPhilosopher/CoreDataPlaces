@@ -11,12 +11,17 @@
 //TODO: see if this causes any problems
 #import "CPSplitViewController.h"
 #import "CPTabBarController.h"
+#import "CPScrollableImageViewController.h"
+
+//TODO:delete this is a test
+#import "CPNotificationManager.h"
+
 
 @interface CPAppDelegate ()
 {
 @private
 	CPTabBarController *CP_tabBarController;
-	//	CPScrollableImageViewController *CP_scrollableImageVC;
+	CPScrollableImageViewController *CP_scrollableImageVC;
 	CPSplitViewController *CP_splitVC;
 }
 @end
@@ -29,7 +34,7 @@
 
 @synthesize window = _window;
 @synthesize tabBarController = CP_tabBarController;
-//@synthesize scrollableImageVC = CP_scrollableImageVC;
+@synthesize scrollableImageVC = CP_scrollableImageVC;
 @synthesize splitVC = CP_splitVC;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -54,6 +59,7 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	[CPNotificationManager sharedManager];
     [self RD_setupTheAppDelegateWindow];
 	[self RD_initializeTabBarController];
 	[self RD_determineTheSetupSequenceForDifferingDevices];
@@ -213,17 +219,18 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 
 #pragma mark - Readability method
 
-
 - (void)RD_setupTheAppDelegateWindow;
 {
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	self.window.backgroundColor = [UIColor whiteColor];
 }
+
 - (void)RD_initializeTabBarController;
 {
 	//		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self] autorelease];
 	self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self managedObjectContext:self.managedObjectContext] autorelease];
 }
+
 - (void)RD_determineTheSetupSequenceForDifferingDevices;
 {
 	if ([self RD_determineIfTheDeviceIsiPadOrNot])	
@@ -231,34 +238,41 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 	else
 		[self RD_setupForiPhoneOriPod];
 }
+
 - (BOOL)RD_determineIfTheDeviceIsiPadOrNot;
 {
 	return ([[UIScreen mainScreen] bounds].size.height > 500);
 }
+
 - (void)RD_setupForiPad;
 {
 	[self RD_setupForScrollableImageViewController];
 	UINavigationController *navcon = [[UINavigationController alloc] init];
-	//		[navcon pushViewController:self.scrollableImageVC animated:NO];
+	[navcon pushViewController:self.scrollableImageVC animated:NO];
 	[self RD_setupSplitViewControllerWithNavigationController:navcon];
 	self.window.rootViewController = self.splitVC;
 	[navcon release];
 }
+
 - (void)RD_setupForScrollableImageViewController;
 {
-	//		self.scrollableImageVC = [[[CPScrollableImageViewController alloc] init] autorelease];
-	//		self.scrollableImageVC.title = CPTitleOfScrollableViewController;
+//		self.scrollableImageVC = [[[CPScrollableImageViewController alloc] init] autorelease];
+	self.scrollableImageVC = [CPScrollableImageViewController sharedInstance];
+	self.scrollableImageVC.title = CPTitleOfScrollableViewController;
 }
+
 - (void)RD_setupSplitViewControllerWithNavigationController:(UINavigationController *)navcon;
 {
 	self.splitVC = [[[CPSplitViewController alloc] init] autorelease];
-	//		self.splitVC.delegate = self.scrollableImageVC;
+	self.splitVC.delegate = self.scrollableImageVC;
 	self.splitVC.viewControllers = [NSArray arrayWithObjects:self.tabBarController, navcon, nil];
 }
+
 - (void)RD_setupForiPhoneOriPod;
 {
 	self.window.rootViewController = self.tabBarController;
 }
+
 - (void)RD_runKIFIfRunningIntegrationTest;
 {
 #if RUN_KIF_TESTS

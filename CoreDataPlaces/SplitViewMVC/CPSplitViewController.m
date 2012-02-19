@@ -17,7 +17,8 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait ||
 			interfaceOrientation == UIInterfaceOrientationLandscapeRight ||
-			interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+			interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+			interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

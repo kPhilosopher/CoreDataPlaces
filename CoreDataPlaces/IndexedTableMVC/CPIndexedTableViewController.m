@@ -51,6 +51,13 @@
 	[super dealloc];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

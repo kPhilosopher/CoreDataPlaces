@@ -174,6 +174,13 @@
 	[self performFetchForTableView:self.tableView];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
+}
+
 #pragma mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

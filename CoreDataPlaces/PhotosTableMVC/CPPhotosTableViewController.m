@@ -56,7 +56,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			//!!!!change this so that the handler is given by the initializer
 			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 			self.listOfPhotos = [flickrDataHandler photoListWithPlaceIDString:placeID];
-			[flickrDataHandler release];
+			[flickrDataHandler release];flickrDataHandler = nil;
 			self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
 			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
 		}

@@ -22,8 +22,8 @@
 //	id<PictureListTableViewControllerDelegate> CP_delegateToTransfer;
 }
 
-extern NSString *CPAlertTitle;
-extern NSString *CPAlertMessage;
+//extern NSString *CPAlertTitle;
+//extern NSString *CPAlertMessage;
 
 @end
 
@@ -32,8 +32,8 @@ extern NSString *CPAlertMessage;
 @implementation CPTopPlacesTableViewController
 
 NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
-NSString *CPAlertTitle = @"Cannot Obtain Data";
-NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
+//NSString *CPAlertTitle = @"Cannot Obtain Data";
+//NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Synthesize
 
@@ -102,13 +102,13 @@ NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ([[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:CPAlertSwitchOn])
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:CPAlertTitle message:CPAlertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];	
-		[alert show];
-		[alert release];
-		[object setValue:CPAlertSwitchOff forKey:keyPath];
-	}
+//	if ([[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:CPAlertSwitchOn])
+//	{
+//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:CPAlertTitle message:CPAlertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];	
+//		[alert show];
+//		[alert release];
+//		[object setValue:CPAlertSwitchOff forKey:keyPath];
+//	}
 }
 
 #pragma mark - CPTableViewControllerDataMutating protocol method

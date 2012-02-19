@@ -137,6 +137,11 @@
 	return 0;
 }
 
+//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
+- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
+{
+	return imageController.view.window == nil;
+}
 
 - (void)managedObjectSelected:(NSManagedObject *)managedObject;
 {
@@ -144,11 +149,13 @@
 	{
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
-		[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
 		scrollableImageViewController.title = chosenPhoto.title;
 		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
-		[self.navigationController pushViewController:scrollableImageViewController animated:YES];
-		[scrollableImageViewController release];
+		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+		{
+			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+			[self.navigationController pushViewController:scrollableImageViewController animated:YES];
+		}
 	}
 }
 

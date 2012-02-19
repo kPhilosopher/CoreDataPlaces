@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
 //TODO: see if this causes any problems
 //#import "CPSplitViewController.h"
 //#import "CPTabBarController.h"
 
 @class CPSplitViewController;
 @class CPTabBarController;
+@class CPScrollableImageViewController;
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -23,7 +25,7 @@ extern NSString *CPTitleOfScrollableViewController;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (retain) CPTabBarController *tabBarController;
-//@property (retain) CPScrollableImageViewController *scrollableImageVC;
+@property (retain) CPScrollableImageViewController *scrollableImageVC;
 @property (retain) CPSplitViewController *splitVC;
 
 #pragma mark --Core Data

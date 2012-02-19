@@ -60,6 +60,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	self = [self init];
 	if (self) {
 		//	self.delegateToTransfer = delegate;
+		self.title = @"Lists";
 		self.managedObjectContext = managedObjectContext;
 		[self CP_setup];
 	}
