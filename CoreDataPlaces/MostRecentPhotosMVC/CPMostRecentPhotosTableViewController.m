@@ -145,6 +145,4 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	}
 }
 
-
-
 @end

@@ -28,6 +28,7 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 	Photo *CP_currentPhoto;
 	CPPhotosRefinedElement *CP_photosRefinedElement;
 	NSManagedObjectContext *CP_managedObjectContext;
+	Photo *CP_queuedPhoto;
 	
 	//TODO:test if the popover can disappear
 	UIPopoverController *CP_popoverController;
@@ -38,6 +39,7 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 @property (retain) UIImage *image;
 @property (retain) UIImageView *imageView;
 @property (retain) UIPopoverController *popoverController;
+@property (retain) Photo *queuedPhoto;
 
 @end
 
@@ -53,6 +55,7 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 @synthesize scrollView = CP_scrollView;
 @synthesize switchForFavorite = CP_switchForFavorite;
 @synthesize currentPhoto = CP_currentPhoto;
+@synthesize queuedPhoto = CP_queuedPhoto;
 @synthesize photosRefinedElement = CP_photosRefinedElement;
 @synthesize managedObjectContext = CP_managedObjectContext;
 @synthesize popoverController = CP_popoverController;
@@ -163,7 +166,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (void)newPhotoSequence;
 {
-	NSString *photoURL = self.currentPhoto.photoURL;
+	NSString *photoURL = self.queuedPhoto.photoURL;
 	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
 		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -176,7 +179,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 		dispatch_async(imageDownloadQueue, ^
 		{
 			UIImage *imageData = nil;
-			if ([self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]]) 
+			if ([self.queuedPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]]) 
 			{
 				//TODO: download the image in here with multi-threading.
 				CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
@@ -192,13 +195,16 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 			dispatch_async(dispatch_get_main_queue(), ^
 			{
 				[activityIndicator stopAnimating];
+				[self.imageView removeFromSuperview];
 				if (imageData)
 				{
+					self.currentPhoto = self.queuedPhoto;
+					self.queuedPhoto = nil;
 					self.image = imageData;
-					[self.imageView removeFromSuperview];
 					self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
 					self.scrollView.contentSize = self.imageView.bounds.size;
 					[self.scrollView addSubview:self.imageView];
+					self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
 					if (self.image != nil)
 					{
 						//			int r = arc4random() % 50;
@@ -264,11 +270,10 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 //	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
-
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
 {
-	self.currentPhoto = newPhoto;
-	self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
+//	self.currentPhoto = newPhoto;
+	self.queuedPhoto = newPhoto;
 //	[self.imageView removeFromSuperview];
 //	self.imageView = nil;
 	self.image = nil;
@@ -391,25 +396,32 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
 {
-	CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
-	if (sender.on == YES) 
+	if (self.image) 
 	{
-		[imageCacheHandler cacheImage:self.currentPhoto.photoURL UIImage:self.image];
+		CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+		if (sender.on == YES) 
+		{
+			[imageCacheHandler cacheImage:self.currentPhoto.photoURL UIImage:self.image];
+		}
+		else if (sender.on == NO && [self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]])
+		{
+			//delete the cache.
+			[imageCacheHandler deleteCacheImage:self.currentPhoto.photoURL];
+		}
+		[imageCacheHandler release];imageCacheHandler = nil;
+		
+		self.currentPhoto.isFavorite = [NSNumber numberWithBool:sender.on];
+		
+		NSError *error = nil;
+		if (![self.managedObjectContext save:&error])
+		{
+			//handle the error.
+			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+		}
 	}
-	else if (sender.on == NO && [self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]])
+	else if (sender.on)
 	{
-		//delete the cache.
-		[imageCacheHandler deleteCacheImage:self.currentPhoto.photoURL];
-	}
-	[imageCacheHandler release];imageCacheHandler = nil;
-	
-	self.currentPhoto.isFavorite = [NSNumber numberWithBool:sender.on];
-	
-	NSError *error = nil;
-	if (![self.managedObjectContext save:&error])
-	{
-		//handle the error.
-		NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+		sender.on = !sender.on;
 	}
 }
 
