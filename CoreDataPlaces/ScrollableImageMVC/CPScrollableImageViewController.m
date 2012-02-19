@@ -12,6 +12,7 @@
 #import "FlickrFetcher.h"
 #import "CPAppDelegate.h"
 #import "CPImageCacheHandler.h"
+#import "CPNotificationManager.h"
 
 
 static CPScrollableImageViewController *sharedScrollableImageController = nil;
@@ -27,12 +28,16 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 	Photo *CP_currentPhoto;
 	CPPhotosRefinedElement *CP_photosRefinedElement;
 	NSManagedObjectContext *CP_managedObjectContext;
+	
+	//TODO:test if the popover can disappear
+	UIPopoverController *CP_popoverController;
 }
 
 #pragma mark - Property
 
 @property (retain) UIImage *image;
 @property (retain) UIImageView *imageView;
+@property (retain) UIPopoverController *popoverController;
 
 @end
 
@@ -50,6 +55,7 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 @synthesize currentPhoto = CP_currentPhoto;
 @synthesize photosRefinedElement = CP_photosRefinedElement;
 @synthesize managedObjectContext = CP_managedObjectContext;
+@synthesize popoverController = CP_popoverController;
 
 NSString *ScrollableImageViewAccessibilityLabel = @"Scrollable image";
 NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
@@ -130,6 +136,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	[CP_scrollView release];
 	[CP_switchForFavorite release];
 	[CP_imageDictionary release];
+	[CP_popoverController release];
 	[super dealloc];
 }
 
@@ -159,8 +166,14 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	NSString *photoURL = self.currentPhoto.photoURL;
 	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
-		dispatch_queue_t downloadQueue = dispatch_queue_create("Flickr downloader", NULL);
-		dispatch_async(downloadQueue, ^
+		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+		activityIndicator.color = [UIColor blueColor];
+		activityIndicator.hidesWhenStopped = YES;
+		[self.view addSubview:activityIndicator];
+		activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+		[activityIndicator startAnimating];
+		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
+		dispatch_async(imageDownloadQueue, ^
 		{
 			UIImage *imageData = nil;
 			if ([self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]]) 
@@ -178,28 +191,38 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 			}
 			dispatch_async(dispatch_get_main_queue(), ^
 			{
-				self.image = imageData;
-				self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
-				self.scrollView.contentSize = self.imageView.bounds.size;
-				[self.scrollView addSubview:self.imageView];
-				if (self.image != nil)
+				[activityIndicator stopAnimating];
+				if (imageData)
 				{
-					//			int r = arc4random() % 50;
-					//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
-					self.currentPhoto.timeOfLastView = [NSDate date];
-					[self.currentPhoto setTheTimeLapse];
-					NSError *error = nil;
-					if (![self.managedObjectContext save:&error])
+					self.image = imageData;
+					[self.imageView removeFromSuperview];
+					self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
+					self.scrollView.contentSize = self.imageView.bounds.size;
+					[self.scrollView addSubview:self.imageView];
+					if (self.image != nil)
 					{
-						//handle the error.
-						NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+						//			int r = arc4random() % 50;
+						//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+						self.currentPhoto.timeOfLastView = [NSDate date];
+						[self.currentPhoto setTheTimeLapse];
+						NSError *error = nil;
+						if (![self.managedObjectContext save:&error])
+						{
+							//handle the error.
+							NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+						}
 					}
+					[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 				}
-				[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+				else
+				{
+					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+				}
 			});
 		});
+		dispatch_release(imageDownloadQueue);
+		[activityIndicator release];activityIndicator = nil;
 	}
-	
 	
 }
 
@@ -246,13 +269,18 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 {
 	self.currentPhoto = newPhoto;
 	self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
-	[self.imageView removeFromSuperview];
-	self.imageView = nil;
+//	[self.imageView removeFromSuperview];
+//	self.imageView = nil;
 	self.image = nil;
 	//TODO: convenicen method for this if statement.
 	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if ([appDelegate window].bounds.size.width > 500)//iPad
 	{
+		if (self.popoverController.popoverVisible)
+		{
+			[self.popoverController dismissPopoverAnimated:YES];
+		}
+		
 //		[self viewWillAppear:YES];
 		[self newPhotoSequence];
 	}
@@ -393,6 +421,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
 {
+	self.popoverController = pc;
 	barButtonItem.title = aViewController.title;
 	self.navigationItem.rightBarButtonItem = barButtonItem;
 }
@@ -400,6 +429,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 - (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button
 {
 	self.navigationItem.rightBarButtonItem = nil;
+	self.popoverController = nil;
 }
 
 @end

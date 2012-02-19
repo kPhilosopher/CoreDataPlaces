@@ -6,13 +6,14 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPPhotosTableViewController.h"
+#import "CPPhotosTableViewController-Internal.h"
 #import "CPPhotosRefinedElement.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
 #import "CPFlickrDataHandler.h"
 #import "CPPlacesRefinedElement.h"
 #import "Place.h"
+#import "CPNotificationManager.h"
 
 
 @interface CPPhotosTableViewController ()
@@ -38,31 +39,6 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize currentPlace = CP_currentPlace;
 //@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
-
-#pragma mark - Initialization
-//TODO: change the initializers to not include with****
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
-{
-	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
-    if (self)
-	{
-		if (placeID)
-		{
-//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
-//			self.listOfPictures_theModel = pictureList;
-			
-			
-//			start downloading the list of photos in another thread.
-			//!!!!change this so that the handler is given by the initializer
-			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-			self.listOfPhotos = [flickrDataHandler photoListWithPlaceIDString:placeID];
-			[flickrDataHandler release];flickrDataHandler = nil;
-			self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
-			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
-		}
-    }
-    return self;
-}
 
 #pragma mark - Factory method
 
@@ -143,6 +119,69 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	return photosTableViewController;
 }
 
+#pragma mark - Initialization
+
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id)dataIndexHandler tableViewHandler:(id)tableViewHandler placeIDString:(NSString *)placeID;
+{
+	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
+    if (self)
+	{
+		if (placeID)
+		{
+			//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
+			//			self.listOfPictures_theModel = pictureList;
+			
+			//			start downloading the list of photos in another thread.
+			//!!!!change this so that the handler is given by the initializer
+//			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+//			self.listOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
+//			id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
+//			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
+//			{
+//				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
+//			}
+//			else
+//			{
+//				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+//			}
+			
+//			[flickrDataHandler release];flickrDataHandler = nil;
+			[self CP_setupPhotosListWithPlaceID:placeID];
+			self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
+			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
+			
+		}
+	}
+	return self;
+}
+
+//TODO: change the initializers to not include with****
+
+//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
+//{
+//	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
+//    if (self)
+//	{
+//		if (placeID)
+//		{
+//			//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
+//			//			self.listOfPictures_theModel = pictureList;
+//			
+//			
+//			//			start downloading the list of photos in another thread.
+//			//!!!!change this so that the handler is given by the initializer
+//			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+//			self.listOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
+//			id undeterminedListOfPhotos = [
+//										   [flickrDataHandler release];flickrDataHandler = nil;
+//										   self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
+//										   self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
+//										   
+//										   }
+//										   }
+//										   return self;
+//										   }
+
 #pragma mark - View lifecycle
 
 - (void)dealloc
@@ -151,6 +190,41 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	[CP_listOfPhotos release];
 	[super dealloc];
 }
+
+
+#pragma mark - Convenience method
+
+- (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
+{
+	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+	//TODO: find a better place to put this redundant code.
+	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.color = [UIColor blueColor];
+	activityIndicator.hidesWhenStopped = YES;
+	[self.view addSubview:activityIndicator];
+	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+	[activityIndicator startAnimating];
+	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
+	dispatch_async(photosDownloadQueue, ^{
+		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[activityIndicator stopAnimating];
+			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
+			{
+				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
+				[self indexTheTableViewData];
+			}
+			else
+			{
+				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+			}
+		});
+	});
+	dispatch_release(photosDownloadQueue);
+	[flickrDataHandler release];
+}
+
+
 
 #pragma mark - Methods to override the IndexedTableViewController
 

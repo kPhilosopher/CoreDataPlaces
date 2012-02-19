@@ -63,7 +63,8 @@
 		
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
-		self.searchKey = nil;
+//		self.searchKey = nil;
+		self.searchKey = @"title";
 		self.title = @"Favorites";
 		
 		//TODO: change the design. this is for testing
@@ -122,7 +123,7 @@
 		
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
-		self.searchKey = nil;
+		self.searchKey = @"title";
 		self.title = @"Favorites";
 		
 		//TODO: change the design. this is for testing

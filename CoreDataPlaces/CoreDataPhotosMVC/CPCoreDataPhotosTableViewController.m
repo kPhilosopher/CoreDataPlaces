@@ -88,7 +88,7 @@
 		
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
-		self.searchKey = nil;
+		self.searchKey = @"title";
 		self.title = chosenPlace.title;
 	}
     return self;

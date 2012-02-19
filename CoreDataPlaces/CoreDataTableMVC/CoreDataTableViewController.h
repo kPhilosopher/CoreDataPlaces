@@ -15,6 +15,7 @@
 	NSString *subtitleKey;
 	NSString *searchKey;
 	NSFetchedResultsController *fetchedResultsController;
+	//TODO: make sure to erase this to preserve this file.
 	NSManagedObjectContext *CP_managedObjectContext;
 }
 

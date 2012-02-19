@@ -64,7 +64,6 @@
 		CE989F2114D369CD00AB58C9 /* JBBPriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1D14D369CD00AB58C9 /* JBBPriorityQueue.m */; };
 		CE989F2214D369CD00AB58C9 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1F14D369CD00AB58C9 /* NSObject+AssociatedObjects.m */; };
 		CE989F2314D369CD00AB58C9 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1F14D369CD00AB58C9 /* NSObject+AssociatedObjects.m */; };
-		CE989F2614D36CFC00AB58C9 /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
 		CE989F2E14D3889D00AB58C9 /* CPPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2D14D3889C00AB58C9 /* CPPhotosTableViewHandler.m */; };
 		CE989F2F14D3889D00AB58C9 /* CPPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2D14D3889C00AB58C9 /* CPPhotosTableViewHandler.m */; };
 		CE989F3314D38B2500AB58C9 /* CPTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F3214D38B2500AB58C9 /* CPTableViewHandler.m */; };
@@ -73,11 +72,12 @@
 		CE989F4714D7B1E000AB58C9 /* CPFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */; };
 		CE989F4814D8538B00AB58C9 /* CPIndexedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451514CE931700D21E00 /* CPIndexedTableViewController.m */; };
 		CE989F4914D8539300AB58C9 /* CPTopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */; };
-		CE989F4A14D853A400AB58C9 /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
 		CEA5676F14E1924400EB370E /* CPCoreDataTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5676E14E1924400EB370E /* CPCoreDataTableViewHandler.m */; };
 		CEA5677014E1924400EB370E /* CPCoreDataTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5676E14E1924400EB370E /* CPCoreDataTableViewHandler.m */; };
 		CEA5677914E1E36E00EB370E /* CPMostRecentPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5677714E1DF7A00EB370E /* CPMostRecentPhotosTableViewController.m */; };
 		CEB1118D14DF5B36009B1B5B /* CoreDataPlaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */; };
+		CEB6110914F0DF0B008DA3AE /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
+		CEB6110C14F0ED39008DA3AE /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
 		CEDA8AB114D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
@@ -111,13 +111,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CE2AD81214DB94C100957968 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CE80D84014CCC7C500BDF83D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CE80D86814CCC7C500BDF83D;
-			remoteInfo = CoreDataPlacesTests;
-		};
 		CE60709414ED837300420AD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE80D84014CCC7C500BDF83D /* Project object */;
@@ -223,6 +216,7 @@
 		CEB1119714E045D1009B1B5B /* CPRefinedElementInterfacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRefinedElementInterfacing.h; sourceTree = "<group>"; };
 		CEB1119C14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewHandler.h; sourceTree = "<group>"; };
 		CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewHandler.m; sourceTree = "<group>"; };
+		CEB6110B14F0EC85008DA3AE /* CPPhotosTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewController-Internal.h"; sourceTree = "<group>"; };
 		CEDA8AAF14D1D329005A2EB0 /* CPFlickrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataSource.h; sourceTree = "<group>"; };
 		CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataSource.m; sourceTree = "<group>"; };
 		CEDA8AB314D1D34E005A2EB0 /* CPFlickrDataSource-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPFlickrDataSource-Internal.h"; sourceTree = "<group>"; };
@@ -630,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				CE989F2414D36CFC00AB58C9 /* CPPhotosTableViewController.h */,
+				CEB6110B14F0EC85008DA3AE /* CPPhotosTableViewController-Internal.h */,
 				CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */,
 				CE989F3614D3959700AB58C9 /* CPPhotosTableViewHandler.h */,
 				CE60E24114DA4D010000B213 /* CPPhotosTableViewHandler-Internal.h */,
@@ -747,7 +742,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CE2AD81314DB94C100957968 /* PBXTargetDependency */,
 			);
 			name = CoreDataPlaces;
 			productName = CoreDataPlaces;
@@ -900,7 +894,6 @@
 				CE989F1914D3693A00AB58C9 /* CPPhotosDataIndexer.m in Sources */,
 				CE989F2014D369CD00AB58C9 /* JBBPriorityQueue.m in Sources */,
 				CE989F2214D369CD00AB58C9 /* NSObject+AssociatedObjects.m in Sources */,
-				CE989F2614D36CFC00AB58C9 /* CPPhotosTableViewController.m in Sources */,
 				CE989F2E14D3889D00AB58C9 /* CPPhotosTableViewHandler.m in Sources */,
 				CE989F3314D38B2500AB58C9 /* CPTableViewHandler.m in Sources */,
 				CE989F4414D7B07000AB58C9 /* CoreDataTableViewController.m in Sources */,
@@ -920,6 +913,7 @@
 				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
 				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 				CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */,
+				CEB6110914F0DF0B008DA3AE /* CPPhotosTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +921,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE989F4A14D853A400AB58C9 /* CPPhotosTableViewController.m in Sources */,
 				CE989F4914D8539300AB58C9 /* CPTopPlacesTableViewController.m in Sources */,
 				CE989F4814D8538B00AB58C9 /* CPIndexedTableViewController.m in Sources */,
 				CE80D89C14CCCA2900BDF83D /* FlickrFetcher.m in Sources */,
@@ -962,17 +955,13 @@
 				CE3E9F1214E9BE9100101891 /* CPPhotoTimeIntervalCalculatorTests.m in Sources */,
 				CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
 				CEF201A614F0CF5800044A8B /* CPNotificationManager.m in Sources */,
+				CEB6110C14F0ED39008DA3AE /* CPPhotosTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CE2AD81314DB94C100957968 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CE80D86814CCC7C500BDF83D /* CoreDataPlacesTests */;
-			targetProxy = CE2AD81214DB94C100957968 /* PBXContainerItemProxy */;
-		};
 		CE60709514ED837300420AD8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE80D84814CCC7C500BDF83D /* CoreDataPlaces */;

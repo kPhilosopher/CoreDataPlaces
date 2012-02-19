@@ -88,7 +88,7 @@ NSString *CPAlertSwitchOn = @"AlertOn";
 		self.flickrTopPlaces = (NSArray *)undeterminedFlickrTopPlaces;
 	}
 //	else	[self CP_mutateKeyValueObservedPropertyAlertViewSwitchToAlertSwitchOn];
-	else	[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+//	else	[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 }
 
 //- (void)setupThePropertiesOfMostRecentPlacesWithNSUserDefaults;
@@ -102,7 +102,7 @@ NSString *CPAlertSwitchOn = @"AlertOn";
 - (NSArray *)photoListWithFlickrPlaceID:(NSString *)placeID
 {
 	NSArray *flickrPhotoList = nil;
-	id undeterminedFlickrPhotoList = [self.flickrDataHandler photoListWithPlaceIDString:placeID];
+	id undeterminedFlickrPhotoList = [self.flickrDataHandler flickrPhotoListWithPlaceID:placeID];
 	if ([undeterminedFlickrPhotoList isKindOfClass:[NSArray class]])
 		flickrPhotoList = (NSArray *)undeterminedFlickrPhotoList;
 	else

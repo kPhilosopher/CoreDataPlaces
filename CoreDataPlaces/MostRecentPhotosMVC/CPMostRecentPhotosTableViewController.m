@@ -12,7 +12,7 @@
 
 @implementation CPMostRecentPhotosTableViewController
 
-const int CPMaximumHoursForMostRecentPhoto = 51;
+const int CPMaximumHoursForMostRecentPhoto = 48;
 
 #pragma mark - Initialization
 
@@ -84,7 +84,7 @@ const int CPMaximumHoursForMostRecentPhoto = 51;
 		
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
-		self.searchKey = nil;
+		self.searchKey = @"title";
 		//TODO: title of the given Place
 		self.title = @"Recent Photos";
 	}

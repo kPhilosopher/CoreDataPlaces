@@ -17,7 +17,7 @@
 	return [FlickrFetcher topPlaces];
 }
 
-- (NSArray *)photoListWithPlaceIDString:(NSString *)flickrPlaceId;
+- (NSArray *)flickrPhotoListWithPlaceID:(NSString *)flickrPlaceId;
 {
 	return [FlickrFetcher photosAtPlace:flickrPlaceId];
 }

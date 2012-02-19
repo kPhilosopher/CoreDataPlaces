@@ -62,8 +62,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	if ([self fetchTheElementSections] == nil)
-		[self indexTheTableViewData];
+//	if ([self fetchTheElementSections] == nil)
+//		[self indexTheTableViewData];
 	return [self.tableViewHandler numberOfSectionsInIndexedTableViewController:self];
 }
 

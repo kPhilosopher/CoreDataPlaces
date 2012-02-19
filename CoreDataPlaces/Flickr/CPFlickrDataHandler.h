@@ -15,6 +15,6 @@
 
 - (NSArray *)flickrTopPlaces;
 
-- (NSArray *)photoListWithPlaceIDString:(NSString *)flickrPlaceId;
+- (NSArray *)flickrPhotoListWithPlaceID:(NSString *)flickrPlaceId;
 
 @end

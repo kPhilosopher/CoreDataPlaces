@@ -20,8 +20,10 @@ extern NSString *CPTopPlacesViewAccessibilityLabel;
 
 #pragma mark - Property
 
+@property (retain) NSArray *listOfPlaces;
+@property (retain) NSMutableArray *indexedListOfPlaces;
 //@property (retain) id<CPTableViewControllerDataReloading> delegateToUpdateMostRecentPlaces;
-@property (retain) CPFlickrDataSource *flickrDataSource;
+//@property (retain) CPFlickrDataSource *flickrDataSource;
 //@property (assign) id<PictureListTableViewControllerDelegate> delegateToTransfer;
 
 #pragma mark - Initialization
