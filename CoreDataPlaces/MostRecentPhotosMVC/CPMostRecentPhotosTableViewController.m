@@ -12,6 +12,8 @@
 
 @implementation CPMostRecentPhotosTableViewController
 
+NSString *CPMostRecentPhotosViewAccessibilityLabel = @"Most recent photos table";
+
 const int CPMaximumHoursForMostRecentPhoto = 48;
 
 #pragma mark - Initialization

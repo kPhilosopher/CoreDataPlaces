@@ -13,6 +13,62 @@
 		CE197A0F14E4AE1700BAE98D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
 		CE197A1214E4AE1700BAE98D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
 		CE197A1314E4AE1700BAE98D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
+		CE1C5C7E14F1EE3B00F1C617 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D85B14CCC7C500BDF83D /* main.m */; };
+		CE1C5C7F14F1EE3B00F1C617 /* CoreDataPlaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */; };
+		CE1C5C8014F1EE3B00F1C617 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D88C14CCCA2900BDF83D /* FlickrFetcher.m */; };
+		CE1C5C8114F1EE3B00F1C617 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89014CCCA2900BDF83D /* NSObject+SBJSON.m */; };
+		CE1C5C8214F1EE3B00F1C617 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89214CCCA2900BDF83D /* NSString+SBJSON.m */; };
+		CE1C5C8314F1EE3B00F1C617 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89414CCCA2900BDF83D /* SBJSON.m */; };
+		CE1C5C8414F1EE3B00F1C617 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89614CCCA2900BDF83D /* SBJsonBase.m */; };
+		CE1C5C8514F1EE3B00F1C617 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89814CCCA2900BDF83D /* SBJsonParser.m */; };
+		CE1C5C8614F1EE3B00F1C617 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89A14CCCA2900BDF83D /* SBJsonWriter.m */; };
+		CE1C5C8714F1EE3B00F1C617 /* CPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D8AB14CCCAE500BDF83D /* CPAppDelegate.m */; };
+		CE1C5C8814F1EE3B00F1C617 /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */; };
+		CE1C5C8914F1EE3B00F1C617 /* CPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */; };
+		CE1C5C8A14F1EE3B00F1C617 /* CPIndexedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451514CE931700D21E00 /* CPIndexedTableViewController.m */; };
+		CE1C5C8B14F1EE3B00F1C617 /* CPDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451914CF184D00D21E00 /* CPDataIndexer.m */; };
+		CE1C5C8C14F1EE3B00F1C617 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
+		CE1C5C8D14F1EE3B00F1C617 /* CPTopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */; };
+		CE1C5C8E14F1EE3B00F1C617 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
+		CE1C5C8F14F1EE3B00F1C617 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
+		CE1C5C9014F1EE3B00F1C617 /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
+		CE1C5C9114F1EE3B00F1C617 /* CPPlacesRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706214D27B5C006756EA /* CPPlacesRefinedElement.m */; };
+		CE1C5C9214F1EE3B00F1C617 /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706414D27B5C006756EA /* CPPlacesTableViewHandler.m */; };
+		CE1C5C9314F1EE3B00F1C617 /* CPPhotosRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF708214D35C85006756EA /* CPPhotosRefinedElement.m */; };
+		CE1C5C9414F1EE3B00F1C617 /* CPPhotosDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1814D3693A00AB58C9 /* CPPhotosDataIndexer.m */; };
+		CE1C5C9514F1EE3B00F1C617 /* JBBPriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1D14D369CD00AB58C9 /* JBBPriorityQueue.m */; };
+		CE1C5C9614F1EE3B00F1C617 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F1F14D369CD00AB58C9 /* NSObject+AssociatedObjects.m */; };
+		CE1C5C9714F1EE3B00F1C617 /* CPPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2D14D3889C00AB58C9 /* CPPhotosTableViewHandler.m */; };
+		CE1C5C9814F1EE3B00F1C617 /* CPTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F3214D38B2500AB58C9 /* CPTableViewHandler.m */; };
+		CE1C5C9914F1EE3B00F1C617 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F4314D7B07000AB58C9 /* CoreDataTableViewController.m */; };
+		CE1C5C9A14F1EE3B00F1C617 /* CPFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */; };
+		CE1C5C9B14F1EE3B00F1C617 /* CPCoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */; };
+		CE1C5C9C14F1EE3B00F1C617 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */; };
+		CE1C5C9D14F1EE3B00F1C617 /* CPManagedObjectInsertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6714DF495900D819AB /* CPManagedObjectInsertionHandler.m */; };
+		CE1C5C9E14F1EE3B00F1C617 /* CPTopPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */; };
+		CE1C5C9F14F1EE3B00F1C617 /* CPCoreDataTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5676E14E1924400EB370E /* CPCoreDataTableViewHandler.m */; };
+		CE1C5CA014F1EE3B00F1C617 /* CPMostRecentPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5677714E1DF7A00EB370E /* CPMostRecentPhotosTableViewController.m */; };
+		CE1C5CA114F1EE3B00F1C617 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
+		CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
+		CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
+		CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
+		CE1C5CA514F1EE3B00F1C617 /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
+		CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
+		CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
+		CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
+		CE1C5CA914F1EE3B00F1C617 /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
+		CE1C5CAA14F1EE3B00F1C617 /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
+		CE1C5CAC14F1EE3B00F1C617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
+		CE1C5CAD14F1EE3B00F1C617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
+		CE1C5CAE14F1EE3B00F1C617 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85114CCC7C500BDF83D /* CoreGraphics.framework */; };
+		CE1C5CAF14F1EE3B00F1C617 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85314CCC7C500BDF83D /* CoreData.framework */; };
+		CE1C5CB114F1EE3B00F1C617 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE80D85814CCC7C500BDF83D /* InfoPlist.strings */; };
+		CE1C5CB214F1EE3B00F1C617 /* CPScrollableImageViewController-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */; };
+		CE1C5CB314F1EE3B00F1C617 /* CPScrollableImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */; };
+		CE1C5CBA14F1EE8600F1C617 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1C5C7A14F1EE2C00F1C617 /* libKIF.a */; };
+		CE1C5CCE14F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C5CC914F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m */; };
+		CE1C5CCF14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */; };
+		CE1C5CD014F1EFD200F1C617 /* PlacesKIFTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */; };
 		CE2AD81014DB88E400957968 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */; };
 		CE2AD81114DB94B800957968 /* CPScrollableImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */; };
 		CE2AD81614DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */; };
@@ -111,6 +167,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE1C5C7914F1EE2C00F1C617 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1C5C7214F1EE2C00F1C617 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AAB07268139719AC008AF393;
+			remoteInfo = KIF;
+		};
 		CE60709414ED837300420AD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE80D84014CCC7C500BDF83D /* Project object */;
@@ -130,6 +193,15 @@
 		CE197A0D14E4AE1700BAE98D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		CE197A1014E4AE1700BAE98D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		CE197A1114E4AE1700BAE98D /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		CE1C5C7214F1EE2C00F1C617 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KIF.xcodeproj; path = Frameworks/KIF/KIF.xcodeproj; sourceTree = "<group>"; };
+		CE1C5CB714F1EE3B00F1C617 /* Integration Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Integration Tests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1C5CB914F1EE3B00F1C617 /* CoreDataPlaces copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CoreDataPlaces copy-Info.plist"; path = "/Users/jinwoobaek/Documents/workspace/CS193P/CoreDataPlaces/CoreDataPlaces copy-Info.plist"; sourceTree = "<absolute>"; };
+		CE1C5CC814F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KIFTestScenario+PlacesAdditions.h"; sourceTree = "<group>"; };
+		CE1C5CC914F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KIFTestScenario+PlacesAdditions.m"; sourceTree = "<group>"; };
+		CE1C5CCA14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KIFTestStep+PlacesAdditions.h"; sourceTree = "<group>"; };
+		CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KIFTestStep+PlacesAdditions.m"; sourceTree = "<group>"; };
+		CE1C5CCC14F1EFD200F1C617 /* PlacesKIFTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesKIFTestController.h; sourceTree = "<group>"; };
+		CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesKIFTestController.m; sourceTree = "<group>"; };
 		CE2AD80E14DB88E400957968 /* CPScrollableImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPScrollableImageViewController.h; sourceTree = "<group>"; };
 		CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPScrollableImageViewController.m; sourceTree = "<group>"; };
 		CE2AD81514DB98EB00957968 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "CoreDataPlaces/en.lproj/CPScrollableImageViewController-iPhone.xib"; sourceTree = SOURCE_ROOT; };
@@ -260,6 +332,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE1C5CAB14F1EE3B00F1C617 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1C5CBA14F1EE8600F1C617 /* libKIF.a in Frameworks */,
+				CE1C5CAC14F1EE3B00F1C617 /* UIKit.framework in Frameworks */,
+				CE1C5CAD14F1EE3B00F1C617 /* Foundation.framework in Frameworks */,
+				CE1C5CAE14F1EE3B00F1C617 /* CoreGraphics.framework in Frameworks */,
+				CE1C5CAF14F1EE3B00F1C617 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE60707C14ED82B200420AD8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +412,27 @@
 			path = IndexedTableMVC;
 			sourceTree = "<group>";
 		};
+		CE1C5C7314F1EE2C00F1C617 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE1C5C7A14F1EE2C00F1C617 /* libKIF.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE1C5CC714F1EFB600F1C617 /* KIF */ = {
+			isa = PBXGroup;
+			children = (
+				CE1C5CC814F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.h */,
+				CE1C5CC914F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m */,
+				CE1C5CCA14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.h */,
+				CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */,
+				CE1C5CCC14F1EFD200F1C617 /* PlacesKIFTestController.h */,
+				CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */,
+			);
+			path = KIF;
+			sourceTree = "<group>";
+		};
 		CE60708414ED82B200420AD8 /* CoreDataPlacesApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,11 +470,14 @@
 		CE80D83E14CCC7C500BDF83D = {
 			isa = PBXGroup;
 			children = (
+				CE1C5C7214F1EE2C00F1C617 /* KIF.xcodeproj */,
 				CE80D85514CCC7C500BDF83D /* CoreDataPlaces */,
+				CE1C5CC714F1EFB600F1C617 /* KIF */,
 				CE80D87114CCC7C500BDF83D /* CoreDataPlacesTests */,
 				CE60708414ED82B200420AD8 /* CoreDataPlacesApplicationTests */,
 				CE80D84C14CCC7C500BDF83D /* Frameworks */,
 				CE80D84A14CCC7C500BDF83D /* Products */,
+				CE1C5CB914F1EE3B00F1C617 /* CoreDataPlaces copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -379,6 +487,7 @@
 				CE80D84914CCC7C500BDF83D /* CoreDataPlaces.app */,
 				CE80D86914CCC7C500BDF83D /* CoreDataPlacesTests.octest */,
 				CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */,
+				CE1C5CB714F1EE3B00F1C617 /* Integration Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -712,6 +821,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE1C5C7C14F1EE3B00F1C617 /* Integration Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1C5CB414F1EE3B00F1C617 /* Build configuration list for PBXNativeTarget "Integration Tests" */;
+			buildPhases = (
+				CE1C5C7D14F1EE3B00F1C617 /* Sources */,
+				CE1C5CAB14F1EE3B00F1C617 /* Frameworks */,
+				CE1C5CB014F1EE3B00F1C617 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Integration Tests";
+			productName = CoreDataPlaces;
+			productReference = CE1C5CB714F1EE3B00F1C617 /* Integration Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CE60707F14ED82B200420AD8 /* CoreDataPlacesApplicationTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE60708E14ED82B300420AD8 /* Build configuration list for PBXNativeTarget "CoreDataPlacesApplicationTests" */;
@@ -772,7 +898,7 @@
 		CE80D84014CCC7C500BDF83D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Rose-Hulman Institute of Technology";
 			};
 			buildConfigurationList = CE80D84314CCC7C500BDF83D /* Build configuration list for PBXProject "CoreDataPlaces" */;
@@ -785,16 +911,43 @@
 			mainGroup = CE80D83E14CCC7C500BDF83D;
 			productRefGroup = CE80D84A14CCC7C500BDF83D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CE1C5C7314F1EE2C00F1C617 /* Products */;
+					ProjectRef = CE1C5C7214F1EE2C00F1C617 /* KIF.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CE80D84814CCC7C500BDF83D /* CoreDataPlaces */,
 				CE80D86814CCC7C500BDF83D /* CoreDataPlacesTests */,
 				CE60707F14ED82B200420AD8 /* CoreDataPlacesApplicationTests */,
+				CE1C5C7C14F1EE3B00F1C617 /* Integration Tests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		CE1C5C7A14F1EE2C00F1C617 /* libKIF.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKIF.a;
+			remoteRef = CE1C5C7914F1EE2C00F1C617 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
+		CE1C5CB014F1EE3B00F1C617 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1C5CB114F1EE3B00F1C617 /* InfoPlist.strings in Resources */,
+				CE1C5CB214F1EE3B00F1C617 /* CPScrollableImageViewController-iPhone.xib in Resources */,
+				CE1C5CB314F1EE3B00F1C617 /* CPScrollableImageViewController-iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE60707D14ED82B200420AD8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -854,6 +1007,61 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE1C5C7D14F1EE3B00F1C617 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1C5C7E14F1EE3B00F1C617 /* main.m in Sources */,
+				CE1C5C7F14F1EE3B00F1C617 /* CoreDataPlaces.xcdatamodeld in Sources */,
+				CE1C5C8014F1EE3B00F1C617 /* FlickrFetcher.m in Sources */,
+				CE1C5C8114F1EE3B00F1C617 /* NSObject+SBJSON.m in Sources */,
+				CE1C5C8214F1EE3B00F1C617 /* NSString+SBJSON.m in Sources */,
+				CE1C5C8314F1EE3B00F1C617 /* SBJSON.m in Sources */,
+				CE1C5C8414F1EE3B00F1C617 /* SBJsonBase.m in Sources */,
+				CE1C5C8514F1EE3B00F1C617 /* SBJsonParser.m in Sources */,
+				CE1C5C8614F1EE3B00F1C617 /* SBJsonWriter.m in Sources */,
+				CE1C5C8714F1EE3B00F1C617 /* CPAppDelegate.m in Sources */,
+				CE1C5C8814F1EE3B00F1C617 /* CPTabBarController.m in Sources */,
+				CE1C5C8914F1EE3B00F1C617 /* CPSplitViewController.m in Sources */,
+				CE1C5C8A14F1EE3B00F1C617 /* CPIndexedTableViewController.m in Sources */,
+				CE1C5C8B14F1EE3B00F1C617 /* CPDataIndexer.m in Sources */,
+				CE1C5C8C14F1EE3B00F1C617 /* CPRefinedElement.m in Sources */,
+				CE1C5C8D14F1EE3B00F1C617 /* CPTopPlacesTableViewController.m in Sources */,
+				CE1C5C8E14F1EE3B00F1C617 /* CPFlickrDataSource.m in Sources */,
+				CE1C5C8F14F1EE3B00F1C617 /* CPFlickrDataHandler.m in Sources */,
+				CE1C5C9014F1EE3B00F1C617 /* CPPlacesDataIndexer.m in Sources */,
+				CE1C5C9114F1EE3B00F1C617 /* CPPlacesRefinedElement.m in Sources */,
+				CE1C5C9214F1EE3B00F1C617 /* CPPlacesTableViewHandler.m in Sources */,
+				CE1C5C9314F1EE3B00F1C617 /* CPPhotosRefinedElement.m in Sources */,
+				CE1C5C9414F1EE3B00F1C617 /* CPPhotosDataIndexer.m in Sources */,
+				CE1C5C9514F1EE3B00F1C617 /* JBBPriorityQueue.m in Sources */,
+				CE1C5C9614F1EE3B00F1C617 /* NSObject+AssociatedObjects.m in Sources */,
+				CE1C5C9714F1EE3B00F1C617 /* CPPhotosTableViewHandler.m in Sources */,
+				CE1C5C9814F1EE3B00F1C617 /* CPTableViewHandler.m in Sources */,
+				CE1C5C9914F1EE3B00F1C617 /* CoreDataTableViewController.m in Sources */,
+				CE1C5C9A14F1EE3B00F1C617 /* CPFavoritesTableViewController.m in Sources */,
+				CE1C5C9B14F1EE3B00F1C617 /* CPCoreDataPhotosTableViewController.m in Sources */,
+				CE1C5C9C14F1EE3B00F1C617 /* CPScrollableImageViewController.m in Sources */,
+				CE1C5C9D14F1EE3B00F1C617 /* CPManagedObjectInsertionHandler.m in Sources */,
+				CE1C5C9E14F1EE3B00F1C617 /* CPTopPlacesTableViewHandler.m in Sources */,
+				CE1C5C9F14F1EE3B00F1C617 /* CPCoreDataTableViewHandler.m in Sources */,
+				CE1C5CA014F1EE3B00F1C617 /* CPMostRecentPhotosTableViewController.m in Sources */,
+				CE1C5CA114F1EE3B00F1C617 /* Photo.m in Sources */,
+				CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */,
+				CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */,
+				CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */,
+				CE1C5CA514F1EE3B00F1C617 /* FlickrFetcher+TestHelper.m in Sources */,
+				CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */,
+				CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */,
+				CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */,
+				CE1C5CA914F1EE3B00F1C617 /* CPNotificationManager.m in Sources */,
+				CE1C5CAA14F1EE3B00F1C617 /* CPPhotosTableViewController.m in Sources */,
+				CE1C5CCE14F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m in Sources */,
+				CE1C5CCF14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m in Sources */,
+				CE1C5CD014F1EFD200F1C617 /* PlacesKIFTestController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE60707B14ED82B200420AD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1013,6 +1221,56 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE1C5CB514F1EE3B00F1C617 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataPlaces/CoreDataPlaces-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"RUN_KIF_TESTS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Frameworks/KIF/**",
+				);
+				INFOPLIST_FILE = "CoreDataPlaces copy-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "Integration Tests";
+				TEST_AFTER_BUILD = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE1C5CB614F1EE3B00F1C617 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataPlaces/CoreDataPlaces-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"RUN_KIF_TESTS=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Frameworks/KIF/**",
+				);
+				INFOPLIST_FILE = "CoreDataPlaces copy-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "Integration Tests";
+				TEST_AFTER_BUILD = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		CE60708F14ED82B300420AD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1151,6 +1409,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE1C5CB414F1EE3B00F1C617 /* Build configuration list for PBXNativeTarget "Integration Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1C5CB514F1EE3B00F1C617 /* Debug */,
+				CE1C5CB614F1EE3B00F1C617 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE60708E14ED82B300420AD8 /* Build configuration list for PBXNativeTarget "CoreDataPlacesApplicationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

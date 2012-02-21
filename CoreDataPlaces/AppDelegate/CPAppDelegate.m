@@ -12,7 +12,11 @@
 #import "CPSplitViewController.h"
 #import "CPTabBarController.h"
 #import "CPScrollableImageViewController.h"
+//#import "PlacesKIFTestController.h"
 
+#if RUN_KIF_TESTS
+#import "PlacesKIFTestController.h"
+#endif
 //TODO:delete this is a test
 #import "CPNotificationManager.h"
 

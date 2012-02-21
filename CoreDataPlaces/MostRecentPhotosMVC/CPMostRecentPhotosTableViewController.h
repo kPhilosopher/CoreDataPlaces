@@ -12,6 +12,8 @@
 
 @interface CPMostRecentPhotosTableViewController : CoreDataTableViewController
 
+extern NSString *CPMostRecentPhotosViewAccessibilityLabel;
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext;

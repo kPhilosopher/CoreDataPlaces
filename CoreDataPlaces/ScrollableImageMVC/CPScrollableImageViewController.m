@@ -274,7 +274,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 {
 //	self.currentPhoto = newPhoto;
 	self.queuedPhoto = newPhoto;
-//	[self.imageView removeFromSuperview];
+	[self.imageView removeFromSuperview];
 //	self.imageView = nil;
 	self.image = nil;
 	//TODO: convenicen method for this if statement.
@@ -295,7 +295,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 {
     [super viewDidLoad];
 	self.scrollView.delegate = self;
-	self.scrollView.minimumZoomScale = 0.2;
+	self.scrollView.minimumZoomScale = 0.8;
 	self.scrollView.maximumZoomScale = 4;
 	self.scrollView.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
 }
