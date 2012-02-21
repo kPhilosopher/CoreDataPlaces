@@ -201,7 +201,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	[self CP_setupPhotosListWithPlaceID:self.placeID];
+	if (!self.listOfPhotos)
+	{
+		[self CP_setupPhotosListWithPlaceID:self.placeID];
+	}
 }
 
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;

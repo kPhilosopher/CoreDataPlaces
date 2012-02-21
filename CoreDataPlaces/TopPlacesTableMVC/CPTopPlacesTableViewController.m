@@ -127,7 +127,11 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	[self CP_setupTopPlacesList];
+	if (!self.listOfPlaces)
+	{
+		[self CP_setupTopPlacesList];
+	}
+	
 }
 
 - (void)CP_setupTopPlacesList;

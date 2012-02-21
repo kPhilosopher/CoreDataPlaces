@@ -52,7 +52,6 @@
 		CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
 		CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
 		CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
-		CE1C5CA514F1EE3B00F1C617 /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
 		CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
 		CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
 		CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
@@ -152,7 +151,6 @@
 		CEF1451F14CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF1452014CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF1455714CF8F8700D21E00 /* CPTopPlacesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */; };
-		CEF2018814EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
 		CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
 		CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
 		CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
@@ -289,6 +287,8 @@
 		CEB1119C14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewHandler.h; sourceTree = "<group>"; };
 		CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewHandler.m; sourceTree = "<group>"; };
 		CEB6110B14F0EC85008DA3AE /* CPPhotosTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewController-Internal.h"; sourceTree = "<group>"; };
+		CEC4858814F42BDA0026B4D3 /* PhotoLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoLogic.h; sourceTree = "<group>"; };
+		CEC4858914F42BDA0026B4D3 /* PhotoLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoLogic.m; sourceTree = "<group>"; };
 		CEDA8AAF14D1D329005A2EB0 /* CPFlickrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataSource.h; sourceTree = "<group>"; };
 		CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataSource.m; sourceTree = "<group>"; };
 		CEDA8AB314D1D34E005A2EB0 /* CPFlickrDataSource-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPFlickrDataSource-Internal.h"; sourceTree = "<group>"; };
@@ -629,6 +629,8 @@
 				CE197A0D14E4AE1700BAE98D /* Photo.m */,
 				CE3E9F0C14E9BD2300101891 /* Photo+Logic.h */,
 				CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */,
+				CEC4858814F42BDA0026B4D3 /* PhotoLogic.h */,
+				CEC4858914F42BDA0026B4D3 /* PhotoLogic.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1050,7 +1052,6 @@
 				CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */,
 				CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */,
 				CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */,
-				CE1C5CA514F1EE3B00F1C617 /* FlickrFetcher+TestHelper.m in Sources */,
 				CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */,
 				CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */,
 				CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */,
@@ -1116,7 +1117,6 @@
 				CE197A1214E4AE1700BAE98D /* Place.m in Sources */,
 				CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */,
 				CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
-				CEF2018814EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */,
 				CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */,
 				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
 				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
