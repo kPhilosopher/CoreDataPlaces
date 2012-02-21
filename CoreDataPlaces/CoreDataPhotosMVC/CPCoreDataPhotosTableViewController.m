@@ -151,6 +151,7 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 	{
 		Photo *chosenPhoto = (Photo *)managedObject;
 		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+		//TODO: the title should be set in the image controller.
 		scrollableImageViewController.title = chosenPhoto.title;
 		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
 		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])

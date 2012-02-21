@@ -8,6 +8,7 @@
 
 #import "CPFlickrDataHandler.h"
 
+
 @implementation CPFlickrDataHandler
 
 #pragma mark - Instance method.
@@ -20,6 +21,11 @@
 - (NSArray *)flickrPhotoListWithPlaceID:(NSString *)flickrPlaceId;
 {
 	return [FlickrFetcher photosAtPlace:flickrPlaceId];
+}
+
+- (NSData *)flickrImageDataWithURLString:(NSString *)URLString;
+{
+	return [FlickrFetcher imageDataForPhotoWithURLString:URLString];
 }
 
 @end

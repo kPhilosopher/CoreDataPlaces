@@ -32,6 +32,7 @@ extern NSString *CPPhotosListViewAccessibilityLabel;
 
 @property (retain) NSArray *listOfPhotos;
 @property (retain) NSMutableArray *indexedListOfPhotos;
+@property (copy) NSString *placeID;
 @property (retain) Place *currentPlace;
 //@property (retain) id <PictureListTableViewControllerDelegate> iPadScrollableImageViewControllerDelegate;
 

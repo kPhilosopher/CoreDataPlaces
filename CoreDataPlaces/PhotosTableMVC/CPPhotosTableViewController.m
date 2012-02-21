@@ -21,6 +21,7 @@
 @private
 	NSArray *CP_listOfPhotos;
 	NSMutableArray *CP_indexedListOfPhotos;
+	NSString *CP_placeID;
 	Place *CP_currentPlace;
 //	id <PictureListTableViewControllerDelegate> CP_iPadScrollableImageViewControllerDelegate;
 }
@@ -39,6 +40,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 @synthesize listOfPhotos = CP_listOfPhotos;
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize currentPlace = CP_currentPlace;
+@synthesize placeID = CP_placeID;
 //@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
 
 #pragma mark - Factory method
@@ -129,6 +131,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	{
 		if (placeID)
 		{
+			self.placeID = placeID;
 			//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
 			//			self.listOfPictures_theModel = pictureList;
 			
@@ -147,10 +150,9 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 //			}
 			
 //			[flickrDataHandler release];flickrDataHandler = nil;
-			[self CP_setupPhotosListWithPlaceID:placeID];
 			self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
+//			[self CP_setupPhotosListWithPlaceID:placeID];
 //			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
-			
 		}
 	}
 	return self;
@@ -189,11 +191,18 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 {
 	[CP_indexedListOfPhotos release];
 	[CP_listOfPhotos release];
+	[CP_currentPlace release];
 	[super dealloc];
 }
 
 
 #pragma mark - Convenience method
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	[self CP_setupPhotosListWithPlaceID:self.placeID];
+}
 
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
 {
@@ -202,14 +211,17 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
-	[self.view addSubview:activityIndicator];
 	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+	[self.view addSubview:activityIndicator];
 	[activityIndicator startAnimating];
 	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
 	dispatch_async(photosDownloadQueue, ^{
-		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
+		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeID];
+		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[activityIndicator stopAnimating];
+			[activityIndicator removeFromSuperview];
+			[activityIndicator release];
 			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
 			{
 				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
@@ -222,7 +234,6 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		});
 	});
 	dispatch_release(photosDownloadQueue);
-	[flickrDataHandler release];
 }
 
 

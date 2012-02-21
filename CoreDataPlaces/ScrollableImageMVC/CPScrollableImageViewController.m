@@ -13,6 +13,7 @@
 #import "CPAppDelegate.h"
 #import "CPImageCacheHandler.h"
 #import "CPNotificationManager.h"
+#import "CPFlickrDataHandler.h"
 
 
 static CPScrollableImageViewController *sharedScrollableImageController = nil;
@@ -173,8 +174,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 		activityIndicator.color = [UIColor blueColor];
 		activityIndicator.hidesWhenStopped = YES;
-		[self.view addSubview:activityIndicator];
 		activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+		[self.view addSubview:activityIndicator];
 		[activityIndicator startAnimating];
 		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
 		dispatch_async(imageDownloadQueue, ^
@@ -191,11 +192,14 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			else
 			{
 				//			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
-				imageData = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:photoURL]];
+				CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+				imageData = [UIImage imageWithData:[flickrDataHandler flickrImageDataWithURLString:photoURL]];
+				[flickrDataHandler release];flickrDataHandler = nil;
 			}
 			dispatch_async(dispatch_get_main_queue(), ^
 			{
 				[activityIndicator stopAnimating];
+				[activityIndicator release];
 				[self.imageView removeFromSuperview];
 				if (imageData)
 				{
@@ -230,47 +234,13 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			});
 		});
 		dispatch_release(imageDownloadQueue);
-		[activityIndicator release];activityIndicator = nil;
-	}
-	
+	}	
 }
 
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
 	[self newPhotoSequence];
-//	if (self.image == nil && (self.currentPhoto.photoURL != nil)) //TODO: change the self.image to something more relevant.
-//	{
-//		
-//		if (self.currentPhoto.isFavorite == [NSNumber numberWithBool:YES]) 
-//		{
-//			//TODO: download the image in here with multi-threading.
-//			CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
-//			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
-//			[imageCacheHandler release];imageCacheHandler = nil;
-//		}
-//		else
-//		{
-//			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
-//		}
-//		self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
-//		self.scrollView.contentSize = self.imageView.bounds.size;
-//		[self.scrollView addSubview:self.imageView];
-//		if (self.image != nil)
-//		{
-////			int r = arc4random() % 50;
-////			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
-//			self.currentPhoto.timeOfLastView = [NSDate date];
-//			[self.currentPhoto setTheTimeLapse];
-//			NSError *error = nil;
-//			if (![self.managedObjectContext save:&error])
-//			{
-//				//handle the error.
-//				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-//			}
-//		}
-//	}
-//	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
@@ -282,8 +252,9 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	[self.imageView removeFromSuperview];
 //	self.imageView = nil;
 	//TODO: convenicen method for this if statement.
-	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if ([appDelegate window].bounds.size.width > 500)//iPad
+//	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+//	if ([appDelegate window].bounds.size.width > 500)//iPad
+	if (self.view.window != nil)
 	{
 		if (self.popoverController.popoverVisible)
 		{

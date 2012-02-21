@@ -47,6 +47,7 @@
 		{
 			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
+			//TODO: pass the place_id into photosRefinedElement, not the managed object.
 			photosRefinedElement.itsPlace = photosTableViewController.currentPlace;
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 			scrollableImageViewController.photosRefinedElement = photosRefinedElement;
@@ -63,6 +64,7 @@
 //			}
 		}
 	}
+	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Readability method

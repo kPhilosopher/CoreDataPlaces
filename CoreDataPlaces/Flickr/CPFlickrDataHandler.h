@@ -11,10 +11,12 @@
 
 @interface CPFlickrDataHandler : NSObject
 
-#pragma mark - Instance method.
+#pragma mark - Instance method
 
 - (NSArray *)flickrTopPlaces;
 
 - (NSArray *)flickrPhotoListWithPlaceID:(NSString *)flickrPlaceId;
+
+- (NSData *)flickrImageDataWithURLString:(NSString *)URLString;
 
 @end
