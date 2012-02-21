@@ -12,7 +12,7 @@
 
 @implementation CPMostRecentPhotosTableViewController
 
-NSString *CPMostRecentPhotosViewAccessibilityLabel = @"Most recent photos table";
+NSString *CPMostRecentPhotosTableViewAccessibilityLabel = @"Most recent photos table";
 
 const int CPMaximumHoursForMostRecentPhoto = 48;
 
@@ -38,6 +38,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
+		self.tableView.accessibilityLabel = CPMostRecentPhotosTableViewAccessibilityLabel;
 		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"timeLapseSinceLastView";//change compare to CoreDataPhotosTableViewController

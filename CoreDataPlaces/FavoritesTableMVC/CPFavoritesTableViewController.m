@@ -13,66 +13,68 @@
 
 @implementation CPFavoritesTableViewController
 
+NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table";
+
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
-{
-    self = [self initWithStyle:style];
-    if (self) {
-        // Custom initialization
-		self.managedObjectContext = managedObjectContext;
-		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		//		NSString *sectionNameKeyPath = @"title";
-//		NSString *sectionNameKeyPath = @"category";
+//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
+//{
+//    self = [self initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//		self.managedObjectContext = managedObjectContext;
+//		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
+//		//		NSString *sectionNameKeyPath = @"title";
+////		NSString *sectionNameKeyPath = @"category";
+////		
+////		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
+////		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+////		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
+////		fetchRequest.fetchBatchSize = 20;
+////		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@",[NSNumber numberWithBool:YES]];
+////		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
+////		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+////		[fetchRequest setSortDescriptors:sortDescriptors];
+////		[sortDescriptors release];
+////		[sortDescriptor release];
+////	    
+////		NSFetchedResultsController *localFetchedResultsController = 
+////		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+////											managedObjectContext:managedObjectContext
+////											  sectionNameKeyPath:sectionNameKeyPath 
+////													   cacheName:nil];
+////		
+////		// test it
+////		NSError *error;
+////		if ([localFetchedResultsController performFetch:&error]) {
+////			NSLog(@"results");
+////			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
+////			for (Place *place in localFetchedResultsController.fetchedObjects) {
+////				NSLog(@"%@", place);
+////			}
+////		}
+////		else {
+////			NSLog(@"%@", [error localizedFailureReason]);
+////		}
+////		
+////		[fetchRequest release]; fetchRequest = nil;
+////		
+////		self.fetchedResultsController = localFetchedResultsController;
+////		[localFetchedResultsController release];
+////		
 //		
-//		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
-//		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
-//		fetchRequest.fetchBatchSize = 20;
-//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@",[NSNumber numberWithBool:YES]];
-//		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
-//		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-//		[fetchRequest setSortDescriptors:sortDescriptors];
-//		[sortDescriptors release];
-//		[sortDescriptor release];
-//	    
-//		NSFetchedResultsController *localFetchedResultsController = 
-//		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-//											managedObjectContext:managedObjectContext
-//											  sectionNameKeyPath:sectionNameKeyPath 
-//													   cacheName:nil];
+//		self.titleKey = @"title";
+//		self.subtitleKey = @"subtitle";
+////		self.searchKey = nil;
+//		self.searchKey = @"title";
+//		self.title = @"Favorites";
 //		
-//		// test it
-//		NSError *error;
-//		if ([localFetchedResultsController performFetch:&error]) {
-//			NSLog(@"results");
-//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-//			for (Place *place in localFetchedResultsController.fetchedObjects) {
-//				NSLog(@"%@", place);
-//			}
-//		}
-//		else {
-//			NSLog(@"%@", [error localizedFailureReason]);
-//		}
-//		
-//		[fetchRequest release]; fetchRequest = nil;
-//		
-//		self.fetchedResultsController = localFetchedResultsController;
-//		[localFetchedResultsController release];
-//		
-		
-		self.titleKey = @"title";
-		self.subtitleKey = @"subtitle";
-//		self.searchKey = nil;
-		self.searchKey = @"title";
-		self.title = @"Favorites";
-		
-		//TODO: change the design. this is for testing
-		//		self.tableViewHandler = [[CPFavoritesTableViewHandler alloc] init];
-		//		self.dataIndexHandler = [Cp];
-	}
-    return self;
-}
+//		//TODO: change the design. this is for testing
+//		//		self.tableViewHandler = [[CPFavoritesTableViewHandler alloc] init];
+//		//		self.dataIndexHandler = [Cp];
+//	}
+//    return self;
+//}
 
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext customSettingsDictionary:(NSDictionary *)customSettings;
@@ -80,6 +82,7 @@
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
+		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
 		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 //		NSString *sectionNameKeyPath = @"title";

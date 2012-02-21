@@ -25,8 +25,8 @@
 
 @interface CPPhotosTableViewController : CPIndexedTableViewController
 
-extern NSString *PictureListViewAccessibilityLabel;
-extern NSString *PictureListBackBarButtonAccessibilityLabel;
+extern NSString *CPPhotosListViewAccessibilityLabel;
+//extern NSString *PictureListBackBarButtonAccessibilityLabel;
 
 #pragma mark - Property
 

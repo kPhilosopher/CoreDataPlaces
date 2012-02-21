@@ -12,7 +12,7 @@
 
 @interface CPMostRecentPhotosTableViewController : CoreDataTableViewController
 
-extern NSString *CPMostRecentPhotosViewAccessibilityLabel;
+extern NSString *CPMostRecentPhotosTableViewAccessibilityLabel;
 
 #pragma mark - Initialization
 

@@ -9,6 +9,18 @@
 #import "KIFTestScenario+PlacesAdditions.h"
 #import "KIFTestStep.h"
 #import "KIFTestStep+PlacesAdditions.h"
+#import "CPAppDelegate.h"
+#import "CPTabBarController.h"
+#import "CPTopPlacesTableViewController.h"
+#import "CPMostRecentPhotosTableViewController.h"
+#import "CPFavoritesTableViewController.h"
+#import "CPCoreDataPhotosTableViewController.h"
+#import "CPPhotosTableViewController.h"
+#import "CPScrollableImageViewController.h"
+
+#import "UIAccessibilityElement-KIFAdditions.h"
+#import "UIApplication-KIFAdditions.h"
+
 
 #define INDEX_IN_TAB_BAR_FOR_TOP_PLACES 0
 #define INDEX_IN_TAB_BAR_FOR_MOST_RECENT_PLACES 1
@@ -20,9 +32,24 @@
 //#import "KIFTestController.h"
 
 //static NSString *referenceString = nil;
+static NSMutableDictionary *referenceDictionary = nil;
 
+//const int CPTabBarIndexForTopPlacesTab = 0;
+//const int CPTabBarIndexForMostRecentPhotosTab = 1;
+//const int CPTabBarIndexForFavoritesTab = 2;
+
+enum {
+    CPTabBarIndexForTopPlacesTab		= 0,
+    CPTabBarIndexForMostRecentPhotosTab	= 1,
+    CPTabBarIndexForFavoritesTab        = 2,
+};
 
 @implementation KIFTestScenario (PlacesAdditions)
+
++ (void)initializeReferenceDictionary;
+{
+	referenceDictionary = [[NSMutableDictionary alloc] init];
+}
 
 //+ (id)scenarioToGoBackToPictureListFromImage
 //{
@@ -63,29 +90,37 @@
 //	return scenario;
 //}
 
+#pragma mark - Tapping tab bar item
+
 + (id)scenarioToTapTopRatedTabBarItem;
 {
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Scenario of tapping the Top Rated tab bar item."];	
-	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPTabBarViewAccessibilityLabel]];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Scenario of tapping the Top Rated tab bar item."];
 	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Top Rated"]];
-	return scenario;
-}
-
-+ (id)scenarioToViewTopPlacesTableView;
-{
-	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToTapTopRatedTabBarItem];
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to see if the Top Rated tab bar item is functional"];
-	[scenario addStepsFromArray:preliminaryScenario.steps];
-	
-    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPTopPlacesViewAccessibilityLabel]];
 	return scenario;
 }
 
 + (id)scenarioToTapMostRecentTabBarItem;
 {
 	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Scenario of tapping the Most Recent tab bar item."];	
-	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPTabBarViewAccessibilityLabel]];
     [scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Most Recent"]];
+	return scenario;
+}
+
++ (id)scenarioToTapFavoritesTabBarItem;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Scenario of tapping the Favorites bar item."];	
+    [scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Favorites"]];
+	return scenario;
+}
+
+#pragma mark - View the table views
+
++ (id)scenarioToViewTopPlacesTableView;
+{
+	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToTapTopRatedTabBarItem];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to see if the Top Rated tab bar item is functional"];
+	[scenario addStepsFromArray:preliminaryScenario.steps];
+    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel]];
 	return scenario;
 }
 
@@ -95,22 +130,112 @@
 	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to see if the Most Recent tab bar item is functional"];
 	[scenario addStepsFromArray:preliminaryScenario.steps];
 	
-    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPMostRecentPhotosViewAccessibilityLabel]];
+    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPMostRecentPhotosTableViewAccessibilityLabel]];
 	return scenario;
 }
-//
-//+ (id)scenarioToViewTopPlacesPictureList;
+
++ (id)scenarioToViewFavoritePlacesTableView;
+{
+	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToTapFavoritesTabBarItem];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to see if the Most Recent tab bar item is functional"];
+	[scenario addStepsFromArray:preliminaryScenario.steps];
+	
+    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
+	return scenario;
+}
+
+//+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
 //{
-//	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
-//    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to view top places picture list"];
-//	[scenario addStepsFromArray:preliminaryScenario.steps];
+//	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapFirstRowOfEverySectionInTableView"];
+//	//TODO: get the sectionsArray.
+////	NSArray *sectionsArray = nil;
+//	[KIFTestScenario initializeReferenceDictionary];
+//	NSString *sectionsArrayKey = @"sectionsArray";
+////	[referenceDictionary setObject:[NSArray array] forKey:sectionsArrayKey];
+//	id windowID = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+//	CPTabBarController *tabBarController = nil;
 //	
-//	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
-//	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:TopPlacesViewAccessibilityLabel atIndexPath:path]];
-//	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:PictureListViewAccessibilityLabel]];
+//////	NSString **referenceString;
+//	if ([windowID isKindOfClass:[UIWindow class]])
+//	{
+//		UIWindow *window = (UIWindow *)windowID;
+//		
+//		UIViewController *theRootController =  window.rootViewController;
+//		if ([theRootController isKindOfClass:[CPTabBarController class]])
+//		{
+//			tabBarController = (CPTabBarController *)theRootController;
+//		}
+//		
+//	
+//		[scenario addStep:[KIFTestStep stepWithDescription:@"Get The Sections Array" executionBlock:^(KIFTestStep *step, NSError **error){
+//			UIAccessibilityElement *element = [[UIApplication sharedApplication] accessibilityElementWithLabel:CPTopPlacesTableViewAccessibilityLabel];
+//			KIFTestCondition(element, error, @"View with label %@ not found", CPTopPlacesTableViewAccessibilityLabel);
+//			UITableView *tableView = (UITableView *)[UIAccessibilityElement viewContainingAccessibilityElement:element];
+//			
+//			KIFTestCondition([tableView isKindOfClass:[UITableView class]], error, @"Specified view is not a UITableView");
+//			
+//			KIFTestCondition(tableView, error, @"Table view with label %@ not found", CPTopPlacesTableViewAccessibilityLabel);
+//			UINavigationController *navcon = [tabBarController.viewControllers objectAtIndex:CPTabBarIndexForTopPlacesTab];
+//			if ([[navcon topViewController] isKindOfClass:[CPTopPlacesTableViewController class]])
+//			{
+//				CPTopPlacesTableViewController *topPlacesTVC = (CPTopPlacesTableViewController *)[navcon topViewController];
+//				[referenceDictionary setObject:[topPlacesTVC fetchTheElementSections] forKey:sectionsArrayKey];
+//			}
+//			return KIFTestStepResultSuccess;
+//		}]];
+//	}
+//
+////	NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+////	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel atIndexPath:index]];
+//	[scenario addStep:[KIFTestStep stepToTapFirstRowOfEverySectionsInTableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel referenceDictionary:referenceDictionary sectionsArrayKey:sectionsArrayKey]];
+//
 //	return scenario;
 //}
-//
+
+
++ (id)scenarioToViewTopPlacesPhotosList;
+{
+	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
+    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesPhotosList"];
+	[scenario addStepsFromArray:preliminaryScenario.steps];
+	
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel]];
+	return scenario;
+}
+
++ (id)scenarioToViewTopPlacesScrollableImage;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesScrollableImage"];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:0.4 description:@"waiting for photo list to download"]];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	return scenario;
+}
+
++ (id)scenarioToTapFavoritesSwitch;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapFavoritesSwitch"];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:3 description:@"waiting for switch to toggle"]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:CPFavoriteSwitchAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:1 description:@"waiting for switch to toggle"]];
+	return scenario;
+}
+
++ (id)scenarioToViewFavoritesPhotoList;
+{
+	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
+    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewFavoritesPhotoList"];
+	[scenario addStepsFromArray:preliminaryScenario.steps];
+	
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
+	return scenario;
+}
+
 //+ (id)scenarioToViewMostRecentPlacesPictureList;
 //{
 //	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewMostRecentPlacesTableView];

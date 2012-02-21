@@ -30,7 +30,8 @@
 
 @implementation CPPhotosTableViewController
 
-NSString *PictureListViewAccessibilityLabel = @"Picture list";
+NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
+//NSString *PictureListViewAccessibilityLabel = @"Picture list";
 NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 #pragma mark - Synthesize
@@ -147,8 +148,8 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			
 //			[flickrDataHandler release];flickrDataHandler = nil;
 			[self CP_setupPhotosListWithPlaceID:placeID];
-			self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
-			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
+			self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
+//			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
 			
 		}
 	}

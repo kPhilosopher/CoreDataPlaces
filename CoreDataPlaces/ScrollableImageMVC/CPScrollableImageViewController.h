@@ -14,8 +14,9 @@
 
 @interface CPScrollableImageViewController : UIViewController <UIScrollViewDelegate, UISplitViewControllerDelegate>
 
-extern NSString *ScrollableImageViewAccessibilityLabel;
-extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
+extern NSString *CPScrollableImageViewAccessibilityLabel;
+extern NSString *CPFavoriteSwitchAccessibilityLabel;
+//extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
 
 #pragma mark - Property
 

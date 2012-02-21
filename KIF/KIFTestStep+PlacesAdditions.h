@@ -9,15 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KIFTestStep.h"
 
+
 @interface KIFTestStep (PlacesAdditions)
-
-// Factory Steps
-
-+ (id)stepToReset;
-
-// Step Collections
-
-// Assumes the application was reset and sitting at the welcome screen
-+ (NSArray *)stepsToGoToLoginPage;
 
 @end

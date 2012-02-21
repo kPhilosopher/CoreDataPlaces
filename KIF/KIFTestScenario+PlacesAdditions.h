@@ -8,28 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "KIFTestScenario.h"
-//#import "TopPlacesTableViewController.h"
-#import "CPTopPlacesTableViewController.h"
-//#import "MostRecentTableViewController.h"
-#import "CPMostRecentPhotosTableViewController.h"
-//#import "PictureListTableViewController.h"
-#import "CPPhotosTableViewController.h"
-//#import "ScrollableImageViewController.h"
-#import "CPScrollableImageViewController.h"
-//#import "PLTabBarController.h"
-#import "CPTabBarController.h"
-//#import "PLAppDelegate.h"
-#import "CPAppDelegate.h"
 
-#import "UIAccessibilityElement-KIFAdditions.h"
-#import "UIApplication-KIFAdditions.h"
 
 @interface KIFTestScenario (PlacesAdditions)
 
+#pragma mark - Class method
+
++ (void)initializeReferenceDictionary;
+
+#pragma mark - Tapping tab bar item
+
 + (id)scenarioToTapTopRatedTabBarItem;
++ (id)scenarioToTapFavoritesTabBarItem;
 + (id)scenarioToTapMostRecentTabBarItem;
+
+#pragma mark - View the table views
+
 + (id)scenarioToViewTopPlacesTableView;
 + (id)scenarioToViewMostRecentPlacesTableView;
++ (id)scenarioToViewFavoritePlacesTableView;
+
++ (id)scenarioToViewTopPlacesPhotosList;
++ (id)scenarioToViewTopPlacesScrollableImage;
++ (id)scenarioToTapFavoritesSwitch;
++ (id)scenarioToViewFavoritesPhotoList;
+
+//+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
+
 //+ (id)scenarioToViewTopPlacesPictureList;
 //+ (id)scenarioToViewMostRecentPlacesPictureList;
 //+ (id)scenarioToViewScrollableViewInTopPlacesTab;

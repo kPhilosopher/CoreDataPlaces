@@ -60,8 +60,8 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 @synthesize managedObjectContext = CP_managedObjectContext;
 @synthesize popoverController = CP_popoverController;
 
-NSString *ScrollableImageViewAccessibilityLabel = @"Scrollable image";
-NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
+NSString *CPScrollableImageViewAccessibilityLabel = @"Scrollable image";
+NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - Initialization
 
@@ -148,6 +148,7 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 	CGRect theRectToReturn = CGRectMake(0, 0, 0, 0);
 //	CGRect screenRect = self.view.bounds;
 	CGRect screenRect = self.scrollView.bounds;
+	//TODO: checking what imageRect is
 	//TODO: check if setting screenRect to self.scrollView.bounds is a better idea.
 	CGFloat imageRatio = self.imageView.bounds.size.height / self.imageView.bounds.size.width;
 	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
@@ -198,19 +199,19 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 				[self.imageView removeFromSuperview];
 				if (imageData)
 				{
-					self.currentPhoto = self.queuedPhoto;
-					self.queuedPhoto = nil;
+//					self.currentPhoto = self.queuedPhoto;
+//					self.queuedPhoto = nil;
 					self.image = imageData;
 					self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
 					self.scrollView.contentSize = self.imageView.bounds.size;
+					self.switchForFavorite.on = [self.queuedPhoto.isFavorite boolValue];
 					[self.scrollView addSubview:self.imageView];
-					self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
 					if (self.image != nil)
 					{
 						//			int r = arc4random() % 50;
-						//			self.currentPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
-						self.currentPhoto.timeOfLastView = [NSDate date];
-						[self.currentPhoto setTheTimeLapse];
+						//			self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+						self.queuedPhoto.timeOfLastView = [NSDate date];
+						[self.queuedPhoto setTheTimeLapse];
 						NSError *error = nil;
 						if (![self.managedObjectContext save:&error])
 						{
@@ -218,6 +219,8 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 							NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 						}
 					}
+					self.currentPhoto = self.queuedPhoto;
+					self.queuedPhoto = nil;
 					[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 				}
 				else
@@ -274,9 +277,10 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 {
 //	self.currentPhoto = newPhoto;
 	self.queuedPhoto = newPhoto;
+	self.currentPhoto = nil;
+	self.image = nil;
 	[self.imageView removeFromSuperview];
 //	self.imageView = nil;
-	self.image = nil;
 	//TODO: convenicen method for this if statement.
 	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if ([appDelegate window].bounds.size.width > 500)//iPad
@@ -295,9 +299,12 @@ NSString *ScrollableImageBackBarButtonAccessibilityLabel = @"Back";
 {
     [super viewDidLoad];
 	self.scrollView.delegate = self;
-	self.scrollView.minimumZoomScale = 0.8;
+	//TODO: make the zoomScales be variable to the size of the imageView and iPhone or iPad.
+	self.scrollView.minimumZoomScale = 0.3;
 	self.scrollView.maximumZoomScale = 4;
-	self.scrollView.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
+	//TODO: change the contant name.
+	self.scrollView.accessibilityLabel = CPScrollableImageViewAccessibilityLabel;
+//	self.switchForFavorite.accessibilityLabel = CPFavoriteSwitchAccessibilityLabel;
 }
 
 - (void)viewDidUnload

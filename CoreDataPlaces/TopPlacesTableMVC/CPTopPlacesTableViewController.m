@@ -34,7 +34,7 @@
 
 @implementation CPTopPlacesTableViewController
 
-NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
+NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 //NSString *CPAlertTitle = @"Cannot Obtain Data";
 //NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
@@ -53,7 +53,7 @@ NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
     if (self)
 	{
 		self.title = @"Top Places";
-		self.view.accessibilityLabel = CPTopPlacesViewAccessibilityLabel;
+		self.tableView.accessibilityLabel = CPTopPlacesTableViewAccessibilityLabel;
 		
 		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)] autorelease];
 		
@@ -148,6 +148,11 @@ NSString *CPTopPlacesViewAccessibilityLabel = @"Top places table";
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
+			NSString *string = [[self.listOfPlaces lastObject] description];
+			NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+			NSLog(@"%@",@"list of Places");
+			NSLog(@"%@",[NSString stringWithFormat:@"%@",string]);
+			NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		});
 	});
 	dispatch_release(placesDownloadQueue);

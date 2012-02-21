@@ -14,6 +14,8 @@
 
 @implementation CPCoreDataPhotosTableViewController
 
+NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table";
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;

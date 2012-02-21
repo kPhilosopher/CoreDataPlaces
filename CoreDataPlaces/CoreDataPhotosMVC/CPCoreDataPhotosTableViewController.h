@@ -14,6 +14,8 @@
 
 @interface CPCoreDataPhotosTableViewController : CoreDataTableViewController
 
+extern NSString *CPFavoritePhotosTableViewAccessibilityLabel;
+
 #pragma mark - Initialization
 
 //TODO: new api

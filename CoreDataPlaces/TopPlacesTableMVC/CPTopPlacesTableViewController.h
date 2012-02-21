@@ -16,7 +16,7 @@
 
 @interface CPTopPlacesTableViewController : CPIndexedTableViewController
 
-extern NSString *CPTopPlacesViewAccessibilityLabel;
+extern NSString *CPTopPlacesTableViewAccessibilityLabel;
 
 #pragma mark - Property
 

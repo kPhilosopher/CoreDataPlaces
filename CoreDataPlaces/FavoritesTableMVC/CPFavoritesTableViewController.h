@@ -12,6 +12,8 @@
 
 @interface CPFavoritesTableViewController : CoreDataTableViewController
 
+extern NSString *CPFavoritePlacesTableViewAccessibilityLabel;
+
 #pragma mark - Initialization
 
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext customSettingsDictionary:(NSDictionary *)customSettings;

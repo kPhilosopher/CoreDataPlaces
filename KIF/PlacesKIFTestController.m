@@ -14,8 +14,20 @@
 
 - (void)initializeScenarios;
 {
-	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesTableView]];
+//	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesTableView]];
+//	[self addScenario:[KIFTestScenario scenarioToTapMostRecentTabBarItem]];
+//	[self addScenario:[KIFTestScenario scenarioToTapFavoritesTabBarItem]];
+	
+	[self addScenario:[KIFTestScenario scenarioToViewFavoritePlacesTableView]];
 	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPlacesTableView]];
+	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesTableView]];
+	
+	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesPhotosList]];
+	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesScrollableImage]];
+	[self addScenario:[KIFTestScenario scenarioToTapFavoritesSwitch]];
+//	[self addScenario:[KIFTestScenario scenarioToTapFirstRowOfEverySectionInTableView]];
+	
+//	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPlacesTableView]];
 //	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesPictureList]];
 //	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPlacesPictureList]];
 //	[self addScenario:[KIFTestScenario scenarioToViewScrollableViewInTopPlacesTab]];

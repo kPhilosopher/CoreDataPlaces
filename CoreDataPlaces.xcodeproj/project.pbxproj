@@ -423,12 +423,12 @@
 		CE1C5CC714F1EFB600F1C617 /* KIF */ = {
 			isa = PBXGroup;
 			children = (
+				CE1C5CCC14F1EFD200F1C617 /* PlacesKIFTestController.h */,
+				CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */,
 				CE1C5CC814F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.h */,
 				CE1C5CC914F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m */,
 				CE1C5CCA14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.h */,
 				CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */,
-				CE1C5CCC14F1EFD200F1C617 /* PlacesKIFTestController.h */,
-				CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */,
 			);
 			path = KIF;
 			sourceTree = "<group>";
