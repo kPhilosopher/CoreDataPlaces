@@ -18,22 +18,22 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;
-{
-	self = [self initWithStyle:style];
-    if (self) {
-        // Custom initialization
-		self.managedObjectContext = managedObjectContext;
-		self.fetchedResultsController = localFetchedResultsController;
-		
-		self.titleKey = @"title";
-		self.subtitleKey = @"subtitle";
-		self.searchKey = nil;
-		//TODO: title of the given Place
-		//		self.title = @"";
-	}
-    return self;
-}
+//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;
+//{
+//	self = [self initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//		self.managedObjectContext = managedObjectContext;
+//		self.fetchedResultsController = localFetchedResultsController;
+//		
+//		self.titleKey = @"title";
+//		self.subtitleKey = @"subtitle";
+//		self.searchKey = nil;
+//		//TODO: title of the given Place
+//		//		self.title = @"";
+//	}
+//    return self;
+//}
 
 //TODO: might delete this method
 - (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
@@ -41,6 +41,7 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
+		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
 		self.managedObjectContext = managedObjectContext;
 //		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";

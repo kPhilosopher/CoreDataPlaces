@@ -133,6 +133,9 @@
 		CEB1118D14DF5B36009B1B5B /* CoreDataPlaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */; };
 		CEB6110914F0DF0B008DA3AE /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
 		CEB6110C14F0ED39008DA3AE /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
+		CEC4859E14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */; };
+		CEC4859F14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */; };
+		CEC485A014F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */; };
 		CEDA8AB114D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
@@ -289,6 +292,8 @@
 		CEB6110B14F0EC85008DA3AE /* CPPhotosTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewController-Internal.h"; sourceTree = "<group>"; };
 		CEC4858814F42BDA0026B4D3 /* PhotoLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoLogic.h; sourceTree = "<group>"; };
 		CEC4858914F42BDA0026B4D3 /* PhotoLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoLogic.m; sourceTree = "<group>"; };
+		CEC4859C14F47ED00026B4D3 /* PlacesCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesCoreDataTableViewController.h; sourceTree = "<group>"; };
+		CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesCoreDataTableViewController.m; sourceTree = "<group>"; };
 		CEDA8AAF14D1D329005A2EB0 /* CPFlickrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataSource.h; sourceTree = "<group>"; };
 		CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataSource.m; sourceTree = "<group>"; };
 		CEDA8AB314D1D34E005A2EB0 /* CPFlickrDataSource-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPFlickrDataSource-Internal.h"; sourceTree = "<group>"; };
@@ -684,6 +689,8 @@
 				CE989F4314D7B07000AB58C9 /* CoreDataTableViewController.m */,
 				CEA5676D14E1924400EB370E /* CPCoreDataTableViewHandler.h */,
 				CEA5676E14E1924400EB370E /* CPCoreDataTableViewHandler.m */,
+				CEC4859C14F47ED00026B4D3 /* PlacesCoreDataTableViewController.h */,
+				CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */,
 			);
 			path = CoreDataTableMVC;
 			sourceTree = "<group>";
@@ -1060,6 +1067,7 @@
 				CE1C5CCE14F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m in Sources */,
 				CE1C5CCF14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m in Sources */,
 				CE1C5CD014F1EFD200F1C617 /* PlacesKIFTestController.m in Sources */,
+				CEC485A014F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,6 +1079,7 @@
 				CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */,
 				CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */,
 				CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
+				CEC4859F14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,6 +1131,7 @@
 				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 				CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */,
 				CEB6110914F0DF0B008DA3AE /* CPPhotosTableViewController.m in Sources */,
+				CEC4859E14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
