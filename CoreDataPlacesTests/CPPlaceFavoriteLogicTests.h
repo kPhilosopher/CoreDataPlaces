@@ -3,7 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/13/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 //  Logic unit tests contain unit test code that is designed to be linked into an independent test executable.

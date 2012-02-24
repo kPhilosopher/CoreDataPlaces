@@ -3,7 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/16/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 //  Application unit tests contain unit test code that must be injected into an application to run correctly.
