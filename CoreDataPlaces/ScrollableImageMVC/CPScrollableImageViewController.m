@@ -200,7 +200,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			{
 				[activityIndicator stopAnimating];
 				[activityIndicator release];
-				[self.imageView removeFromSuperview];
+				[self.imageView removeFromSuperview]; // Make sure that any in-flight additions before us are cleared
 				if (imageData)
 				{
 //					self.currentPhoto = self.queuedPhoto;
@@ -249,9 +249,10 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	self.queuedPhoto = newPhoto;
 	self.currentPhoto = nil;
 	self.image = nil;
-	[self.imageView removeFromSuperview];
-//	self.imageView = nil;
-	//TODO: convenicen method for this if statement.
+	[self.imageView removeFromSuperview]; // clear view immediately for user feedback, done again in async block above
+	//NSLog(@"image view: %p, scrollview child: %@", self.imageView, [self.scrollView.subviews objectAtIndex:0]);
+	self.imageView = nil;
+	//TODO: convenience method for this if statement.
 //	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
 //	if ([appDelegate window].bounds.size.width > 500)//iPad
 	if (self.view.window != nil)
