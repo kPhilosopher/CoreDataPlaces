@@ -82,7 +82,6 @@
 		CE2D8E6E14FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D8E6514FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m */; };
 		CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6314DF481500D819AB /* CPManagedObjectInsertionHandlerTests.m */; };
 		CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */; };
-		CE2D8E8114FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D8E8014FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m */; };
 		CE2D8E8414FC2640004058FD /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D8E8314FC2640004058FD /* libOCMock.a */; };
 		CE3E9F0B14E976BA00101891 /* CPPlaceFavoriteLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */; };
 		CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
@@ -152,6 +151,7 @@
 		CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
 		CEDA8ACC14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
+		CEE102A214FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */; };
 		CEEF706514D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706614D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706714D27B5C006756EA /* CPPlacesRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706214D27B5C006756EA /* CPPlacesRefinedElement.m */; };
@@ -227,8 +227,8 @@
 		CE2D8E6514FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosTableViewHandler.m; sourceTree = "<group>"; };
 		CE2D8E7C14FC1C8B004058FD /* PriorityQueueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQueueTests.h; sourceTree = "<group>"; };
 		CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityQueueTests.m; sourceTree = "<group>"; };
-		CE2D8E7F14FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests.h; sourceTree = "<group>"; };
-		CE2D8E8014FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests.m; sourceTree = "<group>"; };
+		CE2D8E7F14FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPMostRecentPhotosRefinedElementTests.h; path = CoreDataPlacesTests/CPMostRecentPhotosRefinedElementTests.h; sourceTree = SOURCE_ROOT; };
+		CE2D8E8014FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPMostRecentPhotosRefinedElementTests.m; path = CoreDataPlacesTests/CPMostRecentPhotosRefinedElementTests.m; sourceTree = SOURCE_ROOT; };
 		CE2D8E8314FC2640004058FD /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
 		CE2D8E8614FC268D004058FD /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		CE2D8E8714FC268D004058FD /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
@@ -329,6 +329,9 @@
 		CEDA8AC814D2693D005A2EB0 /* CPTableViewControllerDataReloading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewControllerDataReloading.h; sourceTree = "<group>"; };
 		CEDA8AC914D26B6B005A2EB0 /* CPFlickrDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataHandler.h; sourceTree = "<group>"; };
 		CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataHandler.m; sourceTree = "<group>"; };
+		CEE102A014FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h; sourceTree = "<group>"; };
+		CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m; sourceTree = "<group>"; };
+		CEE102A314FD786B00F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h"; sourceTree = "<group>"; };
 		CEEF705F14D27B5C006756EA /* CPPlacesDataIndexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexer.h; sourceTree = "<group>"; };
 		CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexer.m; sourceTree = "<group>"; };
 		CEEF706114D27B5C006756EA /* CPPlacesRefinedElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesRefinedElement.h; sourceTree = "<group>"; };
@@ -613,6 +616,7 @@
 		CE80D87114CCC7C500BDF83D /* CoreDataPlacesTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEE1029F14FD77B900F8A344 /* CPMostRecentPhotosRefinedElement */,
 				CE2D8E7C14FC1C8B004058FD /* PriorityQueueTests.h */,
 				CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */,
 				CE2D8E7F14FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.h */,
@@ -786,6 +790,16 @@
 				CE60707514ED808800420AD8 /* CPImageCacheHandler.m */,
 			);
 			path = ScrollableImageMVC;
+			sourceTree = "<group>";
+		};
+		CEE1029F14FD77B900F8A344 /* CPMostRecentPhotosRefinedElement */ = {
+			isa = PBXGroup;
+			children = (
+				CEE102A014FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h */,
+				CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */,
+				CEE102A314FD786B00F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h */,
+			);
+			path = CPMostRecentPhotosRefinedElement;
 			sourceTree = "<group>";
 		};
 		CEEF705E14D27AEE006756EA /* PlacesTableMVC */ = {
@@ -1255,7 +1269,7 @@
 				CE2D8E6D14FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m in Sources */,
 				CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */,
 				CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */,
-				CE2D8E8114FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m in Sources */,
+				CEE102A214FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
