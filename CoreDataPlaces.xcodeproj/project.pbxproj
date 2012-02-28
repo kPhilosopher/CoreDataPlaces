@@ -796,8 +796,8 @@
 			isa = PBXGroup;
 			children = (
 				CEE102A014FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h */,
-				CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */,
 				CEE102A314FD786B00F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h */,
+				CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */,
 			);
 			path = CPMostRecentPhotosRefinedElement;
 			sourceTree = "<group>";
