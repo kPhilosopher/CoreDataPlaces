@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPMostRecentPhotosTableViewController.h"
+#import "CPMostRecentPhotosTableViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPScrollableImageViewController.h"
 
@@ -81,37 +81,37 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		
 		[fetchRequest release]; fetchRequest = nil;
 		
-		self.fetchedResultsController = localFetchedResultsController;
-		[localFetchedResultsController release];
-		
-		
-		self.titleKey = @"title";
-		self.subtitleKey = @"subtitle";
-		self.searchKey = @"title";
-		//TODO: title of the given Place
-		self.title = @"Recent Photos";
+//		self.fetchedResultsController = localFetchedResultsController;
+//		[localFetchedResultsController release];
+//		
+//		
+//		self.titleKey = @"title";
+//		self.subtitleKey = @"subtitle";
+//		self.searchKey = @"title";
+//		//TODO: title of the given Place
+//		self.title = @"Recent Photos";
 	}
     return self;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
-{
-	NSString *returningString = nil;
-	id <NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController.sections objectAtIndex:section];
-	
-	if ([sectionInfo.objects count] > 0)
-	{
-		//TODO: create an interface to return a string.
-		//after checking key-value coding to see if:
-		Photo *photo = [sectionInfo.objects lastObject];
-		//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
-		if ([photo.timeLapseSinceLastView intValue] == 0) //change
-			returningString = @"Right Now";
-		else
-			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceLastView intValue]] stringByAppendingString:@" Hour(s) Ago"];//change
-	}
-    return returningString;
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+//{
+//	NSString *returningString = nil;
+//	id <NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController.sections objectAtIndex:section];
+//	
+//	if ([sectionInfo.objects count] > 0)
+//	{
+//		//TODO: create an interface to return a string.
+//		//after checking key-value coding to see if:
+//		Photo *photo = [sectionInfo.objects lastObject];
+//		//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
+//		if ([photo.timeLapseSinceLastView intValue] == 0) //change
+//			returningString = @"Right Now";
+//		else
+//			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceLastView intValue]] stringByAppendingString:@" Hour(s) Ago"];//change
+//	}
+//    return returningString;
+//}
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {

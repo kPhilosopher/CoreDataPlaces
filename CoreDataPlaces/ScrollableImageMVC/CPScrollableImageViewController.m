@@ -215,7 +215,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 						//			int r = arc4random() % 50;
 						//			self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
 						self.queuedPhoto.timeOfLastView = [NSDate date];
-						[self.queuedPhoto setTheTimeLapse];
+//						[self.queuedPhoto setTheTimeLapse];
 						NSError *error = nil;
 						if (![self.managedObjectContext save:&error])
 						{

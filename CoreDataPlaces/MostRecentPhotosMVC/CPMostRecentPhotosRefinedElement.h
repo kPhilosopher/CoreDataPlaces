@@ -6,8 +6,19 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPCoreDataPhotosRefinedElement.h"
+//#import "CPRefinedElement.h"
+#import <Foundation/Foundation.h>
 
-@interface CPMostRecentPhotosRefinedElement : CPCoreDataPhotosRefinedElement
+
+@interface CPMostRecentPhotosRefinedElement : NSObject
+
+#pragma mark - Property
+
+@property (copy) NSString *comparable;
+@property (retain) id rawElement;
+
+#pragma mark - Instance method
+
+- (void)setComparableWithRawElement;
 
 @end

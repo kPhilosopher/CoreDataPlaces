@@ -19,6 +19,7 @@
 //- (NSMutableArray *)returnTheIndexedSectionsOfTheGiven:(NSArray *)rawData;
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 //- (void)convertThe:(NSDictionary *)rawElement IntoRefinedElementsAndAddTo:(NSMutableArray *)temporaryDataElements;
+//TODO: change the method name to: - (void)refineTheRawElement:(id)rawElement andAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
 - (void)refineTheRawElementDictionary:(NSDictionary *)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
 
 

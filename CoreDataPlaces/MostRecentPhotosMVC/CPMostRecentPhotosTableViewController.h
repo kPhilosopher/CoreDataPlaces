@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataTableViewController.h"
+//#import "CoreDataTableViewController.h"
 #import "CPIndexedTableViewController.h"
 
 

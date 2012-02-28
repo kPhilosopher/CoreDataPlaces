@@ -10,4 +10,9 @@
 
 @protocol CPPhotoInterface <NSObject>
 
+@property (nonatomic, retain) NSDate * timeOfLastView;
+@property (nonatomic, retain) NSDate * timeOfUpload;
+
+- (BOOL)isKindOfClass:(Class)aClass;
+
 @end

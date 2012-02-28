@@ -81,7 +81,7 @@
 //	
 //}
 
-- (void)testRemovingOnlyFavoritePhoto
+- (void)testChangingFavoriteStatusOfPhotoInAPlace
 {
 	Place *place = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
 	Photo *photo = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];

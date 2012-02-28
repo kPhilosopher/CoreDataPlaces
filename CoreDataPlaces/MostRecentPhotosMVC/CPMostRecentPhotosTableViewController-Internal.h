@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#ifndef CoreDataPlaces_CPMostRecentPhotosTableViewController_Internal_h
-#define CoreDataPlaces_CPMostRecentPhotosTableViewController_Internal_h
+#import "CPMostRecentPhotosTableViewController.h"
+
+@interface CPMostRecentPhotosTableViewController ()
 
 
-
-#endif
+@end

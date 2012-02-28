@@ -11,13 +11,13 @@
 
 @interface Photo (Logic)
 
-#pragma mark - Instance method
-
-- (void)setTheTimeLapse;
-
-#pragma mark - Convenience method
-
-- (NSNumber *)CP_timeLapseSinceDate:(NSDate *)date;
+//#pragma mark - Instance method
+//
+//- (void)setTheTimeLapse;
+//
+//#pragma mark - Convenience method
+//
+//- (NSNumber *)CP_timeLapseSinceDate:(NSDate *)date;
 
 @end
 
@@ -27,10 +27,10 @@
 
 #pragma mark - Primitive accessor method
 
-- (NSNumber *)primitiveTimeLapseSinceUpload;
-- (void)setPrimitiveTimeLapseSinceUpload:(NSNumber *)newTimeLapseSinceUpload;
-- (NSNumber *)primitiveTimeLapseSinceLastView;
-- (void)setPrimitiveTimeLapseSinceLastView:(NSNumber *)newTimeLapseSinceLastView;
+//- (NSNumber *)primitiveTimeLapseSinceUpload;
+//- (void)setPrimitiveTimeLapseSinceUpload:(NSNumber *)newTimeLapseSinceUpload;
+//- (NSNumber *)primitiveTimeLapseSinceLastView;
+//- (void)setPrimitiveTimeLapseSinceLastView:(NSNumber *)newTimeLapseSinceLastView;
 
 - (Place *)primitiveItsPlace;
 - (void)setPrimitiveItsPlace:(Place *)itsPlace;

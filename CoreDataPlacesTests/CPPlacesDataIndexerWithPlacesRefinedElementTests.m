@@ -38,6 +38,7 @@
 }
 
 //TODO: implement these tests
+//TODO: change the names of the tests to fit the changing method names.
 - (void)test_refineTheRawElementDictionaryThenAddToTemporaryMutableArray;
 {
 	

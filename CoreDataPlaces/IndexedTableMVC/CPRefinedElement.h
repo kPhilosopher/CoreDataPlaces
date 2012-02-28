@@ -21,12 +21,13 @@
 @property (retain) NSDictionary *dictionary;
 @property NSInteger sectionNumber;
 
-#pragma mark - Instance method
-
-- (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement;
-
 #pragma mark - Recommended to override
 
+
+//TODO: change method name to: - (void)setComparableWithRawElement:(id)rawElement;
+- (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement;
+//TODO: change method name to: - (void)setTitleAndSubtitle;
+- (void)extractTitleAndSubTitleFromDictionary;
 - (id)copyWithZone:(NSZone *)zone;
 
 @end

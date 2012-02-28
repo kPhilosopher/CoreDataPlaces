@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CPDataIndexer.h"
 
-@interface CPMostRecentPhotosDataIndexer : CPCoreDataPhotosRefinedElement
+@interface CPMostRecentPhotosDataIndexer : CPDataIndexer
 
 @end

@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "CPPhotoInterface.h"
+
 
 @class Place;
 
-@interface Photo : NSManagedObject
+@interface Photo : NSManagedObject <CPPhotoInterface>
 
 @property (nonatomic, retain) NSNumber * isFavorite;
 @property (nonatomic, retain) NSString * photoURL;
 @property (nonatomic, retain) NSString * subtitle;
-@property (nonatomic, retain) NSDate * timeOfLastView;
-@property (nonatomic, retain) NSDate * timeOfUpload;
 @property (nonatomic, retain) NSString * title;
+//@property (nonatomic, retain) NSDate * timeOfLastView;
+//@property (nonatomic, retain) NSDate * timeOfUpload;
 @property (nonatomic, retain) NSNumber * timeLapseSinceUpload;
 @property (nonatomic, retain) NSNumber * timeLapseSinceLastView;
 @property (nonatomic, retain) Place *itsPlace;
