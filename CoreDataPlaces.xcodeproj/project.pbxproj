@@ -227,8 +227,6 @@
 		CE2D8E6514FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosTableViewHandler.m; sourceTree = "<group>"; };
 		CE2D8E7C14FC1C8B004058FD /* PriorityQueueTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQueueTests.h; sourceTree = "<group>"; };
 		CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityQueueTests.m; sourceTree = "<group>"; };
-		CE2D8E7F14FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPMostRecentPhotosRefinedElementTests.h; path = CoreDataPlacesTests/CPMostRecentPhotosRefinedElementTests.h; sourceTree = SOURCE_ROOT; };
-		CE2D8E8014FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPMostRecentPhotosRefinedElementTests.m; path = CoreDataPlacesTests/CPMostRecentPhotosRefinedElementTests.m; sourceTree = SOURCE_ROOT; };
 		CE2D8E8314FC2640004058FD /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
 		CE2D8E8614FC268D004058FD /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		CE2D8E8714FC268D004058FD /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
@@ -619,8 +617,6 @@
 				CEE1029F14FD77B900F8A344 /* CPMostRecentPhotosRefinedElement */,
 				CE2D8E7C14FC1C8B004058FD /* PriorityQueueTests.h */,
 				CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */,
-				CE2D8E7F14FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.h */,
-				CE2D8E8014FC21EB004058FD /* CPMostRecentPhotosRefinedElementTests.m */,
 				CE8DDF6214DF481500D819AB /* CPManagedObjectInsertionHandlerTests.h */,
 				CE8DDF6314DF481500D819AB /* CPManagedObjectInsertionHandlerTests.m */,
 				CE7EF3A514D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.h */,

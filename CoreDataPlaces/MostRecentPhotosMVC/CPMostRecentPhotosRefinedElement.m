@@ -19,7 +19,7 @@
 
 #pragma mark - Property
 
-//@property (copy, readwrite) NSString *comparable;
+@property (copy, readwrite) NSString *comparable;
 
 @end
 

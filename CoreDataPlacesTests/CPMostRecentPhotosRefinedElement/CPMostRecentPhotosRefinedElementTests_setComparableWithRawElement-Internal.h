@@ -17,10 +17,14 @@
 @property (retain) CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement;
 @property (retain) id mockPhoto;
 @property (retain) NSDate *inputDate;
-@property (assign) NSInteger hours;
+@property (assign) NSInteger hour;
+@property (assign) NSInteger minute;
+@property (assign) NSInteger second;
 
 #pragma mark - Internal method
 
-- (NSDate *)CP_dateOfHoursAgoWithGivenInteger:(int)hours;
+- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
+- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute;
+- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute second:(int)second;
 
 @end

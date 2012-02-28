@@ -14,7 +14,7 @@
 
 #pragma mark - Property
 
-@property (copy) NSString *comparable;
+@property (copy, readonly) NSString *comparable;
 @property (retain) id rawElement;
 
 #pragma mark - Instance method
