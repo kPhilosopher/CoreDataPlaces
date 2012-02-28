@@ -47,20 +47,27 @@
 { 
 	if ([self.rawElement isKindOfClass:[Photo class]])
 	{
+		//set up
 		Photo *thePhoto = (Photo *)self.rawElement;
-		NSDate *startDate = thePhoto.timeOfLastView;
 		
+		//date manipulation
+		NSDate *startDate = thePhoto.timeOfLastView;
 		NSDate *endDate = [NSDate date];
-		NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-		NSUInteger unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
+		NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+		NSUInteger unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
 		NSDateComponents *components = [gregorian components:unitFlags
 													fromDate:startDate
 													  toDate:endDate 
 													 options:0];
-		double minute = (double)[components minute]/60.0;
-		double number = minute + (double)[components hour];
-		NSString *string = [NSString stringWithFormat:@"%.2f",number];
-		self.comparable = string;
+		//math with components
+		float seconds = (float)[components second];
+		float minutesInSeconds = (((float)[components minute]) * 60.0);
+		float allSecondsInDecimal = (seconds + minutesInSeconds) / 3600.0;
+		float number = allSecondsInDecimal + (float)[components hour];
+		self.comparable = [NSString stringWithFormat:@"%.5f",number];
+		
+		//clean up
+		[gregorian release];gregorian = nil;
 	}
 }
 
