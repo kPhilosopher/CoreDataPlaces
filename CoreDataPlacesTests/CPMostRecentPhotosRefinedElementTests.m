@@ -26,32 +26,39 @@
 
 - (void)testMethod_setComparableWithRawElement;
 {
-//	NSDictionary *inputDictionary;
-//	Photo *inputPhoto = nil;
 	id mockPhoto = nil;
-	CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	int hours = 0;
 	NSDate *inputDate = nil;
 	BOOL yesBoolValue = YES;
 	
-	//test 1
-	mostRecentPhotosRefinedElement.comparable = nil;
+	//---------
+	//test 1 (hours = 0)
+	//---------
+	
+	//setup
+	CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	hours = 0;
 	inputDate = [self dateOfHoursAgoWithGivenInteger:hours];
 	mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterface)];
-
 	[[[mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesBoolValue)] isKindOfClass:[Photo class]];
 	[[[mockPhoto stub] andReturn:inputDate] timeOfLastView];
 	mostRecentPhotosRefinedElement.rawElement = mockPhoto;
 	
 	//method under test.
 	[mostRecentPhotosRefinedElement setComparableWithRawElement];
-//	STAssertNil(mostRecentPhotosRefinedElement.comparable,@"");
 	
+	//evaluate the outcome
 	STAssertTrue(([[NSString stringWithFormat:@"%d",[mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",hours]]),@"setComparableWithRawElement isn't functioning correctly.");
 	
-	//test 2
-	mostRecentPhotosRefinedElement.comparable = nil;
+	//tear down
+	[mostRecentPhotosRefinedElement release];mostRecentPhotosRefinedElement = nil;
+	
+	//---------
+	//test 2 (hours = 2)
+	//---------
+	
+	//setup
+	mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	hours = 2;
 	inputDate = [self dateOfHoursAgoWithGivenInteger:hours];
 	mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterface)];
@@ -61,12 +68,19 @@
 	
 	//method under test.
 	[mostRecentPhotosRefinedElement setComparableWithRawElement];
-	//	STAssertNil(mostRecentPhotosRefinedElement.comparable,@"");
 	
+	//evaluate the outcome
 	STAssertTrue(([[NSString stringWithFormat:@"%d",[mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",hours]]),@"setComparableWithRawElement isn't functioning correctly.");
 	
-	//test 3
-	mostRecentPhotosRefinedElement.comparable = nil;
+	//tear down
+	[mostRecentPhotosRefinedElement release];mostRecentPhotosRefinedElement = nil;
+	
+	//---------
+	//test 3 (nil input date)
+	//---------
+	
+	//setup
+	mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	inputDate = nil;
 	mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterface)];
 	[[[mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesBoolValue)] isKindOfClass:[Photo class]];
@@ -75,21 +89,32 @@
 	
 	//method under test.
 	[mostRecentPhotosRefinedElement setComparableWithRawElement];
-	//	STAssertNil(mostRecentPhotosRefinedElement.comparable,@"");
 	
+	//evaluate the outcome
 	STAssertTrue(([mostRecentPhotosRefinedElement.comparable intValue] > 10000),@"setComparableWithRawElement isn't functioning correctly.");
 	
-	//test 4
-	mostRecentPhotosRefinedElement.comparable = nil;
+	//tear down
+	[mostRecentPhotosRefinedElement release];mostRecentPhotosRefinedElement = nil;
+	
+	//---------
+	//test 4 (nil rawElement)
+	//---------
+	
+	//setup
+	mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	hours = 43;
 	inputDate = [self dateOfHoursAgoWithGivenInteger:hours];
 	mockPhoto = nil;
 	mostRecentPhotosRefinedElement.rawElement = mockPhoto;
 	
-	//method under test.
+	//method under test
 	[mostRecentPhotosRefinedElement setComparableWithRawElement];
+	
+	//evaluate the outcome
 	STAssertNil(mostRecentPhotosRefinedElement.comparable,@"");
-	[mostRecentPhotosRefinedElement release];
+	
+	//tear down
+	[mostRecentPhotosRefinedElement release];mostRecentPhotosRefinedElement = nil;
 }
 
 @end
