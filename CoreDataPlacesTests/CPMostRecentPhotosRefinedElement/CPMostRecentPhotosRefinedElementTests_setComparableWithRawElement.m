@@ -143,19 +143,23 @@ const BOOL CPYESBoolReturnValueForMock = YES;
 
 - (void)testMethod_setComparableWithRawElement_05;
 {
+	self.second = 2;
+	
 	self.hour = 1;
 	self.minute = 0;
-	self.second = 2;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
 	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterface)];
 	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(CPYESBoolReturnValueForMock)] isKindOfClass:[Photo class]];
 	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
 	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+
 	
 	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	
+	self.second = 0;
+	
 	self.hour = 1;
 	self.minute = 0;
-	self.second = 0;//this is the difference.
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
 	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterface)];
 	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(CPYESBoolReturnValueForMock)] isKindOfClass:[Photo class]];
