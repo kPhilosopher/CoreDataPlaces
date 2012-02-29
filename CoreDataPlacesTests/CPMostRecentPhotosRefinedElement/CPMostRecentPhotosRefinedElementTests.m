@@ -146,6 +146,22 @@
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.subtitle isEqualToString:inputSubtitle]),@"the subtitle is not set correctly.");
 }
 
+- (void)testMethod_setTitleAndSubtitleWithRawElement_02;
+{
+	//setup
+	id mockPhoto = nil;
+	
+	//evaluate the status before the method.
+	STAssertNil(self.mostRecentPhotosRefinedElement.title,@"the title should be nil.");
+	STAssertNil(self.mostRecentPhotosRefinedElement.subtitle,@"the subtitle should be nil.");
+	
+	self.mostRecentPhotosRefinedElement.rawElement = mockPhoto;
+	
+	//evaluate the outcome.
+	STAssertNil(self.mostRecentPhotosRefinedElement.title,@"the title should be nil.");
+	STAssertNil(self.mostRecentPhotosRefinedElement.subtitle,@"the subtitle should be nil.");
+}
+
 #pragma mark - compare Test
 
 - (void)testMethod_compare_01;
