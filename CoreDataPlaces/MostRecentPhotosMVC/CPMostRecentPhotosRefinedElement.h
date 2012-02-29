@@ -16,9 +16,9 @@
 #pragma mark - Property
 
 @property (copy, readonly) NSString *comparable;
+@property (retain) id rawElement;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
-@property (retain) id rawElement;
 @property NSInteger sectionNumber;
 
 #pragma mark - Instance method

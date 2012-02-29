@@ -14,9 +14,9 @@
 {
 	@private
 	NSString *CP_comparable;
+	id CP_rawElement;
 	NSString *CP_title;
 	NSString *CP_subtitle;
-	id CP_rawElement;
 	NSInteger CP_sectionNumber;
 }
 
@@ -38,10 +38,10 @@
 
 - (void)dealloc;
 {
+	[CP_comparable release];
 	[CP_rawElement release];
 	[CP_title release];
 	[CP_subtitle release];
-	[CP_comparable release];
 	[super dealloc];
 }
 
