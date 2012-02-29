@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0A120914FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A120814FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m */; };
 		CE0B38C814CCCDBB006A85BB /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */; };
 		CE0B38CF14CCD4D2006A85BB /* CPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */; };
 		CE197A0E14E4AE1700BAE98D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
@@ -197,6 +198,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0A120214FDA0ED00C760F4 /* CPMostRecentPhotosRefinedElement-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosRefinedElement-Internal.h"; sourceTree = "<group>"; };
+		CE0A120614FDA5C600C760F4 /* CPPhotoInterfacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotoInterfacing.h; sourceTree = "<group>"; };
+		CE0A120714FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.h; sourceTree = "<group>"; };
+		CE0A120814FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m; sourceTree = "<group>"; };
 		CE0B38C614CCCDBB006A85BB /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
 		CE0B38C914CCCE14006A85BB /* CPTabBarController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTabBarController-Internal.h"; sourceTree = "<group>"; };
@@ -234,7 +239,6 @@
 		CE2D8E8914FC268D004058FD /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		CE2D8E8A14FC268D004058FD /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		CE2D8E8B14FC268D004058FD /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
-		CE2D8E8C14FC36B7004058FD /* CPPhotoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotoInterface.h; sourceTree = "<group>"; };
 		CE3E9F0814E976BA00101891 /* CPPlaceFavoriteLogicTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlaceFavoriteLogicTests.h; sourceTree = "<group>"; };
 		CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlaceFavoriteLogicTests.m; sourceTree = "<group>"; };
 		CE3E9F0C14E9BD2300101891 /* Photo+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Logic.h"; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 				CE2D8E5F14FC1937004058FD /* CPMostRecentPhotosDataIndexer.h */,
 				CE2D8E6014FC1937004058FD /* CPMostRecentPhotosDataIndexer.m */,
 				CE2D8E6114FC1937004058FD /* CPMostRecentPhotosRefinedElement.h */,
+				CE0A120214FDA0ED00C760F4 /* CPMostRecentPhotosRefinedElement-Internal.h */,
 				CE2D8E6214FC1937004058FD /* CPMostRecentPhotosRefinedElement.m */,
 			);
 			name = Model;
@@ -698,7 +703,7 @@
 			children = (
 				CE197A1014E4AE1700BAE98D /* Place.h */,
 				CE197A1114E4AE1700BAE98D /* Place.m */,
-				CE2D8E8C14FC36B7004058FD /* CPPhotoInterface.h */,
+				CE0A120614FDA5C600C760F4 /* CPPhotoInterfacing.h */,
 				CE197A0C14E4AE1600BAE98D /* Photo.h */,
 				CE197A0D14E4AE1700BAE98D /* Photo.m */,
 				CE3E9F0C14E9BD2300101891 /* Photo+Logic.h */,
@@ -791,6 +796,8 @@
 		CEE1029F14FD77B900F8A344 /* CPMostRecentPhotosRefinedElement */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A120714FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.h */,
+				CE0A120814FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m */,
 				CEE102A014FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h */,
 				CEE102A314FD786B00F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h */,
 				CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */,
@@ -1266,6 +1273,7 @@
 				CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */,
 				CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */,
 				CEE102A214FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m in Sources */,
+				CE0A120914FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

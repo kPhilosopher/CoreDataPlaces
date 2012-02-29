@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPMostRecentPhotosRefinedElement-Internal.h"
 #import "Photo.h"
 
 
@@ -14,12 +14,11 @@
 {
 	@private
 	NSString *CP_comparable;
+	NSString *CP_title;
+	NSString *CP_subtitle;
 	id CP_rawElement;
+	NSInteger CP_sectionNumber;
 }
-
-#pragma mark - Property
-
-@property (copy, readwrite) NSString *comparable;
 
 @end
 
@@ -31,12 +30,17 @@
 
 @synthesize comparable = CP_comparable;
 @synthesize rawElement = CP_rawElement;
+@synthesize title = CP_title;
+@synthesize subtitle = CP_subtitle;
+@synthesize sectionNumber = CP_sectionNumber;
 
 #pragma mark - Object lifecycle
 
 - (void)dealloc;
 {
 	[CP_rawElement release];
+	[CP_title release];
+	[CP_subtitle release];
 	[CP_comparable release];
 	[super dealloc];
 }
@@ -69,6 +73,29 @@
 		//clean up
 		[gregorian release];gregorian = nil;
 	}
+}
+
+- (void)setTitleAndSubtitleWithRawElement;
+{
+	
+}
+
+- (NSString *)title;
+{
+	if (CP_title == nil)
+	{
+		[self setTitleAndSubtitleWithRawElement];
+	}
+	return [[CP_title copy] autorelease];
+}
+
+- (NSString *)subtitle;
+{
+	if (CP_subtitle == nil) 
+	{
+		[self setTitleAndSubtitleWithRawElement];
+	}
+	return [[CP_subtitle copy] autorelease];
 }
 
 @end
