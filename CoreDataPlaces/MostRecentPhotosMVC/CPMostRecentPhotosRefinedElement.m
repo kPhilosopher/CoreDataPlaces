@@ -77,7 +77,12 @@
 
 - (void)setTitleAndSubtitleWithRawElement;
 {
-	
+	if ([self.rawElement isKindOfClass:[Photo class]])
+	{
+		Photo *thePhoto = self.rawElement;
+		CP_title = thePhoto.title;
+		CP_subtitle = thePhoto.subtitle;
+	}
 }
 
 - (NSString *)title;

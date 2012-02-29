@@ -74,13 +74,10 @@ const BOOL CPBoolValue = YES;
 
 - (void)testMethod_setComparableWithRawElement_01;
 {
+	//setup
 	self.hour = 0;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+	[self CP_mockPhotoSetup];
 	
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -91,13 +88,10 @@ const BOOL CPBoolValue = YES;
 
 - (void)testMethod_setComparableWithRawElement_02;
 {
+	//setup
 	self.hour = 2;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+	[self CP_mockPhotoSetup];
 	
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -110,11 +104,7 @@ const BOOL CPBoolValue = YES;
 {
 	//setup
 	self.inputDate = nil;
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+	[self CP_mockPhotoSetup];
 	
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -124,12 +114,7 @@ const BOOL CPBoolValue = YES;
 }
 
 - (void)testMethod_setComparableWithRawElement_04;
-{
-	self.hour = 2;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
-	self.mockPhoto = nil;
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
-	
+{	
 	//setup
 	self.hour = 43;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
@@ -145,29 +130,23 @@ const BOOL CPBoolValue = YES;
 
 - (void)testMethod_setComparableWithRawElement_05;
 {
+	//setup
 	self.second = 2;
 	
 	self.hour = 1;
 	self.minute = 0;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+	[self CP_mockPhotoSetup];
 
 	
 	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-	
+
 	self.second = 0;
 	
 	self.hour = 1;
 	self.minute = 0;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	anotherMostRecentPhotoRefinedElement.rawElement = self.mockPhoto;
+	[self CP_mockPhotoSetup];
 	
 	//extract the data I need.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -175,7 +154,8 @@ const BOOL CPBoolValue = YES;
 	
 	[anotherMostRecentPhotoRefinedElement setComparableWithRawElement];
 	NSString *secondComparable = anotherMostRecentPhotoRefinedElement.comparable;
-
+	
+	//evaluate the outcome.
 	STAssertTrue(([firstComparable floatValue] > [secondComparable floatValue]),@"Ensure that the time difference in seconds are accounted for.");
 }
 
@@ -203,5 +183,13 @@ const BOOL CPBoolValue = YES;
 	return dateToReturn;
 }
 
+- (void)CP_mockPhotoSetup;
+{
+	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
+	BOOL yesValue = YES;
+	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
+	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
+	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
+}
 
 @end
