@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE0A120914FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A120814FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m */; };
+		CE0A120F14FDEB3C00C760F4 /* CPMostRecentPhotosRefinedElementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A120E14FDEB3C00C760F4 /* CPMostRecentPhotosRefinedElementTests.m */; };
 		CE0B38C814CCCDBB006A85BB /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */; };
 		CE0B38CF14CCD4D2006A85BB /* CPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B38CE14CCD4D2006A85BB /* CPSplitViewController.m */; };
 		CE197A0E14E4AE1700BAE98D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A0D14E4AE1700BAE98D /* Photo.m */; };
@@ -152,7 +152,6 @@
 		CEDA8AB214D1D329005A2EB0 /* CPFlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */; };
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
 		CEDA8ACC14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
-		CEE102A214FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */; };
 		CEEF706514D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706614D27B5C006756EA /* CPPlacesDataIndexer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */; };
 		CEEF706714D27B5C006756EA /* CPPlacesRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF706214D27B5C006756EA /* CPPlacesRefinedElement.m */; };
@@ -202,6 +201,11 @@
 		CE0A120614FDA5C600C760F4 /* CPPhotoInterfacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotoInterfacing.h; sourceTree = "<group>"; };
 		CE0A120714FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.h; sourceTree = "<group>"; };
 		CE0A120814FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m; sourceTree = "<group>"; };
+		CE0A120A14FDE84C00C760F4 /* CPMostRecentPhotosRefinedElementTests_compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests_compare.h; sourceTree = "<group>"; };
+		CE0A120B14FDE84C00C760F4 /* CPMostRecentPhotosRefinedElementTests_compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests_compare.m; sourceTree = "<group>"; };
+		CE0A120D14FDEB3B00C760F4 /* CPMostRecentPhotosRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinedElementTests.h; sourceTree = "<group>"; };
+		CE0A120E14FDEB3C00C760F4 /* CPMostRecentPhotosRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinedElementTests.m; sourceTree = "<group>"; };
+		CE0A121014FDEB5A00C760F4 /* CPMostRecentPhotosRefinedElementTests-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosRefinedElementTests-Internal.h"; sourceTree = "<group>"; };
 		CE0B38C614CCCDBB006A85BB /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
 		CE0B38C914CCCE14006A85BB /* CPTabBarController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTabBarController-Internal.h"; sourceTree = "<group>"; };
@@ -801,6 +805,11 @@
 				CEE102A014FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.h */,
 				CEE102A314FD786B00F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement-Internal.h */,
 				CEE102A114FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m */,
+				CE0A120A14FDE84C00C760F4 /* CPMostRecentPhotosRefinedElementTests_compare.h */,
+				CE0A120B14FDE84C00C760F4 /* CPMostRecentPhotosRefinedElementTests_compare.m */,
+				CE0A120D14FDEB3B00C760F4 /* CPMostRecentPhotosRefinedElementTests.h */,
+				CE0A121014FDEB5A00C760F4 /* CPMostRecentPhotosRefinedElementTests-Internal.h */,
+				CE0A120E14FDEB3C00C760F4 /* CPMostRecentPhotosRefinedElementTests.m */,
 			);
 			path = CPMostRecentPhotosRefinedElement;
 			sourceTree = "<group>";
@@ -1272,8 +1281,7 @@
 				CE2D8E6D14FC1938004058FD /* CPMostRecentPhotosTableViewHandler.m in Sources */,
 				CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */,
 				CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */,
-				CEE102A214FD77C500F8A344 /* CPMostRecentPhotosRefinedElementTests_setComparableWithRawElement.m in Sources */,
-				CE0A120914FDE07400C760F4 /* CPMostRecentPhotosRefinedElementTests_setTitleAndSubtitleWithRawElement.m in Sources */,
+				CE0A120F14FDEB3C00C760F4 /* CPMostRecentPhotosRefinedElementTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

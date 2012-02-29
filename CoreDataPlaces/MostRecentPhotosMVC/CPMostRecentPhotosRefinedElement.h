@@ -11,7 +11,7 @@
 #import "CPRefinedElementInterfacing.h"
 
 
-@interface CPMostRecentPhotosRefinedElement : NSObject <CPRefinedElementInterfacing>
+@interface CPMostRecentPhotosRefinedElement : NSObject <NSCopying, CPRefinedElementInterfacing>
 
 #pragma mark - Property
 
@@ -25,5 +25,7 @@
 
 - (void)setComparableWithRawElement;
 - (void)setTitleAndSubtitleWithRawElement;
+- (id)copyWithZone:(NSZone *)zone;
+- (NSComparisonResult)compare:(CPMostRecentPhotosRefinedElement *)aRefinedElementPicture;
 
 @end

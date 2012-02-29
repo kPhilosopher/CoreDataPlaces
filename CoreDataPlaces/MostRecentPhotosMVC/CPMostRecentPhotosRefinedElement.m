@@ -103,4 +103,11 @@
 	return [[CP_subtitle copy] autorelease];
 }
 
+- (id)copyWithZone:(NSZone *)zone;
+{
+	return [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
+}
+
+
+
 @end
