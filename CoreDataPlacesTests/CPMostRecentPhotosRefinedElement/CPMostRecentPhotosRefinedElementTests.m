@@ -3,12 +3,13 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/28/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPMostRecentPhotosRefinedElementTests-Internal.h"
 #import <OCMock/OCMock.h>
 #import "Photo.h"
+
 
 @implementation CPMostRecentPhotosRefinedElementTests
 
@@ -46,11 +47,6 @@
 - (void)tearDown;
 {
 	self.mostRecentPhotosRefinedElement = nil;
-	self.inputDate = nil;
-	self.mockPhoto = nil;
-	self.hour = 0;
-	self.minute = 0;
-	self.second = 0;
 }
 
 #pragma mark - setComparableWithRawElement Test
@@ -59,9 +55,8 @@
 {
 	//setup
 	self.hour = 0;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
-	[self CP_mockPhotoSetup];
-	
+	[self CP_setupForInputDateAndMockPhoto];
+		
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
 	
@@ -73,8 +68,7 @@
 {
 	//setup
 	self.hour = 2;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour];
-	[self CP_mockPhotoSetup];
+	[self CP_setupForInputDateAndMockPhoto];
 	
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -86,8 +80,24 @@
 - (void)testMethod_setComparableWithRawElement_03;
 {
 	//setup
+	self.hour = 7;
+	self.minute = 3;
+	self.second = 33;
+	[self CP_setupForInputDateAndMockPhoto];
+	
+	//method under test.
+	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
+	
+	//evaluate the outcome
+	STAssertTrue(([[NSString stringWithFormat:@"%d",[self.mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",self.hour]]),@"setComparableWithRawElement isn't functioning correctly.");
+}
+
+- (void)testMethod_setComparableWithRawElement_04;
+{
+	//setup
 	self.inputDate = nil;
 	[self CP_mockPhotoSetup];
+	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
 	
 	//method under test.
 	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
@@ -96,7 +106,7 @@
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] > 10000),@"setComparableWithRawElement isn't functioning correctly.");
 }
 
-- (void)testMethod_setComparableWithRawElement_04;
+- (void)testMethod_setComparableWithRawElement_05;
 {	
 	//setup
 	self.hour = 43;
@@ -111,50 +121,11 @@
 	STAssertNil(self.mostRecentPhotosRefinedElement.comparable,@"");
 }
 
-- (void)testMethod_setComparableWithRawElement_05;
-{
-	//setup
-	self.second = 2;
-	
-	self.hour = 1;
-	self.minute = 0;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-	[self CP_mockPhotoSetup];
-	
-	
-	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-	
-	self.second = 0;
-	
-	self.hour = 1;
-	self.minute = 0;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-//	[self CP_mockPhotoSetup];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	anotherMostRecentPhotoRefinedElement.rawElement = self.mockPhoto;
-	
-	//extract the data I need.
-	[self.mostRecentPhotosRefinedElement setComparableWithRawElement];
-	NSString *firstComparable = self.mostRecentPhotosRefinedElement.comparable;
-	
-	[anotherMostRecentPhotoRefinedElement setComparableWithRawElement];
-	NSString *secondComparable = anotherMostRecentPhotoRefinedElement.comparable;
-	
-	//evaluate the outcome.
-	STAssertTrue(([anotherMostRecentPhotoRefinedElement.comparable intValue] == 1),@"setComparableWithRawElement isn't functioning correctly.");
-	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] == 1),@"setComparableWithRawElement isn't functioning correctly.");
-	STAssertTrue(([firstComparable floatValue] > [secondComparable floatValue]),@"Ensure that the time difference in seconds are accounted for.");
-}
-
 #pragma mark - setTitleAndSubtitleWithRawElement Test
 
 - (void)testMethod_setTitleAndSubtitleWithRawElement_01;
 {
 	//setup
-	CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	NSString *inputTitle = @"titleString";
 	NSString *inputSubtitle = @"subtitleString";
 	id mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
@@ -162,11 +133,17 @@
 	[[[mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
 	[[[mockPhoto stub] andReturn:inputTitle] title];
 	[[[mockPhoto stub] andReturn:inputSubtitle] subtitle];
-	mostRecentPhotosRefinedElement.rawElement = mockPhoto;
+	
+	
+	//evaluate the status before the method.
+	STAssertNil(self.mostRecentPhotosRefinedElement.title,@"the title should be nil.");
+	STAssertNil(self.mostRecentPhotosRefinedElement.subtitle,@"the subtitle should be nil.");
+	
+	self.mostRecentPhotosRefinedElement.rawElement = mockPhoto;
 	
 	//evaluate the outcome.
-	STAssertTrue(([mostRecentPhotosRefinedElement.title isEqualToString:inputTitle]),@"the title is not set correctly.");
-	STAssertTrue(([mostRecentPhotosRefinedElement.subtitle isEqualToString:inputSubtitle]),@"the subtitle is not set correctly.");
+	STAssertTrue(([self.mostRecentPhotosRefinedElement.title isEqualToString:inputTitle]),@"the title is not set correctly.");
+	STAssertTrue(([self.mostRecentPhotosRefinedElement.subtitle isEqualToString:inputSubtitle]),@"the subtitle is not set correctly.");
 }
 
 #pragma mark - compare Test
@@ -180,8 +157,7 @@
 	
 	self.hour = 1;
 	self.minute = 0;
-	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-	[self CP_mockPhotoSetup];
+	[self CP_setupForInputDateAndMockPhoto];
 	
 	//second comparable setup
 	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
@@ -191,11 +167,7 @@
 	self.hour = 1;
 	self.minute = 0;
 	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
-	//	[self CP_mockPhotoSetup];
-	self.mockPhoto = [OCMockObject mockForProtocol:@protocol(CPPhotoInterfacing)];
-	BOOL yesValue = YES;
-	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
-	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
+	[self CP_mockPhotoSetup];
 	anotherMostRecentPhotoRefinedElement.rawElement = self.mockPhoto;
 	
 	//extract the data I need.
@@ -206,22 +178,24 @@
 	NSString *secondComparable = anotherMostRecentPhotoRefinedElement.comparable;
 	
 	//evaluate the outcome.
-	STAssertTrue(([anotherMostRecentPhotoRefinedElement.comparable intValue] == 1),@"setComparableWithRawElement isn't functioning correctly.");
-	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] == 1),@"setComparableWithRawElement isn't functioning correctly.");
+	STAssertTrue(([anotherMostRecentPhotoRefinedElement.comparable intValue] == self.hour),@"setComparableWithRawElement isn't functioning correctly.");
+	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] == self.hour),@"setComparableWithRawElement isn't functioning correctly.");
 	STAssertTrue(([firstComparable floatValue] > [secondComparable floatValue]),@"Ensure that the time difference in seconds are accounted for.");
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable compare:anotherMostRecentPhotoRefinedElement.comparable] > 0), @"");
 }
 
 #pragma mark - Internal method
 
-- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
+- (void)CP_setupForInputDateAndMockPhoto;
 {
-	return [self CP_dateOfTimeIntervalWithGivenHour:hour minute:0];
+	self.inputDate = [self CP_dateOfTimeIntervalWithGivenHour:self.hour minute:self.minute second:self.second];
+	[self CP_mockPhotoSetup];
+	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
 }
 
-- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute;
+- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
 {
-	return [self CP_dateOfTimeIntervalWithGivenHour:hour minute:minute second:0];
+	return [self CP_dateOfTimeIntervalWithGivenHour:hour minute:0 second:0];
 }
 
 - (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute second:(int)second;
@@ -232,8 +206,7 @@
 	[comps setSecond:-second];
 	NSCalendar *gregorian = [[[NSCalendar alloc]
 							  initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-	NSDate *dateToReturn = [gregorian dateByAddingComponents:comps toDate:[NSDate date] options:0];
-	return dateToReturn;
+	return [gregorian dateByAddingComponents:comps toDate:[NSDate date] options:0];
 }
 
 - (void)CP_mockPhotoSetup;
@@ -242,7 +215,6 @@
 	BOOL yesValue = YES;
 	[[[self.mockPhoto stub] andReturnValue:OCMOCK_VALUE(yesValue)] isKindOfClass:[Photo class]];
 	[[[self.mockPhoto stub] andReturn:self.inputDate] timeOfLastView];
-	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
 }
 
 @end

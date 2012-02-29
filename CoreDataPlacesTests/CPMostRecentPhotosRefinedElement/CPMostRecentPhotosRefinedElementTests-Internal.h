@@ -3,11 +3,12 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 2/28/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 #import "CPMostRecentPhotosRefinedElementTests.h"
 #import "CPMostRecentPhotosRefinedElement.h"
+
 
 @interface CPMostRecentPhotosRefinedElementTests ()
 
@@ -22,9 +23,9 @@
 
 #pragma mark - Internal method
 
-- (void)CP_mockPhotoSetup;
+- (void)CP_setupForInputDateAndMockPhoto;
 - (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
-- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute;
 - (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute second:(int)second;
+- (void)CP_mockPhotoSetup;
 
 @end

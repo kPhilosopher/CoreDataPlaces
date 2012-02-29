@@ -108,6 +108,4 @@
 	return [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
 }
 
-
-
 @end
