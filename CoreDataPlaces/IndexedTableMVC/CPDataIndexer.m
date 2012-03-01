@@ -37,7 +37,7 @@
 	return self;
 }
 
-#pragma mark - View lifecycle
+#pragma mark - Object lifecycle
 
 - (void)dealloc
 {

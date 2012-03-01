@@ -14,8 +14,9 @@
 
 @protocol CPDataIndexHandling <NSObject>
 
-#pragma mark - Methods
+#pragma mark - Required methods
 
+@required
 //- (NSMutableArray *)returnTheIndexedSectionsOfTheGiven:(NSArray *)rawData;
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 //- (void)convertThe:(NSDictionary *)rawElement IntoRefinedElementsAndAddTo:(NSMutableArray *)temporaryDataElements;
