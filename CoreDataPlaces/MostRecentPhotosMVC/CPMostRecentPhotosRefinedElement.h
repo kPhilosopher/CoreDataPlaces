@@ -26,5 +26,6 @@
 - (void)setComparableWithRawElement;
 - (void)setTitleAndSubtitleWithRawElement;
 - (id)copyWithZone:(NSZone *)zone;
+- (NSComparisonResult)compare:(CPMostRecentPhotosRefinedElement *)refinedElement;
 
 @end

@@ -197,7 +197,7 @@
 	STAssertTrue(([anotherMostRecentPhotoRefinedElement.comparable intValue] == self.hour),@"setComparableWithRawElement isn't functioning correctly.");
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] == self.hour),@"setComparableWithRawElement isn't functioning correctly.");
 	STAssertTrue(([firstComparable floatValue] > [secondComparable floatValue]),@"Ensure that the time difference in seconds are accounted for.");
-	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable compare:anotherMostRecentPhotoRefinedElement.comparable] > 0), @"");
+	STAssertTrue(([self.mostRecentPhotosRefinedElement compare:anotherMostRecentPhotoRefinedElement] > 0), @"");
 }
 
 #pragma mark - Internal method

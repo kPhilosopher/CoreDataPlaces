@@ -108,4 +108,13 @@
 	return [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
 }
 
+- (NSComparisonResult)compare:(CPMostRecentPhotosRefinedElement *)refinedElement;
+{
+	int result = 0;
+	NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+	if ([formatter numberFromString:self.comparable] && [formatter numberFromString:refinedElement.comparable])
+		result = [[NSNumber numberWithDouble:[self.comparable doubleValue]] compare:[NSNumber numberWithDouble:[refinedElement.comparable doubleValue]]];
+	return result;
+}
+
 @end
