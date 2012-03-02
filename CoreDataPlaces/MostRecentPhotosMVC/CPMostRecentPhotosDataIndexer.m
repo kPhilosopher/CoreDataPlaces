@@ -90,11 +90,11 @@
 
 - (void)refineTheRawElement:(id)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
 {
-//	CPRefinedElement *refinedElement = [self.refinedElement copy];
-//	refinedElement.comparable = [refinedElement extractComparableFromDictionary:rawElement];
-//	refinedElement.dictionary = rawElement;
-//	[temporaryDataElements addObject:refinedElement];
-//	[refinedElement release];
+	CPMostRecentPhotosRefinedElement *refinedElement = [self.refinedElement copy];
+	refinedElement.rawElement = rawElement;
+	[refinedElement setComparableWithRawElement];
+	[temporaryDataElements addObject:refinedElement];
+	[refinedElement release];
 }
 
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;

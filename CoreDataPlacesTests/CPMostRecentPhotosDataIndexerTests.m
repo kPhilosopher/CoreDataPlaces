@@ -9,6 +9,8 @@
 // !!!: Testing using CPMostRecentPhotosRefinedElement
 
 #import "CPMostRecentPhotosDataIndexerTests-Internal.h"
+#import "CPPhotosRefinedElement.h"
+#import "Photo.h"
 
 
 @interface CPMostRecentPhotosDataIndexerTests()
@@ -55,6 +57,29 @@
 	self.listOfRawTestData = nil;
 	self.listOfTestInput = nil;
 }
+
+#pragma mark - refineTheRawElementThenAddToTemporaryMutableArray Test
+
+- (void)testMethod_refineTheRawElementThenAddToTemporaryMutableArray_01;
+{
+	NSMutableArray *testOutcome = [NSMutableArray array];
+	CPMostRecentPhotosRefinedElement *refinedElementForDataIndexer = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
+	[dataIndexer refineTheRawElement:nil thenAddToTemporaryMutableArray:testOutcome];
+	STAssertTrue(([[testOutcome lastObject] isKindOfClass:[refinedElementForDataIndexer class]]),@"The refined element should be of the correct class");
+	[refinedElementForDataIndexer release]; refinedElementForDataIndexer = nil;
+}
+
+//TODO: make sure this works when the CPMostRecentPhotosRefinedElement becomes a subclass of CPRefinedElement
+//- (void)testMethod_refineTheRawElementThenAddToTemporaryMutableArray_02;
+//{
+//	NSMutableArray *testOutcome = [NSMutableArray array];
+//	CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
+//	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
+//	[dataIndexer refineTheRawElement:nil thenAddToTemporaryMutableArray:testOutcome];
+//	STAssertTrue(([[testOutcome lastObject] isKindOfClass:[refinedElementForDataIndexer class]]),@"The refined element should be of the correct class");
+//	[refinedElementForDataIndexer release]; refinedElementForDataIndexer = nil;
+//}
 
 #pragma mark - sectionCountAndSetSectionNumberForElementsInArray Test
 
