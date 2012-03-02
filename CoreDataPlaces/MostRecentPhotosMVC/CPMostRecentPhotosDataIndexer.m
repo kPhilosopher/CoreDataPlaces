@@ -99,38 +99,40 @@
 
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
-	NSMutableSet *setOfHours = [NSMutableSet set];
 	NSInteger highSection = 0;
+
+	//eliminate duplicates using NSSet.
+	NSMutableSet *setOfHours = [NSMutableSet set];
 	for (CPMostRecentPhotosRefinedElement *refinedElement in temporaryDataElements) 
 	{
 		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
 	}
+	
+	//find the ordering of the numbers using priority queue.
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedAscending];
 	for (NSNumber *number in setOfHours) 
 	{
 		[priorityQueue addObject:number];
 	}
 	highSection = [priorityQueue count];
-	NSMutableArray *copiedArray = [NSMutableArray arrayWithArray:temporaryDataElements];
-	for (int indexForSections = 0; indexForSections < highSection; indexForSections++) 
+	
+	//map the ordering to a sequential number for array.
+	NSMutableDictionary *sectionNumberMapping = [NSMutableDictionary dictionaryWithCapacity:highSection];
+	for (int sectionNumber = 0; sectionNumber < highSection; sectionNumber++)
 	{
-		NSNumber *temporaryHourNumber = [priorityQueue removeFirstObject];
-		
-		for (int indexForEachElement = 0; indexForEachElement < [copiedArray count]; indexForEachElement++) 
-		{
-			CPMostRecentPhotosRefinedElement *refinedElement = [copiedArray objectAtIndex:indexForEachElement];
-			if ([temporaryHourNumber intValue] == [refinedElement.comparable intValue])
-			{
-				refinedElement.sectionNumber = indexForSections;
-				[copiedArray removeObjectAtIndex:indexForEachElement];
-				indexForEachElement = indexForEachElement - 1;
-			}
-			
-		}
+		NSNumber *comparableValue = [priorityQueue removeFirstObject];
+		NSString *comparableIntAsKey = [NSString stringWithFormat:@"%d",[comparableValue intValue]];
+		[sectionNumberMapping setObject:[NSString stringWithFormat:@"%d",sectionNumber] forKey:comparableIntAsKey];
+	}
+	
+	//set the sections numbers for each element.
+	for (CPMostRecentPhotosRefinedElement *refinedElement in temporaryDataElements)
+	{
+		NSString *key = [NSString stringWithFormat:@"%d",[refinedElement.comparable intValue]];
+		refinedElement.sectionNumber = [[sectionNumberMapping objectForKey:key] intValue];
 	}
 	[priorityQueue release];
 	return highSection;
-//	return 0;
 }
 
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
