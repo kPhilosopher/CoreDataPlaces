@@ -18,5 +18,11 @@
 #pragma mark - Property
 
 @property (retain) CPMostRecentPhotosDataIndexer *dataIndexer;
+@property (retain) NSMutableArray *listOfRawTestData;
+@property (retain) NSMutableArray *listOfTestInput;
+
+#pragma mark - Helper method
+
+- (void)CP_setupListOfTestInputWithIndex:(NSInteger)index;
 
 @end
