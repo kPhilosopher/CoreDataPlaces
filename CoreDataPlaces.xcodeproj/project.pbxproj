@@ -334,6 +334,7 @@
 		CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataHandler.m; sourceTree = "<group>"; };
 		CEDDA4D714FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosDataIndexerTests.h; sourceTree = "<group>"; };
 		CEDDA4D814FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosDataIndexerTests.m; sourceTree = "<group>"; };
+		CEDDA4E615006AAC00AB1D06 /* CPMostRecentPhotosDataIndexerTests-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosDataIndexerTests-Internal.h"; sourceTree = "<group>"; };
 		CEEF705F14D27B5C006756EA /* CPPlacesDataIndexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexer.h; sourceTree = "<group>"; };
 		CEEF706014D27B5C006756EA /* CPPlacesDataIndexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexer.m; sourceTree = "<group>"; };
 		CEEF706114D27B5C006756EA /* CPPlacesRefinedElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesRefinedElement.h; sourceTree = "<group>"; };
@@ -621,6 +622,7 @@
 			children = (
 				CEE1029F14FD77B900F8A344 /* CPMostRecentPhotosRefinedElement */,
 				CEDDA4D714FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.h */,
+				CEDDA4E615006AAC00AB1D06 /* CPMostRecentPhotosDataIndexerTests-Internal.h */,
 				CEDDA4D814FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.m */,
 				CE2D8E7C14FC1C8B004058FD /* PriorityQueueTests.h */,
 				CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */,
