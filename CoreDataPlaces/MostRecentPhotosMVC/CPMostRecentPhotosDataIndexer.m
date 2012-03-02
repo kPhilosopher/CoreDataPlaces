@@ -97,40 +97,40 @@
 //	[refinedElement release];
 }
 
-- (NSInteger)sectionCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
+- (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
-//	NSMutableSet *setOfHours = [NSMutableSet set];
-//	NSInteger highSection = 0;
-//	for (CPPhotosRefinedElement *refinedElement in temporaryDataElements) 
-//	{
-//		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
-//	}
-//	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedAscending];
-//	for (NSNumber *number in setOfHours) 
-//	{
-//		[priorityQueue addObject:number];
-//	}
-//	highSection = [priorityQueue count];
-//	NSMutableArray *copiedArray = [NSMutableArray arrayWithArray:temporaryDataElements];
-//	for (int indexForSections = 0; indexForSections < highSection; indexForSections++) 
-//	{
-//		NSNumber *temporaryHourNumber = [priorityQueue removeFirstObject];
-//		
-//		for (int indexForEachElement = 0; indexForEachElement < [copiedArray count]; indexForEachElement++) 
-//		{
-//			CPPhotosRefinedElement *refinedElement = [copiedArray objectAtIndex:indexForEachElement];
-//			if ([temporaryHourNumber intValue] == [refinedElement.comparable intValue])
-//			{
-//				refinedElement.sectionNumber = indexForSections;
-//				[copiedArray removeObjectAtIndex:indexForEachElement];
-//				indexForEachElement = indexForEachElement - 1;
-//			}
-//			
-//		}
-//	}
-//	[priorityQueue release];
-//	return highSection;
-	return 0;
+	NSMutableSet *setOfHours = [NSMutableSet set];
+	NSInteger highSection = 0;
+	for (CPMostRecentPhotosRefinedElement *refinedElement in temporaryDataElements) 
+	{
+		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
+	}
+	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedAscending];
+	for (NSNumber *number in setOfHours) 
+	{
+		[priorityQueue addObject:number];
+	}
+	highSection = [priorityQueue count];
+	NSMutableArray *copiedArray = [NSMutableArray arrayWithArray:temporaryDataElements];
+	for (int indexForSections = 0; indexForSections < highSection; indexForSections++) 
+	{
+		NSNumber *temporaryHourNumber = [priorityQueue removeFirstObject];
+		
+		for (int indexForEachElement = 0; indexForEachElement < [copiedArray count]; indexForEachElement++) 
+		{
+			CPMostRecentPhotosRefinedElement *refinedElement = [copiedArray objectAtIndex:indexForEachElement];
+			if ([temporaryHourNumber intValue] == [refinedElement.comparable intValue])
+			{
+				refinedElement.sectionNumber = indexForSections;
+				[copiedArray removeObjectAtIndex:indexForEachElement];
+				indexForEachElement = indexForEachElement - 1;
+			}
+			
+		}
+	}
+	[priorityQueue release];
+	return highSection;
+//	return 0;
 }
 
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
