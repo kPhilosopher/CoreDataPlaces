@@ -30,7 +30,6 @@
 		cell.detailTextLabel.text = elementWithInterface.subtitle;
 	}
 	return cell;
-	return cell;
 }
 
 - (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
