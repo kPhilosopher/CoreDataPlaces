@@ -8,32 +8,50 @@
 
 // !!!: Testing using CPMostRecentPhotosRefinedElement
 
-#import "CPMostRecentPhotosDataIndexerTests.h"
-#import "CPMostRecentPhotosRefinedElement-Internal.h"
-#import "CPMostRecentPhotosDataIndexer.h"
+#import "CPMostRecentPhotosDataIndexerTests-Internal.h"
 
+
+@interface CPMostRecentPhotosDataIndexerTests()
+{
+	CPMostRecentPhotosDataIndexer *CP_dataIndexer;
+}
+@end
+
+#pragma mark -
 
 @implementation CPMostRecentPhotosDataIndexerTests
+
+#pragma mark - Synthesize
+
+@synthesize dataIndexer = CP_dataIndexer;
+
+#pragma mark - Object lifecycle
+
+- (void)dealloc;
+{
+	[CP_dataIndexer release];
+	[super dealloc];
+}
 
 #pragma mark - Setup / Tear down
 
 - (void)setUp;
 {
-	
+	CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	self.dataIndexer = [[[CPMostRecentPhotosDataIndexer alloc] initWithRefinedElement:refinedElement] autorelease];
+	[refinedElement release];
 }
 
 - (void)tearDown;
 {
-	
+	self.dataIndexer = nil;
 }
 
 #pragma mark - sortTheElementsInSectionArrayAndAddToArrayOfSections Test
 
 - (void)testMethod_sortTheElementsInSectionArrayAndAddToArrayOfSections_01;
 {
-	CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] initWithRefinedElement:refinedElement];
-	
+	//setup
 	int numberOfElements = 8;
 	
 	NSMutableArray *elementsToSort = [NSMutableArray arrayWithCapacity:numberOfElements];
@@ -64,7 +82,7 @@
 	{
 		randomNumber = arc4random()%count;
 		CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-		refinedElement.comparable = [listOfComparableStrings objectAtIndex:randomNumber];
+		refinedElement.comparable = [listOfComparableStrings objectAtIndex:randomNumber];//use of internal setter.
 		[listOfComparableStrings removeObjectAtIndex:randomNumber];
 		[elementsToSort addObject:refinedElement];
 		[refinedElement release];
@@ -72,20 +90,19 @@
 	}
 	NSMutableArray *sectionsOfArray = [NSMutableArray array];
 	
-	//method under test.
-	[dataIndexer sortTheElementsInSectionArray:elementsToSort andAddToArrayOfSections:sectionsOfArray];
+	//method under tests
+	[self.dataIndexer sortTheElementsInSectionArray:elementsToSort andAddToArrayOfSections:sectionsOfArray];
 	
-	//evaluate the outcome.
+	//evaluate the outcomes
 	STAssertTrue(([[sectionsOfArray lastObject] isKindOfClass:[NSMutableArray class]]),@"there should be a mutable array in the arrayOfSections");
 	
 	int indexCount = 0;
 	for (CPMostRecentPhotosRefinedElement *element in [sectionsOfArray lastObject])
 	{
-		STAssertTrue(([[listOfComparableStringsForEvaluation objectAtIndex:indexCount] floatValue] == [element.comparable floatValue]),@"");
+		STAssertTrue(([[sectionsOfArray lastObject] count] == numberOfElements),@"The array does not have the correct number of elements.");
+		STAssertTrue(([[listOfComparableStringsForEvaluation objectAtIndex:indexCount] floatValue] == [element.comparable floatValue]),@"The sorting algorithm isn't working.");
 		indexCount = indexCount + 1;
 	}
-	[refinedElement release];refinedElement = nil;
-	[dataIndexer release];dataIndexer = nil;
 }
 
 @end

@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
+// !!!: Testing using CPMostRecentPhotosRefinedElement
+
 #import <SenTestingKit/SenTestingKit.h>
 
 
