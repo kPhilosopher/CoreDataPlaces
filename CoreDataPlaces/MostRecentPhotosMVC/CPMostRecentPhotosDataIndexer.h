@@ -16,8 +16,7 @@
 @required
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 - (void)refineTheRawElement:(id)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
-- (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
-- (NSInteger)sectionCount;
+- (NSInteger)sectionCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 
 @end
@@ -29,7 +28,6 @@
 #pragma mark - Property
 
 @property (retain) CPMostRecentPhotosRefinedElement *refinedElement;
-@property NSInteger highSection;
 
 #pragma mark - Intialization
 

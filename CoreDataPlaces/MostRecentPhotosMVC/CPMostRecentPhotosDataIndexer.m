@@ -15,7 +15,6 @@
 {
 @private
 	CPMostRecentPhotosRefinedElement *CP_refinedElement;
-	NSInteger CP_highSection;
 }
 @end
 
@@ -25,7 +24,6 @@
 
 #pragma mark - Synthesize
 
-@synthesize highSection = CP_highSection;
 @synthesize refinedElement = CP_refinedElement;
 
 #pragma mark - Object lifecycle
@@ -52,19 +50,57 @@
 
 - (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
 {
-	
+//	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
+//	NSMutableArray *temporaryDataElements;
+//	
+//	//1. refinement process
+//	if (rawElements)//TODO: this might work if && ([rawData count] > 0) will allow efficiency do this by filtering alert message with count of the array returned.
+//	{
+//		temporaryDataElements = [[NSMutableArray alloc] initWithCapacity:1];
+//		for (NSDictionary *rawElement in rawElements)
+//			[self refineTheRawElementDictionary:rawElement thenAddToTemporaryMutableArray:temporaryDataElements];
+//	}
+//	else
+//		return nil;
+//	
+//	//2. set the sections number for each element
+//	[self setSectionNumberForElementsInArray:temporaryDataElements];
+//	
+//	
+//	//3. create the sectionsArray
+//	NSInteger highSection = [self sectionCount];
+//	NSMutableArray *sectionArrays = [[NSMutableArray alloc]initWithCapacity:highSection];
+//	
+//	//4. make the empty arrays for each sections.
+//	for (int i = 0 ; i < highSection; i++) 
+//		[sectionArrays addObject:[[[NSMutableArray alloc] initWithCapacity:0] autorelease]];
+//	
+//	//5. put elements into its section
+//	for (CPRefinedElement *element in temporaryDataElements) 
+//		[(NSMutableArray *)[sectionArrays objectAtIndex:element.sectionNumber] addObject:element];
+//	
+//	//6. sort the elements within each sections
+//	for (NSMutableArray *sectionArray in sectionArrays) 
+//		[self sortTheElementsInSectionArray:sectionArray andAddToArrayOfSections:theElementSections];
+//	[sectionArrays release];
+//	[temporaryDataElements release];
+//	return theElementSections;
 	return nil;
 }
 
 - (void)refineTheRawElement:(id)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
 {
-	
+//	CPRefinedElement *refinedElement = [self.refinedElement copy];
+//	refinedElement.comparable = [refinedElement extractComparableFromDictionary:rawElement];
+//	refinedElement.dictionary = rawElement;
+//	[temporaryDataElements addObject:refinedElement];
+//	[refinedElement release];
 }
 
-- (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
+- (NSInteger)sectionCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
 //	NSMutableSet *setOfHours = [NSMutableSet set];
-//	self.highSection = 0;
+//	NSInteger highSection = 0;
 //	for (CPPhotosRefinedElement *refinedElement in temporaryDataElements) 
 //	{
 //		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
@@ -74,9 +110,9 @@
 //	{
 //		[priorityQueue addObject:number];
 //	}
-//	self.highSection = [priorityQueue count];
+//	highSection = [priorityQueue count];
 //	NSMutableArray *copiedArray = [NSMutableArray arrayWithArray:temporaryDataElements];
-//	for (int indexForSections = 0; indexForSections < self.highSection; indexForSections++) 
+//	for (int indexForSections = 0; indexForSections < highSection; indexForSections++) 
 //	{
 //		NSNumber *temporaryHourNumber = [priorityQueue removeFirstObject];
 //		
@@ -93,25 +129,21 @@
 //		}
 //	}
 //	[priorityQueue release];
-}
-
-- (NSInteger)sectionCount;
-{
+//	return highSection;
 	return 0;
-//	return self.highSection;
 }
 
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 {
-	NSMutableArray *temporarySection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
+	NSMutableArray *sortedSection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
 	id element = [sectionArray lastObject];
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[element class] ordering:NSOrderedAscending];
 	for (id refinedElement in sectionArray)
 		[priorityQueue addObject:refinedElement];
 	int upperLimit = [priorityQueue count];
 	for (int index = 0; index < upperLimit; index++) 
-		[temporarySection addObject:[priorityQueue removeFirstObject]];
-	[elementSections addObject:temporarySection];
+		[sortedSection addObject:[priorityQueue removeFirstObject]];
+	[elementSections addObject:sortedSection];
 	[priorityQueue release];
 }
 
