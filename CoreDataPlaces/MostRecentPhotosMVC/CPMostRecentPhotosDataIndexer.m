@@ -140,7 +140,7 @@
 	NSMutableArray *sortedSection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
 	id element = [sectionArray lastObject];
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[element class] ordering:NSOrderedAscending];
-	for (id refinedElement in sectionArray)
+	for (CPMostRecentPhotosRefinedElement *refinedElement in sectionArray)
 		[priorityQueue addObject:refinedElement];
 	int upperLimit = [priorityQueue count];
 	for (int index = 0; index < upperLimit; index++) 
