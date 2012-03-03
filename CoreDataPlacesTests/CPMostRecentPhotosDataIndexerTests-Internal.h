@@ -10,7 +10,7 @@
 
 #import "CPMostRecentPhotosDataIndexerTests.h"
 #import "CPMostRecentPhotosDataIndexer.h"
-#import "CPMostRecentPhotosRefinedElement-Internal.h"
+#import "CPMostRecentPhotosRefinedElement.h"
 
 
 @interface CPMostRecentPhotosDataIndexerTests()
