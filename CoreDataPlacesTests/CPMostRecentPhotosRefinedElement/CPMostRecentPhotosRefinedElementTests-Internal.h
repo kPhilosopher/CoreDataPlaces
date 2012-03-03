@@ -23,9 +23,9 @@
 
 #pragma mark - Internal method
 
-- (void)CP_setupForInputDateAndMockPhoto;
-- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
-- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute second:(int)second;
-- (void)CP_mockPhotoSetup;
+//- (void)CP_setupForInputDateAndMockPhoto;
+//- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour;
+//- (NSDate *)CP_dateOfTimeIntervalWithGivenHour:(int)hour minute:(int)minute second:(int)second;
+//- (void)CP_mockPhotoSetup;
 
 @end
