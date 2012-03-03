@@ -13,17 +13,16 @@
 
 @implementation CPMostRecentPhotosRefinary
 
-+ (NSArray *)refinedElementsWithRawElements:(NSArray *)rawElements;
++ (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
 {
 	NSMutableArray *refinedElements = [NSMutableArray arrayWithCapacity:[rawElements count]];
 	for (id rawElement in rawElements)
 	{
-		CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-		refinedElement.rawElement = rawElement;
-		[self setComparableForRefinedElement:refinedElement];
-		[self setTitleAndSubtitleForRefinedElement:refinedElement];
-		[refinedElements addObject:refinedElement];
-		[refinedElement release];
+		CPMostRecentPhotosRefinedElement *temporaryRefinedElement = [refinedElement copy];
+		temporaryRefinedElement.rawElement = rawElement;
+		[self setComparableForRefinedElement:temporaryRefinedElement];
+		[self setTitleAndSubtitleForRefinedElement:temporaryRefinedElement];
+		[refinedElements addObject:temporaryRefinedElement];
 	}
 	return refinedElements;
 }

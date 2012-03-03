@@ -14,7 +14,8 @@
 
 #pragma mark - Instance method
 
-+ (NSArray *)refinedElementsWithRawElements:(NSArray *)rawElements;
+//+ (NSArray *)refinedElementsWithRawElements:(NSArray *)rawElements;
++ (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
 + (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 + (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 
