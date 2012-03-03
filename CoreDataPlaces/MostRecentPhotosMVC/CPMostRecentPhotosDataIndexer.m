@@ -48,7 +48,7 @@
 
 #pragma mark - CPDataIndexHandling protocol methods
 
-- (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
+- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
 {
 //	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
 //	NSMutableArray *temporaryDataElements;
@@ -86,15 +86,6 @@
 //	[temporaryDataElements release];
 //	return theElementSections;
 	return nil;
-}
-
-- (void)refineTheRawElement:(id)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
-{
-	CPMostRecentPhotosRefinedElement *refinedElement = [self.refinedElement copy];
-	refinedElement.rawElement = rawElement;
-	[refinedElement setComparableWithRawElement];
-	[temporaryDataElements addObject:refinedElement];
-	[refinedElement release];
 }
 
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
