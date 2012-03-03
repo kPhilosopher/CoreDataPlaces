@@ -217,7 +217,7 @@
 	for (CPMostRecentPhotosRefinedElement *element in [sectionsOfArray lastObject])
 	{
 		STAssertTrue(([[sectionsOfArray lastObject] count] == numberOfElements),@"The array does not have the correct number of elements.");
-		STAssertTrue(([[listOfRawTestDataForEvaluation objectAtIndex:indexCount] floatValue] == [element.comparable floatValue]),@"The sorting algorithm isn't working.");
+		STAssertTrue(([[listOfRawTestDataForEvaluation objectAtIndex:indexCount] floatValue] == [element.comparable floatValue]),@"The sorting algorithm isn't broken.");
 		indexCount = indexCount + 1;
 	}
 }
