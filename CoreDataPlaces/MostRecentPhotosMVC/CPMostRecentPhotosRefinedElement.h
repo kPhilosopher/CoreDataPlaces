@@ -8,8 +8,9 @@
 
 //#import "CPRefinedElement.h"
 #import <Foundation/Foundation.h>
-#import "CPRefinedElementInterfacing.h"
+//#import "CPRefinedElementInterfacing.h"
+#import "CPMostRecentPhotosRefinedElementInterfacing.h"
 
-@interface CPMostRecentPhotosRefinedElement : NSObject <NSCopying, CPRefinedElementInterfacing>
+@interface CPMostRecentPhotosRefinedElement : NSObject <NSCopying, CPMostRecentPhotosRefinedElementInterfacing>
 
 @end
