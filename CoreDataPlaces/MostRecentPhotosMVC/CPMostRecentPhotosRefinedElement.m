@@ -54,7 +54,8 @@
 
 - (NSComparisonResult)compare:(CPMostRecentPhotosRefinedElement *)refinedElement;
 {
-	return [self.comparable compare:refinedElement.comparable];
+//	return [self.comparable compare:refinedElement.comparable];
+	return [[NSNumber numberWithFloat:[self.comparable floatValue]] compare:[NSNumber numberWithFloat:[refinedElement.comparable floatValue]]];
 }
 
 @end
