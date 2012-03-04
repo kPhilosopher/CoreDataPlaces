@@ -21,7 +21,7 @@
 {
 	//setup
 	int numberOfSections = 4;
-	NSMutableArray *indexedSections = [NSMutableArray arrayWithCapacity:4];
+	NSMutableArray *indexedSections = [NSMutableArray arrayWithCapacity:numberOfSections];
 	for (int index = 0; index < numberOfSections; index++) 
 	{
 		[indexedSections addObject:[NSMutableArray arrayWithCapacity:1]];
@@ -65,8 +65,8 @@
 	headerTitle = [tableViewHandler indexedTableViewController:mockTVC titleForHeaderInSection:3];
 	STAssertTrue(([headerTitle isEqualToString:@"1229 Hour(s) Ago"]),@"Header with zero is incorrect.");
 	
+	//clean up
 	[tableViewHandler release];
-	
 }
 
 @end
