@@ -23,6 +23,6 @@
 
 #pragma mark - Helper method
 
-- (void)CP_setupListOfTestInputWithIndex:(NSInteger)index;
+- (void)CP_setupListOfRefinedElementWithIndex:(NSInteger)index;
 
 @end

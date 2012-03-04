@@ -14,7 +14,7 @@
 #pragma mark - Required methods
 
 @required
-- (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
+- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
 
