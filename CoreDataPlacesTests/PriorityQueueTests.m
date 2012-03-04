@@ -64,4 +64,16 @@
 	STAssertTrue(([[descendingPriority removeFirstObject] intValue] == 1),@"");
 }
 
+- (void)testDuplicates
+{
+	JBBPriorityQueue *descendingPriority = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedDescending];
+	[descendingPriority addObject:[NSNumber numberWithInt:8]];
+	[descendingPriority addObject:[NSNumber numberWithInt:3]];
+	[descendingPriority addObject:[NSNumber numberWithInt:8]];
+	
+	STAssertTrue(([[descendingPriority removeFirstObject] intValue] == 8),@"");
+	STAssertTrue(([[descendingPriority removeFirstObject] intValue] == 8),@"");
+	STAssertTrue(([[descendingPriority removeFirstObject] intValue] == 3),@"");
+}
+
 @end
