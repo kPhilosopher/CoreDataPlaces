@@ -44,20 +44,19 @@
 	return nil;
 }
 
-//TODO: refactor this method.
 - (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 {
 	NSString *returningString = nil;
-	if ([[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count] > 0)
+	id undeterminedElement = [[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] lastObject];
+	if ([[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count] > 0 &&
+		[undeterminedElement isKindOfClass:[CPMostRecentPhotosRefinedElement class]])
 	{
-		//TODO: create an interface to return a string.
-		//after checking key-value coding to see if:
-		CPMostRecentPhotosRefinedElement *refinedElement = [[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] objectAtIndex:0];
-		NSString *elapsedHours = refinedElement.comparable;
-		if ([elapsedHours intValue] == 0) 
+		CPMostRecentPhotosRefinedElement *refinedElement = (CPMostRecentPhotosRefinedElement *)undeterminedElement;
+		NSString *timeIntervalInHours = refinedElement.comparable;
+		if ([timeIntervalInHours intValue] == 0)
 			returningString = @"Right Now";
         else
-			returningString = [[NSString stringWithFormat:@"%d",[elapsedHours intValue]] stringByAppendingString:@" Hour(s) Ago"];
+			returningString = [[NSString stringWithFormat:@"%d",[timeIntervalInHours intValue]] stringByAppendingString:@" Hour(s) Ago"];
     }
     return returningString;
 }
