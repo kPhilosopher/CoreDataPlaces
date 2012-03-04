@@ -11,40 +11,7 @@
 #import "JBBPriorityQueue.h"
 
 
-@interface CPMostRecentPhotosDataIndexer ()
-{
-@private
-	CPMostRecentPhotosRefinedElement *CP_refinedElement;
-}
-@end
-
-#pragma mark -
-
 @implementation CPMostRecentPhotosDataIndexer
-
-#pragma mark - Synthesize
-
-@synthesize refinedElement = CP_refinedElement;
-
-#pragma mark - Object lifecycle
-
-- (void)dealloc
-{
-	[CP_refinedElement release];
-	[super dealloc];
-}
-
-#pragma mark - Intialization
-
-- (id)initWithRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
-{
-	self = [super init];
-	if (self)
-	{
-		self.refinedElement = refinedElement;
-	}
-	return self;
-}
 
 #pragma mark - CPDataIndexHandling protocol methods
 
@@ -53,9 +20,9 @@
 	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
 	NSMutableArray *temporaryDataElements = [NSMutableArray arrayWithArray:refinedElements];
 	
+	//TODO: in the controller that calls the refinary, the raw elements should be checked to not be nil and have at least one element in it.
 	//1. set the sections number for each element
 	NSInteger highSection = [self sectionsCountAndSetSectionNumberForElementsInArray:temporaryDataElements];
-	
 	
 	//2. create the sectionsArray
 	NSMutableArray *indexedSections = [NSMutableArray arrayWithCapacity:highSection];
@@ -69,10 +36,8 @@
 		[(NSMutableArray *)[indexedSections objectAtIndex:element.sectionNumber] addObject:element];
 	
 	//5. sort the elements within each sections
-	
-	//TODO:refactor the variable names.
-	for (NSMutableArray *sectionArray in indexedSections) 
-		[self sortTheElementsInSectionArray:sectionArray andAddToArrayOfSections:theElementSections];
+	for (NSMutableArray *unsortedSection in indexedSections) 
+		[self sortTheElementsInSectionArray:unsortedSection andAddToArrayOfSections:theElementSections];
 	
 	return theElementSections;
 }
@@ -91,12 +56,11 @@
 	//find the ordering of the numbers using priority queue.
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedAscending];
 	for (NSNumber *number in setOfHours) 
-	{
 		[priorityQueue addObject:number];
-	}
-	highSection = [priorityQueue count];
+	
 	
 	//map the ordering to a sequential number for array.
+	highSection = [priorityQueue count];
 	NSMutableDictionary *sectionNumberMapping = [NSMutableDictionary dictionaryWithCapacity:highSection];
 	for (int sectionNumber = 0; sectionNumber < highSection; sectionNumber++)
 	{
@@ -115,17 +79,26 @@
 	return highSection;
 }
 
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
 {
-	NSMutableArray *sortedSection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
-	id element = [sectionArray lastObject];
+	//setup the priority queue.
+	id element = [unsortedSection lastObject];
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[element class] ordering:NSOrderedAscending];
-	for (CPMostRecentPhotosRefinedElement *refinedElement in sectionArray)
+	
+	//load the priority queue with the refined elements.
+	for (CPMostRecentPhotosRefinedElement *refinedElement in unsortedSection)
 		[priorityQueue addObject:refinedElement];
+	
+	//place the sorted elements into an array.
 	int upperLimit = [priorityQueue count];
+	NSMutableArray *sortedSection = [NSMutableArray arrayWithCapacity:upperLimit];
 	for (int index = 0; index < upperLimit; index++) 
 		[sortedSection addObject:[priorityQueue removeFirstObject]];
-	[elementSections addObject:sortedSection];
+	
+	//add the sorted sections in the array of sections.
+	[indexedSections addObject:sortedSection];
+	
+	//clean up
 	[priorityQueue release];
 }
 

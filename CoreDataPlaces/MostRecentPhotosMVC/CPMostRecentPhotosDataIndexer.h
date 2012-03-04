@@ -9,6 +9,7 @@
 //#import "CPDataIndexer.h"
 #import <Foundation/Foundation.h>
 
+
 @protocol CPDataIndexHandlingTemporary <NSObject>
 
 #pragma mark - Required methods
@@ -16,20 +17,12 @@
 @required
 - (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
 
 @end
 
-@class CPMostRecentPhotosRefinedElement;
+#pragma mark -
 
 @interface CPMostRecentPhotosDataIndexer : NSObject <CPDataIndexHandlingTemporary>
-
-#pragma mark - Property
-
-@property (retain) CPMostRecentPhotosRefinedElement *refinedElement;
-
-#pragma mark - Intialization
-
-- (id)initWithRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 
 @end
