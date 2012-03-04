@@ -10,7 +10,6 @@
 
 #import "CPMostRecentPhotosDataIndexerTests.h"
 #import "CPMostRecentPhotosDataIndexer.h"
-#import "CPMostRecentPhotosRefinedElement.h"
 
 
 @interface CPMostRecentPhotosDataIndexerTests()
@@ -23,6 +22,6 @@
 
 #pragma mark - Helper method
 
-- (void)CP_setupListOfRefinedElementWithIndex:(NSInteger)index;
+- (void)CP_setupListOfTestInputAtIndex:(NSInteger)index;
 
 @end

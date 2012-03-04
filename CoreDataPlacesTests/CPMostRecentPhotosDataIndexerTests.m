@@ -9,7 +9,7 @@
 // !!!: Testing using CPMostRecentPhotosRefinedElement
 
 #import "CPMostRecentPhotosDataIndexerTests-Internal.h"
-#import "CPPhotosRefinedElement.h"
+#import "CPMostRecentPhotosRefinedElement.h"
 #import "Photo.h"
 
 
@@ -45,9 +45,7 @@
 
 - (void)setUp;
 {
-	CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
-	self.dataIndexer = [[[CPMostRecentPhotosDataIndexer alloc] initWithRefinedElement:refinedElement] autorelease];
-	[refinedElement release];
+	self.dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] init];
 	self.listOfRawTestData = [NSMutableArray array];
 }
 
@@ -63,23 +61,22 @@
 - (void)testMethod_indexedSectionsOfRefinedElements_01;
 {
 	//setup
-	int totalSections = 12;
 	
 	//sections include 0,1,2,3,4,5,6,11,12,13,14,200
-	NSMutableDictionary *sectionToComparable = [NSMutableDictionary dictionary];
-	[sectionToComparable setObject:@"0" forKey:@"0"];
-	[sectionToComparable setObject:@"1" forKey:@"1"];
-	[sectionToComparable setObject:@"2" forKey:@"2"];
-	[sectionToComparable setObject:@"3" forKey:@"3"];
-	[sectionToComparable setObject:@"4" forKey:@"4"];
-	[sectionToComparable setObject:@"5" forKey:@"5"];
-	[sectionToComparable setObject:@"6" forKey:@"6"];
-	[sectionToComparable setObject:@"11" forKey:@"7"];
-	[sectionToComparable setObject:@"12" forKey:@"8"];
-	[sectionToComparable setObject:@"13" forKey:@"9"];
-	[sectionToComparable setObject:@"14" forKey:@"10"];
-	[sectionToComparable setObject:@"200" forKey:@"11"];
-	
+	NSMutableDictionary *sectionToComparableMapping = [NSMutableDictionary dictionary];
+	[sectionToComparableMapping setObject:@"0" forKey:@"0"];
+	[sectionToComparableMapping setObject:@"1" forKey:@"1"];
+	[sectionToComparableMapping setObject:@"2" forKey:@"2"];
+	[sectionToComparableMapping setObject:@"3" forKey:@"3"];
+	[sectionToComparableMapping setObject:@"4" forKey:@"4"];
+	[sectionToComparableMapping setObject:@"5" forKey:@"5"];
+	[sectionToComparableMapping setObject:@"6" forKey:@"6"];
+	[sectionToComparableMapping setObject:@"11" forKey:@"7"];
+	[sectionToComparableMapping setObject:@"12" forKey:@"8"];
+	[sectionToComparableMapping setObject:@"13" forKey:@"9"];
+	[sectionToComparableMapping setObject:@"14" forKey:@"10"];
+	[sectionToComparableMapping setObject:@"200" forKey:@"11"];
+	int totalSections = [sectionToComparableMapping count];
 	
 	[self.listOfRawTestData addObject:@"0.00001"];
 	[self.listOfRawTestData addObject:@"0.10000"];
@@ -129,7 +126,7 @@
 	
 	for (int index = 0; index < numberOfElements; index++)
 	{
-		[self CP_setupListOfRefinedElementWithIndex:index];
+		[self CP_setupListOfTestInputAtIndex:index];
 	}
 	
 	//method under test.
@@ -138,29 +135,30 @@
 	//evaluate the outcome
 	STAssertTrue(([indexedSections count] == totalSections),@"The total section calculation is wrong");
 	
-	int count = 0;
+	int index = 0;
 	CPMostRecentPhotosRefinedElement *refinedElementOfPreviousIndexedSection = nil;
 	for (NSArray *indexedSection in indexedSections) 
 	{
-		STAssertTrue(([[indexedSection lastObject] isKindOfClass:[CPMostRecentPhotosRefinedElement class]]),@"The object in the indexed sections should be a refined element");
 		CPMostRecentPhotosRefinedElement *refinedElement = (CPMostRecentPhotosRefinedElement *)[indexedSection lastObject];
-		STAssertTrue(([refinedElement.comparable intValue] == [[sectionToComparable objectForKey:[NSString stringWithFormat:@"%d",count]] intValue]),@"The sections are not set correctly.");
+		
+		STAssertTrue(([refinedElement isKindOfClass:[CPMostRecentPhotosRefinedElement class]]),@"The object in the indexed sections should be a refined element");
+		NSString *keyForMapping = [NSString stringWithFormat:@"%d",index++];
+		STAssertTrue(([refinedElement.comparable intValue] == [[sectionToComparableMapping objectForKey:keyForMapping] intValue]),@"The sections are not set correctly.");
 		
 		if (refinedElementOfPreviousIndexedSection)
 		{
-			NSNumber *firstNumber = [NSNumber numberWithFloat:[refinedElementOfPreviousIndexedSection.comparable floatValue]];
-			NSNumber *secondNumber = [NSNumber numberWithFloat:[refinedElement.comparable floatValue]];
-			STAssertTrue(([firstNumber compare:secondNumber] < 0),@"The sections are not set correctly.");
+			NSNumber *refinedElementComparableValueFromPreviousSection = [NSNumber numberWithFloat:[refinedElementOfPreviousIndexedSection.comparable floatValue]];
+			NSNumber *refinedElementComparableValueFromCurrentSection = [NSNumber numberWithFloat:[refinedElement.comparable floatValue]];
+			STAssertTrue(([refinedElementComparableValueFromPreviousSection compare:refinedElementComparableValueFromCurrentSection] < 0),@"The sections are not set correctly.");
 		}
 		if ([indexedSection count] > 1)
 		{
-			CPMostRecentPhotosRefinedElement *firstRefinedElement = (CPMostRecentPhotosRefinedElement *)[indexedSection objectAtIndex:0];
-			NSNumber *firstNumber = [NSNumber numberWithFloat:[firstRefinedElement.comparable floatValue]];
-			NSNumber *secondNumber = [NSNumber numberWithFloat:[refinedElement.comparable floatValue]];
-			STAssertTrue(([firstNumber compare:secondNumber] <= 0),@"The sorting algorithm isn't applied correctly.");
+			CPMostRecentPhotosRefinedElement *firstRefinedElementInSection = (CPMostRecentPhotosRefinedElement *)[indexedSection objectAtIndex:0];
+			NSNumber *firstRefinedElementComparableValueInSection = [NSNumber numberWithFloat:[firstRefinedElementInSection.comparable floatValue]];
+			NSNumber *lastRefinedElementComparableValueInSection = [NSNumber numberWithFloat:[refinedElement.comparable floatValue]];
+			STAssertTrue(([firstRefinedElementComparableValueInSection compare:lastRefinedElementComparableValueInSection] <= 0),@"The sorting algorithm isn't applied correctly.");
 		}
 		refinedElementOfPreviousIndexedSection = refinedElement;
-		count++;
 	}
 }
 
@@ -169,23 +167,23 @@
 - (void)testMethod_sectionsCountAndSetSectionNumberForElementsInArray_01;
 {
 	//setup
-	int totalSections = 12;
 	
 	//sections include 0,1,2,3,4,5,6,11,12,13,14,200
-	NSMutableDictionary *comparableToSection = [NSMutableDictionary dictionary];
-	[comparableToSection setObject:@"0" forKey:@"0"];
-	[comparableToSection setObject:@"1" forKey:@"1"];
-	[comparableToSection setObject:@"2" forKey:@"2"];
-	[comparableToSection setObject:@"3" forKey:@"3"];
-	[comparableToSection setObject:@"4" forKey:@"4"];
-	[comparableToSection setObject:@"5" forKey:@"5"];
-	[comparableToSection setObject:@"6" forKey:@"6"];
-	[comparableToSection setObject:@"7" forKey:@"11"];
-	[comparableToSection setObject:@"8" forKey:@"12"];
-	[comparableToSection setObject:@"9" forKey:@"13"];
-	[comparableToSection setObject:@"10" forKey:@"14"];
-	[comparableToSection setObject:@"11" forKey:@"200"];
+	NSMutableDictionary *comparableToSectionMapping = [NSMutableDictionary dictionary];
+	[comparableToSectionMapping setObject:@"0" forKey:@"0"];
+	[comparableToSectionMapping setObject:@"1" forKey:@"1"];
+	[comparableToSectionMapping setObject:@"2" forKey:@"2"];
+	[comparableToSectionMapping setObject:@"3" forKey:@"3"];
+	[comparableToSectionMapping setObject:@"4" forKey:@"4"];
+	[comparableToSectionMapping setObject:@"5" forKey:@"5"];
+	[comparableToSectionMapping setObject:@"6" forKey:@"6"];
+	[comparableToSectionMapping setObject:@"7" forKey:@"11"];
+	[comparableToSectionMapping setObject:@"8" forKey:@"12"];
+	[comparableToSectionMapping setObject:@"9" forKey:@"13"];
+	[comparableToSectionMapping setObject:@"10" forKey:@"14"];
+	[comparableToSectionMapping setObject:@"11" forKey:@"200"];
 	
+	int totalSections = [comparableToSectionMapping count];
 	
 	[self.listOfRawTestData addObject:@"0.00001"];
 	[self.listOfRawTestData addObject:@"0.10000"];
@@ -235,7 +233,7 @@
 	
 	for (int index = 0; index < numberOfElements; index++)
 	{
-		[self CP_setupListOfRefinedElementWithIndex:index];
+		[self CP_setupListOfTestInputAtIndex:index];
 	}
 	
 	//method under test
@@ -247,9 +245,9 @@
 	int counter = 0;
 	for (CPMostRecentPhotosRefinedElement *refinedElement in self.listOfTestInput) 
 	{
-		NSString *integerOfTestDataComparable = [NSString stringWithFormat:@"%d",[[self.listOfRawTestData objectAtIndex:counter++] intValue]];
+		NSString *keyToMapping = [NSString stringWithFormat:@"%d",[[self.listOfRawTestData objectAtIndex:counter++] intValue]];
 		
-		STAssertTrue((refinedElement.sectionNumber == [[comparableToSection objectForKey:integerOfTestDataComparable] intValue]),@"The section setting algorithm has an error.");
+		STAssertTrue((refinedElement.sectionNumber == [[comparableToSectionMapping objectForKey:keyToMapping] intValue]),@"The section setting algorithm has an error.");
 	}
 }
 
@@ -257,7 +255,7 @@
 
 - (void)testMethod_sortTheElementsInSectionArrayAndAddToArrayOfSections_01;
 {
-	//setup]
+	//setup
 	[self.listOfRawTestData addObject:@"0.00001"];
 	[self.listOfRawTestData addObject:@"0.10000"];
 	[self.listOfRawTestData addObject:@"0.20000"];
@@ -267,40 +265,40 @@
 	[self.listOfRawTestData addObject:@"0.30002"];
 	[self.listOfRawTestData addObject:@"0.9"];
 	
-	NSMutableArray *listOfRawTestDataForEvaluation = [NSMutableArray arrayWithArray:self.listOfRawTestData];
+	NSMutableArray *listOfSortedRawTestDataForEvaluation = [NSMutableArray arrayWithArray:self.listOfRawTestData];
 	
 	int numberOfElements = [self.listOfRawTestData count];
 	self.listOfTestInput = [NSMutableArray arrayWithCapacity:numberOfElements];
 	
-	int count = numberOfElements;
+	//randomize the ordering of the input array.
+	int index01 = numberOfElements;
 	int randomNumber = 0;
-	while (count > 0)
+	while (index01 > 0)
 	{
-		randomNumber = arc4random()%count;
-		[self CP_setupListOfRefinedElementWithIndex:randomNumber];
+		randomNumber = arc4random()%index01--;
+		[self CP_setupListOfTestInputAtIndex:randomNumber];
 		[self.listOfRawTestData removeObjectAtIndex:randomNumber];
-		count = count - 1;
 	}
-	NSMutableArray *sectionsOfArray = [NSMutableArray array];
+	NSMutableArray *sections = [NSMutableArray array];
 	
 	//method under tests
-	[self.dataIndexer sortTheElementsInSectionArray:self.listOfTestInput andAddToArrayOfSections:sectionsOfArray];
+	[self.dataIndexer sortTheElementsInSectionArray:self.listOfTestInput andAddToArrayOfSections:sections];
 	
-	//evaluate the outcomes
-	STAssertTrue(([[sectionsOfArray lastObject] isKindOfClass:[NSMutableArray class]]),@"there should be a mutable array in the arrayOfSections");
+	//evaluate the outcome.
+	NSArray *sortedSection = [sections lastObject];
+	STAssertTrue(([sortedSection isKindOfClass:[NSMutableArray class]]),@"there should be a mutable array in the sections");
+	STAssertTrue(([sortedSection count] == numberOfElements),@"The array does not have the correct number of elements.");
 	
-	int indexCount = 0;
-	for (CPMostRecentPhotosRefinedElement *element in [sectionsOfArray lastObject])
+	int index02 = 0;
+	for (CPMostRecentPhotosRefinedElement *element in sortedSection)
 	{
-		STAssertTrue(([[sectionsOfArray lastObject] count] == numberOfElements),@"The array does not have the correct number of elements.");
-		STAssertTrue(([[listOfRawTestDataForEvaluation objectAtIndex:indexCount] floatValue] == [element.comparable floatValue]),@"The sorting algorithm isn't broken.");
-		indexCount = indexCount + 1;
+		STAssertTrue(([[listOfSortedRawTestDataForEvaluation objectAtIndex:index02++] floatValue] == [element.comparable floatValue]),@"The sorting algorithm is broken.");
 	}
 }
 
 #pragma mark - Helper method
 
-- (void)CP_setupListOfRefinedElementWithIndex:(NSInteger)index;
+- (void)CP_setupListOfTestInputAtIndex:(NSInteger)index;
 {
 	CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
 	refinedElement.comparable = [self.listOfRawTestData objectAtIndex:index];//use of internal setter.
