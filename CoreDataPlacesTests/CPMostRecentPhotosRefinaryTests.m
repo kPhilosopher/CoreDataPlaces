@@ -7,7 +7,6 @@
 //
 
 #import "CPMostRecentPhotosRefinaryTests-Internal.h"
-#import "CPMostRecentPhotosRefinary.h"
 #import "CPPhotoInterfacing.h"
 #import "Photo.h"
 #import <OCMock/OCMock.h>
@@ -16,6 +15,7 @@
 @interface CPMostRecentPhotosRefinaryTests()
 {
 	CPMostRecentPhotosRefinedElement *CP_mostRecentPhotosRefinedElement;
+	CPMostRecentPhotosRefinary *CP_refinary;
 	id CP_mockPhoto;
 	NSDate *CP_inputDate;
 	NSInteger CP_hour;
@@ -31,6 +31,7 @@
 #pragma mark - Synthesize
 
 @synthesize mostRecentPhotosRefinedElement = CP_mostRecentPhotosRefinedElement;
+@synthesize refinary = CP_refinary;
 @synthesize mockPhoto = CP_mockPhoto;
 @synthesize inputDate = CP_inputDate;
 @synthesize inputTitle = CP_inputTitle;
@@ -43,9 +44,10 @@
 
 - (void)dealloc;
 {
-	[CP_inputDate release];
-	[CP_mockPhoto release];
 	[CP_mostRecentPhotosRefinedElement release];
+	[CP_refinary release];
+	[CP_mockPhoto release];
+	[CP_inputDate release];
 	[CP_inputTitle release];
 	[CP_inputSubtitle release];
 	[super dealloc];
@@ -56,10 +58,12 @@
 - (void)setUp;
 {
 	self.mostRecentPhotosRefinedElement = [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
+	self.refinary = [[CPMostRecentPhotosRefinary alloc] init];
 }
 
 - (void)tearDown;
 {
+	self.refinary = nil;
 	self.mostRecentPhotosRefinedElement = nil;
 	self.inputDate = nil;
 	self.inputTitle = nil;
@@ -70,9 +74,9 @@
 	self.second = 0;
 }
 
-#pragma mark - refinedElementsWithGivenRefinedElementTypeAndRawElements Test
+#pragma mark - refinedElementsWithRawElements Test
 
-- (void)testMethod_refinedElementsWithGivenRefinedElementTypeAndRawElements_01;
+- (void)testMethod_refinedElementsWithRawElements_01;
 {
 	//setup.
 	int numberOfElements = 10;
@@ -158,7 +162,8 @@
 	[rawElements addObject:self.mockPhoto];
 	
 	//method under test.
-	NSArray *supposedRefinedElements = [CPMostRecentPhotosRefinary refinedElementsWithGivenRefinedElementType:self.mostRecentPhotosRefinedElement rawElements:rawElements];
+	
+	NSArray *supposedRefinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.mostRecentPhotosRefinedElement rawElements:rawElements];
 	
 	//evaluate the outcome.
 	STAssertTrue(([[supposedRefinedElements lastObject] isKindOfClass:[CPMostRecentPhotosRefinedElement class]]),@"The element returned is not a refined element type that is specified.");
@@ -181,8 +186,8 @@
 	[self CP_setupForInputDateAndMockPhoto];
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
-	
+	[self.refinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
+
 	//evaluate the outcome
 	STAssertTrue(([[NSString stringWithFormat:@"%d",[self.mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",self.hour]]),@"setComparableWithRawElement isn't functioning correctly.");
 }
@@ -194,7 +199,7 @@
 	[self CP_setupForInputDateAndMockPhoto];
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome
 	STAssertTrue(([[NSString stringWithFormat:@"%d",[self.mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",self.hour]]),@"setComparableWithRawElement isn't functioning correctly.");
@@ -209,7 +214,7 @@
 	[self CP_setupForInputDateAndMockPhoto];
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome
 	STAssertTrue(([[NSString stringWithFormat:@"%d",[self.mostRecentPhotosRefinedElement.comparable intValue]] isEqualToString:[NSString stringWithFormat:@"%d",self.hour]]),@"setComparableWithRawElement isn't functioning correctly.");
@@ -223,7 +228,7 @@
 	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.comparable intValue] > 10000),@"setComparableWithRawElement isn't functioning correctly.");
@@ -238,7 +243,7 @@
 	self.mostRecentPhotosRefinedElement.rawElement = self.mockPhoto;
 	
 	//method under test
-	[CPMostRecentPhotosRefinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setComparableForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome
 	STAssertNil(self.mostRecentPhotosRefinedElement.comparable,@"");
@@ -259,7 +264,7 @@
 	STAssertNil(self.mostRecentPhotosRefinedElement.subtitle,@"the subtitle should be nil.");
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setTitleAndSubtitleForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setTitleAndSubtitleForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome.
 	STAssertTrue(([self.mostRecentPhotosRefinedElement.title isEqualToString:self.inputTitle]),@"the title is not set correctly.");
@@ -277,7 +282,7 @@
 	STAssertNil(self.mostRecentPhotosRefinedElement.subtitle,@"the subtitle should be nil.");
 	
 	//method under test.
-	[CPMostRecentPhotosRefinary setTitleAndSubtitleForRefinedElement:self.mostRecentPhotosRefinedElement];
+	[self.refinary setTitleAndSubtitleForRefinedElement:self.mostRecentPhotosRefinedElement];
 	
 	//evaluate the outcome.
 	STAssertNil(self.mostRecentPhotosRefinedElement.title,@"the title should be nil.");

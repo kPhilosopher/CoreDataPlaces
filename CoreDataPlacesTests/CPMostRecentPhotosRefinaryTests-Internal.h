@@ -8,12 +8,15 @@
 
 #import "CPMostRecentPhotosRefinaryTests.h"
 #import "CPMostRecentPhotosRefinedElement.h"
+#import "CPMostRecentPhotosRefinary.h"
 
 
 @interface CPMostRecentPhotosRefinaryTests()
 
 #pragma mark - Property
 
+@property (retain) CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement;
+@property (retain) CPMostRecentPhotosRefinary *refinary;
 @property (retain) id mockPhoto;
 @property (retain) NSDate *inputDate;
 @property (assign) NSInteger hour;
@@ -21,7 +24,6 @@
 @property (assign) NSInteger second;
 @property (copy) NSString *inputTitle;
 @property (copy) NSString *inputSubtitle;
-@property (retain) CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement;
 
 #pragma mark - Internal method
 
