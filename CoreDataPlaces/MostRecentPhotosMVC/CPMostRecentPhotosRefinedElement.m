@@ -49,12 +49,11 @@
 
 - (id)copyWithZone:(NSZone *)zone;
 {
-	return [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
+	return [[CPMostRecentPhotosRefinedElement alloc] init];
 }
 
 - (NSComparisonResult)compare:(CPMostRecentPhotosRefinedElement *)refinedElement;
 {
-//	return [self.comparable compare:refinedElement.comparable];
 	return [[NSNumber numberWithFloat:[self.comparable floatValue]] compare:[NSNumber numberWithFloat:[refinedElement.comparable floatValue]]];
 }
 
