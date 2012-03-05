@@ -89,6 +89,15 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	}
 }
 
+- (NSDate *)CP_dateOfTimeIntervalBetweenNowAndHoursAgo:(int)hour;
+{
+	NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
+	[comps setHour:-hour];
+	NSCalendar *gregorian = [[[NSCalendar alloc]
+							  initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+	return [gregorian dateByAddingComponents:comps toDate:[NSDate date] options:0];
+}
+
 - (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext dataHandler:(CPMostRecentPhotosDataHandler *)dataHandler;
 {
 	self = [self initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
@@ -103,6 +112,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		self.fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
 		self.fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
+		self.fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeOfLastView >= %@",[self CP_dateOfTimeIntervalBetweenNowAndHoursAgo:CPMaximumHoursForMostRecentPhoto]];//changed
 		self.fetchRequest.fetchBatchSize = 20;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
