@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+
+@class CPMostRecentPhotosRefinedElement;
+
 @protocol CPRefining <NSObject>
+
+@required
+
+//TODO: changed the most recent to just CPRefinedElement.
+//- (id)initWithRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
+- (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 
 @end
