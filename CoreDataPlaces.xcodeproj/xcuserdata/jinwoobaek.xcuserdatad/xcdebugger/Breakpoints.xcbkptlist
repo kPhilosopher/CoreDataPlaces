@@ -16,31 +16,5 @@
          landmarkName = "+stepToTapFirstRowOfEverySectionsInTableViewWithAccessibilityLabel:referenceDictionary:sectionsArrayKey:"
          landmarkType = "5">
       </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CoreDataPlaces/MostRecentPhotosMVC/CPMostRecentPhotosTableViewController.m"
-         timestampString = "352672630.434848"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
-         landmarkName = "-CP_checkTheChangeInManagedObjectContext:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CoreDataPlaces/ScrollableImageMVC/CPScrollableImageViewController.m"
-         timestampString = "352672671.316495"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "217"
-         endingLineNumber = "217"
-         landmarkName = "-newPhotoSequence"
-         landmarkType = "5">
-      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

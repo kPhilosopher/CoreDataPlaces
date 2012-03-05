@@ -14,10 +14,25 @@
 
 #pragma mark - Property
 
-//@property (copy) NSString *comparable;
-//@property (retain) id rawElement;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+@property (copy) NSString *comparable;
+@property (retain) NSDictionary *dictionary;
+@property NSInteger sectionNumber;
+
+#pragma mark - Recommended to override
+
+//TODO: change method name to: - (void)setComparableWithRawElement:(id)rawElement;
+- (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement;
+//TODO: change method name to: - (void)setTitleAndSubtitle;
+- (void)extractTitleAndSubTitleFromDictionary;
+- (id)copyWithZone:(NSZone *)zone;
+
+
+//@property (copy) NSString *comparable;
+//@property (retain) id rawElement;
+//@property (nonatomic, copy) NSString *title;
+//@property (nonatomic, copy) NSString *subtitle;
 //@property NSInteger sectionNumber;
 //
 //#pragma mark - Instance method
