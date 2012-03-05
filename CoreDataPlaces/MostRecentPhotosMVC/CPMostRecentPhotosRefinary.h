@@ -7,16 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPRefining.h"
 
-@class CPMostRecentPhotosRefinedElement;
 
-@interface CPMostRecentPhotosRefinary : NSObject
-
-#pragma mark - Instance method
-
-//+ (NSArray *)refinedElementsWithRawElements:(NSArray *)rawElements;
-+ (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
-+ (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
-+ (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+@interface CPMostRecentPhotosRefinary : NSObject <CPRefining>
 
 @end

@@ -11,9 +11,14 @@
 #import "Photo.h"
 
 
+
+#pragma mark -
+
 @implementation CPMostRecentPhotosRefinary
 
-+ (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
+#pragma mark - Instance method
+
+- (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
 {
 	NSMutableArray *refinedElements = [NSMutableArray arrayWithCapacity:[rawElements count]];
 	for (id rawElement in rawElements)
@@ -23,12 +28,12 @@
 		[self setComparableForRefinedElement:temporaryRefinedElement];
 		[self setTitleAndSubtitleForRefinedElement:temporaryRefinedElement];
 		[refinedElements addObject:temporaryRefinedElement];
+		[temporaryRefinedElement release];
 	}
 	return refinedElements;
 }
 
-//- (void)setComparableWithRawElement;
-+ (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 { 
 	if ([refinedElement.rawElement isKindOfClass:[Photo class]])
 	{
@@ -56,8 +61,7 @@
 	}
 }
 
-//- (void)setTitleAndSubtitleWithRawElement;
-+ (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
 {
 	if ([refinedElement.rawElement isKindOfClass:[Photo class]])
 	{
