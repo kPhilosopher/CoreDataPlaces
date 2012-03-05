@@ -77,7 +77,7 @@
 
 - (id)copyWithZone:(NSZone *)zone;
 {
-	return [[[CPRefinedElement alloc] init] autorelease];
+	return [[CPRefinedElement alloc] init];
 }
 
 @end
