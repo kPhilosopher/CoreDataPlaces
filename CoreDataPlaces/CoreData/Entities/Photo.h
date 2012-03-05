@@ -14,6 +14,7 @@
 @class Place;
 
 @interface Photo : NSManagedObject <CPPhotoInterfacing>
+//@interface Photo : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * isFavorite;
 @property (nonatomic, retain) NSString * photoURL;
