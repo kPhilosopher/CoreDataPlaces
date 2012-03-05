@@ -98,8 +98,7 @@
 
 - (id)copyWithZone:(NSZone *)zone;
 {
-	CPPhotosRefinedElement *refinedElementCopy = [[[CPPhotosRefinedElement alloc] init] autorelease];
-	return refinedElementCopy;
+	return [[CPPhotosRefinedElement alloc] init];
 }
 
 @end
