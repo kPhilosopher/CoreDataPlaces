@@ -9,142 +9,204 @@
 #import "CPMostRecentPhotosTableViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPScrollableImageViewController.h"
+#import "CPMostRecentPhotosRefinedElement.h"
+//#import "CPMostRecentPhotosDataIndexer.h"
+#import "CPMostRecentPhotosTableViewHandler.h"
+#import "CPMostRecentPhotosRefinary.h"
+#import "CPMostRecentPhotosDataHandler.h"
 
-@implementation CPMostRecentPhotosTableViewController
+
+@interface CPMostRecentPhotosTableViewController()
+{
+	@private
+	id<CPRefining> CP_refinary;
+	id<CPDataIndexHandlingTemporary> CP_tempDataIndexer;
+	CPMostRecentPhotosRefinedElement *CP_refinedElementType;
+	NSArray *CP_listOfRawElements;
+	NSMutableArray *CP_refinedElementSections;
+	BOOL CP_reindex;
+	NSFetchRequest *CP_fetchRequest;
+}
+@end
+
+#pragma mark -
 
 NSString *CPMostRecentPhotosTableViewAccessibilityLabel = @"Most recent photos table";
 
 const int CPMaximumHoursForMostRecentPhoto = 48;
 
-#pragma mark - Initialization
+@implementation CPMostRecentPhotosTableViewController
 
-//TODO: erase this, this is here for testing.
-- (NSNumber *)CP_timeLapseSinceDate:(NSDate *)date;
+#pragma mark - Synthesize
+
+@synthesize tempDataIndexer = CP_tempDataIndexer;
+@synthesize listOfRawElements = CP_listOfRawElements;
+@synthesize refinedElementSections = CP_refinedElementSections;
+@synthesize refinary = CP_refinary;
+@synthesize refinedElementType = CP_refinedElementType;
+@synthesize fetchRequest = CP_fetchRequest;
+
+#pragma mark - Factory method
+
++ (id)mostRecentPhotosTableViewControllerWithManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	NSDate *endDate = [NSDate date];
-	NSDate *startDate = date;
-	NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
-	NSUInteger unitFlags = NSHourCalendarUnit;
-	NSDateComponents *components = [gregorian components:unitFlags
-												fromDate:startDate
-												  toDate:endDate 
-												 options:0];
-	int number = [components hour];
-	return [NSNumber numberWithInt:number];
+	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[[CPMostRecentPhotosTableViewHandler alloc] init] autorelease];
+	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] init];
+	CPMostRecentPhotosRefinary *refinary = [[CPMostRecentPhotosRefinary alloc] init];
+	CPMostRecentPhotosRefinedElement *refinedElementType = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPMostRecentPhotosDataHandler *dataHandler = [[[CPMostRecentPhotosDataHandler alloc] initWithRefinedElementType:refinedElementType refinary:refinary dataIndexer:dataIndexer] autorelease];
+	[dataIndexer release]; dataIndexer = nil;
+	[refinedElementType release]; refinedElementType = nil;
+	[refinary release]; refinary = nil;
+	return [[[CPMostRecentPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:nil tableViewHandler:tableViewHandler managedObjectContext:managedObjectContext dataHandler:dataHandler] autorelease];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+#pragma mark - Initialization
+
+//TODO: fix the location of this method
+- (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
 {
-    self = [self initWithStyle:style];
+	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+	NSLog(@"%@",[NSString stringWithFormat:@"notified."]);
+	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+	if ([[notification.userInfo objectForKey:NSUpdatedObjectsKey] isKindOfClass:[NSSet class]])
+	{
+		NSSet *setOfUpdatedObjects = (NSSet *)[notification.userInfo objectForKey:NSUpdatedObjectsKey];
+		for (id element in setOfUpdatedObjects) 
+		{
+			if ([element isKindOfClass:[Photo class]])
+			{
+				Photo *photo = (Photo *)element;
+				if ([photo.changedValuesForCurrentEvent objectForKey:@"timeOfLastView"])
+				{
+					CP_reindex = YES;
+					NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+					NSLog(@"%@",[NSString stringWithFormat:@"time to reindex."]);
+					NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+				}
+			}
+		}
+	}
+}
+
+- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext dataHandler:(CPMostRecentPhotosDataHandler *)dataHandler;
+//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandlingTemporary>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{
+	self = [self initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self) {
-        // Custom initialization
-		self.tableView.accessibilityLabel = CPMostRecentPhotosTableViewAccessibilityLabel;
+		self.refinedElementType = dataHandler.refinedElementType;
+		self.refinary = dataHandler.refinary;
+		self.tempDataIndexer = dataHandler.dataIndexer;
 		self.managedObjectContext = managedObjectContext;
-		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		NSString *sectionNameKeyPath = @"timeLapseSinceLastView";//change compare to CoreDataPhotosTableViewController
+		CP_reindex = YES;
+		self.tableView.accessibilityLabel = CPMostRecentPhotosTableViewAccessibilityLabel;
 		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
-		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %d",CPMaximumHoursForMostRecentPhoto];//changed
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		[sortDescriptors release];sortDescriptors = nil;
-		[sortDescriptor release];sortDescriptor = nil;
-	    
-		NSFetchedResultsController *localFetchedResultsController = 
-		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-											managedObjectContext:managedObjectContext
-											  sectionNameKeyPath:sectionNameKeyPath 
-													   cacheName:nil];
+		self.fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+		self.fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
+		self.fetchRequest.fetchBatchSize = 20;
+//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %d",CPMaximumHoursForMostRecentPhoto];//changed
 		
-		NSError *error;
-		if (![localFetchedResultsController performFetch:&error])
-		{
-			NSLog(@"%@", [error localizedFailureReason]);
-			abort();
-		}
-		// test it
-//		if ([localFetchedResultsController performFetch:&error]) {
-//			NSLog(@"results");
-//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
-//				NSLog(@"%@", photo.title);
-//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
-//			}
-//		}
-//		else {
-//			NSLog(@"%@", [error localizedFailureReason]);
-//		}
 		
-		[fetchRequest release]; fetchRequest = nil;
-		
-//		self.fetchedResultsController = localFetchedResultsController;
-//		[localFetchedResultsController release];
+//		NSError *error = nil;
 //		
-//		
-//		self.titleKey = @"title";
-//		self.subtitleKey = @"subtitle";
-//		self.searchKey = @"title";
-//		//TODO: title of the given Place
-//		self.title = @"Recent Photos";
+//		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
+//		if (mutableFetchResults == nil) {
+//			// Handle the error.
+//		}
+//		self.listOfRawElements = mutableFetchResults;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(CP_checkTheChangeInManagedObjectContext:)
+													 name:NSManagedObjectContextObjectsDidChangeNotification
+												   object:self.managedObjectContext];
 	}
     return self;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
-//{
-//	NSString *returningString = nil;
-//	id <NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController.sections objectAtIndex:section];
-//	
-//	if ([sectionInfo.objects count] > 0)
-//	{
-//		//TODO: create an interface to return a string.
-//		//after checking key-value coding to see if:
-//		Photo *photo = [sectionInfo.objects lastObject];
-//		//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
-//		if ([photo.timeLapseSinceLastView intValue] == 0) //change
-//			returningString = @"Right Now";
-//		else
-//			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceLastView intValue]] stringByAppendingString:@" Hour(s) Ago"];//change
-//	}
-//    return returningString;
-//}
+#pragma mark - View lifecycle
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+- (void)dealloc
 {
-	return nil;
+	[CP_tempDataIndexer release];
+	[CP_refinary release];
+	[CP_listOfRawElements release];
+	[CP_refinedElementSections release];
+	[CP_fetchRequest release];
+	[super dealloc];
 }
 
-#pragma mark UITableViewDelegate methods
-
-
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+- (void)viewWillAppear:(BOOL)animated;
 {
-	return 0;
+	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+	NSLog(@"%@",[NSString stringWithFormat:@"viewWillAppear"]);
+	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+	[super viewWillAppear:animated];
+	if (CP_reindex) 
+	{
+		NSError *error = nil;
+		
+		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
+		if (mutableFetchResults == nil) {
+			// Handle the error.
+		}
+		self.listOfRawElements = mutableFetchResults;
+		[mutableFetchResults release]; mutableFetchResults = nil;
+		[self indexTheTableViewData];
+		CP_reindex = NO;
+	}
 }
 
 //TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
-- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
+//- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
+//{
+//	return imageController.view.window == nil;
+//}
+//
+//- (void)managedObjectSelected:(NSManagedObject *)managedObject;
+//{
+//	if ([managedObject isKindOfClass:[Photo class]])
+//	{
+//		Photo *chosenPhoto = (Photo *)managedObject;
+//		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+//		scrollableImageViewController.title = chosenPhoto.title;
+//		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
+//		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+//		{
+//			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+//			[self.navigationController pushViewController:scrollableImageViewController animated:YES];
+//		}
+//	}
+//}
+
+#pragma mark - CPTableViewControllerDataMutating protocol method
+
+- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
 {
-	return imageController.view.window == nil;
+	self.refinedElementSections = array;
 }
 
-- (void)managedObjectSelected:(NSManagedObject *)managedObject;
+- (NSMutableArray *)fetchTheElementSections;
 {
-	if ([managedObject isKindOfClass:[Photo class]])
+	return CP_refinedElementSections;
+}
+
+- (NSArray *)fetchTheRawData;
+{
+	return CP_listOfRawElements;
+}
+
+#pragma mark - DataReloadForTableViewControllerProtocol implementation
+
+- (void)indexTheTableViewData
+{
+	//TODO:change the condition of the if statement.
+	if (self.tempDataIndexer != nil) 
 	{
-		Photo *chosenPhoto = (Photo *)managedObject;
-		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
-		scrollableImageViewController.title = chosenPhoto.title;
-		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
-		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
-		{
-			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-			[self.navigationController pushViewController:scrollableImageViewController animated:YES];
-		}
+		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:[self fetchTheRawData]];
+		[self setTheElementSectionsToTheFollowingArray:
+		 [self.tempDataIndexer indexedSectionsOfRefinedElements:refinedElements]];
+		[self.tableView reloadData];
 	}
 }
 

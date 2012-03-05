@@ -10,5 +10,11 @@
 
 @interface CPMostRecentPhotosTableViewController ()
 
+#pragma mark - Property
+
+@property (retain) NSArray *listOfRawElements;
+@property (retain) NSMutableArray *refinedElementSections;
+//@property (assign) BOOL reindex;
+@property (retain) NSFetchRequest *fetchRequest;
 
 @end
