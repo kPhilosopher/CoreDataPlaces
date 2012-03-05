@@ -7,9 +7,11 @@
 //
 
 #import "CPMostRecentPhotosTableViewHandler.h"
+#import "Photo+Logic.h"
 #import "CPIndexedTableViewController.h"
 #import "CPMostRecentPhotosRefinedElementInterfacing.h"
 #import "CPMostRecentPhotosRefinedElement.h"
+#import "CPScrollableImageViewController.h"
 
 
 @implementation CPMostRecentPhotosTableViewHandler
@@ -69,9 +71,29 @@
 
 #pragma mark Table view delegate handler method
 
+
+//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
+- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
+{
+	return imageController.view.window == nil;
+}
+
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	return;
+	id undeterminedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	if ([undeterminedElement isKindOfClass:[CPMostRecentPhotosRefinedElement class]])
+	{
+		CPMostRecentPhotosRefinedElement *chosenPhoto = (CPMostRecentPhotosRefinedElement *)undeterminedElement;
+		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+		scrollableImageViewController.title = chosenPhoto.title;
+		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto.rawElement];
+		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+		{
+			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+			[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+		}
+	}
+	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
