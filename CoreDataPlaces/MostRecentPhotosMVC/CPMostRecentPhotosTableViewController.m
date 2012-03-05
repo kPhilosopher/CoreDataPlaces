@@ -14,6 +14,7 @@
 #import "CPMostRecentPhotosTableViewHandler.h"
 #import "CPMostRecentPhotosRefinary.h"
 #import "CPMostRecentPhotosDataHandler.h"
+#import "CPAppDelegate.h"
 
 
 @interface CPMostRecentPhotosTableViewController()
@@ -66,9 +67,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 //TODO: fix the location of this method
 - (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"notified."]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	if ([[notification.userInfo objectForKey:NSUpdatedObjectsKey] isKindOfClass:[NSSet class]])
 	{
 		NSSet *setOfUpdatedObjects = (NSSet *)[notification.userInfo objectForKey:NSUpdatedObjectsKey];
@@ -80,9 +78,11 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 				if ([photo.changedValuesForCurrentEvent objectForKey:@"timeOfLastView"])
 				{
 					CP_reindex = YES;
-					NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-					NSLog(@"%@",[NSString stringWithFormat:@"time to reindex."]);
-					NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+					CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+					if ([appDelegate window].bounds.size.width > 500)//iPad
+					{
+						[self viewWillAppear:YES];
+					}
 				}
 			}
 		}
@@ -90,7 +90,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext dataHandler:(CPMostRecentPhotosDataHandler *)dataHandler;
-//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandlingTemporary>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [self initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self) {
@@ -105,16 +104,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		self.fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
 		self.fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
 		self.fetchRequest.fetchBatchSize = 20;
-//		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeLapseSinceLastView < %d",CPMaximumHoursForMostRecentPhoto];//changed
-		
-		
-//		NSError *error = nil;
-//		
-//		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
-//		if (mutableFetchResults == nil) {
-//			// Handle the error.
-//		}
-//		self.listOfRawElements = mutableFetchResults;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(CP_checkTheChangeInManagedObjectContext:)
@@ -138,9 +127,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 - (void)viewWillAppear:(BOOL)animated;
 {
-	NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-	NSLog(@"%@",[NSString stringWithFormat:@"viewWillAppear"]);
-	NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 	[super viewWillAppear:animated];
 	if (CP_reindex) 
 	{
@@ -156,28 +142,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		CP_reindex = NO;
 	}
 }
-
-//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
-//- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
-//{
-//	return imageController.view.window == nil;
-//}
-//
-//- (void)managedObjectSelected:(NSManagedObject *)managedObject;
-//{
-//	if ([managedObject isKindOfClass:[Photo class]])
-//	{
-//		Photo *chosenPhoto = (Photo *)managedObject;
-//		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
-//		scrollableImageViewController.title = chosenPhoto.title;
-//		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
-//		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
-//		{
-//			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-//			[self.navigationController pushViewController:scrollableImageViewController animated:YES];
-//		}
-//	}
-//}
 
 #pragma mark - CPTableViewControllerDataMutating protocol method
 
