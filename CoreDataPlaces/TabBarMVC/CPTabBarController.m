@@ -142,7 +142,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 										 initWithStyle:UITableViewStylePlain 
 										 managedObjectContext:self.managedObjectContext 
 											customSettingsDictionary:nil] autorelease];
-//	self.mostRecentPhotosTableViewController = [[[CPMostRecentPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext] autorelease];
+	self.mostRecentPhotosTableViewController = [CPMostRecentPhotosTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
 	
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
 //	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
