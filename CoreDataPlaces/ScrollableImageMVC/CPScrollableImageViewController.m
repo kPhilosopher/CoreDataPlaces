@@ -411,12 +411,12 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (imageRatio > screenRatio)
 	{
 		minimumZoomScale = screenRect.size.height/self.imageView.bounds.size.height;
-		maximumZoomScale = (screenRect.size.width*1.2)/self.imageView.bounds.size.width;
+		maximumZoomScale = (screenRect.size.width*CPMaximumZoomScale)/self.imageView.bounds.size.width;
 	}
 	else
 	{
 		minimumZoomScale = screenRect.size.width/self.imageView.bounds.size.width;
-		maximumZoomScale = (screenRect.size.height*1.2)/self.imageView.bounds.size.height;
+		maximumZoomScale = (screenRect.size.height*CPMaximumZoomScale)/self.imageView.bounds.size.height;
 	}
 	self.scrollView.maximumZoomScale = maximumZoomScale;
 	self.scrollView.minimumZoomScale = minimumZoomScale;
