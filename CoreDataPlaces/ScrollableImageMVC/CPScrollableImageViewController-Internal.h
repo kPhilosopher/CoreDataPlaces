@@ -6,9 +6,13 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#ifndef CoreDataPlaces_CPScrollableImageViewController_Internal_h
-#define CoreDataPlaces_CPScrollableImageViewController_Internal_h
+#import "CPScrollableImageViewController.h"
 
+@interface CPScrollableImageViewController()
 
+#pragma mark - Internal method
 
-#endif
+- (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace;
+- (void)CP_setTheZoomScales;
+
+@end
