@@ -206,6 +206,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE075D18150602D100D165C5 /* CPScrollableImageViewController-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPScrollableImageViewController-Internal.h"; sourceTree = "<group>"; };
 		CE0A120614FDA5C600C760F4 /* CPPhotoInterfacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotoInterfacing.h; sourceTree = "<group>"; };
 		CE0B38C614CCCDBB006A85BB /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		CE0B38C714CCCDBB006A85BB /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
@@ -820,6 +821,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2AD80E14DB88E400957968 /* CPScrollableImageViewController.h */,
+				CE075D18150602D100D165C5 /* CPScrollableImageViewController-Internal.h */,
 				CE2AD80F14DB88E400957968 /* CPScrollableImageViewController.m */,
 				CE2AD81414DB98EB00957968 /* CPScrollableImageViewController-iPhone.xib */,
 				CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */,
