@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPScrollableImageViewController.h"
+#import "CPScrollableImageViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPPhotosRefinedElement.h"
 #import "FlickrFetcher.h"
@@ -30,8 +30,6 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 	CPPhotosRefinedElement *CP_photosRefinedElement;
 	NSManagedObjectContext *CP_managedObjectContext;
 	Photo *CP_queuedPhoto;
-	
-	//TODO:test if the popover can disappear
 	UIPopoverController *CP_popoverController;
 }
 
@@ -47,6 +45,9 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 #pragma mark -
 
 @implementation CPScrollableImageViewController
+
+const float CPMinimumZoomScale = 0.8;
+const float CPMaximumZoomScale = 1.2;
 
 #pragma mark - Synthesize
 
@@ -72,7 +73,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (self) 
 	{
 		self.managedObjectContext = managedObjectContext;
-		
+		self.view.backgroundColor = [UIColor blackColor];
 		
 		//		self.view.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
 		//		self.navigationItem.backBarButtonItem.accessibilityLabel = ScrollableImageBackBarButtonAccessibilityLabel;
@@ -144,28 +145,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	[super dealloc];
 }
 
-- (CGRect)getTheRectSizeThatWillUtilizeTheScreenSpace
-{
-	CGRect theRectToReturn = CGRectMake(0, 0, 0, 0);
-//	CGRect screenRect = self.view.bounds;
-	CGRect screenRect = self.scrollView.bounds;
-	//TODO: checking what imageRect is
-	//TODO: check if setting screenRect to self.scrollView.bounds is a better idea.
-	CGFloat imageRatio = self.imageView.bounds.size.height / self.imageView.bounds.size.width;
-	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
-	if (imageRatio > screenRatio)
-	{
-		theRectToReturn.size.height = screenRatio * self.imageView.bounds.size.width;
-		theRectToReturn.size.width = self.imageView.bounds.size.width;
-	}
-	else
-	{
-		theRectToReturn.size.width = self.imageView.bounds.size.height / screenRatio;
-		theRectToReturn.size.height = self.imageView.bounds.size.height;
-	}
-	return theRectToReturn;
-}
-
 - (void)newPhotoSequence;
 {
 	NSString *photoURL = self.queuedPhoto.photoURL;
@@ -191,7 +170,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			}
 			else
 			{
-				//			self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
+//				self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
 				CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 				imageData = [UIImage imageWithData:[flickrDataHandler flickrImageDataWithURLString:photoURL]];
 				[flickrDataHandler release];flickrDataHandler = nil;
@@ -226,7 +205,9 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 					}
 					self.currentPhoto = self.queuedPhoto;
 					self.queuedPhoto = nil;
-					[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+					//call to set the scrollScale.
+					[self CP_setTheZoomScales];
+					[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 				}
 				else
 				{
@@ -246,16 +227,12 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
 {
-//	self.currentPhoto = newPhoto;
 	self.queuedPhoto = newPhoto;
 	self.currentPhoto = nil;
 	self.image = nil;
 	[self.imageView removeFromSuperview]; // clear view immediately for user feedback, done again in async block above
-	//NSLog(@"image view: %p, scrollview child: %@", self.imageView, [self.scrollView.subviews objectAtIndex:0]);
 	self.imageView = nil;
 	//TODO: convenience method for this if statement.
-//	CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-//	if ([appDelegate window].bounds.size.width > 500)//iPad
 	if (self.view.window != nil)
 	{
 		if (self.popoverController.popoverVisible)
@@ -273,8 +250,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
     [super viewDidLoad];
 	self.scrollView.delegate = self;
 	//TODO: make the zoomScales be variable to the size of the imageView and iPhone or iPad.
-	self.scrollView.minimumZoomScale = 0.3;
-	self.scrollView.maximumZoomScale = 4;
+	self.scrollView.minimumZoomScale = CPMinimumZoomScale;
+	self.scrollView.maximumZoomScale = CPMaximumZoomScale;
 	//TODO: change the contant name.
 	self.scrollView.accessibilityLabel = CPScrollableImageViewAccessibilityLabel;
 //	self.switchForFavorite.accessibilityLabel = CPFavoriteSwitchAccessibilityLabel;
@@ -361,9 +338,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	//TODO: allow it to autorotate.
-	//when autorotate, the self.view.bounds in the following method does is not the view configured after the rotation.
-//	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
     return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
 			(interfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
 			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
@@ -371,7 +345,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 {
-	[self.scrollView zoomToRect:[self getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+	[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
@@ -403,6 +377,49 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	{
 		sender.on = !sender.on;
 	}
+}
+
+#pragma mark - Helper method
+
+- (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace
+{
+	CGRect theRectToReturn = CGRectMake(0, 0, 0, 0);
+	CGRect screenRect = self.scrollView.bounds;
+	CGFloat imageRatio = self.imageView.bounds.size.height / self.imageView.bounds.size.width;
+	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
+	if (imageRatio > screenRatio)
+	{
+		theRectToReturn.size.height = screenRatio * self.imageView.bounds.size.width;
+		theRectToReturn.size.width = self.imageView.bounds.size.width;
+	}
+	else
+	{
+		theRectToReturn.size.width = self.imageView.bounds.size.height / screenRatio;
+		theRectToReturn.size.height = self.imageView.bounds.size.height;
+	}
+	return theRectToReturn;
+}
+
+- (void)CP_setTheZoomScales;
+{
+	CGFloat minimumZoomScale = 0.0;
+	CGFloat maximumZoomScale = 0.0;
+	CGRect screenRect = self.scrollView.bounds;
+	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
+	CGFloat imageRatio = self.imageView.bounds.size.height / self.imageView.bounds.size.width;
+	
+	if (imageRatio > screenRatio)
+	{
+		minimumZoomScale = screenRect.size.height/self.imageView.bounds.size.height;
+		maximumZoomScale = (screenRect.size.width*CPMaximumZoomScale)/self.imageView.bounds.size.width;
+	}
+	else
+	{
+		minimumZoomScale = screenRect.size.width/self.imageView.bounds.size.width;
+		maximumZoomScale = (screenRect.size.height*CPMaximumZoomScale)/self.imageView.bounds.size.height;
+	}
+	self.scrollView.maximumZoomScale = maximumZoomScale;
+	self.scrollView.minimumZoomScale = minimumZoomScale;
 }
 
 #pragma mark - Split View Delegate Methods

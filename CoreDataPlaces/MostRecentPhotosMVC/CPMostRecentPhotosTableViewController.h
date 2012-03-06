@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+//TODO: change the location of this statement when merging the hierarchy of the TVC and its affiliated classes.
 #import "CPMostRecentPhotosDataIndexer.h"
-//#import "CoreDataTableViewController.h"
 #import "CPIndexedTableViewController.h"
 #import "CPRefining.h"
 
