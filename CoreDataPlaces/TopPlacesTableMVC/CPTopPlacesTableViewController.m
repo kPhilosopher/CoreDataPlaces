@@ -141,6 +141,8 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
 	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+	//TODO: change the way we set the accessibility label.
+	activityIndicator.accessibilityLabel = @"Activity Indicator";
 	[self.view addSubview:activityIndicator];
 	[activityIndicator startAnimating];
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];

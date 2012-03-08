@@ -22,7 +22,7 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
     self = [self initWithStyle:style];
     if (self) {
         // Custom initialization
-		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
+		self.tableView.accessibilityLabel = CPFavoritePlacesTableViewAccessibilityLabel;
 		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"category";

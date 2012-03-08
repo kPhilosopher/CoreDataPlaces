@@ -216,6 +216,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
 	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+	activityIndicator.accessibilityLabel = @"Activity Indicator";
 	[self.view addSubview:activityIndicator];
 	[activityIndicator startAnimating];
 	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);

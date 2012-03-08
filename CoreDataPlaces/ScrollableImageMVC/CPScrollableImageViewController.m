@@ -154,6 +154,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		activityIndicator.color = [UIColor blueColor];
 		activityIndicator.hidesWhenStopped = YES;
 		activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
+		activityIndicator.accessibilityLabel = @"Activity Indicator";
 		[self.view addSubview:activityIndicator];
 		[activityIndicator startAnimating];
 		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
@@ -254,7 +255,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	self.scrollView.maximumZoomScale = CPMaximumZoomScale;
 	//TODO: change the contant name.
 	self.scrollView.accessibilityLabel = CPScrollableImageViewAccessibilityLabel;
-//	self.switchForFavorite.accessibilityLabel = CPFavoriteSwitchAccessibilityLabel;
+	self.switchForFavorite.accessibilityLabel = CPFavoriteSwitchAccessibilityLabel;
 }
 
 - (void)viewDidUnload
