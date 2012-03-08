@@ -22,12 +22,12 @@
 #import "UIApplication-KIFAdditions.h"
 
 
-#define INDEX_IN_TAB_BAR_FOR_TOP_PLACES 0
-#define INDEX_IN_TAB_BAR_FOR_MOST_RECENT_PLACES 1
-
-#define INDEX_IN_NAVCON_FOR_PLACES 0
-#define INDEX_IN_NAVCON_FOR_PICTURE_LIST 1
-#define INDEX_IN_NAVCON_FOR_SCROLLABLE_IMAGE 2
+//#define INDEX_IN_TAB_BAR_FOR_TOP_PLACES 0
+//#define INDEX_IN_TAB_BAR_FOR_MOST_RECENT_PLACES 1
+//
+//#define INDEX_IN_NAVCON_FOR_PLACES 0
+//#define INDEX_IN_NAVCON_FOR_PICTURE_LIST 1
+//#define INDEX_IN_NAVCON_FOR_SCROLLABLE_IMAGE 2
 
 //#import "KIFTestController.h"
 
@@ -41,7 +41,13 @@ static NSMutableDictionary *referenceDictionary = nil;
 enum {
     CPTabBarIndexForTopPlacesTab		= 0,
     CPTabBarIndexForMostRecentPhotosTab	= 1,
-    CPTabBarIndexForFavoritesTab        = 2,
+    CPTabBarIndexForFavoritesTab        = 2
+};
+
+enum {
+	CPNavconIndexForTopPlacesOrFavorites = 0,
+	CPNavconIndexForPhotos = 1,
+	CPNavconIndexForScrollabeImage = 2
 };
 
 @implementation KIFTestScenario (PlacesAdditions)
@@ -140,7 +146,194 @@ enum {
 	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to see if the Most Recent tab bar item is functional"];
 	[scenario addStepsFromArray:preliminaryScenario.steps];
 	
-    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
+    [scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:1 description:@"show that there is no items populated."]];
+	return scenario;
+}
+
+
+
+
+
+
+
+
++ (id)scenarioToTapTopRowPlaceInTopPlacesTab;
+{
+//	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
+    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesPhotosList"];
+//	[scenario addStepsFromArray:preliminaryScenario.steps];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:@"Activity Indicator"]];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel atIndexPath:path]];
+	return scenario;
+}
+
++ (id)scenarioToTapTopRowPhotoInTopPlacesTab;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesScrollableImage"];
+//	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:@"Activity Indicator"]];
+	//TODO: see if I can tap into the app and make sure the indexes are populated, rather than waiting an arbitrary amount of time.
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:2 description:@"waiting for photo list to download"]];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:@"Activity Indicator"]];
+	return scenario;
+}
+
++ (id)scenarioToTapFavoritesSwitchOn;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapFavoritesSwitch"];
+	[scenario addStep:[KIFTestStep stepToSetOn:YES forSwitchWithAccessibilityLabel:CPFavoriteSwitchAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:1 description:@"waiting for switch to toggle"]];
+	return scenario;
+}
+
++ (id)scenarioToTapFavoritesSwitchOff;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapFavoritesSwitch"];
+	[scenario addStep:[KIFTestStep stepToSetOn:NO forSwitchWithAccessibilityLabel:CPFavoriteSwitchAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:1 description:@"waiting for switch to toggle"]];
+	return scenario;
+}
+
++ (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for top places tab"];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPTabBarViewAccessibilityLabel]];
+//	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Top Rated"]];
+	//TODO: figure out why this would create an error.
+//	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToTapTopRatedTabBarItem];
+//	[scenario addStepsFromArray:preliminaryScenario.steps];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	//extract the place title to put in place
+	id windowID = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	CPTabBarController *tabBarController;
+	UINavigationController *navcon;
+//	NSString **referenceString;
+	//TODO: add a step that would release the dictionary.
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSString *backButtonKey = @"BackButtonTitle";
+	[dictionary setObject:@" " forKey:backButtonKey];
+	if ([windowID isKindOfClass:[UIWindow class]])
+	{
+		UIWindow *window = (UIWindow *)windowID;
+		
+		UIViewController *theRootController =  window.rootViewController;
+		if ([theRootController isKindOfClass:[CPTabBarController class]])
+		{
+			tabBarController = (CPTabBarController *)theRootController;
+		}
+		navcon = [tabBarController.viewControllers objectAtIndex:CPTabBarIndexForTopPlacesTab];
+	}
+	[scenario addStep:[KIFTestStep stepWithDescription:@"get the title" executionBlock:^(KIFTestStep *step, NSError **error){
+		if ([navcon.viewControllers objectAtIndex:CPNavconIndexForPhotos])
+		{
+			CPPhotosTableViewController *pictureList = [navcon.viewControllers objectAtIndex:CPNavconIndexForPhotos];
+			NSString *titleString = [pictureList.title copy];
+			[dictionary setObject:titleString forKey:backButtonKey];
+			return KIFTestStepResultSuccess;
+		}
+		return KIFTestStepResultFailure;
+	}]];
+	
+//	[scenario addStep:[KIFTestStep stepToTapViewWithStringReference:&referenceString]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithStringAtKey:backButtonKey ofReferenceDictionary:dictionary]];
+	[scenario addStep:[KIFTestStep stepWithDescription:@"release the hounds" executionBlock:^(KIFTestStep *step, NSError **error){
+		[dictionary release];
+		return KIFTestStepResultSuccess;
+	}]];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Top Places"]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel]];
+	return scenario;
+}
+
++ (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for top places tab"];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPTabBarViewAccessibilityLabel]];
+	//	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Top Rated"]];
+	//TODO: figure out why this would create an error.
+	//	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToTapTopRatedTabBarItem];
+	//	[scenario addStepsFromArray:preliminaryScenario.steps];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	//extract the place title to put in place
+	id windowID = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+	CPTabBarController *tabBarController;
+	UINavigationController *navcon;
+	//	NSString **referenceString;
+	//TODO: add a step that would release the dictionary.
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSString *backButtonKey = @"BackButtonTitle";
+	[dictionary setObject:@" " forKey:backButtonKey];
+	if ([windowID isKindOfClass:[UIWindow class]])
+	{
+		UIWindow *window = (UIWindow *)windowID;
+		
+		UIViewController *theRootController =  window.rootViewController;
+		if ([theRootController isKindOfClass:[CPTabBarController class]])
+		{
+			tabBarController = (CPTabBarController *)theRootController;
+		}
+		navcon = [tabBarController.viewControllers objectAtIndex:CPTabBarIndexForFavoritesTab];
+	}
+	[scenario addStep:[KIFTestStep stepWithDescription:@"get the title" executionBlock:^(KIFTestStep *step, NSError **error){
+		if ([navcon.viewControllers objectAtIndex:CPNavconIndexForPhotos])
+		{
+			CPPhotosTableViewController *pictureList = [navcon.viewControllers objectAtIndex:CPNavconIndexForPhotos];
+			NSString *titleString = [pictureList.title copy];
+			[dictionary setObject:titleString forKey:backButtonKey];
+			return KIFTestStepResultSuccess;
+		}
+		return KIFTestStepResultFailure;
+	}]];
+	
+	//	[scenario addStep:[KIFTestStep stepToTapViewWithStringReference:&referenceString]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithStringAtKey:backButtonKey ofReferenceDictionary:dictionary]];
+	[scenario addStep:[KIFTestStep stepWithDescription:@"release the hounds" executionBlock:^(KIFTestStep *step, NSError **error){
+		[dictionary release];
+		return KIFTestStepResultSuccess;
+	}]];
+	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Favorites"]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel]];
+	return scenario;
+}
+
++ (id)scenarioToTapTopRowPlaceInFavoritesTab;
+{
+    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapTopRowPlaceInFavoritesTab"];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel atIndexPath:path]];
+	return scenario;
+}
+
++ (id)scenarioToTapTopRowPhotoInFavoritesTab;
+{
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapTopRowPhotoInFavoritesTab"];
+	//TODO: see if I can tap into the app and make sure the indexes are populated, rather than waiting an arbitrary amount of time.
+	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:0.5 description:@"waiting for photo list to download"]];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	return scenario;
+}
+
+
+
+
+
+
++ (id)scenarioToViewFavoritesPhotoList;
+{
+	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
+    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewFavoritesPhotoList"];
+	[scenario addStepsFromArray:preliminaryScenario.steps];
+	
+	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel atIndexPath:path]];
+	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
 	return scenario;
 }
 
@@ -191,50 +384,6 @@ enum {
 //
 //	return scenario;
 //}
-
-
-+ (id)scenarioToViewTopPlacesPhotosList;
-{
-	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
-    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesPhotosList"];
-	[scenario addStepsFromArray:preliminaryScenario.steps];
-	
-	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
-	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPTopPlacesTableViewAccessibilityLabel atIndexPath:path]];
-	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel]];
-	return scenario;
-}
-
-+ (id)scenarioToViewTopPlacesScrollableImage;
-{
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewTopPlacesScrollableImage"];
-	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:0.4 description:@"waiting for photo list to download"]];
-	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
-	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPPhotosListViewAccessibilityLabel atIndexPath:path]];
-	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
-	return scenario;
-}
-
-+ (id)scenarioToTapFavoritesSwitch;
-{
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToTapFavoritesSwitch"];
-	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:3 description:@"waiting for switch to toggle"]];
-	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:CPFavoriteSwitchAccessibilityLabel]];
-	[scenario addStep:[KIFTestStep stepToWaitForTimeInterval:1 description:@"waiting for switch to toggle"]];
-	return scenario;
-}
-
-+ (id)scenarioToViewFavoritesPhotoList;
-{
-	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToViewTopPlacesTableView];
-    KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"scenarioToViewFavoritesPhotoList"];
-	[scenario addStepsFromArray:preliminaryScenario.steps];
-	
-	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
-	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel atIndexPath:path]];
-	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
-	return scenario;
-}
 
 //+ (id)scenarioToViewMostRecentPlacesPictureList;
 //{

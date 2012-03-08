@@ -22,9 +22,19 @@
 	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPlacesTableView]];
 	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesTableView]];
 	
-	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesPhotosList]];
-	[self addScenario:[KIFTestScenario scenarioToViewTopPlacesScrollableImage]];
-	[self addScenario:[KIFTestScenario scenarioToTapFavoritesSwitch]];
+	//go to Top Places and add a favorite
+	[self addScenario:[KIFTestScenario scenarioToTapTopRowPlaceInTopPlacesTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapTopRowPhotoInTopPlacesTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapFavoritesSwitchOn]];
+	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForTopPlacesTab]];
+	
+	//check if that favorite is there.
+	[self addScenario:[KIFTestScenario scenarioToViewFavoritePlacesTableView]];
+	[self addScenario:[KIFTestScenario scenarioToTapTopRowPlaceInFavoritesTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapTopRowPhotoInFavoritesTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapFavoritesSwitchOff]];
+	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForTopPlacesTab]];
+	
 //	[self addScenario:[KIFTestScenario scenarioToTapFirstRowOfEverySectionInTableView]];
 	
 //	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPlacesTableView]];

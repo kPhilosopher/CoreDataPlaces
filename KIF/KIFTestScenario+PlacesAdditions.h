@@ -28,11 +28,18 @@
 + (id)scenarioToViewMostRecentPlacesTableView;
 + (id)scenarioToViewFavoritePlacesTableView;
 
-+ (id)scenarioToViewTopPlacesPhotosList;
-+ (id)scenarioToViewTopPlacesScrollableImage;
-+ (id)scenarioToTapFavoritesSwitch;
-+ (id)scenarioToViewFavoritesPhotoList;
++ (id)scenarioToTapTopRowPlaceInTopPlacesTab;
++ (id)scenarioToTapTopRowPhotoInTopPlacesTab;
 
++ (id)scenarioToTapTopRowPlaceInFavoritesTab;
++ (id)scenarioToTapTopRowPhotoInFavoritesTab;
+
++ (id)scenarioToTapFavoritesSwitchOn;
++ (id)scenarioToTapFavoritesSwitchOff;
++ (id)scenarioToViewFavoritesPhotoList;
+//+ (id)scenarioToGoBackToPictureListFromImage;
++ (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
++ (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 //+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
 
 //+ (id)scenarioToViewTopPlacesPictureList;
