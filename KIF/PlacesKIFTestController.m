@@ -33,7 +33,7 @@
 	[self addScenario:[KIFTestScenario scenarioToTapTopRowPlaceInFavoritesTab]];
 	[self addScenario:[KIFTestScenario scenarioToTapTopRowPhotoInFavoritesTab]];
 	[self addScenario:[KIFTestScenario scenarioToTapFavoritesSwitchOff]];
-	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForTopPlacesTab]];
+	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForFavoritesTab]];
 	
 //	[self addScenario:[KIFTestScenario scenarioToTapFirstRowOfEverySectionInTableView]];
 	
