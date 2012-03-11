@@ -102,6 +102,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 {
 	self = [self initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
     if (self) {
+		self.title = @"Most Recents";
 		self.refinedElementType = dataHandler.refinedElementType;
 		self.refinary = dataHandler.refinary;
 		self.tempDataIndexer = dataHandler.dataIndexer;

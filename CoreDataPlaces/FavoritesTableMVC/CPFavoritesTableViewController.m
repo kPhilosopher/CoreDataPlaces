@@ -71,7 +71,7 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 		self.titleKey = @"title";
 		self.subtitleKey = @"subtitle";
 		self.searchKey = @"title";
-		self.title = @"Favorites";
+		self.title = @"Favorite Photos";
 		
 		//TODO: change the design. this is for testing
 //		self.tableViewHandler = [[CPFavoritesTableViewHandler alloc] init];
