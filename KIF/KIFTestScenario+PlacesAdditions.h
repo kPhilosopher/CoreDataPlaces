@@ -14,7 +14,7 @@
 
 #pragma mark - Class method
 
-+ (void)initializeReferenceDictionary;
++ (NSMutableDictionary *)initializeReferenceDictionary;
 
 #pragma mark - Tapping tab bar item
 
@@ -34,7 +34,6 @@
 
 + (id)scenarioToTapTopRowPlaceInFavoritesTab;
 + (id)scenarioToTapTopRowPhotoInFavoritesTab;
-+ (id)scenarioToTapSecondRowPhotoInFavoritesTab;
 
 + (id)scenarioToTapFavoritesSwitchOn;
 + (id)scenarioToTapFavoritesSwitchOff;
@@ -46,6 +45,9 @@
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 
 + (id)scenarioToTapSecondRowPhotoInMostRecentsTab;
++ (id)scenarioToTapTopRowPhotoInMostRecentsTab;
++ (id)scenarioToGoBackToPhotosTableViewForMostRecentsTab;
+
 //+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
 
 //+ (id)scenarioToViewTopPlacesPictureList;
