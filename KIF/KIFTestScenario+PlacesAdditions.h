@@ -25,21 +25,27 @@
 #pragma mark - View the table views
 
 + (id)scenarioToViewTopPlacesTableView;
-+ (id)scenarioToViewMostRecentPlacesTableView;
++ (id)scenarioToViewMostRecentPhotosTableView;
 + (id)scenarioToViewFavoritePlacesTableView;
 
 + (id)scenarioToTapTopRowPlaceInTopPlacesTab;
 + (id)scenarioToTapTopRowPhotoInTopPlacesTab;
++ (id)scenarioToTapTopRowOfSecondSectionInPhotoInTopPlacesTab;
 
 + (id)scenarioToTapTopRowPlaceInFavoritesTab;
 + (id)scenarioToTapTopRowPhotoInFavoritesTab;
++ (id)scenarioToTapSecondRowPhotoInFavoritesTab;
 
 + (id)scenarioToTapFavoritesSwitchOn;
 + (id)scenarioToTapFavoritesSwitchOff;
 + (id)scenarioToViewFavoritesPhotoList;
 //+ (id)scenarioToGoBackToPictureListFromImage;
 + (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
++ (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
++ (id)scenarioToGoBackToPlacesTableViewForFavoritesTab;
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
+
++ (id)scenarioToTapSecondRowPhotoInMostRecentsTab;
 //+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
 
 //+ (id)scenarioToViewTopPlacesPictureList;
