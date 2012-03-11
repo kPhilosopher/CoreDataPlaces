@@ -14,6 +14,9 @@
 #import "CPPlacesRefinedElement.h"
 #import "CPNotificationManager.h"
 
+//TODO: change this when the extern string constants' location is changed.
+#import "CPPhotosTableViewController.h"
+
 
 @interface CPTopPlacesTableViewController ()
 {
@@ -137,13 +140,18 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 - (void)CP_setupTopPlacesList;
 {
 	//TODO: find a better place to put this redundant code.
+	UIView *theLabel = [[UIView alloc] init];
+	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
-	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
-	//TODO: change the way we set the accessibility label.
-	activityIndicator.accessibilityLabel = @"Activity Indicator";
-	[self.view addSubview:activityIndicator];
+	activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+	theLabel.frame = activityIndicator.frame;
+	activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
+	activityIndicator.accessibilityLabel = @"Activity indicator";
+	activityIndicator.hidesWhenStopped = YES;
+	[self.navigationController.view addSubview:theLabel];
+	[theLabel addSubview:activityIndicator];
 	[activityIndicator startAnimating];
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 	dispatch_queue_t placesDownloadQueue = dispatch_queue_create("Flickr places downloader", NULL);
@@ -152,8 +160,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[activityIndicator stopAnimating];
-			[activityIndicator removeFromSuperview];
-			[activityIndicator release];
 			if ([undeterminedListOfPlaces isKindOfClass:[NSArray class]]) 
 			{
 				self.listOfPlaces = (NSArray *)undeterminedListOfPlaces;
@@ -168,6 +174,10 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 //			NSLog(@"%@",@"list of Places");
 //			NSLog(@"%@",[NSString stringWithFormat:@"%@",string]);
 //			NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+			[activityIndicator removeFromSuperview];
+			[activityIndicator release];
+			[theLabel removeFromSuperview];
+			[theLabel release];
 		});
 	});
 	dispatch_release(placesDownloadQueue);

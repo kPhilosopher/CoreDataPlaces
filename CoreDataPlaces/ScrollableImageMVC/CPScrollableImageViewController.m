@@ -15,6 +15,8 @@
 #import "CPNotificationManager.h"
 #import "CPFlickrDataHandler.h"
 
+//TODO: change this when the extern string constants' location is changed.
+#import "CPPhotosTableViewController.h"
 
 static CPScrollableImageViewController *sharedScrollableImageController = nil;
 
@@ -150,12 +152,18 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	NSString *photoURL = self.queuedPhoto.photoURL;
 	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
+		UIView *theLabel = [[UIView alloc] init];
+		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 		activityIndicator.color = [UIColor blueColor];
 		activityIndicator.hidesWhenStopped = YES;
-		activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
-		activityIndicator.accessibilityLabel = @"Activity Indicator";
-		[self.view addSubview:activityIndicator];
+		activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+		theLabel.frame = activityIndicator.frame;
+		activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
+		activityIndicator.accessibilityLabel = @"Activity indicator";
+		activityIndicator.hidesWhenStopped = YES;
+		[self.navigationController.view addSubview:theLabel];
+		[theLabel addSubview:activityIndicator];
 		[activityIndicator startAnimating];
 		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
 		dispatch_async(imageDownloadQueue, ^
@@ -179,7 +187,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			dispatch_async(dispatch_get_main_queue(), ^
 			{
 				[activityIndicator stopAnimating];
-				[activityIndicator release];
 				[self.imageView removeFromSuperview]; // Make sure that any in-flight additions before us are cleared
 				if (imageData)
 				{
@@ -214,6 +221,10 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 				{
 					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 				}
+				[activityIndicator removeFromSuperview];
+				[activityIndicator release];
+				[theLabel removeFromSuperview];
+				[theLabel release];
 			});
 		});
 		dispatch_release(imageDownloadQueue);

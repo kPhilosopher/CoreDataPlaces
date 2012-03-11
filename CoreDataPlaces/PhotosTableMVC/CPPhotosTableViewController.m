@@ -23,6 +23,9 @@
 	NSMutableArray *CP_indexedListOfPhotos;
 	NSString *CP_placeID;
 	Place *CP_currentPlace;
+	
+//	UILabel *CP_theLabel;
+//	UIActivityIndicatorView *CP_activityIndicator;
 //	id <PictureListTableViewControllerDelegate> CP_iPadScrollableImageViewControllerDelegate;
 }
 @end
@@ -34,6 +37,7 @@
 NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 //NSString *PictureListViewAccessibilityLabel = @"Picture list";
 NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
+NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker";
 
 #pragma mark - Synthesize
 
@@ -41,6 +45,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize currentPlace = CP_currentPlace;
 @synthesize placeID = CP_placeID;
+
+
+//@synthesize activityIndicator = CP_activityIndicator;
+//@synthesize theLabel = CP_theLabel;
 //@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
 
 #pragma mark - Factory method
@@ -133,27 +141,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		if (placeID)
 		{
 			self.placeID = placeID;
-			//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
-			//			self.listOfPictures_theModel = pictureList;
-			
-			//			start downloading the list of photos in another thread.
-			//!!!!change this so that the handler is given by the initializer
-//			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-//			self.listOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
-//			id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
-//			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
-//			{
-//				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
-//			}
-//			else
-//			{
-//				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-//			}
-			
-//			[flickrDataHandler release];flickrDataHandler = nil;
 			self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
-//			[self CP_setupPhotosListWithPlaceID:placeID];
-//			self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
 		}
 	}
 	return self;
@@ -161,30 +149,6 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 
 //TODO: change the initializers to not include with****
 
-//- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler placeIDString:(NSString *)placeID;
-//{
-//	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
-//    if (self)
-//	{
-//		if (placeID)
-//		{
-//			//			self.dataIndexHandler = [[[PictureListDataIndexer alloc] init] autorelease];
-//			//			self.listOfPictures_theModel = pictureList;
-//			
-//			
-//			//			start downloading the list of photos in another thread.
-//			//!!!!change this so that the handler is given by the initializer
-//			CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-//			self.listOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:placeID];
-//			id undeterminedListOfPhotos = [
-//										   [flickrDataHandler release];flickrDataHandler = nil;
-//										   self.view.accessibilityLabel = PictureListViewAccessibilityLabel;
-//										   self.navigationItem.backBarButtonItem.accessibilityLabel = PictureListBackBarButtonAccessibilityLabel;
-//										   
-//										   }
-//										   }
-//										   return self;
-//										   }
 
 #pragma mark - View lifecycle
 
@@ -193,6 +157,7 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 	[CP_indexedListOfPhotos release];
 	[CP_listOfPhotos release];
 	[CP_currentPlace release];
+//	[CP_activityIndicator release];
 	[super dealloc];
 }
 
@@ -211,13 +176,20 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
 {
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+	//TODO: make a class that contains all the constant strings that is used in more than one place.
 	//TODO: find a better place to put this redundant code.
+	UIView *theLabel = [[UIView alloc] init];
+	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
-	activityIndicator.frame = CGRectMake((self.view.bounds.size.width - activityIndicator.bounds.size.width)/2, (self.view.bounds.size.height - activityIndicator.bounds.size.height)/2, activityIndicator.bounds.size.width, activityIndicator.bounds.size.height);
-	activityIndicator.accessibilityLabel = @"Activity Indicator";
-	[self.view addSubview:activityIndicator];
+	activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+	theLabel.frame = activityIndicator.frame;
+	activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
+	activityIndicator.accessibilityLabel = @"Activity indicator";
+	activityIndicator.hidesWhenStopped = NO;
+	[self.navigationController.view addSubview:theLabel];
+	[theLabel addSubview:activityIndicator];
 	[activityIndicator startAnimating];
 	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
 	dispatch_async(photosDownloadQueue, ^{
@@ -225,8 +197,6 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[activityIndicator stopAnimating];
-			[activityIndicator removeFromSuperview];
-			[activityIndicator release];
 			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
 			{
 				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
@@ -236,6 +206,10 @@ NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
+			[activityIndicator removeFromSuperview];
+			[activityIndicator release];
+			[theLabel removeFromSuperview];
+			[theLabel release];
 		});
 	});
 	dispatch_release(photosDownloadQueue);

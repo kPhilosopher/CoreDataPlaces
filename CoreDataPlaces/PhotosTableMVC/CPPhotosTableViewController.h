@@ -27,6 +27,7 @@
 
 extern NSString *CPPhotosListViewAccessibilityLabel;
 //extern NSString *PictureListBackBarButtonAccessibilityLabel;
+extern NSString *CPActivityIndicatorMarkerForKIF;
 
 #pragma mark - Property
 
