@@ -23,9 +23,6 @@
 	NSMutableArray *CP_indexedListOfPhotos;
 	NSString *CP_placeID;
 	Place *CP_currentPlace;
-	
-//	UILabel *CP_theLabel;
-//	UIActivityIndicatorView *CP_activityIndicator;
 //	id <PictureListTableViewControllerDelegate> CP_iPadScrollableImageViewControllerDelegate;
 }
 @end
@@ -45,10 +42,6 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize currentPlace = CP_currentPlace;
 @synthesize placeID = CP_placeID;
-
-
-//@synthesize activityIndicator = CP_activityIndicator;
-//@synthesize theLabel = CP_theLabel;
 //@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
 
 #pragma mark - Factory method
@@ -157,7 +150,6 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 	[CP_indexedListOfPhotos release];
 	[CP_listOfPhotos release];
 	[CP_currentPlace release];
-//	[CP_activityIndicator release];
 	[super dealloc];
 }
 
@@ -187,7 +179,7 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 	theLabel.frame = activityIndicator.frame;
 	activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
 	activityIndicator.accessibilityLabel = @"Activity indicator";
-	activityIndicator.hidesWhenStopped = NO;
+	activityIndicator.hidesWhenStopped = YES;
 	[self.navigationController.view addSubview:theLabel];
 	[theLabel addSubview:activityIndicator];
 	[activityIndicator startAnimating];
