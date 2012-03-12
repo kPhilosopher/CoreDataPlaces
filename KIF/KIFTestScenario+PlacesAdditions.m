@@ -412,6 +412,7 @@ enum {
 	NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
 	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPMostRecentPhotosTableViewAccessibilityLabel atIndexPath:path]];
 	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:CPActivityIndicatorMarkerForKIF]];
 	id windowID = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
 	CPTabBarController *tabBarController;
 	UINavigationController *navcon;
@@ -462,6 +463,7 @@ enum {
 	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
 	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPMostRecentPhotosTableViewAccessibilityLabel atIndexPath:path]];
 	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:CPActivityIndicatorMarkerForKIF]];
 	//TODO: compare the image information.
 	id windowID = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
 	CPTabBarController *tabBarController;
@@ -491,6 +493,8 @@ enum {
 			NSString *photoURLToCompare = [dictionary objectForKey:photoURLKey];
 			NSAssert([photoURL isEqualToString:photoURLToCompare],@"The photoURL isn't the same.");
 			
+			[referenceDictionary release];
+			referenceDictionary = nil;
 			return KIFTestStepResultSuccess;
 		}
 		return KIFTestStepResultFailure;
