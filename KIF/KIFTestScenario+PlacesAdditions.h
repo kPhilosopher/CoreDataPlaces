@@ -12,9 +12,11 @@
 
 @interface KIFTestScenario (PlacesAdditions)
 
+extern NSString *CPPhotoURLKey;
+
 #pragma mark - Class method
 
-+ (NSMutableDictionary *)initializeReferenceDictionary;
++ (NSMutableDictionary *)referenceDictionary;
 
 #pragma mark - Tapping tab bar item
 
@@ -38,24 +40,14 @@
 + (id)scenarioToTapFavoritesSwitchOn;
 + (id)scenarioToTapFavoritesSwitchOff;
 + (id)scenarioToViewFavoritesPhotoList;
-//+ (id)scenarioToGoBackToPictureListFromImage;
 + (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForFavoritesTab;
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 
-+ (id)scenarioToTapSecondRowPhotoInMostRecentsTab;
-+ (id)scenarioToTapTopRowPhotoInMostRecentsTab;
++ (id)scenarioToTapSecondRowPhotoInMostRecentsTabAndSetPhotoURL;
++ (id)scenarioToTapTopRowPhotoInMostRecentsTabAndCheckPhotoURL;
 + (id)scenarioToGoBackToPhotosTableViewForMostRecentsTab;
 
-//+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
-
-//+ (id)scenarioToViewTopPlacesPictureList;
-//+ (id)scenarioToViewMostRecentPlacesPictureList;
-//+ (id)scenarioToViewScrollableViewInTopPlacesTab;
-//+ (id)scenarioToViewScrollableViewInMostRecentPlacesTab;
-//+ (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
-//+ (id)scenarioToGoBackToPlacesTableViewForMostRecentPlacesTab;
-//+ (id)scenarioToEraseAllTheRowsInMostRecentPlaces;
 
 @end

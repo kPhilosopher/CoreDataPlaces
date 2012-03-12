@@ -44,9 +44,9 @@
 	
 	//check if the MostRecentPhotos work.
 	[self addScenario:[KIFTestScenario scenarioToViewMostRecentPhotosTableView]];
-	[self addScenario:[KIFTestScenario scenarioToTapSecondRowPhotoInMostRecentsTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapSecondRowPhotoInMostRecentsTabAndSetPhotoURL]];
 	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForMostRecentsTab]];
-	[self addScenario:[KIFTestScenario scenarioToTapTopRowPhotoInMostRecentsTab]];
+	[self addScenario:[KIFTestScenario scenarioToTapTopRowPhotoInMostRecentsTabAndCheckPhotoURL]];
 	[self addScenario:[KIFTestScenario scenarioToGoBackToPhotosTableViewForMostRecentsTab]];
 //	[self addScenario:[KIFTestScenario scenarioToTapFirstRowOfEverySectionInTableView]];
 	
