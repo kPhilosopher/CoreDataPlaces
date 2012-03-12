@@ -333,6 +333,7 @@
 		CEB6110B14F0EC85008DA3AE /* CPPhotosTableViewController-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPPhotosTableViewController-Internal.h"; sourceTree = "<group>"; };
 		CEC4859C14F47ED00026B4D3 /* PlacesCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesCoreDataTableViewController.h; sourceTree = "<group>"; };
 		CEC4859D14F47ED00026B4D3 /* PlacesCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesCoreDataTableViewController.m; sourceTree = "<group>"; };
+		CED98736150EA15D0084D521 /* KIFTestScenario+PlacesAdditions-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KIFTestScenario+PlacesAdditions-Internal.h"; sourceTree = "<group>"; };
 		CEDA8AAF14D1D329005A2EB0 /* CPFlickrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlickrDataSource.h; sourceTree = "<group>"; };
 		CEDA8AB014D1D329005A2EB0 /* CPFlickrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlickrDataSource.m; sourceTree = "<group>"; };
 		CEDA8AB314D1D34E005A2EB0 /* CPFlickrDataSource-Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPFlickrDataSource-Internal.h"; sourceTree = "<group>"; };
@@ -488,6 +489,7 @@
 				CE1C5CCC14F1EFD200F1C617 /* PlacesKIFTestController.h */,
 				CE1C5CCD14F1EFD200F1C617 /* PlacesKIFTestController.m */,
 				CE1C5CC814F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.h */,
+				CED98736150EA15D0084D521 /* KIFTestScenario+PlacesAdditions-Internal.h */,
 				CE1C5CC914F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m */,
 				CE1C5CCA14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.h */,
 				CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */,

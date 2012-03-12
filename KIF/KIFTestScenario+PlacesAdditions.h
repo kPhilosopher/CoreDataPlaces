@@ -1,6 +1,6 @@
 //
 //  KIFTestScenario+PlacesAdditions.h
-//  Places_09
+//  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 12/16/11.
 //  Copyright (c) 2011 Jinwoo Baek. All rights reserved.
@@ -12,17 +12,9 @@
 
 @interface KIFTestScenario (PlacesAdditions)
 
-extern NSString *CPPhotoURLKey;
-
 #pragma mark - Class method
 
 + (NSMutableDictionary *)referenceDictionary;
-
-#pragma mark - Tapping tab bar item
-
-+ (id)scenarioToTapTopRatedTabBarItem;
-+ (id)scenarioToTapFavoritesTabBarItem;
-+ (id)scenarioToTapMostRecentTabBarItem;
 
 #pragma mark - View the table views
 
@@ -32,21 +24,20 @@ extern NSString *CPPhotoURLKey;
 
 + (id)scenarioToTapTopRowPlaceInTopPlacesTab;
 + (id)scenarioToTapTopRowPhotoInTopPlacesTab;
-+ (id)scenarioToTapTopRowOfSecondSectionInPhotoInTopPlacesTab;
++ (id)scenarioToTapSecondPhotoInTopPlacesTab;
 
 + (id)scenarioToTapTopRowPlaceInFavoritesTab;
 + (id)scenarioToTapTopRowPhotoInFavoritesTab;
 
 + (id)scenarioToTapFavoritesSwitchOn;
 + (id)scenarioToTapFavoritesSwitchOff;
-+ (id)scenarioToViewFavoritesPhotoList;
 + (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForFavoritesTab;
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 
-+ (id)scenarioToTapSecondRowPhotoInMostRecentsTabAndSetPhotoURL;
-+ (id)scenarioToTapTopRowPhotoInMostRecentsTabAndCheckPhotoURL;
++ (id)scenarioToTapSecondRowPhotoInMostRecentsTabAndSetPhotoURLInReferenceDictionary;
++ (id)scenarioToTapTopRowPhotoInMostRecentsTabAndCheckPhotoURLAgainstReferenceDictionary;
 + (id)scenarioToGoBackToPhotosTableViewForMostRecentsTab;
 
 
