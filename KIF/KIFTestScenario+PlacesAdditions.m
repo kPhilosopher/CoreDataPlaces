@@ -142,6 +142,7 @@ enum {
 	NSIndexPath *path = [NSIndexPath indexPathForRow:1 inSection:0];
 	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPMostRecentPhotosTableViewAccessibilityLabel atIndexPath:path]];
 	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:CPActivityIndicatorMarkerForKIF]];
 	
 	UINavigationController *navigationController = [KIFTestScenario CP_navigationControllerWithIndexAtTabBar:CPTabBarIndexForMostRecentPhotosTab];
 	
@@ -166,6 +167,7 @@ enum {
 	NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
 	[scenario addStep:[KIFTestStep stepToTapRowInTableViewWithAccessibilityLabel:CPMostRecentPhotosTableViewAccessibilityLabel atIndexPath:path]];
 	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToWaitForAbsenceOfViewWithAccessibilityLabel:CPActivityIndicatorMarkerForKIF]];
 	
 	UINavigationController *navigationController = [KIFTestScenario CP_navigationControllerWithIndexAtTabBar:CPTabBarIndexForMostRecentPhotosTab];
 	
@@ -277,7 +279,7 @@ enum {
 		return KIFTestStepResultFailure;
 	}]];
 	
-	[scenario addStep:[KIFTestStep stepToTapViewWithStringAtKey:backButtonKey ofReferenceDictionary:dictionary]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabelInReferenceDictionary:dictionary labelKey:backButtonKey ]];
 	[scenario addStep:[KIFTestStep stepWithDescription:@"release the hounds" executionBlock:^(KIFTestStep *step, NSError **error){
 		[dictionary release];
 		return KIFTestStepResultSuccess;
