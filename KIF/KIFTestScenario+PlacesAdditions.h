@@ -1,6 +1,6 @@
 //
 //  KIFTestScenario+PlacesAdditions.h
-//  Places_09
+//  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 12/16/11.
 //  Copyright (c) 2011 Jinwoo Baek. All rights reserved.
@@ -14,13 +14,7 @@
 
 #pragma mark - Class method
 
-+ (NSMutableDictionary *)initializeReferenceDictionary;
-
-#pragma mark - Tapping tab bar item
-
-+ (id)scenarioToTapTopRatedTabBarItem;
-+ (id)scenarioToTapFavoritesTabBarItem;
-+ (id)scenarioToTapMostRecentTabBarItem;
++ (NSMutableDictionary *)referenceDictionary;
 
 #pragma mark - View the table views
 
@@ -30,32 +24,21 @@
 
 + (id)scenarioToTapTopRowPlaceInTopPlacesTab;
 + (id)scenarioToTapTopRowPhotoInTopPlacesTab;
-+ (id)scenarioToTapTopRowOfSecondSectionInPhotoInTopPlacesTab;
++ (id)scenarioToTapSecondPhotoInTopPlacesTab;
 
 + (id)scenarioToTapTopRowPlaceInFavoritesTab;
 + (id)scenarioToTapTopRowPhotoInFavoritesTab;
 
 + (id)scenarioToTapFavoritesSwitchOn;
 + (id)scenarioToTapFavoritesSwitchOff;
-+ (id)scenarioToViewFavoritesPhotoList;
-//+ (id)scenarioToGoBackToPictureListFromImage;
 + (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
 + (id)scenarioToGoBackToPlacesTableViewForFavoritesTab;
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 
-+ (id)scenarioToTapSecondRowPhotoInMostRecentsTab;
-+ (id)scenarioToTapTopRowPhotoInMostRecentsTab;
++ (id)scenarioToTapSecondRowPhotoInMostRecentsTabAndSetPhotoURLInReferenceDictionary;
++ (id)scenarioToTapTopRowPhotoInMostRecentsTabAndCheckPhotoURLAgainstReferenceDictionary;
 + (id)scenarioToGoBackToPhotosTableViewForMostRecentsTab;
 
-//+ (id)scenarioToTapFirstRowOfEverySectionInTableView;
-
-//+ (id)scenarioToViewTopPlacesPictureList;
-//+ (id)scenarioToViewMostRecentPlacesPictureList;
-//+ (id)scenarioToViewScrollableViewInTopPlacesTab;
-//+ (id)scenarioToViewScrollableViewInMostRecentPlacesTab;
-//+ (id)scenarioToGoBackToPlacesTableViewForTopPlacesTab;
-//+ (id)scenarioToGoBackToPlacesTableViewForMostRecentPlacesTab;
-//+ (id)scenarioToEraseAllTheRowsInMostRecentPlaces;
 
 @end

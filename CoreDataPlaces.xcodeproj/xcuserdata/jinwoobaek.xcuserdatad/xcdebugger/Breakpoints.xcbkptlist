@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Frameworks/KIF/Classes/KIFTestStep.m"
-         timestampString = "352942389.238601"
+         timestampString = "353302961.721043"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1392"
-         endingLineNumber = "1392">
+         startingLineNumber = "1173"
+         endingLineNumber = "1173">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
