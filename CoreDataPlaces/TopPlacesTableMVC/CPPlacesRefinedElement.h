@@ -6,8 +6,13 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CPRefinedElement.h"
 
-@interface CPPlacesRefinedElement : NSObject
+
+@interface CPPlacesRefinedElement : CPRefinedElement
+
+#pragma mark - Property
+
+@property (retain) NSString *placeID;
 
 @end

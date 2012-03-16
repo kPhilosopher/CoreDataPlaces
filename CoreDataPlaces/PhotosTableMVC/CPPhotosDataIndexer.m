@@ -8,75 +8,70 @@
 
 #import "CPPhotosDataIndexer.h"
 #import "JBBPriorityQueue.h"
-#import "CPPhotosRefinedElement.h"
+#import "CPRefinedElement.h"
 
-
-@interface CPPhotosDataIndexer ()
-{
-@private
-	NSInteger CP_highSection;
-}
-@end
-
-#pragma mark -
 
 @implementation CPPhotosDataIndexer
 
-#pragma mark - Synthesize
+#pragma mark - CPDataIndexHandling protocol methods
 
-@synthesize highSection = CP_highSection;
-
-#pragma mark - Instance method to override
-
-- (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
+- (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
+	NSInteger highSection = 0;
+	
+	//eliminate duplicates using NSSet.
 	NSMutableSet *setOfHours = [NSMutableSet set];
-	self.highSection = 0;
-	for (CPPhotosRefinedElement *refinedElement in temporaryDataElements) 
+	for (CPRefinedElement *refinedElement in temporaryDataElements) 
 	{
 		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
 	}
+	
+	//find the ordering of the numbers using priority queue.
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[NSNumber class] ordering:NSOrderedAscending];
 	for (NSNumber *number in setOfHours) 
-	{
 		[priorityQueue addObject:number];
-	}
-	self.highSection = [priorityQueue count];
-	NSMutableArray *copiedArray = [NSMutableArray arrayWithArray:temporaryDataElements];
-	for (int indexForSections = 0; indexForSections < self.highSection; indexForSections++) 
+	
+	
+	//map the ordering to a sequential number for array.
+	highSection = [priorityQueue count];
+	NSMutableDictionary *sectionNumberMapping = [NSMutableDictionary dictionaryWithCapacity:highSection];
+	for (int sectionNumber = 0; sectionNumber < highSection; sectionNumber++)
 	{
-		NSNumber *temporaryHourNumber = [priorityQueue removeFirstObject];
-
-		for (int indexForEachElement = 0; indexForEachElement < [copiedArray count]; indexForEachElement++) 
-		{
-			CPPhotosRefinedElement *refinedElement = [copiedArray objectAtIndex:indexForEachElement];
-			if ([temporaryHourNumber intValue] == [refinedElement.comparable intValue])
-			{
-				refinedElement.sectionNumber = indexForSections;
-				[copiedArray removeObjectAtIndex:indexForEachElement];
-				indexForEachElement = indexForEachElement - 1;
-			}
-			
-		}
+		NSNumber *comparableValue = [priorityQueue removeFirstObject];
+		NSString *comparableIntAsKey = [NSString stringWithFormat:@"%d",[comparableValue intValue]];
+		[sectionNumberMapping setObject:[NSString stringWithFormat:@"%d",sectionNumber] forKey:comparableIntAsKey];
+	}
+	
+	//set the sections numbers for each element.
+	for (CPRefinedElement *refinedElement in temporaryDataElements)
+	{
+		NSString *key = [NSString stringWithFormat:@"%d",[refinedElement.comparable intValue]];
+		refinedElement.sectionNumber = [[sectionNumberMapping objectForKey:key] intValue];
 	}
 	[priorityQueue release];
+	return highSection;
 }
 
-- (NSInteger)sectionCount;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
 {
-	return self.highSection;
-}
-
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
-{
-	NSMutableArray *temporarySection = [NSMutableArray arrayWithCapacity:[sectionArray count]];
-	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[CPPhotosRefinedElement class] ordering:NSOrderedAscending];
-	for (CPPhotosRefinedElement *refinedElement in sectionArray)
+	//setup the priority queue.
+	id element = [unsortedSection lastObject];
+	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[element class] ordering:NSOrderedAscending];
+	
+	//load the priority queue with the refined elements.
+	for (CPRefinedElement *refinedElement in unsortedSection)
 		[priorityQueue addObject:refinedElement];
+	
+	//place the sorted elements into an array.
 	int upperLimit = [priorityQueue count];
+	NSMutableArray *sortedSection = [NSMutableArray arrayWithCapacity:upperLimit];
 	for (int index = 0; index < upperLimit; index++) 
-		[temporarySection addObject:[priorityQueue removeFirstObject]];
-	[elementSections addObject:temporarySection];
+		[sortedSection addObject:[priorityQueue removeFirstObject]];
+	
+	//add the sorted sections in the array of sections.
+	[indexedSections addObject:sortedSection];
+	
+	//clean up
 	[priorityQueue release];
 }
 

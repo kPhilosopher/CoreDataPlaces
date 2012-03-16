@@ -12,8 +12,4 @@
 
 @interface CPPhotosDataIndexer : CPDataIndexer
 
-#pragma mark - Property
-
-@property NSInteger highSection;
-
 @end

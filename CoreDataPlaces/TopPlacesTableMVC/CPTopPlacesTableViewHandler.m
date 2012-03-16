@@ -7,9 +7,9 @@
 //
 
 #import "CPTopPlacesTableViewHandler.h"
-#import "CPRefinedElement.h"
+#import "CPPlacesRefinedElement.h"
 #import "CPTopPlacesTableViewController.h"
-//#import "CPPhotosTableViewController.h"
+#import "CPPhotosTableViewController.h"
 
 
 @implementation CPTopPlacesTableViewHandler
@@ -35,15 +35,15 @@
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-//	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
-//	CPPlacesRefinedElement *placesRefinedElement;
-//	if ([refinedElement isKindOfClass:[CPRefinedElement class]])
-//	{
-//		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
-//		//TODO:change the interface to pass the managedobject, not the refinedElement.
-//		CPPhotosTableViewController *photosTableViewController = [CPPhotosTableViewController photosTableViewControllerWithRefinedElement:placesRefinedElement manageObjectContext:indexedTableViewController.managedObjectContext];
-//		[indexedTableViewController.navigationController pushViewController:photosTableViewController animated:YES];
-//	}
+	
+	CPRefinedElement *refinedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	CPPlacesRefinedElement *placesRefinedElement;
+	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]])
+	{
+		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
+		CPPhotosTableViewController *photosTableViewController = [CPPhotosTableViewController photosTableViewControllerWithRefinedElement:placesRefinedElement manageObjectContext:indexedTableViewController.managedObjectContext];
+		[indexedTableViewController.navigationController pushViewController:photosTableViewController animated:YES];
+	}
 	
 	
 	

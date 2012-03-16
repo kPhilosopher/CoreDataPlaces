@@ -8,9 +8,9 @@
 
 #import "CPTopPlacesTableViewController-Internal.h"
 #import "CPTopPlacesTableViewHandler.h"
-#import "CPRefinedElement.h"
-#import "CPTopPlacesDataIndexer.h"
-#import "CPTopPlacesRefinary.h"
+#import "CPPlacesRefinedElement.h"
+#import "CPPlacesDataIndexer.h"
+#import "CPPlacesRefinary.h"
 #import "CPFlickrDataHandler.h"
 #import "CPNotificationManager.h"
 #import "CPIndexAssistant.h"
@@ -49,7 +49,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 		self.title = @"Top Places";
 		self.tableView.accessibilityLabel = CPTopPlacesTableViewAccessibilityLabel;
 		
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)] autorelease];
+		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_setupTopPlacesList)] autorelease];
 	}
     return self;
 }
@@ -59,9 +59,9 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 + (id)topPlacesTableViewControllerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {	
 	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
-	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
-	CPTopPlacesDataIndexer *dataIndexer = [[CPTopPlacesDataIndexer alloc] init];
-	CPTopPlacesRefinary *refinary = [[CPTopPlacesRefinary alloc] init];
+	CPPlacesRefinedElement *refinedElementType = [[CPPlacesRefinedElement alloc] init];
+	CPPlacesDataIndexer *dataIndexer = [[CPPlacesDataIndexer alloc] init];
+	CPPlacesRefinary *refinary = [[CPPlacesRefinary alloc] init];
 	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
 	[refinary release]; refinary = nil;
 	[dataIndexer release]; dataIndexer = nil;
@@ -81,13 +81,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	[super dealloc];
 }
 
-#pragma mark - Convenience method
-
-- (void)CP_refreshTheTopPlacesList;
-{
-	[self CP_setupTopPlacesList];
-}
-
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
@@ -97,6 +90,13 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	}
 	
 }
+
+#pragma mark - Convenience method
+
+//- (void)CP_refreshTheTopPlacesList;
+//{
+//	[self CP_setupTopPlacesList];
+//}
 
 //TODO: refactor
 - (void)CP_setupTopPlacesList;

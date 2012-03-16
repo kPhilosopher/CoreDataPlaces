@@ -19,6 +19,6 @@
 #pragma mark - Internal method
 
 - (void)CP_setupTopPlacesList;
-- (void)CP_refreshTheTopPlacesList;
+//- (void)CP_refreshTheTopPlacesList;
 
 @end

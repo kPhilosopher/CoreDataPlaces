@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CPTableViewHandler.h"
 
-@interface CPPhotosTitleForHeaderTableViewHandler : NSObject
+@interface CPPhotosTitleForHeaderTableViewHandler : CPTableViewHandler
 
 @end

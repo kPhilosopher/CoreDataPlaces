@@ -7,11 +7,13 @@
 //
 
 #import "CPPhotosTableViewController-Internal.h"
-#import "CPPhotosRefinedElement.h"
+#import "CPPhotosRefinary.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
-#import "CPFlickrDataHandler.h"
+#import "CPPhotosRefinedElement.h"
+#import "CPIndexAssistant.h"
 #import "CPPlacesRefinedElement.h"
+#import "CPFlickrDataHandler.h"
 #import "Place.h"
 #import "CPNotificationManager.h"
 
@@ -21,9 +23,7 @@
 @private
 	NSArray *CP_listOfPhotos;
 	NSMutableArray *CP_indexedListOfPhotos;
-	NSString *CP_placeID;
-	Place *CP_currentPlace;
-//	id <PictureListTableViewControllerDelegate> CP_iPadScrollableImageViewControllerDelegate;
+	CPPlacesRefinedElement *CP_placeRefinedElement;
 }
 @end
 
@@ -32,124 +32,116 @@
 @implementation CPPhotosTableViewController
 
 NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
-//NSString *PictureListViewAccessibilityLabel = @"Picture list";
-NSString *PictureListBackBarButtonAccessibilityLabel = @"Back";
+//TODO: change the location of this constant.
 NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker";
 
 #pragma mark - Synthesize
 
 @synthesize listOfPhotos = CP_listOfPhotos;
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
-@synthesize currentPlace = CP_currentPlace;
-@synthesize placeID = CP_placeID;
-//@synthesize iPadScrollableImageViewControllerDelegate = CP_iPadScrollableImageViewControllerDelegate;
+@synthesize placeRefinedElement = CP_placeRefinedElement;
 
 #pragma mark - Factory method
 
 + (id)photosTableViewControllerWithRefinedElement:(CPPlacesRefinedElement *)refinedElement manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	CPPhotosTableViewController *photosTableViewController = nil;
-	CPPlacesRefinedElement *placesRefinedElement = nil;
-	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]]) 
+	CPPhotosRefinary *refinary = [[CPPhotosRefinary alloc] init];
+	CPPhotosDataIndexer *dataIndexer = [[CPPhotosDataIndexer alloc] init];
+	CPPhotosTableViewHandler *tableViewHandler = [[CPPhotosTableViewHandler alloc] init];
+	CPPhotosRefinedElement *refinedElementType = [[CPPhotosRefinedElement alloc] init];
+	CPIndexAssistant *indexAssitant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
+	[refinary release]; refinary = nil;
+	[dataIndexer release]; dataIndexer = nil;
+	[tableViewHandler release]; tableViewHandler = nil;
+	[refinedElementType release]; refinedElementType = nil;
+	CPPhotosTableViewController *photosTableViewController = [[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssitant managedObjectContext:managedObjectContext placeRefinedElement:refinedElement];
+	[indexAssitant release]; indexAssitant = nil;
+	return [photosTableViewController autorelease];
+}
+
+//TODO: refactor to be in a insertion handler for coredata objects.
++ (Place *)placeWithRefinedElement:(CPPlacesRefinedElement *)refinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{
+	Place *currentPlace = nil;
+	NSString *placeID = refinedElement.placeID;
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
+	[fetchRequest setSortDescriptors:nil];
+	
+	NSError *error = nil;
+	NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
+	if ((returnedObjectCount == 0) && !error)
 	{
-		placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
-		NSString *placeID = [placesRefinedElement.dictionary objectForKey:@"place_id"];
-		//TODO: check if this placeID duplication check works. (write a test)
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
-		fetchRequest.fetchBatchSize = 1;
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
-		[fetchRequest setSortDescriptors:nil];
-		
-		Place *chosenPlace = nil;
+		currentPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedObjectContext];
+		//		Place *currentPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedObjectContext];
+		currentPlace.title = refinedElement.title;
+		currentPlace.subtitle = refinedElement.subtitle;
+		currentPlace.category = [refinedElement.title substringToIndex:1];
+		currentPlace.placeID = placeID;
+		currentPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
 		
 		NSError *error = nil;
-		NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
-		if ((returnedObjectCount == 0) && !error)
+		
+		//Hal's approach to finding the source of error.
+		
+		NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+		if (![managedObjectContext save:&error])
 		{
-			chosenPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedObjectContext];
-	//		Place *chosenPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedObjectContext];
-			chosenPlace.title = placesRefinedElement.title;
-			chosenPlace.subtitle = placesRefinedElement.subtitle;
-			chosenPlace.category = [chosenPlace.title substringToIndex:1];
-			chosenPlace.placeID = placeID;
-			chosenPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
-			
-			NSError *error = nil;
-			
-//Hal's approach to finding the source of error.
-			
-			NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
-			if (![managedObjectContext save:&error])
-			{
-				//handle the error.
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-			NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+			//handle the error.
+			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 		}
-		else if (error)
+		NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+	}
+	else if (error)
+	{
+		NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+	}
+	else
+	{
+		NSError *error = nil;
+		NSArray *fetchRequestOutput = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+		if (!fetchRequestOutput)
 		{
 			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 		}
+		else if ([fetchRequestOutput count] > 1)
+		{
+			NSLog(@"placeID is not a key anymore");
+		}
 		else
 		{
-			NSError *error = nil;
-			NSArray *fetchRequestOutput = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-			if (!fetchRequestOutput)
-			{
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-			else if ([fetchRequestOutput count] > 1)
-			{
-				NSLog(@"placeID is not a key anymore");
-			}
-			else
-			{
-				chosenPlace = [fetchRequestOutput lastObject];
-			}
+			currentPlace = [fetchRequestOutput lastObject];
 		}
-		[fetchRequest release];
-		CPPhotosRefinedElement *refinedElementForDataIndexer = [[CPPhotosRefinedElement alloc] init];
-		CPPhotosDataIndexer *dataIndexHandler = [[CPPhotosDataIndexer alloc] initWithRefinedElement:refinedElementForDataIndexer];
-		[refinedElementForDataIndexer release];
-		CPPhotosTableViewHandler *tableViewHandler = [[CPPhotosTableViewHandler alloc] init];
-		photosTableViewController = [[[CPPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler placeIDString:chosenPlace.placeID] autorelease];
-		[tableViewHandler release];
-		[dataIndexHandler release];
-		photosTableViewController.title = chosenPlace.title;
-		photosTableViewController.currentPlace = chosenPlace;
-		//TODO: change the initialization to pass the managedObjectContext as an argument.
-		photosTableViewController.managedObjectContext = managedObjectContext;
 	}
-	return photosTableViewController;
+	[fetchRequest release];
+	return currentPlace;
 }
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id)dataIndexHandler tableViewHandler:(id)tableViewHandler placeIDString:(NSString *)placeID;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext placeRefinedElement:(CPPlacesRefinedElement *)placeRefinedElement;
 {
-	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
     if (self)
 	{
-		if (placeID)
-		{
-			self.placeID = placeID;
-			self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
-		}
+		self.placeRefinedElement = placeRefinedElement;
+		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
+		NSLog(@"%@",[NSString stringWithFormat:placeRefinedElement.placeID]);
+		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
+		self.title = self.placeRefinedElement.title;
+		self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
 	}
 	return self;
 }
 
-//TODO: change the initializers to not include with****
-
-
 #pragma mark - View lifecycle
 
-- (void)dealloc
+- (void)dealloc;
 {
-	[CP_indexedListOfPhotos release];
 	[CP_listOfPhotos release];
-	[CP_currentPlace release];
+	[CP_indexedListOfPhotos release];
+	[CP_placeRefinedElement release];
 	[super dealloc];
 }
 
@@ -161,7 +153,7 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 	[super viewWillAppear:animated];
 	if (!self.listOfPhotos)
 	{
-		[self CP_setupPhotosListWithPlaceID:self.placeID];
+		[self CP_setupPhotosListWithPlaceID:self.placeRefinedElement.placeID];
 	}
 }
 
@@ -185,7 +177,7 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 	[activityIndicator startAnimating];
 	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
 	dispatch_async(photosDownloadQueue, ^{
-		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeID];
+		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeRefinedElement.placeID];
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[activityIndicator stopAnimating];
@@ -211,17 +203,17 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 
 #pragma mark - Methods to override the IndexedTableViewController
 
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array
+- (void)setTheElementSections:(NSMutableArray *)array;
 {
 	self.indexedListOfPhotos = array;
 }
 
-- (NSMutableArray *)fetchTheElementSections
+- (NSMutableArray *)theElementSections;
 {
 	return self.indexedListOfPhotos;
 }
 
-- (NSArray *)fetchTheRawData
+- (NSArray *)theRawData;
 {
 	return self.listOfPhotos;
 }

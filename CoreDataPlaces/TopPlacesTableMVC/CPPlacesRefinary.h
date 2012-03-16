@@ -8,8 +8,8 @@
 
 #import "CPRefinary.h"
 
-
-@interface CPTopPlacesRefinary : CPRefinary
+//TODO: change the name of this class to CPPlacesRefinary
+@interface CPPlacesRefinary : CPRefinary
 
 //TODO: change the location of the extern string
 extern NSString *CPPlaceID;

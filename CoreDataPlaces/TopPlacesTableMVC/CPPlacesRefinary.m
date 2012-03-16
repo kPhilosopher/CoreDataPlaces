@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPTopPlacesRefinary.h"
-#import "CPRefinedElement.h"
+#import "CPPlacesRefinary.h"
+#import "CPPlacesRefinedElement.h"
 #import "NSString+TitleExtraction.h"
 #import "NSString+TitleExtraction.h"
 #import "NSString+FindCharacterInSet.h"
 
 
-@implementation CPTopPlacesRefinary
+@implementation CPPlacesRefinary
 
 //TODO: change the location of the extern string
 NSString *CPPlaceID = @"place_id";
@@ -39,6 +39,19 @@ NSString *CPPlaceID = @"place_id";
 			int startingIndexOfSubTitle = [contentString rangeOfCharacterFromSet:[NSString characterSetWithComma]].location + 1;
 			NSString *subTitle = [contentString substringFromIndex:startingIndexOfSubTitle +1];
 			refinedElement.subtitle = [subTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		}
+	}
+}
+
+- (void)setCustomPropertiesForRefinedElement:(CPRefinedElement *)refinedElement;
+{
+	if ([refinedElement isKindOfClass:[CPPlacesRefinedElement class]]) 
+	{
+		CPPlacesRefinedElement *placesRefinedElement = (CPPlacesRefinedElement *)refinedElement;
+		if ([placesRefinedElement.rawElement isKindOfClass:[NSDictionary class]]) 
+		{
+			NSDictionary *dictionary = (NSDictionary *)placesRefinedElement.rawElement;
+			placesRefinedElement.placeID = [dictionary objectForKey:CPPlaceID];
 		}
 	}
 }
