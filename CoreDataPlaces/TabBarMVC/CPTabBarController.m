@@ -10,8 +10,6 @@
 #import "CPTopPlacesTableViewController.h"
 #import "CPFavoritesTableViewController.h"
 #import "CPMostRecentPhotosTableViewController.h"
-#import "CPFlickrDataHandler.h"
-#import "CPPlacesDataIndexer.h"
 
 
 @interface CPTabBarController()
@@ -24,7 +22,6 @@
 	CPFavoritesTableViewController *CP_favoritesTableViewController;
 	CPMostRecentPhotosTableViewController *CP_mostRecentPhotosTableViewController;
 	NSManagedObjectContext *CP_managedObjectContext;
-	//	id <PictureListTableViewControllerDelegate> CP_delegateToTransfer;
 }
 
 @property (retain) UINavigationController *topPlacesNavigationViewController;
@@ -50,7 +47,6 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 @synthesize topPlacesTableViewController = CP_topPlacesTableViewController;
 @synthesize mostRecentPhotosTableViewController = CP_mostRecentPhotosTableViewController;
 @synthesize favoritesTableViewController = CP_favoritesTableViewController;
-//@synthesize delegateToTransfer = CP_delegateToTransfer;
 @synthesize managedObjectContext = CP_managedObjectContext;
 
 #pragma mark - Initalization
