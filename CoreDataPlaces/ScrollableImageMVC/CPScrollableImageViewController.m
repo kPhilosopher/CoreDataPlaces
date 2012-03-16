@@ -23,25 +23,17 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 @interface CPScrollableImageViewController ()
 {
 @private
-	NSDictionary *CP_imageDictionary;
+//	NSDictionary *CP_imageDictionary;
 	UIImage *CP_image;
 	UIImageView *CP_imageView;
 	UIScrollView *CP_scrollView;
 	UISwitch *CP_switchForFavorite;
 	Photo *CP_currentPhoto;
-	CPPhotosRefinedElement *CP_photosRefinedElement;
+//	CPPhotosRefinedElement *CP_photoRefinedElement;
 	NSManagedObjectContext *CP_managedObjectContext;
 	Photo *CP_queuedPhoto;
 	UIPopoverController *CP_popoverController;
 }
-
-#pragma mark - Property
-
-@property (retain) UIImage *image;
-@property (retain) UIImageView *imageView;
-@property (retain) UIPopoverController *popoverController;
-@property (retain) Photo *queuedPhoto;
-
 @end
 
 #pragma mark -
@@ -53,14 +45,14 @@ const float CPMaximumZoomScale = 1.2;
 
 #pragma mark - Synthesize
 
-@synthesize imageDictionary = CP_imageDictionary;
+//@synthesize imageDictionary = CP_imageDictionary;
 @synthesize image = CP_image;
 @synthesize imageView = CP_imageView;
 @synthesize scrollView = CP_scrollView;
 @synthesize switchForFavorite = CP_switchForFavorite;
 @synthesize currentPhoto = CP_currentPhoto;
 @synthesize queuedPhoto = CP_queuedPhoto;
-@synthesize photosRefinedElement = CP_photosRefinedElement;
+//@synthesize photoRefinedElement = CP_photoRefinedElement;
 @synthesize managedObjectContext = CP_managedObjectContext;
 @synthesize popoverController = CP_popoverController;
 
@@ -138,11 +130,17 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 -(void)dealloc
 {
+	[CP_currentPhoto release];
+//	[CP_photoRefinedElement release];
+	[CP_managedObjectContext release];
+	[CP_queuedPhoto release];
+	
+	
 	[CP_image release];
 	[CP_imageView release];
 	[CP_scrollView release];
 	[CP_switchForFavorite release];
-	[CP_imageDictionary release];
+//	[CP_imageDictionary release];
 	[CP_popoverController release];
 	[super dealloc];
 }
@@ -153,7 +151,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
 		UIView *theLabel = [[UIView alloc] init];
-		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
+//		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 		activityIndicator.color = [UIColor blueColor];
 		activityIndicator.hidesWhenStopped = YES;
@@ -251,8 +249,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		{
 			[self.popoverController dismissPopoverAnimated:YES];
 		}
-		
-//		[self viewWillAppear:YES];
 		[self newPhotoSequence];
 	}
 }
@@ -286,66 +282,82 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	
 }
 
-- (void)setPhotosRefinedElement:(CPPhotosRefinedElement *)photosRefinedElement;
+//TODO: change the location of this class function.
++ (Photo *)photoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext itsPlace:(Place *)itsPlace;
 {
-	//first check if the photo already exists.
-	NSString *photoURL = [FlickrFetcher urlStringForPhotoWithFlickrInfo:photosRefinedElement.dictionary format:FlickrFetcherPhotoFormatLarge];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
-	fetchRequest.fetchBatchSize = 1;
-	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"photoURL like %@",photoURL];
-	NSSortDescriptor *sortDescriptor = nil;
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[fetchRequest setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	
+	if (!itsPlace) 
+	{
+		//TODO: use the fetching function to find the place of this photo.
+	}
 	Photo *photoToDisplay = nil;
-	NSError *error = nil;
-	NSUInteger returnedObjectCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
-	if ((returnedObjectCount == 0) && !error)
+	//first check if the photo already exists.
+	if ([photoRefinedElement.rawElement isKindOfClass:[NSDictionary class]]) 
 	{
-		photoToDisplay = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
-		photoToDisplay.photoURL = photoURL;
-		photoToDisplay.title = photosRefinedElement.title;
-		photoToDisplay.subtitle = photosRefinedElement.subtitle;
-		photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
-		photoToDisplay.itsPlace = photosRefinedElement.itsPlace;
-		//TODO: fix the way the hour changes show.
-		NSString *secondsSinceUpload = [photosRefinedElement.dictionary objectForKey:@"dateupload"];
-		NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
+		NSDictionary *dictionary = (NSDictionary *)photoRefinedElement.rawElement;
+		NSString *photoURL = [FlickrFetcher urlStringForPhotoWithFlickrInfo:dictionary format:FlickrFetcherPhotoFormatLarge];
+		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
+		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"photoURL like %@",photoURL];
+		NSSortDescriptor *sortDescriptor = nil;
+		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+		[fetchRequest setSortDescriptors:sortDescriptors];
+		[sortDescriptors release];
 		
-		photoToDisplay.timeOfUpload = uploadDate;
-		if (![self.managedObjectContext save:&error])
-		{
-			//handle the error.
-			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-		}
-	}
-	else if (error)
-	{
-		NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-	}
-	else
-	{
+		
 		NSError *error = nil;
-		NSArray *fetchRequestOutput = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-		if (!fetchRequestOutput)
+		NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
+		if ((returnedObjectCount == 0) && !error)
+		{
+			photoToDisplay = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:managedObjectContext];
+			photoToDisplay.photoURL = photoURL;
+			photoToDisplay.title = photoRefinedElement.title;
+			photoToDisplay.subtitle = photoRefinedElement.subtitle;
+			photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
+			photoToDisplay.itsPlace = itsPlace;
+			//TODO: fix the way the hour changes show.
+			NSString *secondsSinceUpload = [dictionary objectForKey:@"dateupload"];
+			NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
+			
+			photoToDisplay.timeOfUpload = uploadDate;
+			if (![managedObjectContext save:&error])
+			{
+				//handle the error.
+				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+			}
+		}
+		else if (error)
 		{
 			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-		}
-		else if ([fetchRequestOutput count] > 1)
-		{
-			NSLog(@"placeID is not a key anymore");
 		}
 		else
 		{
-			photoToDisplay = [fetchRequestOutput lastObject];
+			NSError *error = nil;
+			NSArray *fetchRequestOutput = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+			if (!fetchRequestOutput)
+			{
+				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+			}
+			else if ([fetchRequestOutput count] > 1)
+			{
+				NSLog(@"placeID is not a key anymore");
+			}
+			else
+			{
+				photoToDisplay = [fetchRequestOutput lastObject];
+			}
 		}
+		
+		
+		[fetchRequest release];fetchRequest = nil;
 	}
-	
-	[self setNewCurrentPhoto:photoToDisplay];
-	
-	[fetchRequest release];fetchRequest = nil;
+	return photoToDisplay;
+}
+
+- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
+{
+	self.title = photoRefinedElement.title;
+	Photo *photo = [CPScrollableImageViewController photoWithPhotoRefinedElement:photoRefinedElement managedObjectContext:self.managedObjectContext itsPlace:place];
+	[self setNewCurrentPhoto:photo];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

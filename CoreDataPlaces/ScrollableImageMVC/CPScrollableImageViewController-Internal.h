@@ -10,6 +10,13 @@
 
 @interface CPScrollableImageViewController()
 
+#pragma mark - Property
+
+@property (retain) UIImage *image;
+@property (retain) UIImageView *imageView;
+@property (retain) UIPopoverController *popoverController;
+@property (retain) Photo *queuedPhoto;
+
 #pragma mark - Internal method
 
 - (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace;

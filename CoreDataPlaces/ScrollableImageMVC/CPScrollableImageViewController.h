@@ -12,18 +12,20 @@
 @class Photo;
 @class CPPhotosRefinedElement;
 
+//TODO: erase this when the function below is moved
+@class Place;
+
 @interface CPScrollableImageViewController : UIViewController <UIScrollViewDelegate, UISplitViewControllerDelegate>
 
 extern NSString *CPScrollableImageViewAccessibilityLabel;
 extern NSString *CPFavoriteSwitchAccessibilityLabel;
-//extern NSString *ScrollableImageBackBarButtonAccessibilityLabel;
 
 #pragma mark - Property
 
-@property (retain) NSDictionary *imageDictionary;
+//@property (retain) NSDictionary *imageDictionary;
 @property (retain) IBOutlet UIScrollView *scrollView;
 @property (retain) IBOutlet UISwitch *switchForFavorite;
-@property (nonatomic, retain) CPPhotosRefinedElement *photosRefinedElement;
+//@property (nonatomic, retain) CPPhotosRefinedElement *photoRefinedElement;
 @property (retain) Photo *currentPhoto;
 @property (retain) NSManagedObjectContext *managedObjectContext;
 
@@ -31,12 +33,13 @@ extern NSString *CPFavoriteSwitchAccessibilityLabel;
 
 + (CPScrollableImageViewController *)sharedInstance;
 
-#pragma mark - Instance method
+//TODO: change the location of this funciton.
++ (Photo *)photoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext itsPlace:(Place *)itsPlace;
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-//- (void)initiateTheImageSetupWithGiven:(UIImage *)givenImage;
+#pragma mark - Instance method
 
 - (IBAction)toggleFavoriteSwitch:(id)sender;
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
+- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
 
 @end
