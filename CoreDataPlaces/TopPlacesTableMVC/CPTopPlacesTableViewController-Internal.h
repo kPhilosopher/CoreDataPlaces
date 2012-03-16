@@ -11,6 +11,11 @@
 
 @interface CPTopPlacesTableViewController ()
 
+#pragma mark - Property
+
+@property (retain) NSArray *listOfPlaces;
+@property (retain) NSMutableArray *indexedListOfPlaces;
+
 #pragma mark - Internal method
 
 - (void)CP_setupTopPlacesList;

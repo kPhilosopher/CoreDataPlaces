@@ -10,104 +10,45 @@
 #import "CPRefinedElement.h"
 
 
-@interface CPDataIndexer ()
-{
-@private
-	CPRefinedElement *CP_refinedElement;
-}
-
-@end
-
-#pragma mark -
-
 @implementation CPDataIndexer
 
-#pragma mark - Synthesize
-
-@synthesize refinedElement = CP_refinedElement;
-
-#pragma mark - Initlization
-
-- (id)initWithRefinedElement:(CPRefinedElement *)refinedElement;
-{
-	self = [self init];
-	if (self) {
-		self.refinedElement = refinedElement;
-	}
-	return self;
-}
-
-#pragma mark - Object lifecycle
-
-- (void)dealloc
-{
-	[CP_refinedElement release];
-	[super dealloc];
-}
-
 #pragma mark - Indexing Sequence
-//TODO: Refactor this method.
-- (NSMutableArray *)indexedSectionsOfTheRawElementsArray:(NSArray *)rawElements;
+
+- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
 {
 	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
-	NSMutableArray *temporaryDataElements;
+	NSMutableArray *temporaryDataElements = [NSMutableArray arrayWithArray:refinedElements];
 	
-	//1. refinement process
-	if (rawElements)//TODO: this might work if && ([rawData count] > 0) will allow efficiency do this by filtering alert message with count of the array returned.
-	{
-		temporaryDataElements = [[NSMutableArray alloc] initWithCapacity:1];
-		for (NSDictionary *rawElement in rawElements)
-			[self refineTheRawElementDictionary:rawElement thenAddToTemporaryMutableArray:temporaryDataElements];
-	}
-	else
-		return nil;
+	//TODO: in the controller that calls the refinary, the raw elements should be checked to not be nil and have at least one element in it.
+	//1. set the sections number for each element
+	NSInteger highSection = [self sectionsCountAndSetSectionNumberForElementsInArray:temporaryDataElements];
 	
-	//2. set the sections number for each element
-	[self setSectionNumberForElementsInArray:temporaryDataElements];
-
+	//2. create the sectionsArray
+	NSMutableArray *indexedSections = [NSMutableArray arrayWithCapacity:highSection];
 	
-	//3. create the sectionsArray
-	NSInteger highSection = [self sectionCount];
-	NSMutableArray *sectionArrays = [[NSMutableArray alloc]initWithCapacity:highSection];
+	//3. make the empty arrays for each sections.
+	for (int i = 0 ; i < highSection; i++)
+		[indexedSections addObject:[[[NSMutableArray alloc] initWithCapacity:0] autorelease]];
 	
-	//4. make the empty arrays for each sections.
-	for (int i = 0 ; i < highSection; i++) 
-		[sectionArrays addObject:[[[NSMutableArray alloc] initWithCapacity:0] autorelease]];
-
-	//5. put elements into its section
+	//4. put elements into its section
 	for (CPRefinedElement *element in temporaryDataElements) 
-		[(NSMutableArray *)[sectionArrays objectAtIndex:element.sectionNumber] addObject:element];
+		[(NSMutableArray *)[indexedSections objectAtIndex:element.sectionNumber] addObject:element];
 	
-	//6. sort the elements within each sections
-	for (NSMutableArray *sectionArray in sectionArrays) 
-		[self sortTheElementsInSectionArray:sectionArray andAddToArrayOfSections:theElementSections];
-	[sectionArrays release];
-	[temporaryDataElements release];
+	//5. sort the elements within each sections
+	for (NSMutableArray *unsortedSection in indexedSections) 
+		[self sortTheElementsInSectionArray:unsortedSection andAddToArrayOfSections:theElementSections];
+	
 	return theElementSections;
-}
-
-- (void)refineTheRawElementDictionary:(NSDictionary *)rawElement thenAddToTemporaryMutableArray:(NSMutableArray *)temporaryDataElements;
-{
-	CPRefinedElement *refinedElement = [self.refinedElement copy];
-	refinedElement.comparable = [refinedElement extractComparableFromDictionary:rawElement];
-	refinedElement.dictionary = rawElement;
-	[temporaryDataElements addObject:refinedElement];
-	[refinedElement release];
 }
 
 #pragma mark - Instance method to be overridden
 
-- (void)setSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
-{
-	return;
-}
-
-- (NSInteger)sectionCount;
+- (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
 	return 0;
 }
 
-- (void)sortTheElementsInSectionArray:(NSMutableArray *)sectionArray andAddToArrayOfSections:(NSMutableArray *)elementSections;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
 {
 	return;
 }

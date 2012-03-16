@@ -8,21 +8,19 @@
 
 #import "CPMostRecentPhotosTableViewController-Internal.h"
 #import "Photo+Logic.h"
-#import "CPScrollableImageViewController.h"
-#import "CPMostRecentPhotosRefinedElement.h"
-//#import "CPMostRecentPhotosDataIndexer.h"
-#import "CPMostRecentPhotosTableViewHandler.h"
 #import "CPMostRecentPhotosRefinary.h"
-#import "CPMostRecentPhotosDataHandler.h"
+#import "CPMostRecentPhotosDataIndexer.h"
+#import "CPMostRecentPhotosTableViewHandler.h"
+#import "CPRefinedElement.h"
+#import "CPIndexAssistant.h"
+#import "CPScrollableImageViewController.h"
 #import "CPAppDelegate.h"
 
 
 @interface CPMostRecentPhotosTableViewController()
 {
 	@private
-	id<CPRefining> CP_refinary;
-	id<CPDataIndexHandlingTemporary> CP_tempDataIndexer;
-	CPMostRecentPhotosRefinedElement *CP_refinedElementType;
+
 	NSArray *CP_listOfRawElements;
 	NSMutableArray *CP_refinedElementSections;
 	BOOL CP_reindex;
@@ -40,26 +38,26 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 #pragma mark - Synthesize
 
-@synthesize tempDataIndexer = CP_tempDataIndexer;
 @synthesize listOfRawElements = CP_listOfRawElements;
 @synthesize refinedElementSections = CP_refinedElementSections;
-@synthesize refinary = CP_refinary;
-@synthesize refinedElementType = CP_refinedElementType;
 @synthesize fetchRequest = CP_fetchRequest;
 
 #pragma mark - Factory method
 
 + (id)mostRecentPhotosTableViewControllerWithManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[[CPMostRecentPhotosTableViewHandler alloc] init] autorelease];
-	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] init];
 	CPMostRecentPhotosRefinary *refinary = [[CPMostRecentPhotosRefinary alloc] init];
-	CPMostRecentPhotosRefinedElement *refinedElementType = [[CPMostRecentPhotosRefinedElement alloc] init];
-	CPMostRecentPhotosDataHandler *dataHandler = [[[CPMostRecentPhotosDataHandler alloc] initWithRefinedElementType:refinedElementType refinary:refinary dataIndexer:dataIndexer] autorelease];
-	[dataIndexer release]; dataIndexer = nil;
-	[refinedElementType release]; refinedElementType = nil;
+	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] init];
+	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[CPMostRecentPhotosTableViewHandler alloc] init];
+	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
+	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
 	[refinary release]; refinary = nil;
-	return [[[CPMostRecentPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:nil tableViewHandler:tableViewHandler managedObjectContext:managedObjectContext dataHandler:dataHandler] autorelease];
+	[dataIndexer release]; dataIndexer = nil;
+	[tableViewHandler release]; tableViewHandler = nil;
+	[refinedElementType release]; refinedElementType = nil;
+	CPMostRecentPhotosTableViewController *mostRecentPhotosTableViewController = [[CPMostRecentPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+	[indexAssistant release]; indexAssistant = nil;
+	return [mostRecentPhotosTableViewController autorelease];
 }
 
 #pragma mark - Initialization
@@ -89,6 +87,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	}
 }
 
+//TODO: fix the location of this method
 - (NSDate *)CP_dateOfTimeIntervalBetweenNowAndHoursAgo:(int)hour;
 {
 	NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
@@ -98,15 +97,12 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	return [gregorian dateByAddingComponents:comps toDate:[NSDate date] options:0];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler managedObjectContext:(NSManagedObjectContext *)managedObjectContext dataHandler:(CPMostRecentPhotosDataHandler *)dataHandler;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	self = [self initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
-    if (self) {
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+    if (self)
+	{
 		self.title = @"Most Recents";
-		self.refinedElementType = dataHandler.refinedElementType;
-		self.refinary = dataHandler.refinary;
-		self.tempDataIndexer = dataHandler.dataIndexer;
-		self.managedObjectContext = managedObjectContext;
 		CP_reindex = YES;
 		self.tableView.accessibilityLabel = CPMostRecentPhotosTableViewAccessibilityLabel;
 		
@@ -128,8 +124,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 - (void)dealloc
 {
-	[CP_tempDataIndexer release];
-	[CP_refinary release];
 	[CP_listOfRawElements release];
 	[CP_refinedElementSections release];
 	[CP_fetchRequest release];
@@ -144,7 +138,8 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		NSError *error = nil;
 		
 		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
-		if (mutableFetchResults == nil) {
+		if (mutableFetchResults == nil)
+		{
 			// Handle the error.
 		}
 		self.listOfRawElements = mutableFetchResults;
@@ -156,33 +151,19 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 #pragma mark - CPTableViewControllerDataMutating protocol method
 
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
+- (void)setTheElementSections:(NSMutableArray *)array;
 {
 	self.refinedElementSections = array;
 }
 
-- (NSMutableArray *)fetchTheElementSections;
+- (NSMutableArray *)theElementSections;
 {
 	return CP_refinedElementSections;
 }
 
-- (NSArray *)fetchTheRawData;
+- (NSArray *)theRawData;
 {
 	return CP_listOfRawElements;
-}
-
-#pragma mark - DataReloadForTableViewControllerProtocol implementation
-
-- (void)indexTheTableViewData
-{
-	//TODO:change the condition of the if statement.
-	if (self.tempDataIndexer != nil) 
-	{
-		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:[self fetchTheRawData]];
-		[self setTheElementSectionsToTheFollowingArray:
-		 [self.tempDataIndexer indexedSectionsOfRefinedElements:refinedElements]];
-		[self.tableView reloadData];
-	}
 }
 
 @end

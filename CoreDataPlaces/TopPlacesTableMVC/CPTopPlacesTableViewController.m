@@ -7,15 +7,16 @@
 //
 
 #import "CPTopPlacesTableViewController-Internal.h"
-#import "CPPlacesDataIndexer.h"
 #import "CPTopPlacesTableViewHandler.h"
-#import "CPFlickrDataSource.h"
+#import "CPRefinedElement.h"
+#import "CPTopPlacesDataIndexer.h"
+#import "CPTopPlacesRefinary.h"
 #import "CPFlickrDataHandler.h"
-#import "CPPlacesRefinedElement.h"
 #import "CPNotificationManager.h"
+#import "CPIndexAssistant.h"
 
 //TODO: change this when the extern string constants' location is changed.
-#import "CPPhotosTableViewController.h"
+//#import "CPPhotosTableViewController.h"
 
 
 @interface CPTopPlacesTableViewController ()
@@ -23,13 +24,7 @@
 @private
 	NSArray *CP_listOfPlaces;
 	NSMutableArray *CP_indexedListOfPlaces;
-//	id<CPTableViewControllerDataReloading> CP_delegateToUpdateMostRecentPlaces;
-//	CPFlickrDataSource *CP_flickrDataSource;
-//	id<PictureListTableViewControllerDelegate> CP_delegateToTransfer;
 }
-
-//extern NSString *CPAlertTitle;
-//extern NSString *CPAlertMessage;
 
 @end
 
@@ -38,56 +33,42 @@
 @implementation CPTopPlacesTableViewController
 
 NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
-//NSString *CPAlertTitle = @"Cannot Obtain Data";
-//NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 
 #pragma mark - Synthesize
 
-//@synthesize delegateToUpdateMostRecentPlaces = _delegateToUpdateMostRecentPlaces;
-//@synthesize flickrDataSource = CP_flickrDataSource;
 @synthesize listOfPlaces = CP_listOfPlaces;
 @synthesize indexedListOfPlaces = CP_indexedListOfPlaces;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler theFlickrDataSource:(CPFlickrDataSource *)theFlickrDataSource;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	self = [super initWithStyle:style dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
     if (self)
 	{
 		self.title = @"Top Places";
 		self.tableView.accessibilityLabel = CPTopPlacesTableViewAccessibilityLabel;
 		
 		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_refreshTheTopPlacesList)] autorelease];
-		
-//		[self CP_setupTopPlacesList];
-//		self.flickrDataSource = theFlickrDataSource;
-//		[self.flickrDataSource addObserver:self forKeyPath:@"alertViewSwitch" options:NSKeyValueObservingOptionNew context:NULL];
-//		[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
 	}
     return self;
 }
 
 #pragma mark - Factory method
 
-+ (id)topPlacesTableViewController;
-{
-	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
-	
-	[flickrDataHandler release];
-	
++ (id)topPlacesTableViewControllerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{	
 	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
-	CPPlacesRefinedElement *placesRefinedElement = [[CPPlacesRefinedElement alloc] init];
-	CPPlacesDataIndexer *dataIndexHandler = [[CPPlacesDataIndexer alloc] initWithRefinedElement:placesRefinedElement];
-	[placesRefinedElement release]; placesRefinedElement = nil;
-	
-	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler theFlickrDataSource:flickrDataSource];
-	
-	[flickrDataSource release];
-	[tableViewHandler release];
-	[dataIndexHandler release];
-	
+	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
+	CPTopPlacesDataIndexer *dataIndexer = [[CPTopPlacesDataIndexer alloc] init];
+	CPTopPlacesRefinary *refinary = [[CPTopPlacesRefinary alloc] init];
+	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
+	[refinary release]; refinary = nil;
+	[dataIndexer release]; dataIndexer = nil;
+	[tableViewHandler release]; tableViewHandler = nil;
+	[refinedElementType release]; refinedElementType = nil;
+	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+	[indexAssistant release]; indexAssistant = nil;
 	return [topPlacesTableViewController autorelease];
 }
 
@@ -97,7 +78,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 {
 	[CP_listOfPlaces release];
 	[CP_indexedListOfPlaces release];
-//	[CP_flickrDataSource release];
 	[super dealloc];
 }
 
@@ -106,26 +86,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 - (void)CP_refreshTheTopPlacesList;
 {
 	[self CP_setupTopPlacesList];
-//	[self.flickrDataSource setupFlickrTopPlacesWithFlickrFetcher];
-	[self indexTheTableViewData];
 }
-
-//- (void)CP_setupTopPlacesList;
-//{
-//	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-//	
-//	id undeterminedListOfPlaces = [flickrDataHandler flickrTopPlaces];
-//	if ([undeterminedListOfPlaces isKindOfClass:[NSArray class]]) 
-//	{
-//		self.listOfPlaces = (NSArray *)undeterminedListOfPlaces;
-//		[self indexTheTableViewData];
-//	}
-//	//	else
-//	//			{
-//	//				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-//	//			}
-//	[flickrDataHandler release];
-//}
 
 - (void)viewWillAppear:(BOOL)animated;
 {
@@ -137,11 +98,12 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	
 }
 
+//TODO: refactor
 - (void)CP_setupTopPlacesList;
 {
 	//TODO: find a better place to put this redundant code.
 	UIView *theLabel = [[UIView alloc] init];
-	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
+//	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator.color = [UIColor blueColor];
 	activityIndicator.hidesWhenStopped = YES;
@@ -169,11 +131,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
-//			NSString *string = [[self.listOfPlaces lastObject] description];
-//			NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-//			NSLog(@"%@",@"list of Places");
-//			NSLog(@"%@",[NSString stringWithFormat:@"%@",string]);
-//			NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 			[activityIndicator removeFromSuperview];
 			[activityIndicator release];
 			[theLabel removeFromSuperview];
@@ -183,36 +140,20 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	dispatch_release(placesDownloadQueue);
 }
 
-#pragma mark - KVO observer implementation
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-//	if ([[change objectForKey:NSKeyValueChangeNewKey] isEqualToString:CPAlertSwitchOn])
-//	{
-//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:CPAlertTitle message:CPAlertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];	
-//		[alert show];
-//		[alert release];
-//		[object setValue:CPAlertSwitchOff forKey:keyPath];
-//	}
-}
-
 #pragma mark - CPTableViewControllerDataMutating protocol method
 
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array
+- (void)setTheElementSections:(NSMutableArray *)array
 {
-//	self.flickrDataSource.theElementSectionsOfFlickrTopPlaces = array;
 	self.indexedListOfPlaces = array;
 }
 
-- (NSMutableArray *)fetchTheElementSections
+- (NSMutableArray *)theElementSections
 {
-//	return self.flickrDataSource.theElementSectionsOfFlickrTopPlaces;
 	return self.indexedListOfPlaces;
 }
 
-- (NSArray *)fetchTheRawData
+- (NSArray *)theRawData
 {
-//	return self.flickrDataSource.flickrTopPlaces;
 	return self.listOfPlaces;
 }
 

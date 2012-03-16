@@ -10,4 +10,11 @@
 
 @protocol CPDataIndexing <NSObject>
 
+#pragma mark - Required methods
+
+@required
+- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
+- (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
+
 @end

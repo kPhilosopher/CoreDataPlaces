@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CPDataIndexer.h"
 
-@interface CPTopPlacesDataIndexer : NSObject
+
+@interface CPTopPlacesDataIndexer : CPDataIndexer
 
 @end

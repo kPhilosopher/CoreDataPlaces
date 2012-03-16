@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
+// !!!:This is an abstract class. It must be subclassed with appropriate implementation.
+
 #import <Foundation/Foundation.h>
-#import "CPIndexedTableViewController.h"
+#import "CPTableViewHandling.h"
 
 
 @interface CPTableViewHandler : NSObject <CPTableViewHandling>

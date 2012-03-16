@@ -136,12 +136,11 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 //	[flickrDataSource release]; 
 //	[tableViewHandler release];
 //	[dataIndexHandler release];
-	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewController];
-	self.topPlacesTableViewController.managedObjectContext = self.managedObjectContext;
-	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] 
-										 initWithStyle:UITableViewStylePlain 
-										 managedObjectContext:self.managedObjectContext 
-											customSettingsDictionary:nil] autorelease];
+	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewControllerWithManagedObjectContext:self.managedObjectContext];
+//	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] 
+//										 initWithStyle:UITableViewStylePlain 
+//										 managedObjectContext:self.managedObjectContext 
+//											customSettingsDictionary:nil] autorelease];
 	self.mostRecentPhotosTableViewController = [CPMostRecentPhotosTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
 	
 //	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];

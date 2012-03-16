@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+// !!!:This is an abstract class. It must be subclassed with appropriate implementation.
 
-@interface CPRefinary : NSObject
+#import <Foundation/Foundation.h>
+#import "CPRefining.h"
+
+
+@interface CPRefinary : NSObject <CPRefining>
 
 @end

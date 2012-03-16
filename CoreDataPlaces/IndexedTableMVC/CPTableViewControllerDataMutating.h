@@ -13,10 +13,10 @@
 
 #pragma mark - Protocol method
 
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
+- (void)setTheElementSections:(NSMutableArray *)array;
 
-- (NSMutableArray *)fetchTheElementSections;
+- (NSMutableArray *)theElementSections;
 
-- (NSArray *)fetchTheRawData;
+- (NSArray *)theRawData;
 
 @end

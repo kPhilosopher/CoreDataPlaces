@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CPRefinary.h"
 
-@interface CPTopPlacesRefinary : NSObject
+
+@interface CPTopPlacesRefinary : CPRefinary
+
+//TODO: change the location of the extern string
+extern NSString *CPPlaceID;
 
 @end

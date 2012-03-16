@@ -7,7 +7,7 @@
 //
 
 #import "CPMostRecentPhotosDataIndexer.h"
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPRefinedElement.h"
 #import "JBBPriorityQueue.h"
 
 
@@ -15,40 +15,13 @@
 
 #pragma mark - CPDataIndexHandling protocol methods
 
-- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
-{
-	NSMutableArray *theElementSections = [[[NSMutableArray alloc] init] autorelease];
-	NSMutableArray *temporaryDataElements = [NSMutableArray arrayWithArray:refinedElements];
-	
-	//TODO: in the controller that calls the refinary, the raw elements should be checked to not be nil and have at least one element in it.
-	//1. set the sections number for each element
-	NSInteger highSection = [self sectionsCountAndSetSectionNumberForElementsInArray:temporaryDataElements];
-	
-	//2. create the sectionsArray
-	NSMutableArray *indexedSections = [NSMutableArray arrayWithCapacity:highSection];
-	
-	//3. make the empty arrays for each sections.
-	for (int i = 0 ; i < highSection; i++)
-		[indexedSections addObject:[[[NSMutableArray alloc] initWithCapacity:0] autorelease]];
-	
-	//4. put elements into its section
-	for (CPMostRecentPhotosRefinedElement *element in temporaryDataElements) 
-		[(NSMutableArray *)[indexedSections objectAtIndex:element.sectionNumber] addObject:element];
-	
-	//5. sort the elements within each sections
-	for (NSMutableArray *unsortedSection in indexedSections) 
-		[self sortTheElementsInSectionArray:unsortedSection andAddToArrayOfSections:theElementSections];
-	
-	return theElementSections;
-}
-
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
 	NSInteger highSection = 0;
 
 	//eliminate duplicates using NSSet.
 	NSMutableSet *setOfHours = [NSMutableSet set];
-	for (CPMostRecentPhotosRefinedElement *refinedElement in temporaryDataElements) 
+	for (CPRefinedElement *refinedElement in temporaryDataElements) 
 	{
 		[setOfHours addObject:[NSNumber numberWithInt:[refinedElement.comparable intValue]]];
 	}
@@ -70,7 +43,7 @@
 	}
 	
 	//set the sections numbers for each element.
-	for (CPMostRecentPhotosRefinedElement *refinedElement in temporaryDataElements)
+	for (CPRefinedElement *refinedElement in temporaryDataElements)
 	{
 		NSString *key = [NSString stringWithFormat:@"%d",[refinedElement.comparable intValue]];
 		refinedElement.sectionNumber = [[sectionNumberMapping objectForKey:key] intValue];
@@ -86,7 +59,7 @@
 	JBBPriorityQueue *priorityQueue = [[JBBPriorityQueue alloc] initWithClass:[element class] ordering:NSOrderedAscending];
 	
 	//load the priority queue with the refined elements.
-	for (CPMostRecentPhotosRefinedElement *refinedElement in unsortedSection)
+	for (CPRefinedElement *refinedElement in unsortedSection)
 		[priorityQueue addObject:refinedElement];
 	
 	//place the sorted elements into an array.

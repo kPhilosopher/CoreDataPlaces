@@ -7,14 +7,20 @@
 //
 
 #import "CPIndexedTableViewController.h"
+#import "CPIndexAssistant.h"
+#import "CPRefinedElement.h"
+#import "CPRefinary.h"
 #import "CPDataIndexer.h"
+#import "CPTableViewHandler.h"
 
 
 @interface CPIndexedTableViewController ()
 {
 @private
-	id<CPDataIndexHandling> CP_dataIndexHandler;
-	id<CPTableViewHandling> CP_tableViewHandler;
+	CPRefinary *CP_refinary;
+	CPDataIndexer *CP_dataIndexer;
+	CPTableViewHandler *CP_tableViewHandler;
+	CPRefinedElement *CP_refinedElementType;
 	NSManagedObjectContext *CP_managedObjectContext;
 }
 @end
@@ -25,19 +31,24 @@
 
 #pragma mark - Synthesize
 
-@synthesize dataIndexHandler = CP_dataIndexHandler;
+@synthesize refinary = CP_refinary;
+@synthesize dataIndexer = CP_dataIndexer;
 @synthesize tableViewHandler = CP_tableViewHandler;
+@synthesize refinedElementType = CP_refinedElementType;
 @synthesize managedObjectContext = CP_managedObjectContext;
 
 #pragma mark - Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style dataIndexHandler:(id<CPDataIndexHandling>)dataIndexHandler tableViewHandler:(id<CPTableViewHandling>)tableViewHandler;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [super initWithStyle:style];
 	if (self) 
 	{
-		self.dataIndexHandler = dataIndexHandler;
-		self.tableViewHandler = tableViewHandler;
+		self.refinary = indexAssistant.refinary;
+		self.dataIndexer = indexAssistant.dataIndexer;
+		self.tableViewHandler = indexAssistant.tableViewHandler;
+		self.refinedElementType = indexAssistant.refinedElementType;
+		self.managedObjectContext = managedObjectContext;
 	}
 	return self;
 }
@@ -46,8 +57,11 @@
 
 - (void)dealloc
 {
-	[CP_dataIndexHandler release];
+	[CP_refinary release];
+	[CP_dataIndexer release];
 	[CP_tableViewHandler release];
+	[CP_refinedElementType release];
+	[CP_managedObjectContext release];
 	[super dealloc];
 }
 
@@ -62,8 +76,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//	if ([self fetchTheElementSections] == nil)
-//		[self indexTheTableViewData];
 	return [self.tableViewHandler numberOfSectionsInIndexedTableViewController:self];
 }
 
@@ -111,22 +123,22 @@
 //- (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 - (id)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 {
-	return [(NSArray *)[[self fetchTheElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	return [(NSArray *)[[self theElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 
 #pragma mark - CPTableViewControllerDataMutating protocol method
 
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
+- (void)setTheElementSections:(NSMutableArray *)array;
 {
 	return;
 }
 
-- (NSMutableArray *)fetchTheElementSections;
+- (NSMutableArray *)theElementSections;
 {
 	return nil;
 }
 
-- (NSArray *)fetchTheRawData;
+- (NSArray *)theRawData;
 {
 	return nil;
 }
@@ -135,10 +147,12 @@
 
 - (void)indexTheTableViewData
 {
-	if (self.dataIndexHandler != nil) 
+	//TODO:change the condition of the if statement.
+	if (self.dataIndexer != nil) 
 	{
-		[self setTheElementSectionsToTheFollowingArray:
-		 [self.dataIndexHandler indexedSectionsOfTheRawElementsArray:[self fetchTheRawData]]];
+		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:[self theRawData]];
+		[self setTheElementSections:
+		 [self.dataIndexer indexedSectionsOfRefinedElements:refinedElements]];
 		[self.tableView reloadData];
 	}
 }

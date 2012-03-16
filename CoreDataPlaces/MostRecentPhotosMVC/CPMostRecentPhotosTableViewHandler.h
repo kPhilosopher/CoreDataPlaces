@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-//#import "CPTableViewHandler.h"
-#import "CPTableViewHandling.h"
+#import "CPTableViewHandler.h"
 
-@interface CPMostRecentPhotosTableViewHandler : NSObject <CPTableViewHandling>
+
+@interface CPMostRecentPhotosTableViewHandler : CPTableViewHandler
 
 @end

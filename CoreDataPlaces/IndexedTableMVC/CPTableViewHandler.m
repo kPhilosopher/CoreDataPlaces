@@ -8,6 +8,7 @@
 
 #import "CPTableViewHandler.h"
 #import "CPRefinedElementInterfacing.h"
+#import "CPIndexedTableViewController.h"
 
 
 @implementation CPTableViewHandler
@@ -16,7 +17,7 @@
 
 - (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 {
-    return [(NSArray *)[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count];
+    return [(NSArray *)[[indexedTableViewController theElementSections] objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
@@ -34,7 +35,7 @@
 
 - (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
-    return [[indexedTableViewController fetchTheElementSections] count];
+    return [[indexedTableViewController theElementSections] count];
 }
 
 - (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;

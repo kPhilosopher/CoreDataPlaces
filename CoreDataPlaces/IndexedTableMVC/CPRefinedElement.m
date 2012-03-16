@@ -12,10 +12,10 @@
 @interface CPRefinedElement ()
 {
 @private
+	NSString *CP_comparable;
+	id CP_rawElement;
 	NSString *CP_title;
 	NSString *CP_subtitle;
-	NSString *CP_comparable;
-	NSDictionary *CP_dictionary;
 	NSInteger CP_sectionNumber;
 }
 @end
@@ -26,58 +26,33 @@
 
 #pragma mark - Synthesize
 
+@synthesize comparable = CP_comparable;
+@synthesize rawElement = CP_rawElement;
 @synthesize title = CP_title;
 @synthesize subtitle = CP_subtitle;
-@synthesize comparable = CP_comparable;
-@synthesize dictionary = CP_dictionary;
 @synthesize sectionNumber = CP_sectionNumber;
 
 #pragma mark - View lifecycle
 
 - (void)dealloc
 {
+	[CP_comparable release];
+	[CP_rawElement release];
 	[CP_title release];
 	[CP_subtitle release];
-	[CP_comparable release];
-	[CP_dictionary release];
 	[super dealloc];
 }
 
 #pragma mark - Instance method
 
-- (NSString *)extractComparableFromDictionary:(NSDictionary *)rawElement
-{
-	return nil;
-}
-
-- (void)extractTitleAndSubTitleFromDictionary;
-{
-	return;
-}
-
-- (NSString *)title;
-{
-	if (CP_title == nil)
-	{
-		[self extractTitleAndSubTitleFromDictionary];
-	}
-	return [[CP_title copy] autorelease];
-}
-
-- (NSString *)subtitle;
-{
-	if (CP_subtitle == nil) 
-	{
-		[self extractTitleAndSubTitleFromDictionary];
-	}
-	return [[CP_subtitle copy] autorelease];
-}
-
-#pragma mark - NSCopying protocol method
-
 - (id)copyWithZone:(NSZone *)zone;
 {
 	return [[CPRefinedElement alloc] init];
+}
+
+- (NSComparisonResult)compare:(CPRefinedElement *)refinedElement;
+{
+	return [[NSNumber numberWithFloat:[self.comparable floatValue]] compare:[NSNumber numberWithFloat:[refinedElement.comparable floatValue]]];
 }
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CPRefining.h"
+#import "CPRefinary.h"
 
 
-@interface CPMostRecentPhotosRefinary : NSObject <CPRefining>
+@interface CPMostRecentPhotosRefinary : CPRefinary
 
 @end

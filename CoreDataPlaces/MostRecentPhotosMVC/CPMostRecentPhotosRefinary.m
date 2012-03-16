@@ -7,33 +7,15 @@
 //
 
 #import "CPMostRecentPhotosRefinary.h"
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPRefinedElement.h"
 #import "Photo.h"
 
-
-
-#pragma mark -
 
 @implementation CPMostRecentPhotosRefinary
 
 #pragma mark - Instance method
 
-- (NSArray *)refinedElementsWithGivenRefinedElementType:(CPMostRecentPhotosRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
-{
-	NSMutableArray *refinedElements = [NSMutableArray arrayWithCapacity:[rawElements count]];
-	for (id rawElement in rawElements)
-	{
-		CPMostRecentPhotosRefinedElement *temporaryRefinedElement = [refinedElement copy];
-		temporaryRefinedElement.rawElement = rawElement;
-		[self setComparableForRefinedElement:temporaryRefinedElement];
-		[self setTitleAndSubtitleForRefinedElement:temporaryRefinedElement];
-		[refinedElements addObject:temporaryRefinedElement];
-		[temporaryRefinedElement release];
-	}
-	return refinedElements;
-}
-
-- (void)setComparableForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
 { 
 	if ([refinedElement.rawElement isKindOfClass:[Photo class]])
 	{
@@ -49,6 +31,7 @@
 													fromDate:startDate
 													  toDate:endDate 
 													 options:0];
+		
 		//math with components
 		float seconds = (float)[components second];
 		float minutesInSeconds = (((float)[components minute]) * 60.0);
@@ -61,7 +44,7 @@
 	}
 }
 
-- (void)setTitleAndSubtitleForRefinedElement:(CPMostRecentPhotosRefinedElement *)refinedElement;
+- (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
 {
 	if ([refinedElement.rawElement isKindOfClass:[Photo class]])
 	{

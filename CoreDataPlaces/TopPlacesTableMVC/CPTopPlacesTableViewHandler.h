@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CPPlacesTableViewHandler.h"
+#import "CPTableViewHandler.h"
 
-@interface CPTopPlacesTableViewHandler : CPPlacesTableViewHandler
+@interface CPTopPlacesTableViewHandler : CPTableViewHandler
 
 @end
