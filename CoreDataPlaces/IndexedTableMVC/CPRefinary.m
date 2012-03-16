@@ -22,6 +22,7 @@
 		temporaryRefinedElement.rawElement = rawElement;
 		[self setComparableForRefinedElement:temporaryRefinedElement];
 		[self setTitleAndSubtitleForRefinedElement:temporaryRefinedElement];
+		[self setCustomPropertiesForRefinedElement:temporaryRefinedElement];
 		[refinedElements addObject:temporaryRefinedElement];
 		[temporaryRefinedElement release];
 	}
@@ -34,6 +35,11 @@
 }
 
 - (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
+{
+	
+}
+
+- (void)setCustomPropertiesForRefinedElement:(CPRefinedElement *)refinedElement;
 {
 	
 }

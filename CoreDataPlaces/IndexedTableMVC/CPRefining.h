@@ -18,5 +18,6 @@
 - (NSArray *)refinedElementsWithGivenRefinedElementType:(CPRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
 - (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
 - (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
+- (void)setCustomPropertiesForRefinedElement:(CPRefinedElement *)refinedElement;
 
 @end
