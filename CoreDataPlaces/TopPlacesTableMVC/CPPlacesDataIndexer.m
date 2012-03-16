@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPTopPlacesDataIndexer.h"
+#import "CPPlacesDataIndexer.h"
 #import "CPRefinedElement.h"
 
 
-@implementation CPTopPlacesDataIndexer
+@implementation CPPlacesDataIndexer
 
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {

@@ -9,6 +9,6 @@
 #import "CPDataIndexer.h"
 
 
-@interface CPTopPlacesDataIndexer : CPDataIndexer
+@interface CPPlacesDataIndexer : CPDataIndexer
 
 @end
