@@ -9,7 +9,8 @@
 #import "CPMostRecentPhotosTableViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPMostRecentPhotosRefinary.h"
-#import "CPMostRecentPhotosDataIndexer.h"
+//#import "CPMostRecentPhotosDataIndexer.h"
+#import "CPPhotosDataIndexer.h"
 #import "CPMostRecentPhotosTableViewHandler.h"
 #import "CPRefinedElement.h"
 #import "CPIndexAssistant.h"
@@ -47,7 +48,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 + (id)mostRecentPhotosTableViewControllerWithManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	CPMostRecentPhotosRefinary *refinary = [[CPMostRecentPhotosRefinary alloc] init];
-	CPMostRecentPhotosDataIndexer *dataIndexer = [[CPMostRecentPhotosDataIndexer alloc] init];
+	CPPhotosDataIndexer *dataIndexer = [[CPPhotosDataIndexer alloc] init];
 	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[CPMostRecentPhotosTableViewHandler alloc] init];
 	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
 	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
