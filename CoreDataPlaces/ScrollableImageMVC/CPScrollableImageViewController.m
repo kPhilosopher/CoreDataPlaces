@@ -151,7 +151,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
 	{
 		UIView *theLabel = [[UIView alloc] init];
-//		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
+		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
 		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 		activityIndicator.color = [UIColor blueColor];
 		activityIndicator.hidesWhenStopped = YES;

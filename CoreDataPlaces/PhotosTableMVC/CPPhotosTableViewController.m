@@ -60,7 +60,7 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 }
 
 //TODO: refactor to be in a insertion handler for coredata objects.
-+ (Place *)placeWithRefinedElement:(CPPlacesRefinedElement *)refinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (Place *)placeWithPlaceRefinedElement:(CPPlacesRefinedElement *)refinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	Place *currentPlace = nil;
 	NSString *placeID = refinedElement.placeID;
@@ -74,7 +74,6 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 	if ((returnedObjectCount == 0) && !error)
 	{
 		currentPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:managedObjectContext];
-		//		Place *currentPlace = [[Place alloc] initWithEntity:@"Place" insertIntoManagedObjectContext:managedObjectContext];
 		currentPlace.title = refinedElement.title;
 		currentPlace.subtitle = refinedElement.subtitle;
 		currentPlace.category = [refinedElement.title substringToIndex:1];

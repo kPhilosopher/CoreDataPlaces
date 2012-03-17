@@ -27,7 +27,7 @@
 		{
 			photosTableViewController = (CPPhotosTableViewController *)indexedTableViewController;
 			photosRefinedElement = (CPPhotosRefinedElement *)refinedElement;
-			Place *currentPlace = [CPPhotosTableViewController placeWithRefinedElement:photosTableViewController.placeRefinedElement managedObjectContext:indexedTableViewController.managedObjectContext];
+			Place *currentPlace = [CPPhotosTableViewController placeWithPlaceRefinedElement:photosTableViewController.placeRefinedElement managedObjectContext:indexedTableViewController.managedObjectContext];
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 			[scrollableImageViewController setupNewPhotoWithPhotoRefinedElement:photosRefinedElement place:currentPlace];
 			if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
