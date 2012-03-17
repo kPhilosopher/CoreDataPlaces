@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
 
 

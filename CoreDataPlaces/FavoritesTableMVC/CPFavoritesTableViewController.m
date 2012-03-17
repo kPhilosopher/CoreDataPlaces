@@ -23,10 +23,9 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
     if (self) {
         // Custom initialization
 		self.tableView.accessibilityLabel = CPFavoritePlacesTableViewAccessibilityLabel;
-		self.managedObjectContext = managedObjectContext;
+//		self.managedObjectContext = managedObjectContext;
 		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"category";
-		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
@@ -72,20 +71,7 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 		self.subtitleKey = @"subtitle";
 		self.searchKey = @"title";
 		self.title = @"Favorite Photos";
-		
-		//TODO: change the design. this is for testing
-//		self.tableViewHandler = [[CPFavoritesTableViewHandler alloc] init];
-//		self.dataIndexHandler = [Cp];
 	}
-    return self;
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -94,9 +80,8 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 	if ([managedObject isKindOfClass:[Place class]])
 	{
 		Place *chosenPlace = (Place *)managedObject;
-		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext chosenPlace:chosenPlace];
+		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [CPCoreDataPhotosTableViewController coreDataPhotosTableViewControllerWithPlace:chosenPlace manageObjectContext:self.fetchedResultsController.managedObjectContext];
 		[self.navigationController pushViewController:coreDataPhotosTableViewController animated:YES];
-		[coreDataPhotosTableViewController release];
 	}
 }
 
