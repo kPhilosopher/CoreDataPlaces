@@ -13,7 +13,7 @@
 
 @implementation CPMostRecentPhotosRefinary
 
-#pragma mark - Instance method
+#pragma mark - Overriding method
 
 - (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
 { 
@@ -41,16 +41,6 @@
 		
 		//clean up
 		[gregorian release];gregorian = nil;
-	}
-}
-
-- (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
-{
-	if ([refinedElement.rawElement isKindOfClass:[Photo class]])
-	{
-		Photo *thePhoto = (Photo *)refinedElement.rawElement;
-		refinedElement.title = thePhoto.title;
-		refinedElement.subtitle = thePhoto.subtitle;
 	}
 }
 

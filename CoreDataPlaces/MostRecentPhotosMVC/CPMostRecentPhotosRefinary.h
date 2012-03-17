@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CPRefinary.h"
+#import "CPCoreDataPhotosRefinary.h"
 
 
-@interface CPMostRecentPhotosRefinary : CPRefinary
+@interface CPMostRecentPhotosRefinary : CPCoreDataPhotosRefinary
 
 @end
