@@ -17,4 +17,8 @@
 @property (retain) NSMutableArray *refinedElementSections;
 @property (retain) NSFetchRequest *fetchRequest;
 
+#pragma mark - Internal method
+
+- (void)CP_fetchListThenIndexData;
+
 @end

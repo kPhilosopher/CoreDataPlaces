@@ -9,9 +9,8 @@
 #import "CPMostRecentPhotosTableViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPMostRecentPhotosRefinary.h"
-//#import "CPMostRecentPhotosDataIndexer.h"
 #import "CPPhotosDataIndexer.h"
-#import "CPMostRecentPhotosTableViewHandler.h"
+#import "CPCoreDataPhotosTableViewHandler.h"
 #import "CPRefinedElement.h"
 #import "CPIndexAssistant.h"
 #import "CPScrollableImageViewController.h"
@@ -21,7 +20,6 @@
 @interface CPMostRecentPhotosTableViewController()
 {
 	@private
-
 	NSArray *CP_listOfRawElements;
 	NSMutableArray *CP_refinedElementSections;
 	BOOL CP_reindex;
@@ -49,7 +47,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 {
 	CPMostRecentPhotosRefinary *refinary = [[CPMostRecentPhotosRefinary alloc] init];
 	CPPhotosDataIndexer *dataIndexer = [[CPPhotosDataIndexer alloc] init];
-	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[CPMostRecentPhotosTableViewHandler alloc] init];
+	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[CPCoreDataPhotosTableViewHandler alloc] init];
 	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
 	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
 	[refinary release]; refinary = nil;
@@ -80,7 +78,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 					CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
 					if ([appDelegate window].bounds.size.width > 500)//iPad
 					{
-						[self viewWillAppear:YES];
+						[self CP_fetchListThenIndexData];
 					}
 				}
 			}
@@ -131,9 +129,8 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	[super dealloc];
 }
 
-- (void)viewWillAppear:(BOOL)animated;
+- (void)CP_fetchListThenIndexData;
 {
-	[super viewWillAppear:animated];
 	if (CP_reindex) 
 	{
 		NSError *error = nil;
@@ -148,6 +145,12 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 		[self indexTheTableViewData];
 		CP_reindex = NO;
 	}
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	[self CP_fetchListThenIndexData];
 }
 
 #pragma mark - CPTableViewControllerDataMutating protocol method
