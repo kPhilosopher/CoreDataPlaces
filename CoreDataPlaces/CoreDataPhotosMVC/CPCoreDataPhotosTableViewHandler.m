@@ -7,39 +7,40 @@
 //
 
 #import "CPCoreDataPhotosTableViewHandler.h"
-#import "Photo.h"
+#import "CPIndexedTableViewController.h"
+#import "CPRefinedElement.h"
+#import "CPScrollableImageViewController.h"
+#import "Photo+Logic.h"
 
 
 @implementation CPCoreDataPhotosTableViewHandler
 
-#pragma mark Table view data source handler method
-
-- (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
-{
-	NSString *returningString = nil;
-	if ([[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] count] > 0)
-	{
-		//NSString *elapsedHours = @"";
-		//TODO: create an interface to return a string.
-		//after checking key-value coding to see if:
-		id element = [[[indexedTableViewController fetchTheElementSections] objectAtIndex:section] objectAtIndex:0];
-		if ([element isKindOfClass:[Photo class]])
-		{
-			Photo *photo = (Photo *)element;
-			if ([photo.timeLapseSinceUpload intValue] == 0) 
-				returningString = @"Right Now";
-			else
-				returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]] stringByAppendingString:@" Hour(s) Ago"];
-		}
-    }
-    return returningString;
-}
-
 #pragma mark Table view delegate handler method
+
+//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
+- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
+{
+	return imageController.view.window == nil;
+}
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	return;
+	id undeterminedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
+	if ([undeterminedElement isKindOfClass:[CPRefinedElement class]])
+	{
+		CPRefinedElement *chosenPhoto = (CPRefinedElement *)undeterminedElement;
+		if ([chosenPhoto.rawElement isKindOfClass:[Photo class]]) 
+		{
+			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
+			[scrollableImageViewController setNewCurrentPhoto:chosenPhoto.rawElement];
+			if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+			{
+				[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
+				[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
+			}
+		}
+	}
+	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

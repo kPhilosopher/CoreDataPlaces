@@ -6,9 +6,8 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "CPTableViewHandler.h"
+#import "CPPhotosTitleForHeaderTableViewHandler.h"
 
-@interface CPCoreDataPhotosTableViewHandler : CPTableViewHandler
+@interface CPCoreDataPhotosTableViewHandler : CPPhotosTitleForHeaderTableViewHandler
 
 @end

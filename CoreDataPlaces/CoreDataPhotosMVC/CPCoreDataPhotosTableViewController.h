@@ -6,21 +6,25 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "CoreDataTableViewController.h"
+#import "CPIndexedTableViewController.h"
 
 
 @class Place;
 
-@interface CPCoreDataPhotosTableViewController : CoreDataTableViewController
+@interface CPCoreDataPhotosTableViewController : CPIndexedTableViewController
 
 extern NSString *CPFavoritePhotosTableViewAccessibilityLabel;
 
+#pragma mark - Property
+
+@property (retain) Place *currentPlace;
+
+#pragma mark - Factory method
+
++ (id)coreDataPhotosTableViewControllerWithPlace:(Place *)chosenPlace manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 #pragma mark - Initialization
 
-//TODO: new api
-//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;
-
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext place:(Place *)place;
 
 @end

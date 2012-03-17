@@ -6,15 +6,58 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPCoreDataPhotosTableViewController.h"
+#import "CPCoreDataPhotosTableViewController-Internal.h"
+#import "CPCoreDataPhotosRefinary.h"
+#import "CPPhotosDataIndexer.h"
+#import "CPCoreDataPhotosTableViewHandler.h"
+#import "CPRefinedElement.h"
+#import "CPIndexAssistant.h"
 #import "Photo+Logic.h"
 #import "Place.h"
 #import "CPScrollableImageViewController.h"
+#import "CPAppDelegate.h"
 
+
+@interface CPCoreDataPhotosTableViewController()
+{
+	@private
+	NSArray *CP_listOfRawElements;
+	NSMutableArray *CP_refinedElementSections;
+	NSFetchRequest *CP_fetchRequest;
+	Place *CP_currentPlace;
+	BOOL CP_reindex;
+}
+@end
 
 @implementation CPCoreDataPhotosTableViewController
 
 NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table";
+
+#pragma mark - Synthesize
+
+@synthesize currentPlace = CP_currentPlace;
+@synthesize fetchRequest = CP_fetchRequest;
+@synthesize listOfRawElements = CP_listOfRawElements;
+@synthesize refinedElementSections = CP_refinedElementSections;
+
+
+#pragma mark - Factory method
+
++ (id)coreDataPhotosTableViewControllerWithPlace:(Place *)chosenPlace manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{
+	CPCoreDataPhotosRefinary *refinary = [[CPCoreDataPhotosRefinary alloc] init];
+	CPPhotosDataIndexer *dataIndexer = [[CPPhotosDataIndexer alloc] init];
+	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[CPCoreDataPhotosTableViewHandler alloc] init];
+	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
+	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
+	[refinary release]; refinary = nil;
+	[dataIndexer release]; dataIndexer = nil;
+	[tableViewHandler release]; tableViewHandler = nil;
+	[refinedElementType release]; refinedElementType = nil;
+	CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext place:chosenPlace];
+	[indexAssistant release]; indexAssistant = nil;
+	return [coreDataPhotosTableViewController autorelease];
+}
 
 #pragma mark - Initialization
 
@@ -35,132 +78,164 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 //    return self;
 //}
 
+//TODO: fix the location of this method
+- (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
+{
+	if ([[notification.userInfo objectForKey:NSUpdatedObjectsKey] isKindOfClass:[NSSet class]])
+	{
+		NSSet *setOfUpdatedObjects = (NSSet *)[notification.userInfo objectForKey:NSUpdatedObjectsKey];
+		for (id element in setOfUpdatedObjects) 
+		{
+			if ([element isKindOfClass:[Photo class]])
+			{
+				Photo *photo = (Photo *)element;
+				if ([photo.changedValuesForCurrentEvent objectForKey:@"isFavorite"])
+				{
+					CP_reindex = YES;
+					CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
+					if ([appDelegate window].bounds.size.width > 500)//iPad
+					{
+						[self CP_fetchListThenIndexData];
+					}
+				}
+			}
+		}
+	}
+}
+
 //TODO: might delete this method
-- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
+//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext place:(Place *)place;
 {
-    self = [self initWithStyle:style];
-    if (self) {
-        // Custom initialization
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+    if (self)
+	{
+		self.currentPlace = place;
+		self.title = place.title;
+		CP_reindex = YES;
 		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
-		self.managedObjectContext = managedObjectContext;
-//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
-
+		
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
-		fetchRequest.fetchBatchSize = 20;
-		fetchRequest.predicate = [NSPredicate
-								  predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
-		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		[sortDescriptors release];
-		[sortDescriptor release];
-	    
-		NSFetchedResultsController *localFetchedResultsController = 
-		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-											managedObjectContext:managedObjectContext
-											  sectionNameKeyPath:sectionNameKeyPath 
-													   cacheName:nil];
+		self.fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+		self.fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
+		self.fetchRequest.predicate = [NSPredicate
+									   predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], place.placeID];
+		self.fetchRequest.fetchBatchSize = 20;
 		
-		NSError *error;
-		if (![localFetchedResultsController performFetch:&error])
-		{
-			NSLog(@"%@", [error localizedFailureReason]);
-			abort();
-		}
-		// test it
-		//		if ([localFetchedResultsController performFetch:&error]) {
-		//			NSLog(@"results");
-		//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-		//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
-		//				NSLog(@"%@", photo.title);
-		//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
-		//			}
-		//		}
-		//		else {
-		//			NSLog(@"%@", [error localizedFailureReason]);
-		//		}
-		
-		[fetchRequest release]; fetchRequest = nil;
-		
-		self.fetchedResultsController = localFetchedResultsController;
-		[localFetchedResultsController release];
-		
-		
-		self.titleKey = @"title";
-		self.subtitleKey = @"subtitle";
-		self.searchKey = @"title";
-		self.title = chosenPlace.title;
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(CP_checkTheChangeInManagedObjectContext:)
+													 name:NSManagedObjectContextObjectsDidChangeNotification
+												   object:self.managedObjectContext];
 	}
     return self;
+//    self = [self initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
+//		self.managedObjectContext = managedObjectContext;
+////		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
+//		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
+//
+//		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
+//		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
+//		fetchRequest.fetchBatchSize = 20;
+//		fetchRequest.predicate = [NSPredicate
+//								  predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
+//		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
+//		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+//		[fetchRequest setSortDescriptors:sortDescriptors];
+//		[sortDescriptors release];
+//		[sortDescriptor release];
+//	    
+//		NSFetchedResultsController *localFetchedResultsController = 
+//		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+//											managedObjectContext:managedObjectContext
+//											  sectionNameKeyPath:sectionNameKeyPath 
+//													   cacheName:nil];
+//		
+//		NSError *error;
+//		if (![localFetchedResultsController performFetch:&error])
+//		{
+//			NSLog(@"%@", [error localizedFailureReason]);
+//			abort();
+//		}
+//		// test it
+//		//		if ([localFetchedResultsController performFetch:&error]) {
+//		//			NSLog(@"results");
+//		//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
+//		//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
+//		//				NSLog(@"%@", photo.title);
+//		//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
+//		//			}
+//		//		}
+//		//		else {
+//		//			NSLog(@"%@", [error localizedFailureReason]);
+//		//		}
+//		
+//		[fetchRequest release]; fetchRequest = nil;
+//		
+//		self.fetchedResultsController = localFetchedResultsController;
+//		[localFetchedResultsController release];
+//		
+//		
+//		self.titleKey = @"title";
+//		self.subtitleKey = @"subtitle";
+//		self.searchKey = @"title";
+//		self.title = chosenPlace.title;
+//	}
+//    return self;
 }
 
+#pragma mark - View lifecycle
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)dealloc;
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	[CP_listOfRawElements release];
+	[CP_refinedElementSections release];
+	[CP_currentPlace release];
+	[CP_fetchRequest release];
+	[super dealloc];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+- (void)CP_fetchListThenIndexData;
 {
-	NSString *returningString = nil;
-	id <NSFetchedResultsSectionInfo> sectionInfo = [fetchedResultsController.sections objectAtIndex:section];
-	
-	if ([sectionInfo.objects count] > 0)
+	if (CP_reindex) 
 	{
-		//TODO: create an interface to return a string.
-		//after checking key-value coding to see if:
-		Photo *photo = [sectionInfo.objects lastObject];
-//		NSString *elapsedHours = [NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]];
-
-		if ([photo.timeLapseSinceUpload intValue] == 0) 
-			returningString = @"Right Now";
-		else
-			returningString = [[NSString stringWithFormat:@"%d",[photo.timeLapseSinceUpload intValue]] stringByAppendingString:@" Hour(s) Ago"];
-	}
-    return returningString;
-}
-
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-	return nil;
-}
-
-#pragma mark UITableViewDelegate methods
-
-
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-{
-	return 0;
-}
-
-//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
-- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
-{
-	return imageController.view.window == nil;
-}
-
-- (void)managedObjectSelected:(NSManagedObject *)managedObject;
-{
-	if ([managedObject isKindOfClass:[Photo class]])
-	{
-		Photo *chosenPhoto = (Photo *)managedObject;
-		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
-		//TODO: the title should be set in the image controller.
-		scrollableImageViewController.title = chosenPhoto.title;
-		[scrollableImageViewController setNewCurrentPhoto:chosenPhoto];
-		if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+		NSError *error = nil;
+		
+		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
+		if (mutableFetchResults == nil)
 		{
-			[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
-			[self.navigationController pushViewController:scrollableImageViewController animated:YES];
+			// Handle the error.
 		}
+		self.listOfRawElements = mutableFetchResults;
+		[mutableFetchResults release]; mutableFetchResults = nil;
+		[self indexTheTableViewData];
 	}
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	[self CP_fetchListThenIndexData];
+}
+
+#pragma mark - CPTableViewControllerDataMutating protocol method
+
+- (void)setTheElementSections:(NSMutableArray *)array;
+{
+	self.refinedElementSections = array;
+}
+
+- (NSMutableArray *)theElementSections;
+{
+	return CP_refinedElementSections;
+}
+
+- (NSArray *)theRawData;
+{
+	return CP_listOfRawElements;
 }
 
 @end
