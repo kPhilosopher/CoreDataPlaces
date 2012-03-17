@@ -51,11 +51,11 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - Initalization
 
+//TODO: change this interface to not include delegate.
 - (id)initWithDelegate:(id)delegate managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [self init];
 	if (self) {
-		//	self.delegateToTransfer = delegate;
 		self.title = @"Lists";
 		self.managedObjectContext = managedObjectContext;
 		[self CP_setup];
@@ -115,48 +115,13 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 -(void)RD_setupTheCustomTableViewControllers;
 {
 	[self RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource];
-//	self.topPlacesTableViewController.delegateToUpdateMostRecentPlaces = self.mostRecentPhotosTableViewController;
-	[self RD_setDelegateToTransferForTableViewControllersForiPad];
 	[self RD_pushViewControllersToNavigationViewControllers];
 }
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 {
-//	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-//	CPFlickrDataSource *flickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
-//	[flickrDataHandler release];
-//	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
-//	CPPlacesDataIndexer *dataIndexHandler = [[CPPlacesDataIndexer alloc] init];
-//	
-//	self.topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:flickrDataSource dataIndexHandler:dataIndexHandler tableViewHandler:tableViewHandler];
-//	
-//	[flickrDataSource release]; 
-//	[tableViewHandler release];
-//	[dataIndexHandler release];
 	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewControllerWithManagedObjectContext:self.managedObjectContext];
-//	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] 
-//										 initWithStyle:UITableViewStylePlain 
-//										 managedObjectContext:self.managedObjectContext 
-//											customSettingsDictionary:nil] autorelease];
+	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext customSettingsDictionary:nil] autorelease];
 	self.mostRecentPhotosTableViewController = [CPMostRecentPhotosTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
-	
-//	PlacesDataIndexer *placesDataIndexerForTopPlaces = [[PlacesDataIndexer alloc] init];
-//	PlacesDataIndexer *placesDataIndexerForMostRecentPlaces = [[PlacesDataIndexer alloc] init];
-//	CPFlickrDataSource *theFlickrDataSource = [[CPFlickrDataSource alloc] initWithFlickrDataHandler:flickrDataHandler];
-	
-	
-//	self.topPlacesTableViewController = 
-//	[[[TopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForTopPlaces] autorelease];
-//	self.mostRecentPhotosTableViewController = 
-//	[[[MostRecentTableViewController alloc] initWithStyle:UITableViewStylePlain withTheFlickrDataSource:theFlickrDataSource dataIndexHandler:placesDataIndexerForMostRecentPlaces] autorelease];
-//	
-//	[theFlickrDataSource release];
-//	[placesDataIndexerForMostRecentPlaces release];
-//	[placesDataIndexerForTopPlaces release];
-}
-- (void)RD_setDelegateToTransferForTableViewControllersForiPad;
-{ 
-//	self.topPlacesTableViewController.delegateToTransfer = self.delegateToTransfer;
-//	self.mostRecentPhotosTableViewController.delegateToTransfer = self.delegateToTransfer;
 }
 -(void)RD_pushViewControllersToNavigationViewControllers;
 {

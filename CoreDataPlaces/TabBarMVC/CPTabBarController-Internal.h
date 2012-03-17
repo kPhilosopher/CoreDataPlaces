@@ -21,7 +21,6 @@
 - (void)RD_setupTheCustomTableViewControllers;
 - (void)RD_pushViewControllersToNavigationViewControllers;
 - (void)RD_setTabBarItemToSystemItems;
-- (void)RD_setDelegateToTransferForTableViewControllersForiPad;
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 - (void)RD_addTheNavigationControllersToThisTabBarController;
 
