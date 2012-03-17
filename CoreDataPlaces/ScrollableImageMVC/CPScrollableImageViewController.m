@@ -210,6 +210,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 						}
 					}
 					self.currentPhoto = self.queuedPhoto;
+					self.title = self.currentPhoto.title;
 					self.queuedPhoto = nil;
 					//call to set the scrollScale.
 					[self CP_setTheZoomScales];
@@ -294,7 +295,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if ([photoRefinedElement.rawElement isKindOfClass:[NSDictionary class]]) 
 	{
 		NSDictionary *dictionary = (NSDictionary *)photoRefinedElement.rawElement;
-		NSString *photoURL = [FlickrFetcher urlStringForPhotoWithFlickrInfo:dictionary format:FlickrFetcherPhotoFormatLarge];
+//		NSString *photoURL = [FlickrFetcher urlStringForPhotoWithFlickrInfo:dictionary format:FlickrFetcherPhotoFormatLarge];
+		NSString *photoURL = photoRefinedElement.largePhotoURL;
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
 		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"photoURL like %@",photoURL];
@@ -389,7 +391,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		[imageCacheHandler release];imageCacheHandler = nil;
 		
 		self.currentPhoto.isFavorite = [NSNumber numberWithBool:sender.on];
-		
+		[self.managedObjectContext processPendingChanges];
 		NSError *error = nil;
 		if (![self.managedObjectContext save:&error])
 		{
