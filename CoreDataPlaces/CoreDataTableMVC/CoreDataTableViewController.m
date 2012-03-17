@@ -10,8 +10,6 @@
 
 @synthesize fetchedResultsController;
 @synthesize titleKey, subtitleKey, searchKey;
-//TODO:preserve this file, delete this.
-@synthesize managedObjectContext = CP_managedObjectContext;
 
 - (void)createSearchBar
 {
