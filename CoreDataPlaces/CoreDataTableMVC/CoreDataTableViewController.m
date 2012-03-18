@@ -173,13 +173,6 @@
 	[self performFetchForTableView:self.tableView];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
-			(interfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
-			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
-}
-
 #pragma mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -290,23 +283,6 @@
 	[currentSearchText release];
 	[normalPredicate release];
     [super dealloc];
-}
-
-#pragma mark - CPTableViewControllerDataMutating protocol method
-
-- (void)setTheElementSectionsToTheFollowingArray:(NSMutableArray *)array;
-{
-	return;
-}
-
-- (NSMutableArray *)fetchTheElementSections;
-{
-	return [NSMutableArray arrayWithArray:[self.fetchedResultsController sections]];
-}
-
-- (NSArray *)fetchTheRawData;
-{
-	return nil;
 }
 
 @end
