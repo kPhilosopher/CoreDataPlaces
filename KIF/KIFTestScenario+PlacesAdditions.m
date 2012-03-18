@@ -275,19 +275,11 @@ enum {
 			NSString *titleString = [pictureList.title copy];
 			[dictionary setObject:titleString forKey:backButtonKey];
 			[titleString release];
-			[dictionary release]; [backButtonKey release];
 			return KIFTestStepResultSuccess;
 		}
 		return KIFTestStepResultFailure;
 	}]];
 	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabelInReferenceDictionary:dictionary labelKey:backButtonKey]];
-	[scenario addStep:[KIFTestStep stepWithDescription:@"release the dictionary" executionBlock:^(KIFTestStep *step, NSError **error){
-		[backButtonKey release];//release for the tapping block
-		[backButtonKey release];//release for the current block
-		[dictionary release];//release for the tapping block
-		[dictionary release];//release for the current block
-		return KIFTestStepResultSuccess;
-	}]];
 	return scenario;
 }
 
