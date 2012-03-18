@@ -23,8 +23,6 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
     if (self) {
         // Custom initialization
 		self.tableView.accessibilityLabel = CPFavoritePlacesTableViewAccessibilityLabel;
-//		self.managedObjectContext = managedObjectContext;
-		//		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
 		NSString *sectionNameKeyPath = @"category";
 		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -42,11 +40,13 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 											managedObjectContext:managedObjectContext
 											  sectionNameKeyPath:sectionNameKeyPath 
 													   cacheName:nil];
-
+		[fetchRequest release]; fetchRequest = nil;
+		
 		NSError *error;
 		if (![localFetchedResultsController performFetch:&error])
 		{
 			NSLog(@"%@", [error localizedFailureReason]);
+			//TODO: make sure all aborts are out.
 			abort();
 		}
 		// test it
@@ -61,7 +61,6 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 //			NSLog(@"%@", [error localizedFailureReason]);
 //		}
 		
-		[fetchRequest release]; fetchRequest = nil;
 
 		self.fetchedResultsController = localFetchedResultsController;
 		[localFetchedResultsController release];
@@ -71,6 +70,7 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 		self.subtitleKey = @"subtitle";
 		self.searchKey = @"title";
 		self.title = @"Favorite Photos";
+		[self.tableView reloadData];
 	}
     return self;
 }
