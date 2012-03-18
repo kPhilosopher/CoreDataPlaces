@@ -8,6 +8,20 @@
 
 #import "NSManagedObjectContext+Additions.h"
 
+
 @implementation NSManagedObjectContext (Additions)
+
+#pragma mark - Internal method
+
+- (void)processPendingChangesThenSave;
+{
+	[self processPendingChanges];
+	NSError *error = nil;
+	if (![self save:&error])
+	{
+		//handle the error.
+		NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+	}
+}
 
 @end

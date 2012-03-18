@@ -8,6 +8,11 @@
 
 #import <CoreData/CoreData.h>
 
+
 @interface NSManagedObjectContext (Additions)
+
+#pragma mark - Internal method
+
+- (void)processPendingChangesThenSave;
 
 @end

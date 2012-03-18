@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface UIActivityIndicatorView (NavigationController)
+
+#pragma mark - Class method
+
++ (UIActivityIndicatorView *)activityIndicatorOnKIFTestableViewWithNavigationController:(UINavigationController *)navigationController;
 
 @end

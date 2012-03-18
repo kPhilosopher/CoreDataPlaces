@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface CPConstants : NSObject
+
+extern NSString * const CPActivityIndicatorMarkerForKIF;
+extern NSString *CPPlaceID;
 
 @end
