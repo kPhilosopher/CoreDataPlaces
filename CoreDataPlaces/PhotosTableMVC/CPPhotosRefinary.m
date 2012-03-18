@@ -35,6 +35,7 @@
 													fromDate:startDate
 													  toDate:endDate 
 													 options:0];
+		[gregorian release]; gregorian = nil;
 		
 		//math with components
 		float seconds = (float)[components second];
