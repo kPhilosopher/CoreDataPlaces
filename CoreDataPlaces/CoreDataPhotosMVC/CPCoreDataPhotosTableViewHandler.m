@@ -17,12 +17,6 @@
 
 #pragma mark Table view delegate handler method
 
-//TODO: create a file that has this method for all classes that use it, or create an inheritance or strategy re-architecture to reduce redundancy.
-- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
-{
-	return imageController.view.window == nil;
-}
-
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
 	id undeterminedElement = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
@@ -33,7 +27,7 @@
 		{
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 			[scrollableImageViewController setNewCurrentPhoto:chosenPhoto.rawElement];
-			if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 			{
 				[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
 				[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
