@@ -15,7 +15,6 @@
 @interface CPPhotosTableViewController : CPIndexedTableViewController
 
 extern NSString *CPPhotosListViewAccessibilityLabel;
-extern NSString *CPActivityIndicatorMarkerForKIF;
 
 #pragma mark - Property
 

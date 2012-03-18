@@ -7,6 +7,7 @@
 //
 
 #import "CPPhotosTableViewController-Internal.h"
+#import "CPConstants.h"
 #import "CPPhotosRefinary.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
@@ -32,8 +33,6 @@
 @implementation CPPhotosTableViewController
 
 NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
-//TODO: change the location of this constant.
-NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker";
 
 #pragma mark - Synthesize
 
@@ -80,17 +79,17 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
 		currentPlace.placeID = placeID;
 		currentPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
 		
-		NSError *error = nil;
+//		NSError *error = nil;
 		
 		//Hal's approach to finding the source of error.
 		
-		NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
-		if (![managedObjectContext save:&error])
-		{
-			//handle the error.
-			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-		}
-		NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+//		NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+//		if (![managedObjectContext save:&error])
+//		{
+//			//handle the error.
+//			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+//		}
+//		NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
 	}
 	else if (error)
 	{
@@ -125,9 +124,6 @@ NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker"
     if (self)
 	{
 		self.placeRefinedElement = placeRefinedElement;
-		NSLog(@"++++++");NSLog(@"-------");NSLog(@"-------");
-		NSLog(@"%@",[NSString stringWithFormat:placeRefinedElement.placeID]);
-		NSLog(@"-------");NSLog(@"-------");NSLog(@"++++++");
 		self.title = self.placeRefinedElement.title;
 		self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
 	}
