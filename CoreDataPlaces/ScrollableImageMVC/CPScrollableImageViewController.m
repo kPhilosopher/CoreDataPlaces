@@ -120,7 +120,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - View lifecycle
 
--(void)dealloc
+- (void)dealloc;
 {
 	[CP_image release];
 	[CP_imageView release];
@@ -137,6 +137,14 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 {
 	[super viewWillAppear:animated];
 	[self CP_newPhotoSequence];
+}
+
+//TODO: see if there is a way to refactor this method with TopPlaceTableViewController.
+- (void)viewWillDisappear:(BOOL)animated;
+{
+	[self.activityIndicator stopAnimating];
+	self.activityIndicator = nil;
+	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidLoad
