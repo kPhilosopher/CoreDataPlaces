@@ -61,23 +61,6 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 
 #pragma mark - Initialization
 
-//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchedResultsController:(NSFetchedResultsController *)localFetchedResultsController;
-//{
-//	self = [self initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//		self.managedObjectContext = managedObjectContext;
-//		self.fetchedResultsController = localFetchedResultsController;
-//		
-//		self.titleKey = @"title";
-//		self.subtitleKey = @"subtitle";
-//		self.searchKey = nil;
-//		//TODO: title of the given Place
-//		//		self.title = @"";
-//	}
-//    return self;
-//}
-
 //TODO: fix the location of this method
 - (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
 {
@@ -103,8 +86,6 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 	}
 }
 
-//TODO: might delete this method
-//- (id)initWithStyle:(UITableViewStyle)style managedObjectContext:(NSManagedObjectContext *)managedObjectContext chosenPlace:(Place *)chosenPlace;
 - (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext place:(Place *)place;
 {
 	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
@@ -128,63 +109,6 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 												   object:self.managedObjectContext];
 	}
     return self;
-//    self = [self initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
-//		self.managedObjectContext = managedObjectContext;
-////		NSString *sectionNameKeyPath = [customSettings objectForKey:@"sectionNameKeyPath"];
-//		NSString *sectionNameKeyPath = @"timeLapseSinceUpload";
-//
-//		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
-//		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
-//		fetchRequest.fetchBatchSize = 20;
-//		fetchRequest.predicate = [NSPredicate
-//								  predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
-//		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sectionNameKeyPath ascending:YES];
-//		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-//		[fetchRequest setSortDescriptors:sortDescriptors];
-//		[sortDescriptors release];
-//		[sortDescriptor release];
-//	    
-//		NSFetchedResultsController *localFetchedResultsController = 
-//		[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-//											managedObjectContext:managedObjectContext
-//											  sectionNameKeyPath:sectionNameKeyPath 
-//													   cacheName:nil];
-//		
-//		NSError *error;
-//		if (![localFetchedResultsController performFetch:&error])
-//		{
-//			NSLog(@"%@", [error localizedFailureReason]);
-//			abort();
-//		}
-//		// test it
-//		//		if ([localFetchedResultsController performFetch:&error]) {
-//		//			NSLog(@"results");
-//		//			NSLog(@"found %d objects", localFetchedResultsController.fetchedObjects.count);
-//		//			for (Photo *photo in localFetchedResultsController.fetchedObjects) {
-//		//				NSLog(@"%@", photo.title);
-//		//				NSLog(@"%@", [self CP_timeLapseSinceDate:photo.timeOfLastView]);
-//		//			}
-//		//		}
-//		//		else {
-//		//			NSLog(@"%@", [error localizedFailureReason]);
-//		//		}
-//		
-//		[fetchRequest release]; fetchRequest = nil;
-//		
-//		self.fetchedResultsController = localFetchedResultsController;
-//		[localFetchedResultsController release];
-//		
-//		
-//		self.titleKey = @"title";
-//		self.subtitleKey = @"subtitle";
-//		self.searchKey = @"title";
-//		self.title = chosenPlace.title;
-//	}
-//    return self;
 }
 
 #pragma mark - View lifecycle
