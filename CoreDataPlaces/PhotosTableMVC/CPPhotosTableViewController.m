@@ -152,6 +152,14 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	}
 }
 
+//TODO: see if there is a way to refactor this method with TopPlaceTableViewController.
+- (void)viewWillDisappear:(BOOL)animated;
+{
+	[self.activityIndicator stopAnimating];
+	self.activityIndicator = nil;
+	[super viewWillDisappear:animated];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 {	
 	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
