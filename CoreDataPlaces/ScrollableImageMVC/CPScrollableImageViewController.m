@@ -181,6 +181,13 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - Instance method
 
+- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
+{
+	CPManagedObjectInsertionHandler *managedObjectInsertionHandler = [[CPManagedObjectInsertionHandler alloc] initWithManagedObjectContext:self.managedObjectContext];
+	Photo *photo = [managedObjectInsertionHandler photoWithPhotoRefinedElement:photoRefinedElement itsPlace:place];
+	[self setNewCurrentPhoto:photo];
+}
+
 - (void)setNewCurrentPhoto:(Photo *)newPhoto;
 {
 	self.currentPhoto = newPhoto;
@@ -193,14 +200,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			[self.popoverController dismissPopoverAnimated:YES];
 		[self CP_newPhotoSequence];
 	}
-}
-
-
-- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
-{
-	CPManagedObjectInsertionHandler *managedObjectInsertionHandler = [[CPManagedObjectInsertionHandler alloc] initWithManagedObjectContext:self.managedObjectContext];
-	Photo *photo = [managedObjectInsertionHandler photoWithPhotoRefinedElement:photoRefinedElement itsPlace:place];
-	[self setNewCurrentPhoto:photo];
 }
 
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
@@ -221,7 +220,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		sender.on = !sender.on;
 }
 
-#pragma mark - Helper method
+#pragma mark - Internal method
 
 - (void)CP_newPhotoSequence;
 {
@@ -285,19 +284,20 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	[self.scrollView addSubview:self.imageView];
 	if (self.image != nil)
 	{
-		//			int r = arc4random() % 50;
-		//			self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+//		int r = arc4random() % 50;
+//		self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
 		self.currentPhoto.timeOfLastView = [NSDate date];
-		[self.managedObjectContext processPendingChanges];
-		NSError *error = nil;
-		if (![self.managedObjectContext save:&error])
-		{
-			//handle the error.
-			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-		}
+		[self.managedObjectContext processPendingChangesThenSave];
 	}
 	self.title = self.currentPhoto.title;
 	[self CP_adjustToChangeInViewSize];
+}
+
+- (void)CP_adjustToChangeInViewSize;
+{
+	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+	[self CP_setTheZoomScales];
+	[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
 - (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace
@@ -339,13 +339,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	}
 	self.scrollView.maximumZoomScale = maximumZoomScale;
 	self.scrollView.minimumZoomScale = minimumZoomScale;
-}
-
-- (void)CP_adjustToChangeInViewSize;
-{
-	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
-	[self CP_setTheZoomScales];
-	[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
 #pragma mark - Split View Delegate Methods
