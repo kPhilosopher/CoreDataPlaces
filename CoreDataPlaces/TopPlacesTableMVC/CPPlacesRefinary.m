@@ -7,6 +7,7 @@
 //
 
 #import "CPPlacesRefinary.h"
+#import "CPConstants.h"
 #import "CPPlacesRefinedElement.h"
 #import "NSString+TitleExtraction.h"
 #import "NSString+TitleExtraction.h"
@@ -14,9 +15,6 @@
 
 
 @implementation CPPlacesRefinary
-
-//TODO: change the location of the extern string
-NSString *CPPlaceID = @"place_id";
 
 #pragma mark - Overriding method
 
