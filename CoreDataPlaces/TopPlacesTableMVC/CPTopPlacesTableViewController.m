@@ -14,6 +14,7 @@
 #import "CPFlickrDataHandler.h"
 #import "CPNotificationManager.h"
 #import "CPIndexAssistant.h"
+#import "UIActivityIndicatorView+NavigationController.h"
 
 //TODO: change this when the extern string constants' location is changed.
 //#import "CPPhotosTableViewController.h"
@@ -24,6 +25,7 @@
 @private
 	NSArray *CP_listOfPlaces;
 	NSMutableArray *CP_indexedListOfPlaces;
+	UIActivityIndicatorView *CP_activityIndicator;
 }
 
 @end
@@ -38,6 +40,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 @synthesize listOfPlaces = CP_listOfPlaces;
 @synthesize indexedListOfPlaces = CP_indexedListOfPlaces;
+@synthesize activityIndicator = CP_activityIndicator;
 
 #pragma mark - Initialization
 
@@ -78,6 +81,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 {
 	[CP_listOfPlaces release];
 	[CP_indexedListOfPlaces release];
+	[CP_activityIndicator release];
 	[super dealloc];
 }
 
@@ -88,40 +92,30 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	{
 		[self CP_setupTopPlacesList];
 	}
-	
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{	
+	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
 }
 
 #pragma mark - Convenience method
 
-//- (void)CP_refreshTheTopPlacesList;
-//{
-//	[self CP_setupTopPlacesList];
-//}
-
 //TODO: refactor
 - (void)CP_setupTopPlacesList;
 {
-	//TODO: find a better place to put this redundant code.
-	UIView *theLabel = [[UIView alloc] init];
-//	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
-	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	activityIndicator.color = [UIColor blueColor];
-	activityIndicator.hidesWhenStopped = YES;
-	activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
-	theLabel.frame = activityIndicator.frame;
-	activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
-	activityIndicator.accessibilityLabel = @"Activity indicator";
-	activityIndicator.hidesWhenStopped = YES;
-	[self.navigationController.view addSubview:theLabel];
-	[theLabel addSubview:activityIndicator];
-	[activityIndicator startAnimating];
+	if (self.activityIndicator == nil) 
+	{
+		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+		[self.activityIndicator startAnimating];
+	}
+	
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 	dispatch_queue_t placesDownloadQueue = dispatch_queue_create("Flickr places downloader", NULL);
 	dispatch_async(placesDownloadQueue, ^{
 		id undeterminedListOfPlaces = [flickrDataHandler flickrTopPlaces];
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[activityIndicator stopAnimating];
 			if ([undeterminedListOfPlaces isKindOfClass:[NSArray class]]) 
 			{
 				self.listOfPlaces = (NSArray *)undeterminedListOfPlaces;
@@ -131,10 +125,12 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
-			[activityIndicator removeFromSuperview];
-			[activityIndicator release];
-			[theLabel removeFromSuperview];
-			[theLabel release];
+			
+			[self.activityIndicator stopAnimating];
+			[self.activityIndicator removeFromSuperview];
+			UIView *KIFView = self.activityIndicator.superview;
+			[KIFView removeFromSuperview];
+			self.activityIndicator = nil;
 		});
 	});
 	dispatch_release(placesDownloadQueue);

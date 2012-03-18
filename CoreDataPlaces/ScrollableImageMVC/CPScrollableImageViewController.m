@@ -227,8 +227,11 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	NSString *photoURL = self.currentPhoto.photoURL;
 	if (self.image == nil && (photoURL != nil))
 	{
-		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
-		[self.activityIndicator startAnimating];
+		if (self.activityIndicator == nil) 
+		{
+			self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+			[self.activityIndicator startAnimating];
+		}
 		
 		BOOL currentPhotoIsAFavorite = [self.currentPhoto.isFavorite boolValue];
 		

@@ -10,6 +10,10 @@
 
 @interface CPPhotosTableViewController ()
 
+#pragma mark - Property
+
+@property (retain) UIActivityIndicatorView *activityIndicator;
+
 #pragma mark - Internal method
 
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;

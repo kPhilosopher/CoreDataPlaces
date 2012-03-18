@@ -7,7 +7,6 @@
 //
 
 #import "CPPhotosTableViewController-Internal.h"
-#import "CPConstants.h"
 #import "CPPhotosRefinary.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
@@ -17,6 +16,7 @@
 #import "CPFlickrDataHandler.h"
 #import "Place.h"
 #import "CPNotificationManager.h"
+#import "UIActivityIndicatorView+NavigationController.h"
 
 
 @interface CPPhotosTableViewController ()
@@ -25,6 +25,7 @@
 	NSArray *CP_listOfPhotos;
 	NSMutableArray *CP_indexedListOfPhotos;
 	CPPlacesRefinedElement *CP_placeRefinedElement;
+	UIActivityIndicatorView *CP_activityIndicator;
 }
 @end
 
@@ -39,6 +40,7 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 @synthesize listOfPhotos = CP_listOfPhotos;
 @synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize placeRefinedElement = CP_placeRefinedElement;
+@synthesize activityIndicator = CP_activityIndicator;
 
 #pragma mark - Factory method
 
@@ -137,11 +139,9 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	[CP_listOfPhotos release];
 	[CP_indexedListOfPhotos release];
 	[CP_placeRefinedElement release];
+	[CP_activityIndicator release];
 	[super dealloc];
 }
-
-
-#pragma mark - Convenience method
 
 - (void)viewWillAppear:(BOOL)animated;
 {
@@ -152,30 +152,27 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	}
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{	
+	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+}
+
+#pragma mark - Internal method
+
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
 {
+	if (self.activityIndicator == nil) 
+	{
+		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+		[self.activityIndicator startAnimating];
+	}
+	
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-	//TODO: make a class that contains all the constant strings that is used in more than one place.
-	//TODO: find a better place to put this redundant code.
-	UIView *theLabel = [[UIView alloc] init];
-	theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
-	UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	activityIndicator.color = [UIColor blueColor];
-	activityIndicator.hidesWhenStopped = YES;
-	activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
-	theLabel.frame = activityIndicator.frame;
-	activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
-	activityIndicator.accessibilityLabel = @"Activity indicator";
-	activityIndicator.hidesWhenStopped = YES;
-	[self.navigationController.view addSubview:theLabel];
-	[theLabel addSubview:activityIndicator];
-	[activityIndicator startAnimating];
 	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
 	dispatch_async(photosDownloadQueue, ^{
 		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeRefinedElement.placeID];
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[activityIndicator stopAnimating];
 			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
 			{
 				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
@@ -185,10 +182,12 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
-			[activityIndicator removeFromSuperview];
-			[activityIndicator release];
-			[theLabel removeFromSuperview];
-			[theLabel release];
+			
+			[self.activityIndicator stopAnimating];
+			[self.activityIndicator removeFromSuperview];
+			UIView *KIFView = self.activityIndicator.superview;
+			[KIFView removeFromSuperview];
+			self.activityIndicator = nil;
 		});
 	});
 	dispatch_release(photosDownloadQueue);
