@@ -9,30 +9,28 @@
 #import "CPScrollableImageViewController-Internal.h"
 #import "Photo+Logic.h"
 #import "CPPhotosRefinedElement.h"
-#import "FlickrFetcher.h"
 #import "CPAppDelegate.h"
 #import "CPImageCacheHandler.h"
 #import "CPNotificationManager.h"
 #import "CPFlickrDataHandler.h"
+#import "UIActivityIndicatorView+NavigationController.h"
+#import "NSManagedObjectContext+Additions.h"
+#import "CPManagedObjectInsertionHandler.h"
 
-//TODO: change this when the extern string constants' location is changed.
-#import "CPPhotosTableViewController.h"
 
 static CPScrollableImageViewController *sharedScrollableImageController = nil;
 
 @interface CPScrollableImageViewController ()
 {
 @private
-//	NSDictionary *CP_imageDictionary;
 	UIImage *CP_image;
 	UIImageView *CP_imageView;
 	UIScrollView *CP_scrollView;
 	UISwitch *CP_switchForFavorite;
 	Photo *CP_currentPhoto;
-//	CPPhotosRefinedElement *CP_photoRefinedElement;
 	NSManagedObjectContext *CP_managedObjectContext;
-	Photo *CP_queuedPhoto;
 	UIPopoverController *CP_popoverController;
+	UIActivityIndicatorView *CP_activityIndicator;
 }
 @end
 
@@ -45,16 +43,14 @@ const float CPMaximumZoomScale = 1.2;
 
 #pragma mark - Synthesize
 
-//@synthesize imageDictionary = CP_imageDictionary;
 @synthesize image = CP_image;
 @synthesize imageView = CP_imageView;
 @synthesize scrollView = CP_scrollView;
 @synthesize switchForFavorite = CP_switchForFavorite;
 @synthesize currentPhoto = CP_currentPhoto;
-@synthesize queuedPhoto = CP_queuedPhoto;
-//@synthesize photoRefinedElement = CP_photoRefinedElement;
 @synthesize managedObjectContext = CP_managedObjectContext;
 @synthesize popoverController = CP_popoverController;
+@synthesize activityIndicator = CP_activityIndicator;
 
 NSString *CPScrollableImageViewAccessibilityLabel = @"Scrollable image";
 NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
@@ -68,10 +64,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	{
 		self.managedObjectContext = managedObjectContext;
 		self.view.backgroundColor = [UIColor blackColor];
-		
-		//		self.view.accessibilityLabel = ScrollableImageViewAccessibilityLabel;
-		//		self.navigationItem.backBarButtonItem.accessibilityLabel = ScrollableImageBackBarButtonAccessibilityLabel;
-		//		self.navigationItem.backBarButtonItem.title = @"whatwhat";
 	}
 	return self;
 }
@@ -83,7 +75,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (sharedScrollableImageController == nil)
 	{
 		CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-		if ([appDelegate window].bounds.size.width > 500)//iPad
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		{
 			sharedScrollableImageController	= [[super allocWithZone:NULL] initWithNibName:@"CPScrollableImageViewController-iPad" bundle:nil managedObjectContext:appDelegate.managedObjectContext];
 		}
@@ -130,138 +122,29 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 -(void)dealloc
 {
-	[CP_currentPhoto release];
-//	[CP_photoRefinedElement release];
-	[CP_managedObjectContext release];
-	[CP_queuedPhoto release];
-	
-	
 	[CP_image release];
 	[CP_imageView release];
 	[CP_scrollView release];
 	[CP_switchForFavorite release];
-//	[CP_imageDictionary release];
+	[CP_currentPhoto release];
 	[CP_popoverController release];
+	[CP_managedObjectContext release];
+	[CP_activityIndicator release];
 	[super dealloc];
-}
-
-- (void)newPhotoSequence;
-{
-	NSString *photoURL = self.queuedPhoto.photoURL;
-	if (self.image == nil && (photoURL != nil)) //TODO: change the self.image to something more relevant.
-	{
-		UIView *theLabel = [[UIView alloc] init];
-		theLabel.accessibilityLabel = CPActivityIndicatorMarkerForKIF;
-		UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-		activityIndicator.color = [UIColor blueColor];
-		activityIndicator.hidesWhenStopped = YES;
-		activityIndicator.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
-		theLabel.frame = activityIndicator.frame;
-		activityIndicator.center = CGPointMake(theLabel.bounds.size.width/2, theLabel.bounds.size.height/2);
-		activityIndicator.accessibilityLabel = @"Activity indicator";
-		activityIndicator.hidesWhenStopped = YES;
-		[self.navigationController.view addSubview:theLabel];
-		[theLabel addSubview:activityIndicator];
-		[activityIndicator startAnimating];
-		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
-		dispatch_async(imageDownloadQueue, ^
-		{
-			UIImage *imageData = nil;
-			if ([self.queuedPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]]) 
-			{
-				//TODO: download the image in here with multi-threading.
-				CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
-				//			self.image = [imageCacheHandler getCachedImage:self.currentPhoto.photoURL];
-				imageData = [imageCacheHandler getCachedImage:photoURL];
-				[imageCacheHandler release];imageCacheHandler = nil;
-			}
-			else
-			{
-//				self.image = [UIImage imageWithData:[FlickrFetcher imageDataForPhotoWithURLString:self.currentPhoto.photoURL]];
-				CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-				imageData = [UIImage imageWithData:[flickrDataHandler flickrImageDataWithURLString:photoURL]];
-				[flickrDataHandler release];flickrDataHandler = nil;
-			}
-			dispatch_async(dispatch_get_main_queue(), ^
-			{
-				[activityIndicator stopAnimating];
-				[self.imageView removeFromSuperview]; // Make sure that any in-flight additions before us are cleared
-				if (imageData)
-				{
-//					self.currentPhoto = self.queuedPhoto;
-//					self.queuedPhoto = nil;
-					self.image = imageData;
-					self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
-					self.scrollView.contentSize = self.imageView.bounds.size;
-					self.switchForFavorite.on = [self.queuedPhoto.isFavorite boolValue];
-					[self.scrollView addSubview:self.imageView];
-					if (self.image != nil)
-					{
-						//			int r = arc4random() % 50;
-						//			self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
-						self.queuedPhoto.timeOfLastView = [NSDate date];
-						[self.managedObjectContext processPendingChanges];
-//						[self.queuedPhoto setTheTimeLapse];
-						NSError *error = nil;
-						if (![self.managedObjectContext save:&error])
-						{
-							//handle the error.
-							NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-						}
-					}
-					self.currentPhoto = self.queuedPhoto;
-					self.title = self.currentPhoto.title;
-					self.queuedPhoto = nil;
-					//call to set the scrollScale.
-					[self CP_setTheZoomScales];
-					[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
-				}
-				else
-				{
-					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-				}
-				[activityIndicator removeFromSuperview];
-				[activityIndicator release];
-				[theLabel removeFromSuperview];
-				[theLabel release];
-			});
-		});
-		dispatch_release(imageDownloadQueue);
-	}	
 }
 
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	[self newPhotoSequence];
-}
-
-- (void)setNewCurrentPhoto:(Photo *)newPhoto;
-{
-	self.queuedPhoto = newPhoto;
-	self.currentPhoto = nil;
-	self.image = nil;
-	[self.imageView removeFromSuperview]; // clear view immediately for user feedback, done again in async block above
-	self.imageView = nil;
-	//TODO: convenience method for this if statement.
-	if (self.view.window != nil)
-	{
-		if (self.popoverController.popoverVisible)
-		{
-			[self.popoverController dismissPopoverAnimated:YES];
-		}
-		[self newPhotoSequence];
-	}
+	[self CP_newPhotoSequence];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	self.scrollView.delegate = self;
-	//TODO: make the zoomScales be variable to the size of the imageView and iPhone or iPad.
 	self.scrollView.minimumZoomScale = CPMinimumZoomScale;
 	self.scrollView.maximumZoomScale = CPMaximumZoomScale;
-	//TODO: change the contant name.
 	self.scrollView.accessibilityLabel = CPScrollableImageViewAccessibilityLabel;
 	self.switchForFavorite.accessibilityLabel = CPFavoriteSwitchAccessibilityLabel;
 }
@@ -269,6 +152,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+	CP_imageView = nil;
 	CP_scrollView = nil;
 	CP_switchForFavorite = nil;
 }
@@ -283,85 +167,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	
 }
 
-//TODO: change the location of this class function.
-+ (Photo *)photoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext itsPlace:(Place *)itsPlace;
-{
-	if (!itsPlace) 
-	{
-		//TODO: use the fetching function to find the place of this photo.
-	}
-	Photo *photoToDisplay = nil;
-	//first check if the photo already exists.
-	if ([photoRefinedElement.rawElement isKindOfClass:[NSDictionary class]]) 
-	{
-		NSDictionary *dictionary = (NSDictionary *)photoRefinedElement.rawElement;
-//		NSString *photoURL = [FlickrFetcher urlStringForPhotoWithFlickrInfo:dictionary format:FlickrFetcherPhotoFormatLarge];
-		NSString *photoURL = photoRefinedElement.largePhotoURL;
-		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-		fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
-		fetchRequest.predicate = [NSPredicate predicateWithFormat:@"photoURL like %@",photoURL];
-		NSSortDescriptor *sortDescriptor = nil;
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-		[fetchRequest setSortDescriptors:sortDescriptors];
-		[sortDescriptors release];
-		
-		
-		NSError *error = nil;
-		NSUInteger returnedObjectCount = [managedObjectContext countForFetchRequest:fetchRequest error:&error];
-		if ((returnedObjectCount == 0) && !error)
-		{
-			photoToDisplay = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:managedObjectContext];
-			photoToDisplay.photoURL = photoURL;
-			photoToDisplay.title = photoRefinedElement.title;
-			photoToDisplay.subtitle = photoRefinedElement.subtitle;
-			photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
-			photoToDisplay.itsPlace = itsPlace;
-			//TODO: fix the way the hour changes show.
-			NSString *secondsSinceUpload = [dictionary objectForKey:@"dateupload"];
-			NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
-			
-			photoToDisplay.timeOfUpload = uploadDate;
-			if (![managedObjectContext save:&error])
-			{
-				//handle the error.
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-		}
-		else if (error)
-		{
-			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-		}
-		else
-		{
-			NSError *error = nil;
-			NSArray *fetchRequestOutput = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-			if (!fetchRequestOutput)
-			{
-				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-			}
-			else if ([fetchRequestOutput count] > 1)
-			{
-				NSLog(@"placeID is not a key anymore");
-			}
-			else
-			{
-				photoToDisplay = [fetchRequestOutput lastObject];
-			}
-		}
-		
-		
-		[fetchRequest release];fetchRequest = nil;
-	}
-	return photoToDisplay;
-}
-
-- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
-{
-	self.title = photoRefinedElement.title;
-	Photo *photo = [CPScrollableImageViewController photoWithPhotoRefinedElement:photoRefinedElement managedObjectContext:self.managedObjectContext itsPlace:place];
-	[self setNewCurrentPhoto:photo];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
@@ -371,7 +176,31 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 {
-	[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
+	[self CP_adjustToChangeInViewSize];
+}
+
+#pragma mark - Instance method
+
+- (void)setNewCurrentPhoto:(Photo *)newPhoto;
+{
+	self.currentPhoto = newPhoto;
+	self.image = nil;
+	[self.imageView removeFromSuperview]; // clear view immediately for user feedback, done again in async block above
+	self.imageView = nil;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		if (self.popoverController.popoverVisible)
+			[self.popoverController dismissPopoverAnimated:YES];
+		[self CP_newPhotoSequence];
+	}
+}
+
+
+- (void)setupNewPhotoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement place:(Place *)place;
+{
+	CPManagedObjectInsertionHandler *managedObjectInsertionHandler = [[CPManagedObjectInsertionHandler alloc] initWithManagedObjectContext:self.managedObjectContext];
+	Photo *photo = [managedObjectInsertionHandler photoWithPhotoRefinedElement:photoRefinedElement itsPlace:place];
+	[self setNewCurrentPhoto:photo];
 }
 
 - (IBAction)toggleFavoriteSwitch:(UISwitch *)sender;
@@ -379,18 +208,86 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	if (self.image) 
 	{
 		CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
-		if (sender.on == YES) 
-		{
+		if (sender.on == YES)
 			[imageCacheHandler cacheImage:self.currentPhoto.photoURL UIImage:self.image];
-		}
-		else if (sender.on == NO && [self.currentPhoto.isFavorite isEqualToNumber:[NSNumber numberWithBool:YES]])
-		{
-			//delete the cache.
+		else
 			[imageCacheHandler deleteCacheImage:self.currentPhoto.photoURL];
-		}
 		[imageCacheHandler release];imageCacheHandler = nil;
 		
 		self.currentPhoto.isFavorite = [NSNumber numberWithBool:sender.on];
+		[self.managedObjectContext processPendingChangesThenSave];
+	}
+	else if (sender.on)
+		sender.on = !sender.on;
+}
+
+#pragma mark - Helper method
+
+- (void)CP_newPhotoSequence;
+{
+	NSString *photoURL = self.currentPhoto.photoURL;
+	if (self.image == nil && (photoURL != nil))
+	{
+		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+		[self.activityIndicator startAnimating];
+		
+		BOOL currentPhotoIsAFavorite = [self.currentPhoto.isFavorite boolValue];
+		
+		dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Flickr image downloader", NULL);
+		dispatch_async(imageDownloadQueue, ^{
+			
+			UIImage *imageData = [CPScrollableImageViewController CP_imageDownloadWithPhotoURL:photoURL currentPhotoIsAFavorite:currentPhotoIsAFavorite];
+			
+			dispatch_async(dispatch_get_main_queue(), ^{
+				
+				if (imageData)
+					[self CP_setupTheViewHierarchyWithNewImage:imageData];
+				else
+					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+				
+				[self.activityIndicator stopAnimating];
+				[self.activityIndicator removeFromSuperview];
+				UIView *KIFView = self.activityIndicator.superview;
+				[KIFView removeFromSuperview];
+				self.activityIndicator = nil;
+				
+			});
+		});
+		dispatch_release(imageDownloadQueue);
+	}	
+}
+
++ (UIImage *)CP_imageDownloadWithPhotoURL:(NSString *)photoURL currentPhotoIsAFavorite:(BOOL)currentPhotoIsAFavorite;
+{
+	UIImage *imageData = nil;
+	if (currentPhotoIsAFavorite) 
+	{
+		CPImageCacheHandler *imageCacheHandler = [[CPImageCacheHandler alloc] init];
+		imageData = [imageCacheHandler getCachedImage:photoURL];
+		[imageCacheHandler release];imageCacheHandler = nil;
+	}
+	else
+	{
+		CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+		imageData = [UIImage imageWithData:[flickrDataHandler flickrImageDataWithURLString:photoURL]];
+		[flickrDataHandler release];flickrDataHandler = nil;
+	}
+	return imageData;
+}
+
+- (void)CP_setupTheViewHierarchyWithNewImage:(UIImage *)newImage;
+{
+	[self.imageView removeFromSuperview]; // Make sure that any in-flight additions before us are cleared
+	self.switchForFavorite.on = [self.currentPhoto.isFavorite boolValue];
+	self.image = newImage;
+	self.imageView = [[[UIImageView alloc] initWithImage:self.image] autorelease];
+	self.scrollView.contentSize = self.imageView.bounds.size;
+	[self.scrollView addSubview:self.imageView];
+	if (self.image != nil)
+	{
+		//			int r = arc4random() % 50;
+		//			self.queuedPhoto.timeOfLastView = [NSDate dateWithTimeIntervalSinceNow:(-(r*3600))];
+		self.currentPhoto.timeOfLastView = [NSDate date];
 		[self.managedObjectContext processPendingChanges];
 		NSError *error = nil;
 		if (![self.managedObjectContext save:&error])
@@ -399,13 +296,9 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 		}
 	}
-	else if (sender.on)
-	{
-		sender.on = !sender.on;
-	}
+	self.title = self.currentPhoto.title;
+	[self CP_adjustToChangeInViewSize];
 }
-
-#pragma mark - Helper method
 
 - (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace
 {
@@ -431,8 +324,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	CGFloat minimumZoomScale = 0.0;
 	CGFloat maximumZoomScale = 0.0;
 	CGRect screenRect = self.scrollView.bounds;
-	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
 	CGFloat imageRatio = self.imageView.bounds.size.height / self.imageView.bounds.size.width;
+	CGFloat screenRatio = screenRect.size.height / screenRect.size.width;
 	
 	if (imageRatio > screenRatio)
 	{
@@ -446,6 +339,13 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	}
 	self.scrollView.maximumZoomScale = maximumZoomScale;
 	self.scrollView.minimumZoomScale = minimumZoomScale;
+}
+
+- (void)CP_adjustToChangeInViewSize;
+{
+	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+	[self CP_setTheZoomScales];
+	[self.scrollView zoomToRect:[self CP_getTheRectSizeThatWillUtilizeTheScreenSpace] animated:YES];
 }
 
 #pragma mark - Split View Delegate Methods

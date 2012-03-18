@@ -14,12 +14,20 @@
 
 @property (retain) UIImage *image;
 @property (retain) UIImageView *imageView;
+@property (retain) Photo *currentPhoto;
 @property (retain) UIPopoverController *popoverController;
-@property (retain) Photo *queuedPhoto;
+@property (retain) UIActivityIndicatorView *activityIndicator;
+
+#pragma mark - Internal class method
+
++ (UIImage *)CP_imageDownloadWithPhotoURL:(NSString *)photoURL currentPhotoIsAFavorite:(BOOL)currentPhotoIsAFavorite;
 
 #pragma mark - Internal method
 
+- (void)CP_newPhotoSequence;
+- (void)CP_setupTheViewHierarchyWithNewImage:(UIImage *)newImage;
 - (CGRect)CP_getTheRectSizeThatWillUtilizeTheScreenSpace;
 - (void)CP_setTheZoomScales;
+- (void)CP_adjustToChangeInViewSize;
 
 @end
