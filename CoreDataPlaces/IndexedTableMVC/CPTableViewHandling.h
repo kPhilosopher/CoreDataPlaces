@@ -3,7 +3,7 @@
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 3/3/12.
-//  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
+//  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
 // !!!:a table view controller that utilizes an object that complies to this protocol must comply to CPTableViewControllerDataMutating.
