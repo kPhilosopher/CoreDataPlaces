@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPPhotosTableViewHandler-Internal.h"
+#import "CPPhotosTableViewHandler.h"
 #import "CPPhotosRefinedElement.h"
 #import "CPScrollableImageViewController.h"
 #import "CPPhotosTableViewController.h"
@@ -30,7 +30,7 @@
 			Place *currentPlace = [CPPhotosTableViewController placeWithPlaceRefinedElement:photosTableViewController.placeRefinedElement managedObjectContext:indexedTableViewController.managedObjectContext];
 			CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 			[scrollableImageViewController setupNewPhotoWithPhotoRefinedElement:photosRefinedElement place:currentPlace];
-			if ([self RD_currentDeviceIsiPodOriPhoneWithImageController:scrollableImageViewController])
+			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 			{
 				[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
 				[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
@@ -38,13 +38,6 @@
 		}
 	}
 	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - Readability method
-//TODO: find a unified place to put this method to reduce redundancy
-- (BOOL)RD_currentDeviceIsiPodOriPhoneWithImageController:(UIViewController *)imageController;
-{
-	return imageController.view.window == nil;
 }
 
 @end
