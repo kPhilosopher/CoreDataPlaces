@@ -28,6 +28,7 @@
 @property (retain) CPTableViewHandler *tableViewHandler;
 @property (retain) CPRefinedElement *refinedElementType;
 @property (retain) NSManagedObjectContext *managedObjectContext;
+@property (retain) NSIndexPath *selectedIndexPath;
 
 #pragma mark - Intialization
 

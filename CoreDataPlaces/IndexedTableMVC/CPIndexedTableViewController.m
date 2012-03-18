@@ -22,6 +22,7 @@
 	CPTableViewHandler *CP_tableViewHandler;
 	CPRefinedElement *CP_refinedElementType;
 	NSManagedObjectContext *CP_managedObjectContext;
+	NSIndexPath *CP_selectedIndexPath;
 }
 @end
 
@@ -36,6 +37,7 @@
 @synthesize tableViewHandler = CP_tableViewHandler;
 @synthesize refinedElementType = CP_refinedElementType;
 @synthesize managedObjectContext = CP_managedObjectContext;
+@synthesize selectedIndexPath = CP_selectedIndexPath;
 
 #pragma mark - Initialization
 
@@ -55,6 +57,22 @@
 
 #pragma mark - View lifecycle
 
+- (void)didReceiveMemoryWarning;
+{
+	self.selectedIndexPath = [self.tableView indexPathForSelectedRow];
+	[super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewDidAppear:animated];
+	if (self.selectedIndexPath)
+	{
+		[self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+		self.selectedIndexPath = nil;
+	}
+}
+
 - (void)dealloc
 {
 	[CP_refinary release];
@@ -62,6 +80,7 @@
 	[CP_tableViewHandler release];
 	[CP_refinedElementType release];
 	[CP_managedObjectContext release];
+	[CP_selectedIndexPath release];
 	[super dealloc];
 }
 
@@ -120,7 +139,6 @@
 
 #pragma mark - Helper method
 
-//- (CPRefinedElement *)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 - (id)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 {
 	return [(NSArray *)[[self theElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
