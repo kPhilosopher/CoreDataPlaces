@@ -7,6 +7,7 @@
 //
 
 #import "KIFTestScenario+PlacesAdditions-Internal.h"
+#import "CPConstants.h"
 #import "KIFTestStep.h"
 #import "CPAppDelegate.h"
 #import "CPTabBarController.h"
@@ -15,7 +16,7 @@
 #import "CPFavoritesTableViewController.h"
 #import "CPCoreDataPhotosTableViewController.h"
 #import "CPPhotosTableViewController.h"
-#import "CPScrollableImageViewController.h"
+#import "CPScrollableImageViewController-Internal.h"
 #import "Photo+Logic.h"
 
 
@@ -201,7 +202,7 @@ enum {
 
 + (id)scenarioToGoBackToPhotosTableViewForTopPlacesTab;
 {
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for top places tab"];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to photos table view for top places tab"];
 	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
 	KIFTestScenario *importedScenario = [KIFTestScenario CP_scenarioToExtractAccessibilityLabelThenTapTheBackButtonWithIndexOfTabBar:CPTabBarIndexForTopPlacesTab];
 	[scenario addStepsFromArray:importedScenario.steps];
@@ -211,17 +212,19 @@ enum {
 
 + (id)scenarioToGoBackToPlacesTableViewForFavoritesTab;
 {
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for top places tab"];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for favorites tab"];
 	KIFTestScenario *preliminaryScenario = [KIFTestScenario scenarioToGoBackToPhotosTableViewForFavoritesTab];
 	[scenario addStepsFromArray:preliminaryScenario.steps];
-	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Favorites"]];
+	[scenario addStep:[KIFTestStep stepToEnsureEmptyTableViewWithAccessibilityLabel:CPFavoritePhotosTableViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToTapViewWithAccessibilityLabel:@"Favorite Photos"]];
 	[scenario addStep:[KIFTestStep stepToWaitForTappableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel]];
+	[scenario addStep:[KIFTestStep stepToEnsureEmptyTableViewWithAccessibilityLabel:CPFavoritePlacesTableViewAccessibilityLabel]];
 	return scenario;
 }
 
 + (id)scenarioToGoBackToPhotosTableViewForFavoritesTab;
 {
-	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to places table view for top places tab"];
+	KIFTestScenario *scenario = [KIFTestScenario scenarioWithDescription:@"Test to go back to photos table view for favorites tab"];
 	[scenario addStep:[KIFTestStep stepToWaitForViewWithAccessibilityLabel:CPScrollableImageViewAccessibilityLabel]];
 	KIFTestScenario *importedScenario = [KIFTestScenario CP_scenarioToExtractAccessibilityLabelThenTapTheBackButtonWithIndexOfTabBar:CPTabBarIndexForFavoritesTab];
 	[scenario addStepsFromArray:importedScenario.steps];
