@@ -37,7 +37,7 @@
 			}
 		}
 	}
-	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[super indexedTableViewController:indexedTableViewController didSelectRowAtIndexPath:indexPath];
 }
 
 @end
