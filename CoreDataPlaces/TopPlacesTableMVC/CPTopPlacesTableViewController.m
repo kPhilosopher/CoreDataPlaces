@@ -14,10 +14,7 @@
 #import "CPFlickrDataHandler.h"
 #import "CPNotificationManager.h"
 #import "CPIndexAssistant.h"
-#import "UIActivityIndicatorView+NavigationController.h"
-
-//TODO: change this when the extern string constants' location is changed.
-//#import "CPPhotosTableViewController.h"
+#import "UIActivityIndicatorView+Additions.h"
 
 
 @interface CPTopPlacesTableViewController ()
@@ -96,7 +93,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 - (void)viewWillDisappear:(BOOL)animated;
 {
-	[self.activityIndicator stopAnimating];
+	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
 	self.activityIndicator = nil;
 	[super viewWillDisappear:animated];
 }
@@ -134,8 +131,8 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 			}
 			
 			[self.activityIndicator stopAnimating];
-			[self.activityIndicator removeFromSuperview];
 			UIView *KIFView = self.activityIndicator.superview;
+			[self.activityIndicator removeFromSuperview];
 			[KIFView removeFromSuperview];
 			self.activityIndicator = nil;
 		});

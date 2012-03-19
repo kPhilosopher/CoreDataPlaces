@@ -16,7 +16,7 @@
 #import "CPFlickrDataHandler.h"
 #import "Place.h"
 #import "CPNotificationManager.h"
-#import "UIActivityIndicatorView+NavigationController.h"
+#import "UIActivityIndicatorView+Additions.h"
 
 
 @interface CPPhotosTableViewController ()
@@ -155,7 +155,7 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 //TODO: see if there is a way to refactor this method with TopPlaceTableViewController.
 - (void)viewWillDisappear:(BOOL)animated;
 {
-	[self.activityIndicator stopAnimating];
+	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
 	self.activityIndicator = nil;
 	[super viewWillDisappear:animated];
 }
@@ -192,8 +192,8 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 			}
 			
 			[self.activityIndicator stopAnimating];
-			[self.activityIndicator removeFromSuperview];
 			UIView *KIFView = self.activityIndicator.superview;
+			[self.activityIndicator removeFromSuperview];
 			[KIFView removeFromSuperview];
 			self.activityIndicator = nil;
 		});
