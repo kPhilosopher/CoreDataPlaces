@@ -7,18 +7,13 @@
 //
 
 #import "CPAppDelegate-Internal.h"
-
-//TODO: see if this causes any problems
 #import "CPSplitViewController.h"
 #import "CPTabBarController.h"
 #import "CPScrollableImageViewController.h"
-//#import "PlacesKIFTestController.h"
 
 #if RUN_KIF_TESTS
 #import "PlacesKIFTestController.h"
 #endif
-//TODO:delete this is a test
-#import "CPNotificationManager.h"
 
 
 @interface CPAppDelegate ()
@@ -63,7 +58,6 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[CPNotificationManager sharedManager];
     [self RD_setupTheAppDelegateWindow];
 	[self RD_initializeTabBarController];
 	[self RD_determineTheSetupSequenceForDifferingDevices];
@@ -231,8 +225,7 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 
 - (void)RD_initializeTabBarController;
 {
-	//		self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self] autorelease];
-	self.tabBarController = [[[CPTabBarController alloc] initWithDelegate:self managedObjectContext:self.managedObjectContext] autorelease];
+	self.tabBarController = [[[CPTabBarController alloc] initWithManagedObjectContext:self.managedObjectContext] autorelease];
 }
 
 - (void)RD_determineTheSetupSequenceForDifferingDevices;
@@ -260,7 +253,6 @@ NSString *CPTitleOfScrollableViewController = @"Photo";
 
 - (void)RD_setupForScrollableImageViewController;
 {
-//		self.scrollableImageVC = [[[CPScrollableImageViewController alloc] init] autorelease];
 	self.scrollableImageVC = [CPScrollableImageViewController sharedInstance];
 	self.scrollableImageVC.title = CPTitleOfScrollableViewController;
 }
