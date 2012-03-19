@@ -7,9 +7,6 @@
 //
 
 #import "CPTabBarController-Internal.h"
-#import "CPTopPlacesTableViewController.h"
-#import "CPFavoritesTableViewController.h"
-#import "CPMostRecentPhotosTableViewController.h"
 
 
 @interface CPTabBarController()
@@ -19,17 +16,10 @@
 	UINavigationController *CP_mostRecentPlacesNavigationViewController;
 	UINavigationController *CP_favoritesNavigationViewController;
 	CPTopPlacesTableViewController *CP_topPlacesTableViewController;
+	CPCoreDataPhotosTableViewController *CP_mostRecentPhotosTableViewController;
 	CPFavoritesTableViewController *CP_favoritesTableViewController;
-	CPMostRecentPhotosTableViewController *CP_mostRecentPhotosTableViewController;
 	NSManagedObjectContext *CP_managedObjectContext;
 }
-
-@property (retain) UINavigationController *topPlacesNavigationViewController;
-@property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
-@property (retain) UINavigationController *favoritesNavigationViewController;
-@property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
-@property (retain) CPMostRecentPhotosTableViewController *mostRecentPhotosTableViewController;
-@property (retain) CPFavoritesTableViewController *favoritesTableViewController;
 
 @end
 
@@ -51,8 +41,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 
 #pragma mark - Initalization
 
-//TODO: change this interface to not include delegate.
-- (id)initWithDelegate:(id)delegate managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
 	self = [self init];
 	if (self) {
@@ -120,7 +109,7 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 - (void)RD_allocInitThePlaceTableViewControllersWithTheSameFlickrDataSource;
 {
 	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewControllerWithManagedObjectContext:self.managedObjectContext];
-	self.mostRecentPhotosTableViewController = [CPMostRecentPhotosTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
+	self.mostRecentPhotosTableViewController = [CPCoreDataPhotosTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
 	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext customSettingsDictionary:nil] autorelease];
 }
 -(void)RD_pushViewControllersToNavigationViewControllers;

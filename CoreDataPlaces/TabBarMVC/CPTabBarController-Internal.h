@@ -7,9 +7,21 @@
 //
 
 #import "CPTabBarController.h"
+#import "CPTopPlacesTableViewController.h"
+#import "CPFavoritesTableViewController.h"
+#import "CPCoreDataPhotosTableViewController.h"
 
 
 @interface CPTabBarController ()
+
+#pragma mark - Property
+
+@property (retain) UINavigationController *topPlacesNavigationViewController;
+@property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
+@property (retain) UINavigationController *favoritesNavigationViewController;
+@property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
+@property (retain) CPCoreDataPhotosTableViewController *mostRecentPhotosTableViewController;
+@property (retain) CPFavoritesTableViewController *favoritesTableViewController;
 
 #pragma mark - Internal method
 

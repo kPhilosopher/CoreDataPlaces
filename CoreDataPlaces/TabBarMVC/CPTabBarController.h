@@ -15,12 +15,10 @@ extern NSString *CPTabBarViewAccessibilityLabel;
 
 #pragma mark - Property
 
-//@property (retain) id <CPPictureListTableViewControllerDelegate> delegateToTransfer;
-
 @property (retain) NSManagedObjectContext *managedObjectContext;
 
 #pragma mark - Initialization
 
-- (id)initWithDelegate:(id)delegate managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end
