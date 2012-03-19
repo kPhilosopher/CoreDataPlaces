@@ -57,7 +57,7 @@
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	return;
+	[indexedTableViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
