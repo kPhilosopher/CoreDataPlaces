@@ -15,7 +15,6 @@
 @property (retain) UIImage *image;
 @property (retain) UIImageView *imageView;
 @property (retain) Photo *currentPhoto;
-@property (retain) UIPopoverController *popoverController;
 @property (retain) UIActivityIndicatorView *activityIndicator;
 
 #pragma mark - Internal class method

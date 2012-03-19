@@ -23,6 +23,7 @@ extern NSString *CPFavoriteSwitchAccessibilityLabel;
 @property (retain) IBOutlet UIScrollView *scrollView;
 @property (retain) IBOutlet UISwitch *switchForFavorite;
 @property (retain) NSManagedObjectContext *managedObjectContext;
+@property (retain) UIPopoverController *popoverController;
 
 #pragma mark - Singleton
 
