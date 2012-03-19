@@ -75,6 +75,7 @@
 		CE6C7C50151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
 		CE6C7C51151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
 		CE6C7C52151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
+		CE6C7C5315172E8900BBFD03 /* CPPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2514D36CFC00AB58C9 /* CPPhotosTableViewController.m */; };
 		CE80D84E14CCC7C500BDF83D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE80D85014CCC7C500BDF83D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
 		CE80D85214CCC7C500BDF83D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85114CCC7C500BDF83D /* CoreGraphics.framework */; };
@@ -1332,6 +1333,7 @@
 				CED8E7881514A380005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
 				CE87E6951515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
 				CE6C7C51151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
+				CE6C7C5315172E8900BBFD03 /* CPPhotosTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

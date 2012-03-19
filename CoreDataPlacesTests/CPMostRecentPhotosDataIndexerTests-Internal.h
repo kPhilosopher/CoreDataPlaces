@@ -9,14 +9,15 @@
 // !!!: Testing using CPMostRecentPhotosRefinedElement
 
 #import "CPMostRecentPhotosDataIndexerTests.h"
-#import "CPMostRecentPhotosDataIndexer.h"
 
+
+@class CPPhotosDataIndexer;
 
 @interface CPMostRecentPhotosDataIndexerTests()
 
 #pragma mark - Property
 
-@property (retain) CPMostRecentPhotosDataIndexer *dataIndexer;
+@property (retain) CPPhotosDataIndexer *dataIndexer;
 @property (retain) NSMutableArray *listOfRawTestData;
 @property (retain) NSMutableArray *listOfTestInput;
 

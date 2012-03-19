@@ -7,7 +7,7 @@
 //
 
 #import "CPMostRecentPhotosRefinaryTests.h"
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPRefinedElement.h"
 #import "CPMostRecentPhotosRefinary.h"
 
 
@@ -15,7 +15,7 @@
 
 #pragma mark - Property
 
-@property (retain) CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement;
+@property (retain) CPRefinedElement *mostRecentPhotosRefinedElement;
 @property (retain) CPMostRecentPhotosRefinary *refinary;
 @property (retain) id mockPhoto;
 @property (retain) NSDate *inputDate;

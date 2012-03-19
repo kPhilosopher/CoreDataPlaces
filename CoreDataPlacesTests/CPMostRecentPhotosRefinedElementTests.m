@@ -12,7 +12,7 @@
 
 @interface CPMostRecentPhotosRefinedElementTests()
 {
-	CPMostRecentPhotosRefinedElement *CP_mostRecentPhotosRefinedElement;
+	CPRefinedElement *CP_mostRecentPhotosRefinedElement;
 }
 @end
 
@@ -36,7 +36,7 @@
 
 - (void)setUp;
 {
-	self.mostRecentPhotosRefinedElement = [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
+	self.mostRecentPhotosRefinedElement = [[[CPRefinedElement alloc] init] autorelease];
 }
 
 - (void)tearDown;
@@ -53,7 +53,7 @@
 	self.mostRecentPhotosRefinedElement.comparable = firstComparable;
 	
 	//second comparable setup
-	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPRefinedElement alloc] init];
 	NSString *secondComparable = @"2.3337";
 	anotherMostRecentPhotoRefinedElement.comparable = secondComparable;
 
@@ -73,7 +73,7 @@
 	self.mostRecentPhotosRefinedElement.comparable = firstComparable;
 	
 	//second comparable setup
-	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPRefinedElement alloc] init];
 	NSString *secondComparable = @"0.3538";
 	anotherMostRecentPhotoRefinedElement.comparable = secondComparable;
 	
@@ -93,7 +93,7 @@
 	self.mostRecentPhotosRefinedElement.comparable = firstComparable;
 	
 	//second comparable setup
-	CPMostRecentPhotosRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPRefinedElement *anotherMostRecentPhotoRefinedElement = [[CPRefinedElement alloc] init];
 	NSString *secondComparable = @"201.3538";
 	anotherMostRecentPhotoRefinedElement.comparable = secondComparable;
 	

@@ -7,8 +7,8 @@
 //
 
 #import "CPMostRecentPhotosTableViewHandlerTests.h"
-#import "CPMostRecentPhotosTableViewHandler.h"
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPCoreDataPhotosTableViewHandler.h"
+#import "CPRefinedElement.h"
 #import "CPIndexedTableViewController.h"
 #import <OCMock/OCMock.h>
 
@@ -28,29 +28,29 @@
 	}
 	
 	int index = 0;
-	CPMostRecentPhotosRefinedElement *refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	CPRefinedElement *refinedElement = [[CPRefinedElement alloc] init];
 	refinedElement.comparable = @"0";
 	[[indexedSections objectAtIndex:index] addObject:[refinedElement autorelease]];
 	
 	index = 1;
-	refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	refinedElement = [[CPRefinedElement alloc] init];
 	refinedElement.comparable = @"4";
 	[[indexedSections objectAtIndex:index] addObject:[refinedElement autorelease]];	
 	
 	index = 2;
-	refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	refinedElement = [[CPRefinedElement alloc] init];
 	refinedElement.comparable = @"99";
 	[[indexedSections objectAtIndex:index] addObject:[refinedElement autorelease]];	
 	
 	index = 3;
-	refinedElement = [[CPMostRecentPhotosRefinedElement alloc] init];
+	refinedElement = [[CPRefinedElement alloc] init];
 	refinedElement.comparable = @"1229";
 	[[indexedSections objectAtIndex:index] addObject:[refinedElement autorelease]];	
 	
 	id mockTVC = [OCMockObject mockForClass:[CPIndexedTableViewController class]];
-	[[[mockTVC stub] andReturn:indexedSections] fetchTheElementSections];
+	[[[mockTVC stub] andReturn:indexedSections] theElementSections];
 	
-	CPMostRecentPhotosTableViewHandler *tableViewHandler = [[CPMostRecentPhotosTableViewHandler alloc] init];
+	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[CPCoreDataPhotosTableViewHandler alloc] init];
 	
 	//method under test and evaluation.
 	NSString *headerTitle = [tableViewHandler indexedTableViewController:mockTVC titleForHeaderInSection:0];

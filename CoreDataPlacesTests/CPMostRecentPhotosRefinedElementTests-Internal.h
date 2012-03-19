@@ -7,13 +7,13 @@
 //
 
 #import "CPMostRecentPhotosRefinedElementTests.h"
-#import "CPMostRecentPhotosRefinedElement.h"
+#import "CPRefinedElement.h"
 
 
 @interface CPMostRecentPhotosRefinedElementTests ()
 
 #pragma mark - Property
 
-@property (retain) CPMostRecentPhotosRefinedElement *mostRecentPhotosRefinedElement;
+@property (retain) CPRefinedElement *mostRecentPhotosRefinedElement;
 
 @end

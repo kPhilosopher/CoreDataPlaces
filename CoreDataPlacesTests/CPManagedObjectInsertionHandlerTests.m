@@ -7,6 +7,7 @@
 //
 
 #import "CPManagedObjectInsertionHandlerTests.h"
+#import "CPConstants.h"
 #import "CPManagedObjectInsertionHandler.h"
 #import "CPPlacesRefinedElement.h"
 #import "CPPhotosRefinedElement.h"
@@ -129,19 +130,19 @@
 	CPPlacesRefinedElement *place01 = [[CPPlacesRefinedElement alloc] init];
 	place01.title = @"place01";
 	place01.subtitle = @"subtitle of place01";
-	place01.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"place01ID",CPPlaceID, nil];
+	place01.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place01ID",CPPlaceID, nil];
 	CPPlacesRefinedElement *place02 = [[CPPlacesRefinedElement alloc] init];
 	place02.title = @"place02";
 	place02.subtitle = @"subtitle of place02";
-	place02.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"place02ID",CPPlaceID, nil];
+	place02.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place02ID",CPPlaceID, nil];
 	CPPlacesRefinedElement *place03 = [[CPPlacesRefinedElement alloc] init];
 	place03.title = @"place03";
 	place03.subtitle = @"subtitle of place03";
-	place03.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"place03ID",CPPlaceID, nil];
+	place03.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place03ID",CPPlaceID, nil];
 	CPPlacesRefinedElement *place04 = [[CPPlacesRefinedElement alloc] init];
 	place04.title = @"place04";
 	place04.subtitle = @"subtitle of place04";
-	place04.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"place04ID",CPPlaceID, nil];
+	place04.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place04ID",CPPlaceID, nil];
 	
 	//call the method to insert the elements.
 	STAssertTrue([self.insertionHandler insertRefinedElement:place01] == YES,@"CPManagedObjectInsertionHandler method insertRefinedElement failed.");
@@ -216,7 +217,7 @@
 	CPPhotosRefinedElement *place01 = [[CPPhotosRefinedElement alloc] init];
 	place01.title = @"place01";
 	place01.subtitle = @"subtitle of place01";
-	place01.dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"place01ID",CPPlaceID, nil];
+	place01.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place01ID",CPPlaceID, nil];
 //	place01.comparable = 
 	
 	//call the method to insert the elements.

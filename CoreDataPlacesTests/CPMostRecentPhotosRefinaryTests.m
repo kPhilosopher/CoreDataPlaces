@@ -14,7 +14,7 @@
 
 @interface CPMostRecentPhotosRefinaryTests()
 {
-	CPMostRecentPhotosRefinedElement *CP_mostRecentPhotosRefinedElement;
+	CPRefinedElement *CP_mostRecentPhotosRefinedElement;
 	CPMostRecentPhotosRefinary *CP_refinary;
 	id CP_mockPhoto;
 	NSDate *CP_inputDate;
@@ -57,7 +57,7 @@
 
 - (void)setUp;
 {
-	self.mostRecentPhotosRefinedElement = [[[CPMostRecentPhotosRefinedElement alloc] init] autorelease];
+	self.mostRecentPhotosRefinedElement = [[[CPRefinedElement alloc] init] autorelease];
 	self.refinary = [[CPMostRecentPhotosRefinary alloc] init];
 }
 
@@ -166,10 +166,10 @@
 	NSArray *supposedRefinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.mostRecentPhotosRefinedElement rawElements:rawElements];
 	
 	//evaluate the outcome.
-	STAssertTrue(([[supposedRefinedElements lastObject] isKindOfClass:[CPMostRecentPhotosRefinedElement class]]),@"The element returned is not a refined element type that is specified.");
+	STAssertTrue(([[supposedRefinedElements lastObject] isKindOfClass:[CPRefinedElement class]]),@"The element returned is not a refined element type that is specified.");
 	
 	int count = 0;
-	for (CPMostRecentPhotosRefinedElement *element in supposedRefinedElements) 
+	for (CPRefinedElement *element in supposedRefinedElements) 
 	{
 		STAssertTrue(([[[rawElements objectAtIndex:count] title] isEqualToString:element.title]),@"The title is set correctly.");
 		STAssertTrue(([[[rawElements objectAtIndex:count] subtitle] isEqualToString:element.subtitle]),@"The title is set correctly.");
