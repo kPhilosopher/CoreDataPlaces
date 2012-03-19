@@ -11,6 +11,13 @@
 #import "CPCoreDataPhotosTableViewController.h"
 
 
+@interface CPFavoritesTableViewController ()
+{
+	@private
+	NSIndexPath *CP_selectedIndexPath;
+}
+@end
+
 @implementation CPFavoritesTableViewController
 
 NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table";
@@ -83,6 +90,38 @@ NSString *CPFavoritePlacesTableViewAccessibilityLabel = @"Favorite places table"
 		CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [CPCoreDataPhotosTableViewController coreDataPhotosTableViewControllerWithPlace:chosenPlace manageObjectContext:self.fetchedResultsController.managedObjectContext];
 		[self.navigationController pushViewController:coreDataPhotosTableViewController animated:YES];
 	}
+}
+
+#pragma mark - View lifecycle
+
+- (void)dealloc;
+{
+	[CP_selectedIndexPath release];
+	[super dealloc];
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewDidAppear:animated];
+	if (CP_selectedIndexPath != nil && [self.tableView cellForRowAtIndexPath:CP_selectedIndexPath])
+	{
+		[self.tableView scrollToRowAtIndexPath:CP_selectedIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+		[CP_selectedIndexPath release]; CP_selectedIndexPath = nil;
+	}
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+	CP_selectedIndexPath = [indexPath retain];
+	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return ((interfaceOrientation == UIInterfaceOrientationPortrait) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeRight) || 
+			(interfaceOrientation == UIInterfaceOrientationLandscapeLeft));
 }
 
 @end
