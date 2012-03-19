@@ -234,6 +234,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 - (void)CP_newPhotoSequence;
 {
 	NSString *photoURL = self.currentPhoto.photoURL;
+	self.switchForFavorite.on = NO;
 	if (self.image == nil && (photoURL != nil))
 	{
 		if (self.activityIndicator == nil) 
