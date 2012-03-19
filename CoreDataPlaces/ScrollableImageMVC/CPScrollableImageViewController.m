@@ -13,7 +13,7 @@
 #import "CPImageCacheHandler.h"
 #import "CPNotificationManager.h"
 #import "CPFlickrDataHandler.h"
-#import "UIActivityIndicatorView+NavigationController.h"
+#import "UIActivityIndicatorView+Additions.h"
 #import "NSManagedObjectContext+Additions.h"
 #import "CPManagedObjectInsertionHandler.h"
 
@@ -136,13 +136,13 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
+	self.title = self.currentPhoto.title;
 	[self CP_newPhotoSequence];
 }
 
-//TODO: see if there is a way to refactor this method with TopPlaceTableViewController.
 - (void)viewWillDisappear:(BOOL)animated;
 {
-	[self.activityIndicator stopAnimating];
+	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
 	self.activityIndicator = nil;
 	[super viewWillDisappear:animated];
 }
@@ -256,8 +256,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 				
 				[self.activityIndicator stopAnimating];
-				[self.activityIndicator removeFromSuperview];
 				UIView *KIFView = self.activityIndicator.superview;
+				[self.activityIndicator removeFromSuperview];
 				[KIFView removeFromSuperview];
 				self.activityIndicator = nil;
 				
