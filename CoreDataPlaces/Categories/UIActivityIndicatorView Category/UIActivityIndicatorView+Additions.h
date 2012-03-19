@@ -1,5 +1,5 @@
 //
-//  UIActivityIndicatorView+NavigationController.h
+//  UIActivityIndicatorView+Additions.h
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 3/17/12.
@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIActivityIndicatorView (NavigationController)
+@interface UIActivityIndicatorView (Additions)
 
 #pragma mark - Class method
 
 + (UIActivityIndicatorView *)activityIndicatorOnKIFTestableViewWithNavigationController:(UINavigationController *)navigationController;
++ (void)removeKIFAndActivityIndicatorView:(UIActivityIndicatorView *)activityIndicator;
 
 @end

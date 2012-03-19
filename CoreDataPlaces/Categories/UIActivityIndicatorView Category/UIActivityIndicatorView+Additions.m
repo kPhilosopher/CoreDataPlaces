@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "UIActivityIndicatorView+NavigationController.h"
+#import "UIActivityIndicatorView+Additions.h"
 #import "CPConstants.h"
 
 
-@implementation UIActivityIndicatorView (NavigationController)
+@implementation UIActivityIndicatorView (Additions)
 
 #pragma mark - Class method
 
@@ -30,6 +30,14 @@
 	[theLabel addSubview:activityIndicator];
 	[theLabel release]; theLabel = nil;
 	return [activityIndicator autorelease];
+}
+
++ (void)removeKIFAndActivityIndicatorView:(UIActivityIndicatorView *)activityIndicator;
+{
+	[activityIndicator stopAnimating];
+	UIView *KIFView = activityIndicator.superview;
+	[activityIndicator removeFromSuperview];
+	[KIFView removeFromSuperview];
 }
 
 @end
