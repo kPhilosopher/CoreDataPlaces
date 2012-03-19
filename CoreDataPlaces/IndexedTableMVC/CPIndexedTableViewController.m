@@ -60,7 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewDidAppear:animated];
-	if (self.selectedIndexPath  && [self.tableView cellForRowAtIndexPath:self.selectedIndexPath])
+	if (self.selectedIndexPath  && [self.tableView indexPathsForVisibleRows])
 	{
 		[self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 		self.selectedIndexPath = nil;
