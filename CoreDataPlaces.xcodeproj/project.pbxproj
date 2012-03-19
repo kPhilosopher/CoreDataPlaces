@@ -171,9 +171,6 @@
 		CEDA8ACB14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
 		CEDA8ACC14D26B6B005A2EB0 /* CPFlickrDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDA8ACA14D26B6B005A2EB0 /* CPFlickrDataHandler.m */; };
 		CEDDA4D914FEFF5300AB1D06 /* CPMostRecentPhotosDataIndexerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA4D814FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.m */; };
-		CEDDA4F41501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA4F31501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m */; };
-		CEDDA4F51501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA4F31501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m */; };
-		CEDDA4F61501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA4F31501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m */; };
 		CEDDA4FC1501C04B00AB1D06 /* CPMostRecentPhotosRefinaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA4FB1501C04B00AB1D06 /* CPMostRecentPhotosRefinaryTests.m */; };
 		CEDDA51115032B9400AB1D06 /* CPMostRecentPhotosRefinedElementTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA51015032B9400AB1D06 /* CPMostRecentPhotosRefinedElementTests.m */; };
 		CEDDA51415032CAE00AB1D06 /* CPMostRecentPhotosTableViewHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDA51315032CAE00AB1D06 /* CPMostRecentPhotosTableViewHandlerTests.m */; };
@@ -356,8 +353,6 @@
 		CEDDA4D714FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosDataIndexerTests.h; sourceTree = "<group>"; };
 		CEDDA4D814FEFF5200AB1D06 /* CPMostRecentPhotosDataIndexerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosDataIndexerTests.m; sourceTree = "<group>"; };
 		CEDDA4E615006AAC00AB1D06 /* CPMostRecentPhotosDataIndexerTests-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosDataIndexerTests-Internal.h"; sourceTree = "<group>"; };
-		CEDDA4F21501B28C00AB1D06 /* CPMostRecentPhotosRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinary.h; sourceTree = "<group>"; };
-		CEDDA4F31501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinary.m; sourceTree = "<group>"; };
 		CEDDA4FA1501C04B00AB1D06 /* CPMostRecentPhotosRefinaryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinaryTests.h; sourceTree = "<group>"; };
 		CEDDA4FB1501C04B00AB1D06 /* CPMostRecentPhotosRefinaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMostRecentPhotosRefinaryTests.m; sourceTree = "<group>"; };
 		CEDDA4FD1501C10B00AB1D06 /* CPMostRecentPhotosRefinaryTests-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CPMostRecentPhotosRefinaryTests-Internal.h"; sourceTree = "<group>"; };
@@ -510,15 +505,6 @@
 				CE1C5CCB14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m */,
 			);
 			path = KIF;
-			sourceTree = "<group>";
-		};
-		CE2D8E6F14FC194E004058FD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CEDDA4F21501B28C00AB1D06 /* CPMostRecentPhotosRefinary.h */,
-				CEDDA4F31501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		CE2D8E8214FC263F004058FD /* Libraries */ = {
@@ -817,7 +803,6 @@
 				CEA5677614E1DF7A00EB370E /* CPMostRecentPhotosTableViewController.h */,
 				CE2D8E6314FC1937004058FD /* CPMostRecentPhotosTableViewController-Internal.h */,
 				CEA5677714E1DF7A00EB370E /* CPMostRecentPhotosTableViewController.m */,
-				CE2D8E6F14FC194E004058FD /* Model */,
 			);
 			path = MostRecentPhotosMVC;
 			sourceTree = "<group>";
@@ -1187,7 +1172,6 @@
 				CE1C5CCE14F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m in Sources */,
 				CE1C5CCF14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m in Sources */,
 				CE1C5CD014F1EFD200F1C617 /* PlacesKIFTestController.m in Sources */,
-				CEDDA4F61501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CEBEC4B91510415E00DF0882 /* CPRefinary.m in Sources */,
 				CEBEC4DB1511911B00DF0882 /* CPTopPlacesTableViewController.m in Sources */,
 				CEBEC4DE1511913200DF0882 /* CPTopPlacesTableViewHandler.m in Sources */,
@@ -1258,7 +1242,6 @@
 				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
 				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 				CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */,
-				CEDDA4F41501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CEBEC4B71510415E00DF0882 /* CPRefinary.m in Sources */,
 				CEBEC4DA1511911900DF0882 /* CPTopPlacesTableViewController.m in Sources */,
 				CEBEC4E21511913300DF0882 /* CPTopPlacesTableViewHandler.m in Sources */,
@@ -1313,7 +1296,6 @@
 				CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */,
 				CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */,
 				CEDDA4D914FEFF5300AB1D06 /* CPMostRecentPhotosDataIndexerTests.m in Sources */,
-				CEDDA4F51501B28C00AB1D06 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CEDDA4FC1501C04B00AB1D06 /* CPMostRecentPhotosRefinaryTests.m in Sources */,
 				CEDDA51115032B9400AB1D06 /* CPMostRecentPhotosRefinedElementTests.m in Sources */,
 				CEDDA51415032CAE00AB1D06 /* CPMostRecentPhotosTableViewHandlerTests.m in Sources */,
