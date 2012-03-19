@@ -16,9 +16,11 @@
 @property (retain) NSArray *listOfRawElements;
 @property (retain) NSMutableArray *refinedElementSections;
 @property (retain) NSFetchRequest *fetchRequest;
+@property (retain) NSString *propertyToMonitor;
 
 #pragma mark - Internal method
 
 - (void)CP_fetchListThenIndexData;
+- (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
 
 @end

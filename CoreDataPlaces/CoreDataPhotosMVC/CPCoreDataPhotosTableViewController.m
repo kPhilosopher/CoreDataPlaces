@@ -7,15 +7,14 @@
 //
 
 #import "CPCoreDataPhotosTableViewController-Internal.h"
-#import "CPCoreDataPhotosRefinary.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPCoreDataPhotosTableViewHandler.h"
+#import "CPMostRecentPhotosRefinary.h"
 #import "CPRefinedElement.h"
 #import "CPIndexAssistant.h"
 #import "Photo+Logic.h"
 #import "Place.h"
-#import "CPScrollableImageViewController.h"
-#import "CPAppDelegate.h"
+#import "NSDate+Additions.h"
 
 
 @interface CPCoreDataPhotosTableViewController()
@@ -26,12 +25,16 @@
 	NSFetchRequest *CP_fetchRequest;
 	Place *CP_currentPlace;
 	BOOL CP_reindex;
+	NSString *CP_propertyToMonitor;
 }
 @end
 
-@implementation CPCoreDataPhotosTableViewController
-
 NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table";
+NSString *CPMostRecentPhotosTableViewAccessibilityLabel = @"Most recent photos table";
+
+const int CPMaximumHoursForMostRecentPhoto = 48;
+
+@implementation CPCoreDataPhotosTableViewController
 
 #pragma mark - Synthesize
 
@@ -39,69 +42,71 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 @synthesize fetchRequest = CP_fetchRequest;
 @synthesize listOfRawElements = CP_listOfRawElements;
 @synthesize refinedElementSections = CP_refinedElementSections;
-
+@synthesize propertyToMonitor = CP_propertyToMonitor;
 
 #pragma mark - Factory method
 
++ (id)mostRecentPhotosTableViewControllerWithManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{
+	CPMostRecentPhotosRefinary *refinary = [[[CPMostRecentPhotosRefinary alloc] init] autorelease];
+	CPPhotosDataIndexer *dataIndexer = [[[CPPhotosDataIndexer alloc] init] autorelease];
+	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[[CPCoreDataPhotosTableViewHandler alloc] init] autorelease];
+	CPRefinedElement *refinedElementType = [[[CPRefinedElement alloc] init] autorelease];
+	CPIndexAssistant *indexAssistant = [[[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType] autorelease];
+	
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"timeOfLastView >= %@",[NSDate dateOfTimeIntervalBetweenNowAndHoursAgo:CPMaximumHoursForMostRecentPhoto]];
+	fetchRequest.fetchBatchSize = 20;
+	
+	CPCoreDataPhotosTableViewController *mostRecentPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext title:@"Most Recents" fetchRequest:fetchRequest];
+	
+	mostRecentPhotosTableViewController.tableView.accessibilityLabel = CPMostRecentPhotosTableViewAccessibilityLabel;
+	mostRecentPhotosTableViewController.propertyToMonitor = @"timeOfLastView";
+	
+	return [mostRecentPhotosTableViewController autorelease];
+}
+
 + (id)coreDataPhotosTableViewControllerWithPlace:(Place *)chosenPlace manageObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {
-	CPCoreDataPhotosRefinary *refinary = [[CPCoreDataPhotosRefinary alloc] init];
-	CPPhotosDataIndexer *dataIndexer = [[CPPhotosDataIndexer alloc] init];
-	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[CPCoreDataPhotosTableViewHandler alloc] init];
-	CPRefinedElement *refinedElementType = [[CPRefinedElement alloc] init];
-	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
-	[refinary release]; refinary = nil;
-	[dataIndexer release]; dataIndexer = nil;
-	[tableViewHandler release]; tableViewHandler = nil;
-	[refinedElementType release]; refinedElementType = nil;
-	CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext place:chosenPlace];
-	[indexAssistant release]; indexAssistant = nil;
+	CPCoreDataPhotosRefinary *refinary = [[[CPCoreDataPhotosRefinary alloc] init] autorelease];
+	CPPhotosDataIndexer *dataIndexer = [[[CPPhotosDataIndexer alloc] init] autorelease];
+	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[[CPCoreDataPhotosTableViewHandler alloc] init] autorelease];
+	CPRefinedElement *refinedElementType = [[[CPRefinedElement alloc] init] autorelease];
+	CPIndexAssistant *indexAssistant = [[[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType] autorelease];
+
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:managedObjectContext];
+	fetchRequest.predicate = [NSPredicate
+								   predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], chosenPlace.placeID];
+	fetchRequest.fetchBatchSize = 20;
+
+	CPCoreDataPhotosTableViewController *coreDataPhotosTableViewController = [[CPCoreDataPhotosTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext fetchRequest:fetchRequest place:chosenPlace];
+
+	coreDataPhotosTableViewController.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
+	coreDataPhotosTableViewController.propertyToMonitor = @"isFavorite";
+
 	return [coreDataPhotosTableViewController autorelease];
 }
 
 #pragma mark - Initialization
 
-//TODO: fix the location of this method
-- (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext fetchRequest:(NSFetchRequest *)fetchRequest place:(Place *)place;
 {
-	if ([[notification.userInfo objectForKey:NSUpdatedObjectsKey] isKindOfClass:[NSSet class]])
-	{
-		NSSet *setOfUpdatedObjects = (NSSet *)[notification.userInfo objectForKey:NSUpdatedObjectsKey];
-		for (id element in setOfUpdatedObjects) 
-		{
-			if ([element isKindOfClass:[Photo class]])
-			{
-				Photo *photo = (Photo *)element;
-				if ([photo.changedValuesForCurrentEvent objectForKey:@"isFavorite"])
-				{
-					CP_reindex = YES;
-					CPAppDelegate *appDelegate = (CPAppDelegate *)[[UIApplication sharedApplication] delegate];
-					if ([appDelegate window].bounds.size.width > 500)//iPad
-					{
-						[self CP_fetchListThenIndexData];
-					}
-				}
-			}
-		}
-	}
+	self = [self initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext title:place.title fetchRequest:fetchRequest];
+    if (self)
+		self.currentPlace = place;
+    return self;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext place:(Place *)place;
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext title:(NSString *)title fetchRequest:(NSFetchRequest *)fetchRequest;
 {
 	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
     if (self)
 	{
-		self.currentPlace = place;
-		self.title = place.title;
+		self.title = title;
 		CP_reindex = YES;
-		self.tableView.accessibilityLabel = CPFavoritePhotosTableViewAccessibilityLabel;
-		
-		//TODO: make it so that the fetchrequest is made from a different object and given to this view controller.
-		self.fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
-		self.fetchRequest.entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:self.managedObjectContext];
-		self.fetchRequest.predicate = [NSPredicate
-									   predicateWithFormat:@"(isFavorite == %@) AND (itsPlace.placeID like %@)", [NSNumber numberWithBool:YES], place.placeID];
-		self.fetchRequest.fetchBatchSize = 20;
+		self.fetchRequest = fetchRequest;
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(CP_checkTheChangeInManagedObjectContext:)
@@ -119,8 +124,17 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 	[CP_refinedElementSections release];
 	[CP_currentPlace release];
 	[CP_fetchRequest release];
+	[CP_propertyToMonitor release];
 	[super dealloc];
 }
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	[self CP_fetchListThenIndexData];
+}
+
+#pragma mark - Internal method
 
 - (void)CP_fetchListThenIndexData;
 {
@@ -139,10 +153,25 @@ NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table"
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated;
+- (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
 {
-	[super viewWillAppear:animated];
-	[self CP_fetchListThenIndexData];
+	if ([[notification.userInfo objectForKey:NSUpdatedObjectsKey] isKindOfClass:[NSSet class]])
+	{
+		NSSet *setOfUpdatedObjects = (NSSet *)[notification.userInfo objectForKey:NSUpdatedObjectsKey];
+		for (id element in setOfUpdatedObjects) 
+		{
+			if ([element isKindOfClass:[Photo class]])
+			{
+				Photo *photo = (Photo *)element;
+				if ([photo.changedValuesForCurrentEvent objectForKey:self.propertyToMonitor])
+				{
+					CP_reindex = YES;
+					if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+						[self CP_fetchListThenIndexData];
+				}
+			}
+		}
+	}
 }
 
 #pragma mark - CPTableViewControllerDataMutating protocol method
