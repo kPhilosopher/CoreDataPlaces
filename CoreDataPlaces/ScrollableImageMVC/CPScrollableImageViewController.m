@@ -193,6 +193,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 {
 	CPManagedObjectInsertionHandler *managedObjectInsertionHandler = [[CPManagedObjectInsertionHandler alloc] initWithManagedObjectContext:self.managedObjectContext];
 	Photo *photo = [managedObjectInsertionHandler photoWithPhotoRefinedElement:photoRefinedElement itsPlace:place];
+	[managedObjectInsertionHandler release]; managedObjectInsertionHandler = nil;
 	[self setNewCurrentPhoto:photo];
 }
 
