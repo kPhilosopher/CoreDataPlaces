@@ -57,16 +57,10 @@
 
 #pragma mark - View lifecycle
 
-- (void)didReceiveMemoryWarning;
-{
-	self.selectedIndexPath = [self.tableView indexPathForSelectedRow];
-	[super didReceiveMemoryWarning];
-}
-
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewDidAppear:animated];
-	if (self.selectedIndexPath)
+	if (self.selectedIndexPath  && [self.tableView cellForRowAtIndexPath:self.selectedIndexPath])
 	{
 		[self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 		self.selectedIndexPath = nil;
@@ -134,6 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {	
+	self.selectedIndexPath = indexPath;
 	return [self.tableViewHandler indexedTableViewController:self didSelectRowAtIndexPath:indexPath];
 }
 
