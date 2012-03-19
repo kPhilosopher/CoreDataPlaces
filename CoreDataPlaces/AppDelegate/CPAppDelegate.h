@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-//TODO: see if this causes any problems
-//#import "CPSplitViewController.h"
-//#import "CPTabBarController.h"
-
 @class CPSplitViewController;
 @class CPTabBarController;
 @class CPScrollableImageViewController;
@@ -33,8 +29,6 @@ extern NSString *CPTitleOfScrollableViewController;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-#pragma mark - Instance method
 
 #pragma mark --Core Data
 
