@@ -72,6 +72,9 @@
 		CE60708914ED82B300420AD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE60708714ED82B300420AD8 /* InfoPlist.strings */; };
 		CE60709314ED82E000420AD8 /* CPImageCacheHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60709214ED82E000420AD8 /* CPImageCacheHandlerTests.m */; };
 		CE60709714EDC69300420AD8 /* testImage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CE60709614EDC69300420AD8 /* testImage.jpeg */; };
+		CE6C7C50151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
+		CE6C7C51151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
+		CE6C7C52151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */; };
 		CE80D84E14CCC7C500BDF83D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE80D85014CCC7C500BDF83D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
 		CE80D85214CCC7C500BDF83D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D85114CCC7C500BDF83D /* CoreGraphics.framework */; };
@@ -160,8 +163,6 @@
 		CEBEC536151300FE00DF0882 /* CPPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F2D14D3889C00AB58C9 /* CPPhotosTableViewHandler.m */; };
 		CEBEC537151300FE00DF0882 /* CPPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEC5091512CEF700DF0882 /* CPPhotosRefinary.m */; };
 		CEBEC538151300FE00DF0882 /* CPPhotosRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEF708214D35C85006756EA /* CPPhotosRefinedElement.m */; };
-		CED8E78115147F56005BF244 /* UIActivityIndicatorView+NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8E78015147F56005BF244 /* UIActivityIndicatorView+NavigationController.m */; };
-		CED8E78215147F56005BF244 /* UIActivityIndicatorView+NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8E78015147F56005BF244 /* UIActivityIndicatorView+NavigationController.m */; };
 		CED8E7831514915B005BF244 /* CPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0319931514442E00C9C57D /* CPConstants.m */; };
 		CED8E7881514A380005BF244 /* NSManagedObjectContext+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8E7861514A380005BF244 /* NSManagedObjectContext+Additions.m */; };
 		CED8E78F1514A54D005BF244 /* NSManagedObjectContext+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8E7861514A380005BF244 /* NSManagedObjectContext+Additions.m */; };
@@ -263,6 +264,8 @@
 		CE60709614EDC69300420AD8 /* testImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpeg; sourceTree = "<group>"; };
 		CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewController.h; sourceTree = "<group>"; };
 		CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewController.m; sourceTree = "<group>"; };
+		CE6C7C4E151715D300BBFD03 /* UIActivityIndicatorView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+Additions.h"; sourceTree = "<group>"; };
+		CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+Additions.m"; sourceTree = "<group>"; };
 		CE7EF3A514D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.h; sourceTree = "<group>"; };
 		CE7EF3A614D0D12500D7574E /* CPPlacesDataIndexerWithPlacesRefinedElementTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexerWithPlacesRefinedElementTests.m; sourceTree = "<group>"; };
 		CE7EF3A914D0D46300D7574E /* CPTableViewControllerDataMutating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewControllerDataMutating.h; sourceTree = "<group>"; };
@@ -343,8 +346,6 @@
 		CEBEC5211512FDBC00DF0882 /* CPPlacesDataIndexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesDataIndexer.m; sourceTree = "<group>"; };
 		CEBEC5221512FDBC00DF0882 /* CPPlacesRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesRefinary.h; sourceTree = "<group>"; };
 		CEBEC5231512FDBC00DF0882 /* CPPlacesRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesRefinary.m; sourceTree = "<group>"; };
-		CED8E77F15147F56005BF244 /* UIActivityIndicatorView+NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+NavigationController.h"; sourceTree = "<group>"; };
-		CED8E78015147F56005BF244 /* UIActivityIndicatorView+NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+NavigationController.m"; sourceTree = "<group>"; };
 		CED8E7851514A380005BF244 /* NSManagedObjectContext+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Additions.h"; sourceTree = "<group>"; };
 		CED8E7861514A380005BF244 /* NSManagedObjectContext+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Additions.m"; sourceTree = "<group>"; };
 		CED98736150EA15D0084D521 /* KIFTestScenario+PlacesAdditions-Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KIFTestScenario+PlacesAdditions-Internal.h"; sourceTree = "<group>"; };
@@ -832,8 +833,8 @@
 		CED8E77E15147F3F005BF244 /* UIActivityIndicatorView Category */ = {
 			isa = PBXGroup;
 			children = (
-				CED8E77F15147F56005BF244 /* UIActivityIndicatorView+NavigationController.h */,
-				CED8E78015147F56005BF244 /* UIActivityIndicatorView+NavigationController.m */,
+				CE6C7C4E151715D300BBFD03 /* UIActivityIndicatorView+Additions.h */,
+				CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */,
 			);
 			path = "UIActivityIndicatorView Category";
 			sourceTree = "<group>";
@@ -1204,10 +1205,10 @@
 				CEA5C62E15133A800066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */,
 				CEA5C634151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */,
 				CE0319951514442E00C9C57D /* CPConstants.m in Sources */,
-				CED8E78215147F56005BF244 /* UIActivityIndicatorView+NavigationController.m in Sources */,
 				CED8E7901514A54F005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
 				CE87E6931515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */,
 				CE87E6961515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
+				CE6C7C52151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,10 +1276,10 @@
 				CEA5C62C15133A7F0066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */,
 				CEA5C633151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */,
 				CE0319941514442E00C9C57D /* CPConstants.m in Sources */,
-				CED8E78115147F56005BF244 /* UIActivityIndicatorView+NavigationController.m in Sources */,
 				CED8E78F1514A54D005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
 				CE87E6921515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */,
 				CE87E6941515CF76001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
+				CE6C7C50151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,6 +1331,7 @@
 				CED8E7831514915B005BF244 /* CPConstants.m in Sources */,
 				CED8E7881514A380005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
 				CE87E6951515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
+				CE6C7C51151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
