@@ -13,7 +13,7 @@
 
 #pragma mark - Class method
 
-+ (UIActivityIndicatorView *)activityIndicatorOnKIFTestableViewWithNavigationController:(UINavigationController *)navigationController;
-+ (void)removeKIFAndActivityIndicatorView:(UIActivityIndicatorView *)activityIndicator;
++ (UIActivityIndicatorView *)activityIndicatorOnKIFTestableViewWithView:(UIView *)view;
+- (void)removeKIFAndActivityIndicatorView;
 
 @end

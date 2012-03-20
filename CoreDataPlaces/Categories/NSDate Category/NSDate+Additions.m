@@ -22,4 +22,17 @@
 	return [gregorian dateByAddingComponents:comps toDate:[NSDate date] options:0];
 }
 
++ (NSDateComponents *)dateComponentsBetweenNowAndGivenDate:(NSDate *)date;
+{
+	NSDate *endDate = [NSDate date];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSUInteger unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	NSDateComponents *components = [gregorian components:unitFlags
+												fromDate:date
+												  toDate:endDate 
+												 options:0];
+	[gregorian release]; gregorian = nil;
+	return components;
+}
+
 @end

@@ -1,5 +1,5 @@
 //
-//  NSDate+Additions.h
+//  NSNumber+Additions.h
 //  CoreDataPlaces
 //
 //  Created by Jinwoo Baek on 3/19/12.
@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface NSDate (Additions)
+@interface NSNumber (Additions)
 
 #pragma mark - Class method
 
-+ (NSDate *)dateOfTimeIntervalBetweenNowAndHoursAgo:(int)hour;
-+ (NSDateComponents *)dateComponentsBetweenNowAndGivenDate:(NSDate *)date;
++ (NSNumber *)numberInHoursWithDateComponents:(NSDateComponents *)dateComponents;
 
 @end
