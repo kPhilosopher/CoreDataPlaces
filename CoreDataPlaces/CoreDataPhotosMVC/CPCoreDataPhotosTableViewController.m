@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPCoreDataPhotosTableViewController-Internal.h"
+#import "CPCoreDataPhotosTableViewController.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPCoreDataPhotosTableViewHandler.h"
 #import "CPMostRecentPhotosRefinary.h"
@@ -20,13 +20,17 @@
 @interface CPCoreDataPhotosTableViewController()
 {
 	@private
-	NSArray *CP_listOfRawElements;
-	NSMutableArray *CP_refinedElementSections;
 	NSFetchRequest *CP_fetchRequest;
 	Place *CP_currentPlace;
 	BOOL CP_reindex;
 	NSString *CP_propertyToMonitor;
 }
+
+#pragma mark - Property
+
+@property (retain) NSFetchRequest *fetchRequest;
+@property (retain) NSString *propertyToMonitor;
+
 @end
 
 NSString *CPFavoritePhotosTableViewAccessibilityLabel = @"Favorite photos table";
@@ -40,8 +44,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 @synthesize currentPlace = CP_currentPlace;
 @synthesize fetchRequest = CP_fetchRequest;
-@synthesize listOfRawElements = CP_listOfRawElements;
-@synthesize refinedElementSections = CP_refinedElementSections;
 @synthesize propertyToMonitor = CP_propertyToMonitor;
 
 #pragma mark - Factory method
@@ -95,7 +97,9 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 {
 	self = [self initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext title:place.title fetchRequest:fetchRequest];
     if (self)
+	{
 		self.currentPlace = place;
+	}
     return self;
 }
 
@@ -120,8 +124,6 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 
 - (void)dealloc;
 {
-	[CP_listOfRawElements release];
-	[CP_refinedElementSections release];
 	[CP_currentPlace release];
 	[CP_fetchRequest release];
 	[CP_propertyToMonitor release];
@@ -131,26 +133,27 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	[self CP_fetchListThenIndexData];
+	if (CP_reindex) 
+	{
+		[self CP_fetchRawElementsThenIndex];
+	}
 }
 
 #pragma mark - Internal method
 
-- (void)CP_fetchListThenIndexData;
+- (void)CP_fetchRawElementsThenIndex;
 {
-	if (CP_reindex) 
+	NSError *error = nil;
+	
+	NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
+	if (mutableFetchResults == nil)
 	{
-		NSError *error = nil;
-		
-		NSMutableArray *mutableFetchResults = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:&error] mutableCopy];
-		if (mutableFetchResults == nil)
-		{
-			// Handle the error.
-		}
-		self.listOfRawElements = mutableFetchResults;
-		[mutableFetchResults release]; mutableFetchResults = nil;
-		[self indexTheTableViewData];
+		// Handle the error.
 	}
+	self.listOfRawElements = mutableFetchResults;
+	[mutableFetchResults release]; mutableFetchResults = nil;
+	[self indexTheTableViewData];
+	CP_reindex = NO;
 }
 
 - (void)CP_checkTheChangeInManagedObjectContext:(NSNotification *)notification;
@@ -165,30 +168,14 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 				Photo *photo = (Photo *)element;
 				if ([photo.changedValuesForCurrentEvent objectForKey:self.propertyToMonitor])
 				{
-					CP_reindex = YES;
 					if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-						[self CP_fetchListThenIndexData];
+						[self CP_fetchRawElementsThenIndex];
+					else
+						CP_reindex = YES;
 				}
 			}
 		}
 	}
-}
-
-#pragma mark - CPTableViewControllerDataMutating protocol method
-
-- (void)setTheElementSections:(NSMutableArray *)array;
-{
-	self.refinedElementSections = array;
-}
-
-- (NSMutableArray *)theElementSections;
-{
-	return CP_refinedElementSections;
-}
-
-- (NSArray *)theRawData;
-{
-	return CP_listOfRawElements;
 }
 
 @end
