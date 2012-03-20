@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPTopPlacesTableViewController-Internal.h"
+#import "CPTopPlacesTableViewController.h"
 #import "CPTopPlacesTableViewHandler.h"
 #import "CPPlacesRefinedElement.h"
 #import "CPPlacesDataIndexer.h"
@@ -20,10 +20,12 @@
 @interface CPTopPlacesTableViewController ()
 {
 @private
-	NSArray *CP_listOfPlaces;
-	NSMutableArray *CP_indexedListOfPlaces;
 	UIActivityIndicatorView *CP_activityIndicator;
 }
+
+#pragma mark - Property
+
+@property (retain) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -35,8 +37,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 #pragma mark - Synthesize
 
-@synthesize listOfPlaces = CP_listOfPlaces;
-@synthesize indexedListOfPlaces = CP_indexedListOfPlaces;
 @synthesize activityIndicator = CP_activityIndicator;
 
 #pragma mark - Initialization
@@ -58,17 +58,14 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 + (id)topPlacesTableViewControllerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 {	
-	CPTopPlacesTableViewHandler *tableViewHandler = [[CPTopPlacesTableViewHandler alloc] init];
-	CPPlacesRefinedElement *refinedElementType = [[CPPlacesRefinedElement alloc] init];
-	CPPlacesDataIndexer *dataIndexer = [[CPPlacesDataIndexer alloc] init];
-	CPPlacesRefinary *refinary = [[CPPlacesRefinary alloc] init];
-	CPIndexAssistant *indexAssistant = [[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType];
-	[refinary release]; refinary = nil;
-	[dataIndexer release]; dataIndexer = nil;
-	[tableViewHandler release]; tableViewHandler = nil;
-	[refinedElementType release]; refinedElementType = nil;
+	CPPlacesRefinary *refinary = [[[CPPlacesRefinary alloc] init] autorelease];
+	CPPlacesDataIndexer *dataIndexer = [[[CPPlacesDataIndexer alloc] init] autorelease];
+	CPTopPlacesTableViewHandler *tableViewHandler = [[[CPTopPlacesTableViewHandler alloc] init] autorelease];
+	CPPlacesRefinedElement *refinedElementType = [[[CPPlacesRefinedElement alloc] init] autorelease];
+	CPIndexAssistant *indexAssistant = [[[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType] autorelease];
+	
 	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
-	[indexAssistant release]; indexAssistant = nil;
+	
 	return [topPlacesTableViewController autorelease];
 }
 
@@ -76,8 +73,6 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 - (void)dealloc
 {
-	[CP_listOfPlaces release];
-	[CP_indexedListOfPlaces release];
 	[CP_activityIndicator release];
 	[super dealloc];
 }
@@ -85,7 +80,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 - (void)viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
-	if (!self.listOfPlaces)
+	if (!self.listOfRawElements)
 	{
 		[self CP_setupTopPlacesList];
 	}
@@ -93,7 +88,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 - (void)viewWillDisappear:(BOOL)animated;
 {
-	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
+	[self.activityIndicator removeKIFAndActivityIndicatorView];
 	self.activityIndicator = nil;
 	[super viewWillDisappear:animated];
 }
@@ -105,12 +100,11 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 
 #pragma mark - Convenience method
 
-//TODO: refactor
 - (void)CP_setupTopPlacesList;
 {
 	if (self.activityIndicator == nil) 
 	{
-		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithView:self.navigationController.view];
 		[self.activityIndicator startAnimating];
 	}
 	
@@ -120,41 +114,22 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 		id undeterminedListOfPlaces = [flickrDataHandler flickrTopPlaces];
 		[flickrDataHandler release];
 		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[self.activityIndicator removeKIFAndActivityIndicatorView];
+			self.activityIndicator = nil;
+			
 			if ([undeterminedListOfPlaces isKindOfClass:[NSArray class]]) 
 			{
-				self.listOfPlaces = (NSArray *)undeterminedListOfPlaces;
+				self.listOfRawElements = (NSArray *)undeterminedListOfPlaces;
 				[self indexTheTableViewData];
 			}
 			else
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			}
-			
-			[self.activityIndicator stopAnimating];
-			UIView *KIFView = self.activityIndicator.superview;
-			[self.activityIndicator removeFromSuperview];
-			[KIFView removeFromSuperview];
-			self.activityIndicator = nil;
 		});
 	});
 	dispatch_release(placesDownloadQueue);
-}
-
-#pragma mark - CPTableViewControllerDataMutating protocol method
-
-- (void)setTheElementSections:(NSMutableArray *)array
-{
-	self.indexedListOfPlaces = array;
-}
-
-- (NSMutableArray *)theElementSections
-{
-	return self.indexedListOfPlaces;
-}
-
-- (NSArray *)theRawData
-{
-	return self.listOfPlaces;
 }
 
 @end
