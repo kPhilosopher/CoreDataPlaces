@@ -24,6 +24,7 @@ extern NSString *CPFavoriteSwitchAccessibilityLabel;
 @property (retain) IBOutlet UISwitch *switchForFavorite;
 @property (retain) NSManagedObjectContext *managedObjectContext;
 @property (retain) UIPopoverController *popoverController;
+@property (retain) Photo *currentPhoto;
 
 #pragma mark - Singleton
 

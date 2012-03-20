@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPScrollableImageViewController-Internal.h"
+#import "CPScrollableImageViewController.h"
 #import "Photo+Logic.h"
 #import "CPPhotosRefinedElement.h"
 #import "CPAppDelegate.h"
@@ -32,6 +32,13 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 	UIPopoverController *CP_popoverController;
 	UIActivityIndicatorView *CP_activityIndicator;
 }
+
+#pragma mark - Property
+
+@property (retain) UIImage *image;
+@property (retain) UIImageView *imageView;
+@property (retain) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 #pragma mark -
@@ -142,7 +149,8 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 - (void)viewWillDisappear:(BOOL)animated;
 {
-	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
+//	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
+	[self.activityIndicator removeKIFAndActivityIndicatorView];
 	self.activityIndicator = nil;
 	[super viewWillDisappear:animated];
 }
@@ -231,15 +239,15 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - Internal method
 
+//TODO: refactor with the activity indicator going away. make it come before the error shows, if it does.
 - (void)CP_newPhotoSequence;
 {
 	NSString *photoURL = self.currentPhoto.photoURL;
-	self.switchForFavorite.on = NO;
 	if (self.image == nil && (photoURL != nil))
 	{
 		if (self.activityIndicator == nil) 
 		{
-			self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
+			self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithView:self.navigationController.view];
 			[self.activityIndicator startAnimating];
 		}
 		
@@ -251,18 +259,16 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 			UIImage *imageData = [CPScrollableImageViewController CP_imageDownloadWithPhotoURL:photoURL currentPhotoIsAFavorite:currentPhotoIsAFavorite];
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
-				
-				if (imageData)
-					[self CP_setupTheViewHierarchyWithNewImage:imageData];
-				else
-					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-				
-				[self.activityIndicator stopAnimating];
-				UIView *KIFView = self.activityIndicator.superview;
-				[self.activityIndicator removeFromSuperview];
-				[KIFView removeFromSuperview];
+
+				[self.activityIndicator removeKIFAndActivityIndicatorView];
 				self.activityIndicator = nil;
 				
+				if (imageData)
+				{
+					[self CP_setupTheViewHierarchyWithNewImage:imageData];
+				}
+				else
+					[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
 			});
 		});
 		dispatch_release(imageDownloadQueue);
