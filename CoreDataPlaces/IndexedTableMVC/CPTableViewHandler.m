@@ -7,7 +7,7 @@
 //
 
 #import "CPTableViewHandler.h"
-#import "CPRefinedElementInterfacing.h"
+#import "CPRefinedElement.h"
 #import "CPIndexedTableViewController.h"
 
 
@@ -17,7 +17,7 @@
 
 - (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController numberOfRowsInSection:(NSInteger)section;
 {
-    return [(NSArray *)[[indexedTableViewController theElementSections] objectAtIndex:section] count];
+    return [(NSArray *)[indexedTableViewController.indexedRefinedElementSections objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell *)cell;
@@ -25,17 +25,18 @@
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	id element = [indexedTableViewController refinedElementInTheElementSectionsWithTheIndexPath:indexPath];
 	
-	if ([element conformsToProtocol:@protocol(CPRefinedElementInterfacing)]) {
-		id<CPRefinedElementInterfacing> elementWithInterface = (id<CPRefinedElementInterfacing>)element;
-		cell.textLabel.text = elementWithInterface.title;
-		cell.detailTextLabel.text = elementWithInterface.subtitle;
+	if ([element isKindOfClass:[CPRefinedElement class]])
+	{
+		CPRefinedElement *refinedElement = (CPRefinedElement *)element;
+		cell.textLabel.text = refinedElement.title;
+		cell.detailTextLabel.text = refinedElement.subtitle;
 	}
 	return cell;
 }
 
 - (NSInteger)numberOfSectionsInIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
 {
-    return [[indexedTableViewController theElementSections] count];
+    return [indexedTableViewController.indexedRefinedElementSections count];
 }
 
 - (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
