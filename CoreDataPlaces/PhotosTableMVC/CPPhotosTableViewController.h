@@ -8,9 +8,10 @@
 
 #import "CPIndexedTableViewController.h"
 
-
-@class Place;
 @class CPPlacesRefinedElement;
+
+//TODO: should be moved off
+@class Place;
 
 @interface CPPhotosTableViewController : CPIndexedTableViewController
 
@@ -18,8 +19,6 @@ extern NSString *CPPhotosListViewAccessibilityLabel;
 
 #pragma mark - Property
 
-@property (retain) NSArray *listOfPhotos;
-@property (retain) NSMutableArray *indexedListOfPhotos;
 @property (retain) CPPlacesRefinedElement *placeRefinedElement;
 
 #pragma mark - Initialization

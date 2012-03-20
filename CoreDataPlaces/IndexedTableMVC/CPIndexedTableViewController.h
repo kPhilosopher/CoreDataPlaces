@@ -9,7 +9,6 @@
 // !!!:This is an abstract class. It must be subclassed with appropriate implementation.
 
 #import <UIKit/UIKit.h>
-#import "CPTableViewControllerDataMutating.h"
 #import "CPTableViewControllerDataReloading.h"
 
 
@@ -19,10 +18,12 @@
 @class CPTableViewHandler;
 @class CPRefinedElement;
 
-@interface CPIndexedTableViewController : UITableViewController <CPTableViewControllerDataMutating, CPTableViewControllerDataReloading>
+@interface CPIndexedTableViewController : UITableViewController <CPTableViewControllerDataReloading>
 
 #pragma mark - Properties
 
+@property (retain) NSArray *listOfRawElements;
+@property (retain) NSMutableArray *indexedRefinedElementSections;
 @property (retain) CPRefinary *refinary;
 @property (retain) CPDataIndexer *dataIndexer;
 @property (retain) CPTableViewHandler *tableViewHandler;

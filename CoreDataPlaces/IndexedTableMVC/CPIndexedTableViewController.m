@@ -17,6 +17,8 @@
 @interface CPIndexedTableViewController ()
 {
 @private
+	NSArray *CP_listOfRawElements;
+	NSMutableArray *CP_indexedRefinedElementSections;
 	CPRefinary *CP_refinary;
 	CPDataIndexer *CP_dataIndexer;
 	CPTableViewHandler *CP_tableViewHandler;
@@ -32,6 +34,8 @@
 
 #pragma mark - Synthesize
 
+@synthesize listOfRawElements = CP_listOfRawElements;
+@synthesize indexedRefinedElementSections = CP_indexedRefinedElementSections;
 @synthesize refinary = CP_refinary;
 @synthesize dataIndexer = CP_dataIndexer;
 @synthesize tableViewHandler = CP_tableViewHandler;
@@ -69,6 +73,8 @@
 
 - (void)dealloc
 {
+	[CP_listOfRawElements release];
+	[CP_indexedRefinedElementSections release];
 	[CP_refinary release];
 	[CP_dataIndexer release];
 	[CP_tableViewHandler release];
@@ -136,36 +142,18 @@
 
 - (id)refinedElementInTheElementSectionsWithTheIndexPath:(NSIndexPath *)indexPath;
 {
-	return [(NSArray *)[[self theElementSections] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-}
-
-#pragma mark - CPTableViewControllerDataMutating protocol method
-
-- (void)setTheElementSections:(NSMutableArray *)array;
-{
-	return;
-}
-
-- (NSMutableArray *)theElementSections;
-{
-	return nil;
-}
-
-- (NSArray *)theRawData;
-{
-	return nil;
+	return [(NSArray *)[self.indexedRefinedElementSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 }
 
 #pragma mark - DataReloadForTableViewControllerProtocol implementation
 
 - (void)indexTheTableViewData
 {
-	//TODO:change the condition of the if statement.
-	if (self.dataIndexer != nil) 
+	if (self.dataIndexer && self.refinary && self.refinedElementType && self.listOfRawElements) 
 	{
-		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:[self theRawData]];
-		[self setTheElementSections:
-		 [self.dataIndexer indexedSectionsOfRefinedElements:refinedElements]];
+		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:self.listOfRawElements];
+//		[self setTheElementSections:[self.dataIndexer indexedSectionsOfRefinedElements:refinedElements]];
+		self.indexedRefinedElementSections = [self.dataIndexer indexedSectionsOfRefinedElements:refinedElements];
 		[self.tableView reloadData];
 	}
 }

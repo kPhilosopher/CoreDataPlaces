@@ -18,8 +18,8 @@
 - (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 {
 	NSString *returningString = nil;
-	id undeterminedElement = [[[indexedTableViewController theElementSections] objectAtIndex:section] lastObject];
-	if ([[[indexedTableViewController theElementSections] objectAtIndex:section] count] > 0 &&
+	id undeterminedElement = [[indexedTableViewController.indexedRefinedElementSections objectAtIndex:section] lastObject];
+	if ([[indexedTableViewController.indexedRefinedElementSections objectAtIndex:section] count] > 0 &&
 		[undeterminedElement isKindOfClass:[CPRefinedElement class]])
 	{
 		CPRefinedElement *refinedElement = (CPRefinedElement *)undeterminedElement;
