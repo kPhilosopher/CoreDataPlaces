@@ -39,9 +39,6 @@
 		CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = CE197A1114E4AE1700BAE98D /* Place.m */; };
 		CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
 		CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
-		CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
-		CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
-		CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
 		CE1C5CA914F1EE3B00F1C617 /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
 		CE1C5CAC14F1EE3B00F1C617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84D14CCC7C500BDF83D /* UIKit.framework */; };
 		CE1C5CAD14F1EE3B00F1C617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D84F14CCC7C500BDF83D /* Foundation.framework */; };
@@ -60,9 +57,35 @@
 		CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6314DF481500D819AB /* CPManagedObjectInsertionHandlerTests.m */; };
 		CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */; };
 		CE2D8E8414FC2640004058FD /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D8E8314FC2640004058FD /* libOCMock.a */; };
+		CE329EE51519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
+		CE329EE61519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
+		CE329EE71519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
+		CE329EEA151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
+		CE329EEB151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
+		CE329EEC151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
+		CE329EF4151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
+		CE329EF5151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
+		CE329EF6151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
+		CE329EF7151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF1151938EA0074AFF4 /* NSString+FindCharacterInSet.m */; };
+		CE329EF8151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF1151938EA0074AFF4 /* NSString+FindCharacterInSet.m */; };
+		CE329EF9151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF1151938EA0074AFF4 /* NSString+FindCharacterInSet.m */; };
+		CE329EFA151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF3151938EA0074AFF4 /* NSString+TitleExtraction.m */; };
+		CE329EFB151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF3151938EA0074AFF4 /* NSString+TitleExtraction.m */; };
+		CE329EFC151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EF3151938EA0074AFF4 /* NSString+TitleExtraction.m */; };
+		CE329F00151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EFF151939080074AFF4 /* NSFileManager+RemoveFile.m */; };
+		CE329F01151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EFF151939080074AFF4 /* NSFileManager+RemoveFile.m */; };
+		CE329F02151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EFF151939080074AFF4 /* NSFileManager+RemoveFile.m */; };
+		CE329F0515193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0415193BBF0074AFF4 /* CPPlacesTableViewHandler.m */; };
+		CE329F0615193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0415193BBF0074AFF4 /* CPPlacesTableViewHandler.m */; };
+		CE329F0715193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0415193BBF0074AFF4 /* CPPlacesTableViewHandler.m */; };
+		CE329F0A15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0915193C7E0074AFF4 /* CPFavoritePhotosRefinary.m */; };
+		CE329F0B15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0915193C7E0074AFF4 /* CPFavoritePhotosRefinary.m */; };
+		CE329F0C15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329F0915193C7E0074AFF4 /* CPFavoritePhotosRefinary.m */; };
 		CE3E9F0B14E976BA00101891 /* CPPlaceFavoriteLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */; };
 		CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
 		CE3E9F0F14E9BD2300101891 /* Photo+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */; };
+		CE4270CA15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */; };
+		CE4270CB15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */; };
 		CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
 		CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
 		CE60708114ED82B200420AD8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D86A14CCC7C500BDF83D /* SenTestingKit.framework */; };
@@ -111,8 +134,6 @@
 		CE80D8A714CCCA2900BDF83D /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89A14CCCA2900BDF83D /* SBJsonWriter.m */; };
 		CE80D8A814CCCA2900BDF83D /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D89A14CCCA2900BDF83D /* SBJsonWriter.m */; };
 		CE80D8AC14CCCAE500BDF83D /* CPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE80D8AB14CCCAE500BDF83D /* CPAppDelegate.m */; };
-		CE87E6921515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87E6911515A2AC001ED6B2 /* CoreDataTableViewController.m */; };
-		CE87E6931515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE87E6911515A2AC001ED6B2 /* CoreDataTableViewController.m */; };
 		CE87E6941515CF76001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6714DF495900D819AB /* CPManagedObjectInsertionHandler.m */; };
 		CE87E6951515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6714DF495900D819AB /* CPManagedObjectInsertionHandler.m */; };
 		CE87E6961515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6714DF495900D819AB /* CPManagedObjectInsertionHandler.m */; };
@@ -126,13 +147,9 @@
 		CEA5C627151339B00066B01B /* CPCoreDataPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5C626151339B00066B01B /* CPCoreDataPhotosRefinary.m */; };
 		CEA5C628151339B00066B01B /* CPCoreDataPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5C626151339B00066B01B /* CPCoreDataPhotosRefinary.m */; };
 		CEA5C629151339B00066B01B /* CPCoreDataPhotosRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA5C626151339B00066B01B /* CPCoreDataPhotosRefinary.m */; };
-		CEA5C62A15133A780066B01B /* CPCoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */; };
-		CEA5C62B15133A790066B01B /* CPCoreDataPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */; };
 		CEA5C62C15133A7F0066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */; };
 		CEA5C62D15133A800066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */; };
 		CEA5C62E15133A800066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */; };
-		CEA5C633151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */; };
-		CEA5C634151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */; };
 		CEB1118D14DF5B36009B1B5B /* CoreDataPlaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE80D86114CCC7C500BDF83D /* CoreDataPlaces.xcdatamodeld */; };
 		CEBEC4B71510415E00DF0882 /* CPRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEC4B61510415E00DF0882 /* CPRefinary.m */; };
 		CEBEC4B81510415E00DF0882 /* CPRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEC4B61510415E00DF0882 /* CPRefinary.m */; };
@@ -187,11 +204,6 @@
 		CEF1451F14CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF1452014CF407500D21E00 /* CPRefinedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF1451E14CF407500D21E00 /* CPRefinedElement.m */; };
 		CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */; };
-		CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */; };
-		CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */; };
-		CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */; };
-		CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
-		CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */; };
 		CEF2019E14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2019C14EF9C6F00044A8B /* CPScrollableImageViewController-iPad.xib */; };
 		CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
 		CEF201A614F0CF5800044A8B /* CPNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF201A414F0C5F800044A8B /* CPNotificationManager.m */; };
@@ -247,10 +259,28 @@
 		CE2D8E8914FC268D004058FD /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		CE2D8E8A14FC268D004058FD /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		CE2D8E8B14FC268D004058FD /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		CE329EE31519342A0074AFF4 /* CPFavoritePlacesRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesRefinary.h; sourceTree = "<group>"; };
+		CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesRefinary.m; sourceTree = "<group>"; };
+		CE329EE8151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesTableViewHandler.h; sourceTree = "<group>"; };
+		CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesTableViewHandler.m; sourceTree = "<group>"; };
+		CE329EEE151938EA0074AFF4 /* NSString+DirectoryFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DirectoryFinder.h"; sourceTree = "<group>"; };
+		CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DirectoryFinder.m"; sourceTree = "<group>"; };
+		CE329EF0151938EA0074AFF4 /* NSString+FindCharacterInSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindCharacterInSet.h"; sourceTree = "<group>"; };
+		CE329EF1151938EA0074AFF4 /* NSString+FindCharacterInSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindCharacterInSet.m"; sourceTree = "<group>"; };
+		CE329EF2151938EA0074AFF4 /* NSString+TitleExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TitleExtraction.h"; sourceTree = "<group>"; };
+		CE329EF3151938EA0074AFF4 /* NSString+TitleExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TitleExtraction.m"; sourceTree = "<group>"; };
+		CE329EFE151939080074AFF4 /* NSFileManager+RemoveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+RemoveFile.h"; sourceTree = "<group>"; };
+		CE329EFF151939080074AFF4 /* NSFileManager+RemoveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+RemoveFile.m"; sourceTree = "<group>"; };
+		CE329F0315193BBF0074AFF4 /* CPPlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlacesTableViewHandler.h; sourceTree = "<group>"; };
+		CE329F0415193BBF0074AFF4 /* CPPlacesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlacesTableViewHandler.m; sourceTree = "<group>"; };
+		CE329F0815193C7E0074AFF4 /* CPFavoritePhotosRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePhotosRefinary.h; sourceTree = "<group>"; };
+		CE329F0915193C7E0074AFF4 /* CPFavoritePhotosRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePhotosRefinary.m; sourceTree = "<group>"; };
 		CE3E9F0814E976BA00101891 /* CPPlaceFavoriteLogicTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlaceFavoriteLogicTests.h; sourceTree = "<group>"; };
 		CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlaceFavoriteLogicTests.m; sourceTree = "<group>"; };
 		CE3E9F0C14E9BD2300101891 /* Photo+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Logic.h"; sourceTree = "<group>"; };
 		CE3E9F0D14E9BD2300101891 /* Photo+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Logic.m"; sourceTree = "<group>"; };
+		CE4270C815193EEF00ABE063 /* CPCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataTableViewController.h; sourceTree = "<group>"; };
+		CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataTableViewController.m; sourceTree = "<group>"; };
 		CE60707414ED808800420AD8 /* CPImageCacheHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPImageCacheHandler.h; sourceTree = "<group>"; };
 		CE60707514ED808800420AD8 /* CPImageCacheHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPImageCacheHandler.m; sourceTree = "<group>"; };
 		CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataPlacesApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,8 +290,6 @@
 		CE60709114ED82E000420AD8 /* CPImageCacheHandlerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPImageCacheHandlerTests.h; sourceTree = "<group>"; };
 		CE60709214ED82E000420AD8 /* CPImageCacheHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPImageCacheHandlerTests.m; sourceTree = "<group>"; };
 		CE60709614EDC69300420AD8 /* testImage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpeg; sourceTree = "<group>"; };
-		CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewController.h; sourceTree = "<group>"; };
-		CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosTableViewController.m; sourceTree = "<group>"; };
 		CE6C7C4E151715D300BBFD03 /* UIActivityIndicatorView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+Additions.h"; sourceTree = "<group>"; };
 		CE6C7C4F151715D300BBFD03 /* UIActivityIndicatorView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+Additions.m"; sourceTree = "<group>"; };
 		CE6C7C6C151756BE00BBFD03 /* CPMostRecentPhotosRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMostRecentPhotosRefinary.h; sourceTree = "<group>"; };
@@ -304,8 +332,6 @@
 		CE80D89914CCCA2900BDF83D /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CE80D89A14CCCA2900BDF83D /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		CE80D8AB14CCCAE500BDF83D /* CPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppDelegate.m; sourceTree = "<group>"; };
-		CE87E6901515A2AC001ED6B2 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
-		CE87E6911515A2AC001ED6B2 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		CE8DDF6214DF481500D819AB /* CPManagedObjectInsertionHandlerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPManagedObjectInsertionHandlerTests.h; sourceTree = "<group>"; };
 		CE8DDF6314DF481500D819AB /* CPManagedObjectInsertionHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPManagedObjectInsertionHandlerTests.m; sourceTree = "<group>"; };
 		CE8DDF6614DF495900D819AB /* CPManagedObjectInsertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPManagedObjectInsertionHandler.h; sourceTree = "<group>"; };
@@ -322,8 +348,6 @@
 		CE989F3114D38B2500AB58C9 /* CPTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableViewHandler.h; sourceTree = "<group>"; };
 		CE989F3214D38B2500AB58C9 /* CPTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTableViewHandler.m; sourceTree = "<group>"; };
 		CE989F3614D3959700AB58C9 /* CPPhotosTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPhotosTableViewHandler.h; sourceTree = "<group>"; };
-		CE989F4514D7B1E000AB58C9 /* CPFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritesTableViewController.h; sourceTree = "<group>"; };
-		CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritesTableViewController.m; sourceTree = "<group>"; };
 		CEA5C625151339B00066B01B /* CPCoreDataPhotosRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosRefinary.h; sourceTree = "<group>"; };
 		CEA5C626151339B00066B01B /* CPCoreDataPhotosRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataPhotosRefinary.m; sourceTree = "<group>"; };
 		CEB1119C14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataPhotosTableViewHandler.h; sourceTree = "<group>"; };
@@ -372,14 +396,6 @@
 		CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTopPlacesTableViewController.m; sourceTree = "<group>"; };
 		CEF2018614EF21B700044A8B /* FlickrFetcher+TestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlickrFetcher+TestHelper.h"; sourceTree = "<group>"; };
 		CEF2018714EF21B700044A8B /* FlickrFetcher+TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlickrFetcher+TestHelper.m"; sourceTree = "<group>"; };
-		CEF2018E14EF237500044A8B /* NSString+FindCharacterInSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindCharacterInSet.h"; sourceTree = "<group>"; };
-		CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FindCharacterInSet.m"; sourceTree = "<group>"; };
-		CEF2019014EF237500044A8B /* NSString+TitleExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TitleExtraction.h"; sourceTree = "<group>"; };
-		CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TitleExtraction.m"; sourceTree = "<group>"; };
-		CEF2019414EF23AC00044A8B /* NSFileManager+RemoveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+RemoveFile.h"; sourceTree = "<group>"; };
-		CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+RemoveFile.m"; sourceTree = "<group>"; };
-		CEF2019814EF25DA00044A8B /* NSString+DirectoryFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DirectoryFinder.h"; sourceTree = "<group>"; };
-		CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DirectoryFinder.m"; sourceTree = "<group>"; };
 		CEF2019D14EF9C6F00044A8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "CoreDataPlaces/en.lproj/CPScrollableImageViewController-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		CEF201A314F0C5F800044A8B /* CPNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPNotificationManager.h; path = CoreDataPlaces/CPNotificationManager.h; sourceTree = SOURCE_ROOT; };
 		CEF201A414F0C5F800044A8B /* CPNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPNotificationManager.m; path = CoreDataPlaces/CPNotificationManager.m; sourceTree = SOURCE_ROOT; };
@@ -523,6 +539,37 @@
 			path = OCMock;
 			sourceTree = "<group>";
 		};
+		CE329EED151938EA0074AFF4 /* NSString Category */ = {
+			isa = PBXGroup;
+			children = (
+				CE329EEE151938EA0074AFF4 /* NSString+DirectoryFinder.h */,
+				CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */,
+				CE329EF0151938EA0074AFF4 /* NSString+FindCharacterInSet.h */,
+				CE329EF1151938EA0074AFF4 /* NSString+FindCharacterInSet.m */,
+				CE329EF2151938EA0074AFF4 /* NSString+TitleExtraction.h */,
+				CE329EF3151938EA0074AFF4 /* NSString+TitleExtraction.m */,
+			);
+			path = "NSString Category";
+			sourceTree = "<group>";
+		};
+		CE329EFD151939080074AFF4 /* NSFileManager Category */ = {
+			isa = PBXGroup;
+			children = (
+				CE329EFE151939080074AFF4 /* NSFileManager+RemoveFile.h */,
+				CE329EFF151939080074AFF4 /* NSFileManager+RemoveFile.m */,
+			);
+			path = "NSFileManager Category";
+			sourceTree = "<group>";
+		};
+		CE4270C715193D9D00ABE063 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE329EE31519342A0074AFF4 /* CPFavoritePlacesRefinary.h */,
+				CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		CE60708414ED82B200420AD8 /* CoreDataPlacesApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,8 +594,6 @@
 		CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE60E23414D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.h */,
-				CE60E23514D9ECCF0000B213 /* CPCoreDataPhotosTableViewController.m */,
 				CEB1119C14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.h */,
 				CEB1119D14E0833F009B1B5B /* CPCoreDataPhotosTableViewHandler.m */,
 				CEA5C624151339840066B01B /* Model */,
@@ -626,7 +671,6 @@
 				CEF1454014CF88DC00D21E00 /* TopPlacesTableMVC */,
 				CEEF706C14D35A0C006756EA /* PhotosTableMVC */,
 				CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */,
-				CE989F4014D7B01D00AB58C9 /* FavoritesTableMVC */,
 				CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */,
 				CEDC73E014DB7CAD00FF6989 /* ScrollableImageMVC */,
 				CE8DDF4E14DF474300D819AB /* CoreData */,
@@ -784,20 +828,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		CE989F4014D7B01D00AB58C9 /* FavoritesTableMVC */ = {
-			isa = PBXGroup;
-			children = (
-				CE989F4514D7B1E000AB58C9 /* CPFavoritesTableViewController.h */,
-				CE989F4614D7B1E000AB58C9 /* CPFavoritesTableViewController.m */,
-			);
-			path = FavoritesTableMVC;
-			sourceTree = "<group>";
-		};
 		CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE87E6901515A2AC001ED6B2 /* CoreDataTableViewController.h */,
-				CE87E6911515A2AC001ED6B2 /* CoreDataTableViewController.m */,
+				CE4270C815193EEF00ABE063 /* CPCoreDataTableViewController.h */,
+				CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */,
+				CE329EE8151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.h */,
+				CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */,
+				CE4270C715193D9D00ABE063 /* Model */,
 			);
 			path = CoreDataTableMVC;
 			sourceTree = "<group>";
@@ -805,10 +843,12 @@
 		CEA5C624151339840066B01B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C7C6C151756BE00BBFD03 /* CPMostRecentPhotosRefinary.h */,
-				CE6C7C6D151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m */,
 				CEA5C625151339B00066B01B /* CPCoreDataPhotosRefinary.h */,
 				CEA5C626151339B00066B01B /* CPCoreDataPhotosRefinary.m */,
+				CE329F0815193C7E0074AFF4 /* CPFavoritePhotosRefinary.h */,
+				CE329F0915193C7E0074AFF4 /* CPFavoritePhotosRefinary.m */,
+				CE6C7C6C151756BE00BBFD03 /* CPMostRecentPhotosRefinary.h */,
+				CE6C7C6D151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -876,6 +916,8 @@
 			children = (
 				CEF1455514CF8F8600D21E00 /* CPTopPlacesTableViewController.h */,
 				CEF1455614CF8F8700D21E00 /* CPTopPlacesTableViewController.m */,
+				CE329F0315193BBF0074AFF4 /* CPPlacesTableViewHandler.h */,
+				CE329F0415193BBF0074AFF4 /* CPPlacesTableViewHandler.m */,
 				CEFD052D14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.h */,
 				CEFD052E14E0F8B80033E4F8 /* CPTopPlacesTableViewHandler.m */,
 				CEF1454A14CF88FC00D21E00 /* Model */,
@@ -899,36 +941,14 @@
 		CEF2018B14EF237500044A8B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				CE329EFD151939080074AFF4 /* NSFileManager Category */,
+				CE329EED151938EA0074AFF4 /* NSString Category */,
 				CE74673915176A9B000953A8 /* NSNumber Category */,
 				CE74671D15176445000953A8 /* NSDate Category */,
 				CED8E7841514A356005BF244 /* NSManagedObjectContext Category */,
 				CED8E77E15147F3F005BF244 /* UIActivityIndicatorView Category */,
-				CEF2018C14EF237500044A8B /* NSFileManager Categories */,
-				CEF2018D14EF237500044A8B /* NSString Categories */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		CEF2018C14EF237500044A8B /* NSFileManager Categories */ = {
-			isa = PBXGroup;
-			children = (
-				CEF2019414EF23AC00044A8B /* NSFileManager+RemoveFile.h */,
-				CEF2019514EF23AC00044A8B /* NSFileManager+RemoveFile.m */,
-			);
-			path = "NSFileManager Categories";
-			sourceTree = "<group>";
-		};
-		CEF2018D14EF237500044A8B /* NSString Categories */ = {
-			isa = PBXGroup;
-			children = (
-				CEF2018E14EF237500044A8B /* NSString+FindCharacterInSet.h */,
-				CEF2018F14EF237500044A8B /* NSString+FindCharacterInSet.m */,
-				CEF2019014EF237500044A8B /* NSString+TitleExtraction.h */,
-				CEF2019114EF237500044A8B /* NSString+TitleExtraction.m */,
-				CEF2019814EF25DA00044A8B /* NSString+DirectoryFinder.h */,
-				CEF2019914EF25DA00044A8B /* NSString+DirectoryFinder.m */,
-			);
-			path = "NSString Categories";
 			sourceTree = "<group>";
 		};
 		CEF2019F14F0C50E00044A8B /* Notifications */ = {
@@ -1157,9 +1177,6 @@
 				CE1C5CA214F1EE3B00F1C617 /* Place.m in Sources */,
 				CE1C5CA314F1EE3B00F1C617 /* Photo+Logic.m in Sources */,
 				CE1C5CA414F1EE3B00F1C617 /* CPImageCacheHandler.m in Sources */,
-				CE1C5CA614F1EE3B00F1C617 /* NSString+FindCharacterInSet.m in Sources */,
-				CE1C5CA714F1EE3B00F1C617 /* NSString+TitleExtraction.m in Sources */,
-				CE1C5CA814F1EE3B00F1C617 /* NSString+DirectoryFinder.m in Sources */,
 				CE1C5CA914F1EE3B00F1C617 /* CPNotificationManager.m in Sources */,
 				CE1C5CCE14F1EFD200F1C617 /* KIFTestScenario+PlacesAdditions.m in Sources */,
 				CE1C5CCF14F1EFD200F1C617 /* KIFTestStep+PlacesAdditions.m in Sources */,
@@ -1178,17 +1195,23 @@
 				CEBEC531151300FD00DF0882 /* CPPhotosDataIndexer.m in Sources */,
 				CEBEC532151300FD00DF0882 /* CPPhotosRefinedElement.m in Sources */,
 				CEA5C629151339B00066B01B /* CPCoreDataPhotosRefinary.m in Sources */,
-				CEA5C62B15133A790066B01B /* CPCoreDataPhotosTableViewController.m in Sources */,
 				CEA5C62E15133A800066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */,
-				CEA5C634151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */,
 				CE0319951514442E00C9C57D /* CPConstants.m in Sources */,
 				CED8E7901514A54F005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
-				CE87E6931515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */,
 				CE87E6961515CF77001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
 				CE6C7C52151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
 				CE6C7C70151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467221517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673E15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
+				CE329EE71519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE329EEC151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
+				CE329EF6151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
+				CE329EF9151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
+				CE329EFC151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
+				CE329F02151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */,
+				CE329F0715193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
+				CE329F0C15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
+				CE4270CB15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,8 +1221,6 @@
 			files = (
 				CE60709314ED82E000420AD8 /* CPImageCacheHandlerTests.m in Sources */,
 				CEF2018914EF21B700044A8B /* FlickrFetcher+TestHelper.m in Sources */,
-				CEF2019714EF23AC00044A8B /* NSFileManager+RemoveFile.m in Sources */,
-				CEF2019B14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 				CEBEC4E61511913B00DF0882 /* CPTopPlacesTableViewHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1232,9 +1253,6 @@
 				CE197A1214E4AE1700BAE98D /* Place.m in Sources */,
 				CE3E9F0E14E9BD2300101891 /* Photo+Logic.m in Sources */,
 				CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */,
-				CEF2019214EF237500044A8B /* NSString+FindCharacterInSet.m in Sources */,
-				CEF2019314EF237500044A8B /* NSString+TitleExtraction.m in Sources */,
-				CEF2019A14EF25DA00044A8B /* NSString+DirectoryFinder.m in Sources */,
 				CEF201A514F0C5F800044A8B /* CPNotificationManager.m in Sources */,
 				CEBEC4B71510415E00DF0882 /* CPRefinary.m in Sources */,
 				CEBEC4DA1511911900DF0882 /* CPTopPlacesTableViewController.m in Sources */,
@@ -1250,17 +1268,23 @@
 				CEBEC537151300FE00DF0882 /* CPPhotosRefinary.m in Sources */,
 				CEBEC538151300FE00DF0882 /* CPPhotosRefinedElement.m in Sources */,
 				CEA5C627151339B00066B01B /* CPCoreDataPhotosRefinary.m in Sources */,
-				CEA5C62A15133A780066B01B /* CPCoreDataPhotosTableViewController.m in Sources */,
 				CEA5C62C15133A7F0066B01B /* CPCoreDataPhotosTableViewHandler.m in Sources */,
-				CEA5C633151340EA0066B01B /* CPFavoritesTableViewController.m in Sources */,
 				CE0319941514442E00C9C57D /* CPConstants.m in Sources */,
 				CED8E78F1514A54D005BF244 /* NSManagedObjectContext+Additions.m in Sources */,
-				CE87E6921515A2AC001ED6B2 /* CoreDataTableViewController.m in Sources */,
 				CE87E6941515CF76001ED6B2 /* CPManagedObjectInsertionHandler.m in Sources */,
 				CE6C7C50151715D300BBFD03 /* UIActivityIndicatorView+Additions.m in Sources */,
 				CE6C7C6E151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467201517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673C15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
+				CE329EE51519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE329EEA151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
+				CE329EF4151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
+				CE329EF7151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
+				CE329EFA151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
+				CE329F00151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */,
+				CE329F0515193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
+				CE329F0A15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
+				CE4270CA15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1316,6 +1340,14 @@
 				CE6C7C6F151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467211517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673D15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
+				CE329EE61519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE329EEB151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
+				CE329EF5151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
+				CE329EF8151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
+				CE329EFB151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
+				CE329F01151939080074AFF4 /* NSFileManager+RemoveFile.m in Sources */,
+				CE329F0615193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
+				CE329F0B15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
