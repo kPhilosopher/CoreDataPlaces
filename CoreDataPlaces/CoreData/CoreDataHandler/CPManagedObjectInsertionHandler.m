@@ -21,6 +21,8 @@
 }
 @end
 
+#pragma mark -
+
 @implementation CPManagedObjectInsertionHandler
 
 #pragma mark - Synthesize
@@ -54,8 +56,6 @@
 		verdict = YES;
 		
 		NSError *error = nil;
-//		
-//		NSLog(@"about to save: inserted %d registered %d deleted %d", self.managedObjectContext.insertedObjects.count, self.managedObjectContext.registeredObjects.count, self.managedObjectContext.deletedObjects.count);
 		if (![self.managedObjectContext save:&error])
 		{
 			//handle the error.
@@ -67,10 +67,6 @@
 
 - (Photo *)photoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement itsPlace:(Place *)itsPlace;
 {
-	if (!itsPlace) 
-	{
-		//TODO: use the fetching function to find the place of this photo.
-	}
 	Photo *photoToDisplay = nil;
 	//first check if the photo already exists.
 	if ([photoRefinedElement.rawElement isKindOfClass:[NSDictionary class]]) 
@@ -96,11 +92,10 @@
 			photoToDisplay.subtitle = photoRefinedElement.subtitle;
 			photoToDisplay.itsPlace = itsPlace;
 			photoToDisplay.isFavorite = [NSNumber numberWithBool:NO];
-			//TODO: fix the way the hour changes show.
-			NSString *secondsSinceUpload = [dictionary objectForKey:@"dateupload"];
-			NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsSinceUpload intValue]];
-			
+			NSString *secondsBetween1970AndUpload = [dictionary objectForKey:@"dateupload"];
+			NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsBetween1970AndUpload intValue]];
 			photoToDisplay.timeOfUpload = uploadDate;
+			
 			NSLog(@"about to save: inserted %d registered %d deleted %d", self.managedObjectContext.insertedObjects.count, self.managedObjectContext.registeredObjects.count, self.managedObjectContext.deletedObjects.count);
 			if (![self.managedObjectContext save:&error])
 			{
@@ -133,6 +128,51 @@
 		[fetchRequest release];fetchRequest = nil;
 	}
 	return photoToDisplay;
+}
+
+- (Place *)placeWithPlaceRefinedElement:(CPPlacesRefinedElement *)refinedElement;
+{
+	Place *currentPlace = nil;
+	NSString *placeID = refinedElement.placeID;
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
+	[fetchRequest setSortDescriptors:nil];
+	
+	NSError *error = nil;
+	NSUInteger returnedObjectCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+	if ((returnedObjectCount == 0) && !error)
+	{
+		currentPlace = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+		currentPlace.title = refinedElement.title;
+		currentPlace.subtitle = refinedElement.subtitle;
+		currentPlace.category = [refinedElement.title substringToIndex:1];
+		currentPlace.placeID = placeID;
+		currentPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
+	}
+	else if (error)
+	{
+		NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+	}
+	else
+	{
+		NSError *error = nil;
+		NSArray *fetchRequestOutput = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+		if (!fetchRequestOutput)
+		{
+			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+		}
+		else if ([fetchRequestOutput count] > 1)
+		{
+			NSLog(@"placeID is not a key anymore");
+		}
+		else
+		{
+			currentPlace = [fetchRequestOutput lastObject];
+		}
+	}
+	[fetchRequest release]; fetchRequest = nil;
+	return currentPlace;
 }
 
 @end

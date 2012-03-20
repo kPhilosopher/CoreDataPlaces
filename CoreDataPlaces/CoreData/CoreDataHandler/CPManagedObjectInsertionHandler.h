@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class Place;
 @class Photo;
 @class CPRefinedElement;
 @class CPPhotosRefinedElement;
+@class CPPlacesRefinedElement;
 
 @interface CPManagedObjectInsertionHandler : NSObject
 
@@ -24,11 +26,9 @@
 - (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 #pragma mark - Instance method
-//TODO: change the interface to this and change the tests as well.
-//- (NSManagedObject *)managedObjectFromRefinedElement:(CPRefinedElement *)refinedElement;
+
 - (BOOL)insertRefinedElement:(CPRefinedElement *)refinedElement;
-
 - (Photo *)photoWithPhotoRefinedElement:(CPPhotosRefinedElement *)photoRefinedElement itsPlace:(Place *)itsPlace;
-
+- (Place *)placeWithPlaceRefinedElement:(CPPlacesRefinedElement *)refinedElement;
 
 @end

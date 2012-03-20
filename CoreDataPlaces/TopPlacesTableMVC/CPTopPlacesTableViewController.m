@@ -111,8 +111,10 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
 	dispatch_queue_t placesDownloadQueue = dispatch_queue_create("Flickr places downloader", NULL);
 	dispatch_async(placesDownloadQueue, ^{
+		
 		id undeterminedListOfPlaces = [flickrDataHandler flickrTopPlaces];
 		[flickrDataHandler release];
+		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			
 			[self.activityIndicator removeKIFAndActivityIndicatorView];
@@ -124,9 +126,7 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 				[self indexTheTableViewData];
 			}
 			else
-			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-			}
 		});
 	});
 	dispatch_release(placesDownloadQueue);
