@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPAppDelegate-Internal.h"
+#import "CPAppDelegate.h"
 #import "CPSplitViewController.h"
 #import "CPTabBarController.h"
 #import "CPScrollableImageViewController.h"

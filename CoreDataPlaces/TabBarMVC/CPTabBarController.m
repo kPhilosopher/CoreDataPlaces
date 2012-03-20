@@ -6,7 +6,10 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPTabBarController-Internal.h"
+#import "CPTabBarController.h"
+#import "CPTopPlacesTableViewController.h"
+#import "CPFavoritesTableViewController.h"
+#import "CPCoreDataPhotosTableViewController.h"
 
 
 @interface CPTabBarController()
@@ -20,6 +23,15 @@
 	CPFavoritesTableViewController *CP_favoritesTableViewController;
 	NSManagedObjectContext *CP_managedObjectContext;
 }
+
+#pragma mark - Property
+
+@property (retain) UINavigationController *topPlacesNavigationViewController;
+@property (retain) UINavigationController *mostRecentPlacesNavigationViewController;
+@property (retain) UINavigationController *favoritesNavigationViewController;
+@property (retain) CPTopPlacesTableViewController *topPlacesTableViewController;
+@property (retain) CPCoreDataPhotosTableViewController *mostRecentPhotosTableViewController;
+@property (retain) CPFavoritesTableViewController *favoritesTableViewController;
 
 @end
 
