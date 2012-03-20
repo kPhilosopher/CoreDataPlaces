@@ -48,7 +48,7 @@
 	[[indexedSections objectAtIndex:index] addObject:[refinedElement autorelease]];	
 	
 	id mockTVC = [OCMockObject mockForClass:[CPIndexedTableViewController class]];
-	[[[mockTVC stub] andReturn:indexedSections] theElementSections];
+	[[[mockTVC stub] andReturn:indexedSections] indexedRefinedElementSections];
 	
 	CPCoreDataPhotosTableViewHandler *tableViewHandler = [[CPCoreDataPhotosTableViewHandler alloc] init];
 	

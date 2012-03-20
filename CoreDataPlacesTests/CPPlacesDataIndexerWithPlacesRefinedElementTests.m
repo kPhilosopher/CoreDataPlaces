@@ -27,8 +27,7 @@
 - (void)setUp;
 {
     [super setUp];
-	CPPlacesRefinedElement *refinedElement = [[[CPPlacesRefinedElement alloc] init] autorelease];
-	self.placesDataIndexer = [[[CPPlacesDataIndexer alloc] initWithRefinedElement:refinedElement] autorelease];
+	self.placesDataIndexer = [[[CPPlacesDataIndexer alloc] init] autorelease];
 }
 
 - (void)tearDown;
