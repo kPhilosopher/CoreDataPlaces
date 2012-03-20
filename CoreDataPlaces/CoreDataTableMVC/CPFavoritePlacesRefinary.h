@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CPRefinary.h"
 
-@interface CPFavoritePlacesRefinary : NSObject
+
+@interface CPFavoritePlacesRefinary : CPRefinary
 
 @end

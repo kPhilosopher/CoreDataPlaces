@@ -8,6 +8,7 @@
 
 #import "CPCoreDataPhotosRefinary.h"
 
+
 @interface CPFavoritePhotosRefinary : CPCoreDataPhotosRefinary
 
 @end

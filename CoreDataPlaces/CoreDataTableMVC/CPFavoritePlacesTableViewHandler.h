@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 Rose-Hulman Institute of Technology. All rights reserved.
 //
 
-#import "CPTableViewHandler.h"
+#import "CPPlacesTableViewHandler.h"
 
-@interface CPFavoritePlacesTableViewHandler : CPTableViewHandler
+
+@interface CPFavoritePlacesTableViewHandler : CPPlacesTableViewHandler
 
 @end
