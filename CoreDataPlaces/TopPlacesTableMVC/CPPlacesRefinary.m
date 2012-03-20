@@ -10,7 +10,6 @@
 #import "CPConstants.h"
 #import "CPPlacesRefinedElement.h"
 #import "NSString+TitleExtraction.h"
-#import "NSString+TitleExtraction.h"
 #import "NSString+FindCharacterInSet.h"
 
 
