@@ -23,7 +23,7 @@
 
 - (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
 {
-    if ([[[indexedTableViewController theElementSections] objectAtIndex:section] count] > 0)
+    if ([[indexedTableViewController.indexedRefinedElementSections objectAtIndex:section] count] > 0)
         return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
     return nil;
 }
