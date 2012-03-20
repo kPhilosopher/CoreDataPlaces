@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPPhotosTableViewController-Internal.h"
+#import "CPPhotosTableViewController.h"
 #import "CPPhotosRefinary.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPPhotosTableViewHandler.h"
@@ -22,11 +22,14 @@
 @interface CPPhotosTableViewController ()
 {
 @private
-	NSArray *CP_listOfPhotos;
-	NSMutableArray *CP_indexedListOfPhotos;
 	CPPlacesRefinedElement *CP_placeRefinedElement;
 	UIActivityIndicatorView *CP_activityIndicator;
 }
+
+#pragma mark - Property
+
+@property (retain) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 #pragma mark -
@@ -37,8 +40,6 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 
 #pragma mark - Synthesize
 
-@synthesize listOfPhotos = CP_listOfPhotos;
-@synthesize indexedListOfPhotos = CP_indexedListOfPhotos;
 @synthesize placeRefinedElement = CP_placeRefinedElement;
 @synthesize activityIndicator = CP_activityIndicator;
 
@@ -59,6 +60,84 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	[indexAssitant release]; indexAssitant = nil;
 	return [photosTableViewController autorelease];
 }
+#pragma mark - Initialization
+
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext placeRefinedElement:(CPPlacesRefinedElement *)placeRefinedElement;
+{
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+    if (self)
+	{
+		self.placeRefinedElement = placeRefinedElement;
+		self.title = self.placeRefinedElement.title;
+		self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
+	}
+	return self;
+}
+
+#pragma mark - View lifecycle
+
+- (void)dealloc;
+{
+	[CP_placeRefinedElement release];
+	[CP_activityIndicator release];
+	[super dealloc];
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	if (!self.listOfRawElements)
+	{
+		[self CP_setupPhotosListWithPlaceID:self.placeRefinedElement.placeID];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated;
+{
+	[self.activityIndicator removeKIFAndActivityIndicatorView];
+	self.activityIndicator = nil;
+	[super viewWillDisappear:animated];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{	
+	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
+}
+
+#pragma mark - Internal method
+
+- (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
+{
+	if (self.activityIndicator == nil) 
+	{
+		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithView:self.navigationController.view];
+		[self.activityIndicator startAnimating];
+	}
+	
+	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
+	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
+	dispatch_async(photosDownloadQueue, ^{
+		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeRefinedElement.placeID];
+		[flickrDataHandler release];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+			[self.activityIndicator removeKIFAndActivityIndicatorView];
+			self.activityIndicator = nil;
+			
+			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
+			{
+				self.listOfRawElements = (NSArray *)undeterminedListOfPhotos;
+				[self indexTheTableViewData];
+			}
+			else
+			{
+				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
+			}
+		});
+	});
+	dispatch_release(photosDownloadQueue);
+}
+
 
 //TODO: refactor to be in a insertion handler for coredata objects.
 + (Place *)placeWithPlaceRefinedElement:(CPPlacesRefinedElement *)refinedElement managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
@@ -81,17 +160,18 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 		currentPlace.placeID = placeID;
 		currentPlace.hasFavoritePhoto = [NSNumber numberWithBool:NO];
 		
-//		NSError *error = nil;
+		//TODO: check if save is necessary, if so, put it in the insertion handler.
+		//		NSError *error = nil;
 		
 		//Hal's approach to finding the source of error.
 		
-//		NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
-//		if (![managedObjectContext save:&error])
-//		{
-//			//handle the error.
-//			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
-//		}
-//		NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+		//		NSLog(@"about to save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
+		//		if (![managedObjectContext save:&error])
+		//		{
+		//			//handle the error.
+		//			NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
+		//		}
+		//		NSLog(@"after save: inserted %d registered %d deleted %d", managedObjectContext.insertedObjects.count, managedObjectContext.registeredObjects.count, managedObjectContext.deletedObjects.count);
 	}
 	else if (error)
 	{
@@ -116,108 +196,6 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	}
 	[fetchRequest release];
 	return currentPlace;
-}
-
-#pragma mark - Initialization
-
-- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext placeRefinedElement:(CPPlacesRefinedElement *)placeRefinedElement;
-{
-	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
-    if (self)
-	{
-		self.placeRefinedElement = placeRefinedElement;
-		self.title = self.placeRefinedElement.title;
-		self.view.accessibilityLabel = CPPhotosListViewAccessibilityLabel;
-	}
-	return self;
-}
-
-#pragma mark - View lifecycle
-
-- (void)dealloc;
-{
-	[CP_listOfPhotos release];
-	[CP_indexedListOfPhotos release];
-	[CP_placeRefinedElement release];
-	[CP_activityIndicator release];
-	[super dealloc];
-}
-
-- (void)viewWillAppear:(BOOL)animated;
-{
-	[super viewWillAppear:animated];
-	if (!self.listOfPhotos)
-	{
-		[self CP_setupPhotosListWithPlaceID:self.placeRefinedElement.placeID];
-	}
-}
-
-//TODO: see if there is a way to refactor this method with TopPlaceTableViewController.
-- (void)viewWillDisappear:(BOOL)animated;
-{
-	[UIActivityIndicatorView removeKIFAndActivityIndicatorView:self.activityIndicator];
-	self.activityIndicator = nil;
-	[super viewWillDisappear:animated];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
-{	
-	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
-}
-
-#pragma mark - Internal method
-
-- (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
-{
-	if (self.activityIndicator == nil) 
-	{
-		self.activityIndicator = [UIActivityIndicatorView activityIndicatorOnKIFTestableViewWithNavigationController:self.navigationController];
-		[self.activityIndicator startAnimating];
-	}
-	
-	CPFlickrDataHandler *flickrDataHandler = [[CPFlickrDataHandler alloc] init];
-	dispatch_queue_t photosDownloadQueue = dispatch_queue_create("Flickr photos downloader", NULL);
-	dispatch_async(photosDownloadQueue, ^{
-		id undeterminedListOfPhotos = [flickrDataHandler flickrPhotoListWithPlaceID:self.placeRefinedElement.placeID];
-		[flickrDataHandler release];
-		dispatch_async(dispatch_get_main_queue(), ^{
-			if ([undeterminedListOfPhotos isKindOfClass:[NSArray class]]) 
-			{
-				self.listOfPhotos = (NSArray *)undeterminedListOfPhotos;
-				[self indexTheTableViewData];
-			}
-			else
-			{
-				[[NSNotificationCenter defaultCenter] postNotificationName:CPNetworkErrorOccuredNotification object:self];
-			}
-			
-			[self.activityIndicator stopAnimating];
-			UIView *KIFView = self.activityIndicator.superview;
-			[self.activityIndicator removeFromSuperview];
-			[KIFView removeFromSuperview];
-			self.activityIndicator = nil;
-		});
-	});
-	dispatch_release(photosDownloadQueue);
-}
-
-
-
-#pragma mark - Methods to override the IndexedTableViewController
-
-- (void)setTheElementSections:(NSMutableArray *)array;
-{
-	self.indexedListOfPhotos = array;
-}
-
-- (NSMutableArray *)theElementSections;
-{
-	return self.indexedListOfPhotos;
-}
-
-- (NSArray *)theRawData;
-{
-	return self.listOfPhotos;
 }
 
 @end
