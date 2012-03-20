@@ -12,11 +12,10 @@
 #import "CPAppDelegate.h"
 #import "CPTabBarController.h"
 #import "CPTopPlacesTableViewController.h"
-#import "CPMostRecentPhotosTableViewController.h"
 #import "CPFavoritesTableViewController.h"
 #import "CPCoreDataPhotosTableViewController.h"
 #import "CPPhotosTableViewController.h"
-#import "CPScrollableImageViewController-Internal.h"
+#import "CPScrollableImageViewController.h"
 #import "Photo+Logic.h"
 
 
