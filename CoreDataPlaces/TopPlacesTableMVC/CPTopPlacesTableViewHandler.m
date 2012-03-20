@@ -8,30 +8,12 @@
 
 #import "CPTopPlacesTableViewHandler.h"
 #import "CPPlacesRefinedElement.h"
-#import "CPTopPlacesTableViewController.h"
 #import "CPPhotosTableViewController.h"
 
 
 @implementation CPTopPlacesTableViewHandler
 
 #pragma mark - Table view delegate handler method
-
-- (NSArray *)sectionIndexTitlesForIndexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController;
-{
-	return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
-}
-
-- (NSString *)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController titleForHeaderInSection:(NSInteger)section;
-{
-    if ([[indexedTableViewController.indexedRefinedElementSections objectAtIndex:section] count] > 0)
-        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
-    return nil;
-}
-
-- (NSInteger)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
-{
-    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
-}
 
 - (void)indexedTableViewController:(CPIndexedTableViewController *)indexedTableViewController didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {

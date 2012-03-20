@@ -8,6 +8,7 @@
 
 #import "CPTableViewHandler.h"
 
+
 @interface CPPlacesTableViewHandler : CPTableViewHandler
 
 @end
