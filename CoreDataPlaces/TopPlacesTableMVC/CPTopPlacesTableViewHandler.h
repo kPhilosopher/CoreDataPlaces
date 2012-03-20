@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CPTableViewHandler.h"
 
+
 @interface CPTopPlacesTableViewHandler : CPTableViewHandler
 
 @end
