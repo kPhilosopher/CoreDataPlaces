@@ -32,7 +32,6 @@
 				[scrollableImageViewController.navigationController popViewControllerAnimated:NO];
 				[indexedTableViewController.navigationController pushViewController:scrollableImageViewController animated:YES];
 			}
-			//TODO: refactor this code with CPPhotosTableViewHandler.
 		}
 	}
 	[super indexedTableViewController:indexedTableViewController didSelectRowAtIndexPath:indexPath];
