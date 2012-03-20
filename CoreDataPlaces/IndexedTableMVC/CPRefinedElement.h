@@ -9,10 +9,21 @@
 // !!!:This is an abstract class. It must be subclassed with appropriate implementation.
 
 #import <Foundation/Foundation.h>
-#import "CPRefinedElementInterfacing.h"
 
 
-//TODO: make changes to tableViewHandlers to allow to just handle RefinedElements, not managed objects as well.
-@interface CPRefinedElement : NSObject <NSCopying, CPRefinedElementInterfacing>
+@interface CPRefinedElement : NSObject <NSCopying>
+
+#pragma mark - Property
+
+@property (copy) NSString *comparable;
+@property (retain) id rawElement;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
+@property NSInteger sectionNumber;
+
+#pragma mark - Instance method
+
+- (id)copyWithZone:(NSZone *)zone;
+- (NSComparisonResult)compare:(CPRefinedElement *)refinedElement;
 
 @end

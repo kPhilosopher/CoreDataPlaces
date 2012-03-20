@@ -9,9 +9,12 @@
 // !!!:This is an abstract class. It must be subclassed with appropriate implementation.
 
 #import <Foundation/Foundation.h>
-#import "CPDataIndexing.h"
 
 
-@interface CPDataIndexer : NSObject <CPDataIndexing>
+@interface CPDataIndexer : NSObject
+
+- (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
+- (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
+- (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
 
 @end

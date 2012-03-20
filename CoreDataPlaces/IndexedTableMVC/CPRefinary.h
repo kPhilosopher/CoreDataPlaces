@@ -9,9 +9,15 @@
 // !!!:This is an abstract class. It must be subclassed with appropriate implementation.
 
 #import <Foundation/Foundation.h>
-#import "CPRefining.h"
 
 
-@interface CPRefinary : NSObject <CPRefining>
+@class CPRefinedElement;
+
+@interface CPRefinary : NSObject
+
+- (NSArray *)refinedElementsWithGivenRefinedElementType:(CPRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
+- (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
+- (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
+- (void)setCustomPropertiesForRefinedElement:(CPRefinedElement *)refinedElement;
 
 @end
