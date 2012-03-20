@@ -239,7 +239,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - Internal method
 
-//TODO: refactor with the activity indicator going away. make it come before the error shows, if it does.
 - (void)CP_newPhotoSequence;
 {
 	NSString *photoURL = self.currentPhoto.photoURL;

@@ -11,10 +11,14 @@
 
 @protocol CPPhotoInterfacing <NSObject>
 
+#pragma mark - Property
+
 @property (nonatomic, retain) NSDate *timeOfLastView;
 @property (nonatomic, retain) NSDate *timeOfUpload;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+
+#pragma mark - Instance method
 
 - (BOOL)isKindOfClass:(Class)aClass;
 

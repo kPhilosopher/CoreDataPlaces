@@ -22,7 +22,6 @@
 	refinedElement.comparable = [[refinedElement.rawElement objectForKey:@"_content"] initialStringWithDelimiterSet:[NSString characterSetWithComma]];
 }
 
-//TODO: refactor
 - (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;
 {
 	if ([refinedElement.rawElement isKindOfClass:[NSDictionary class]]) 

@@ -26,7 +26,6 @@
 {
 	Place *itsPlace = [self primitiveItsPlace];
 	NSNumber *oldBoolean = [self primitiveIsFavorite];
-	//TODO: if isFavorite is NO when it was previously YES, send notification to Place to check if any others are still YES.
 	
 	[self willChangeValueForKey:@"isFavorite"];
 	[self setPrimitiveIsFavorite:isFavorite];

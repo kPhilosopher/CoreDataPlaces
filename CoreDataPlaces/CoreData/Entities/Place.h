@@ -13,6 +13,8 @@
 
 @interface Place : NSManagedObject
 
+#pragma mark - Property
+
 @property (nonatomic, retain) NSString * category;
 @property (nonatomic, retain) NSNumber * hasFavoritePhoto;
 @property (nonatomic, retain) NSString * placeID;
@@ -20,20 +22,17 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSSet *photos;
 
-//TODO: put this in a category
+#pragma mark - Instance method
+
 - (void)checkPhotosToEnsureFavoritePlace;
 
 @end
 
 @interface Place (CoreDataGeneratedAccessors)
 
+#pragma mark - Accessor method
+
 - (NSMutableSet*)primitivePhotos;
 - (void)setPrimitivePhotos:(NSMutableSet*)value;
-
-- (void)addPhotosObject:(Photo *)value;
-- (void)removePhotosObject:(Photo *)value;
-- (void)addPhotos:(NSSet *)values;
-- (void)removePhotos:(NSSet *)values;
-
 
 @end
