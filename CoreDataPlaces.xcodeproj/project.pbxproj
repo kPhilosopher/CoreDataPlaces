@@ -56,12 +56,6 @@
 		CE2D8E7B14FC1B97004058FD /* CPManagedObjectInsertionHandlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DDF6314DF481500D819AB /* CPManagedObjectInsertionHandlerTests.m */; };
 		CE2D8E7E14FC1C8B004058FD /* PriorityQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D8E7D14FC1C8B004058FD /* PriorityQueueTests.m */; };
 		CE2D8E8414FC2640004058FD /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D8E8314FC2640004058FD /* libOCMock.a */; };
-		CE329EE51519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
-		CE329EE61519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
-		CE329EE71519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */; };
-		CE329EEA151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
-		CE329EEB151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
-		CE329EEC151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */; };
 		CE329EF4151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
 		CE329EF5151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
 		CE329EF6151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */; };
@@ -84,6 +78,12 @@
 		CE4270CA15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */; };
 		CE4270CB15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */; };
 		CE4270ED1519560100ABE063 /* CPCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */; };
+		CE42712015195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711D15195D9F00ABE063 /* CPFavoritePlacesRefinary.m */; };
+		CE42712115195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711D15195D9F00ABE063 /* CPFavoritePlacesRefinary.m */; };
+		CE42712215195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711D15195D9F00ABE063 /* CPFavoritePlacesRefinary.m */; };
+		CE42712315195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711F15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m */; };
+		CE42712415195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711F15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m */; };
+		CE42712515195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE42711F15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m */; };
 		CE60707614ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
 		CE60707714ED808800420AD8 /* CPImageCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60707514ED808800420AD8 /* CPImageCacheHandler.m */; };
 		CE60708114ED82B200420AD8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE80D86A14CCC7C500BDF83D /* SenTestingKit.framework */; };
@@ -257,10 +257,6 @@
 		CE2D8E8914FC268D004058FD /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		CE2D8E8A14FC268D004058FD /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		CE2D8E8B14FC268D004058FD /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
-		CE329EE31519342A0074AFF4 /* CPFavoritePlacesRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesRefinary.h; sourceTree = "<group>"; };
-		CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesRefinary.m; sourceTree = "<group>"; };
-		CE329EE8151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesTableViewHandler.h; sourceTree = "<group>"; };
-		CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesTableViewHandler.m; sourceTree = "<group>"; };
 		CE329EEE151938EA0074AFF4 /* NSString+DirectoryFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DirectoryFinder.h"; sourceTree = "<group>"; };
 		CE329EEF151938EA0074AFF4 /* NSString+DirectoryFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DirectoryFinder.m"; sourceTree = "<group>"; };
 		CE329EF0151938EA0074AFF4 /* NSString+FindCharacterInSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FindCharacterInSet.h"; sourceTree = "<group>"; };
@@ -277,6 +273,10 @@
 		CE3E9F0914E976BA00101891 /* CPPlaceFavoriteLogicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlaceFavoriteLogicTests.m; sourceTree = "<group>"; };
 		CE4270C815193EEF00ABE063 /* CPCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoreDataTableViewController.h; sourceTree = "<group>"; };
 		CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoreDataTableViewController.m; sourceTree = "<group>"; };
+		CE42711C15195D9F00ABE063 /* CPFavoritePlacesRefinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesRefinary.h; sourceTree = "<group>"; };
+		CE42711D15195D9F00ABE063 /* CPFavoritePlacesRefinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesRefinary.m; sourceTree = "<group>"; };
+		CE42711E15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFavoritePlacesTableViewHandler.h; sourceTree = "<group>"; };
+		CE42711F15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFavoritePlacesTableViewHandler.m; sourceTree = "<group>"; };
 		CE60707414ED808800420AD8 /* CPImageCacheHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPImageCacheHandler.h; sourceTree = "<group>"; };
 		CE60707514ED808800420AD8 /* CPImageCacheHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPImageCacheHandler.m; sourceTree = "<group>"; };
 		CE60708014ED82B200420AD8 /* CoreDataPlacesApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataPlacesApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -550,11 +550,21 @@
 			path = "NSFileManager Category";
 			sourceTree = "<group>";
 		};
-		CE4270C715193D9D00ABE063 /* Model */ = {
+		CE42711015195CB700ABE063 /* CoreDataPlacesMVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE329EE31519342A0074AFF4 /* CPFavoritePlacesRefinary.h */,
-				CE329EE41519342A0074AFF4 /* CPFavoritePlacesRefinary.m */,
+				CE42711E15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.h */,
+				CE42711F15195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m */,
+				CE42712615195DA400ABE063 /* Model */,
+			);
+			path = CoreDataPlacesMVC;
+			sourceTree = "<group>";
+		};
+		CE42712615195DA400ABE063 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE42711C15195D9F00ABE063 /* CPFavoritePlacesRefinary.h */,
+				CE42711D15195D9F00ABE063 /* CPFavoritePlacesRefinary.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -660,6 +670,7 @@
 				CEF1454014CF88DC00D21E00 /* TopPlacesTableMVC */,
 				CEEF706C14D35A0C006756EA /* PhotosTableMVC */,
 				CE989F4114D7B03F00AB58C9 /* CoreDataTableMVC */,
+				CE42711015195CB700ABE063 /* CoreDataPlacesMVC */,
 				CE60E23214D9ECA50000B213 /* CoreDataPhotosMVC */,
 				CEDC73E014DB7CAD00FF6989 /* ScrollableImageMVC */,
 				CE8DDF4E14DF474300D819AB /* CoreData */,
@@ -815,9 +826,6 @@
 			children = (
 				CE4270C815193EEF00ABE063 /* CPCoreDataTableViewController.h */,
 				CE4270C915193EEF00ABE063 /* CPCoreDataTableViewController.m */,
-				CE329EE8151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.h */,
-				CE329EE9151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m */,
-				CE4270C715193D9D00ABE063 /* Model */,
 			);
 			path = CoreDataTableMVC;
 			sourceTree = "<group>";
@@ -1184,8 +1192,6 @@
 				CE6C7C70151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467221517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673E15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
-				CE329EE71519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
-				CE329EEC151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 				CE329EF6151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
 				CE329EF9151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
 				CE329EFC151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
@@ -1193,6 +1199,8 @@
 				CE329F0715193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
 				CE329F0C15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
 				CE4270CB15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */,
+				CE42712215195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE42712515195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1256,8 +1264,6 @@
 				CE6C7C6E151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467201517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673C15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
-				CE329EE51519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
-				CE329EEA151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 				CE329EF4151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
 				CE329EF7151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
 				CE329EFA151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
@@ -1265,6 +1271,8 @@
 				CE329F0515193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
 				CE329F0A15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
 				CE4270CA15193EEF00ABE063 /* CPCoreDataTableViewController.m in Sources */,
+				CE42712015195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE42712315195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,8 +1327,6 @@
 				CE6C7C6F151756BE00BBFD03 /* CPMostRecentPhotosRefinary.m in Sources */,
 				CE7467211517646D000953A8 /* NSDate+Additions.m in Sources */,
 				CE74673D15176AAC000953A8 /* NSNumber+Additions.m in Sources */,
-				CE329EE61519342A0074AFF4 /* CPFavoritePlacesRefinary.m in Sources */,
-				CE329EEB151936DA0074AFF4 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 				CE329EF5151938EA0074AFF4 /* NSString+DirectoryFinder.m in Sources */,
 				CE329EF8151938EA0074AFF4 /* NSString+FindCharacterInSet.m in Sources */,
 				CE329EFB151938EA0074AFF4 /* NSString+TitleExtraction.m in Sources */,
@@ -1328,6 +1334,8 @@
 				CE329F0615193BBF0074AFF4 /* CPPlacesTableViewHandler.m in Sources */,
 				CE329F0B15193C7E0074AFF4 /* CPFavoritePhotosRefinary.m in Sources */,
 				CE4270ED1519560100ABE063 /* CPCoreDataTableViewController.m in Sources */,
+				CE42712115195D9F00ABE063 /* CPFavoritePlacesRefinary.m in Sources */,
+				CE42712415195D9F00ABE063 /* CPFavoritePlacesTableViewHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
