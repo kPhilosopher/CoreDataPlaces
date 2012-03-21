@@ -11,7 +11,7 @@
 
 @implementation NSManagedObjectContext (Additions)
 
-#pragma mark - Internal method
+#pragma mark - Instance method
 
 - (void)processPendingChangesThenSave;
 {

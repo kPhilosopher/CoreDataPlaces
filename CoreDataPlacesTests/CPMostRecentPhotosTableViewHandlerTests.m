@@ -7,15 +7,15 @@
 //
 
 #import "CPMostRecentPhotosTableViewHandlerTests.h"
+#import <OCMock/OCMock.h>
 #import "CPCoreDataPhotosTableViewHandler.h"
 #import "CPRefinedElement.h"
 #import "CPIndexedTableViewController.h"
-#import <OCMock/OCMock.h>
 
 
 @implementation CPMostRecentPhotosTableViewHandlerTests
 
-#pragma mark - titleForHeaderInSection Test
+#pragma mark - titleForHeaderInSection test
 
 - (void)testMethod_titleForHeaderInSection_01;
 {

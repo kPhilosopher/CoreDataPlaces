@@ -6,17 +6,24 @@
 //  Copyright (c) 2011 Jinwoo Baek. All rights reserved.
 //
 
-#import "KIFTestScenario+PlacesAdditions-Internal.h"
-#import "CPConstants.h"
+#import "KIFTestScenario+PlacesAdditions.h"
 #import "KIFTestStep.h"
-#import "CPAppDelegate.h"
+#import "CPConstants.h"
 #import "CPTabBarController.h"
 #import "CPTopPlacesTableViewController.h"
 #import "CPCoreDataTableViewController.h"
 #import "CPPhotosTableViewController.h"
 #import "CPScrollableImageViewController.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 
+
+extern NSString *CPPhotoURLKey;
+
+@interface KIFTestScenario()
+
+@end
+
+#pragma mark -
 
 static NSMutableDictionary *referenceDictionary = nil;
 NSString *CPPhotoURLKey = @"photoURL";
@@ -151,6 +158,7 @@ enum {
 			CPScrollableImageViewController *scrollabeImageVC = [navigationController.viewControllers objectAtIndex:CPMostRecentsNavconIndexForScrollableImage];
 			NSString *photoURL = [scrollabeImageVC.currentPhoto.photoURL copy];
 			[[KIFTestScenario referenceDictionary] setObject:photoURL forKey:CPPhotoURLKey];
+			[photoURL release]; photoURL = nil;
 			return KIFTestStepResultSuccess;
 		}
 		return KIFTestStepResultFailure;
@@ -177,7 +185,7 @@ enum {
 			NSString *photoURL = [scrollabeImageVC.currentPhoto.photoURL copy];
 			NSString *photoURLToCompare = [[KIFTestScenario referenceDictionary] objectForKey:CPPhotoURLKey];
 			NSAssert([photoURL isEqualToString:photoURLToCompare],@"The photoURL isn't the same, which means the most recents algorithm to put the recently viewed photo at the top is broken.");
-			[[KIFTestScenario referenceDictionary] release];
+			[photoURL release]; photoURL = nil;
 			return KIFTestStepResultSuccess;
 		}
 		return KIFTestStepResultFailure;

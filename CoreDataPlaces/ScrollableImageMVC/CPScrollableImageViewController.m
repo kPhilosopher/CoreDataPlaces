@@ -7,8 +7,7 @@
 //
 
 #import "CPScrollableImageViewController.h"
-#import "Photo+Logic.h"
-#import "CPPhotosRefinedElement.h"
+#import "Photo.h"
 #import "CPAppDelegate.h"
 #import "CPImageCacheHandler.h"
 #import "CPNotificationManager.h"
@@ -43,10 +42,13 @@ static CPScrollableImageViewController *sharedScrollableImageController = nil;
 
 #pragma mark -
 
-@implementation CPScrollableImageViewController
+NSString *CPScrollableImageViewAccessibilityLabel = @"Scrollable image";
+NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 const float CPMinimumZoomScale = 0.8;
 const float CPMaximumZoomScale = 1.2;
+
+@implementation CPScrollableImageViewController
 
 #pragma mark - Synthesize
 
@@ -58,9 +60,6 @@ const float CPMaximumZoomScale = 1.2;
 @synthesize managedObjectContext = CP_managedObjectContext;
 @synthesize popoverController = CP_popoverController;
 @synthesize activityIndicator = CP_activityIndicator;
-
-NSString *CPScrollableImageViewAccessibilityLabel = @"Scrollable image";
-NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 
 #pragma mark - Initialization
 
@@ -93,7 +92,6 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 	}
     return sharedScrollableImageController;
 }
-
 
 + (id)allocWithZone:(NSZone *)zone;
 {
@@ -237,7 +235,7 @@ NSString *CPFavoriteSwitchAccessibilityLabel = @"Favorite";
 		sender.on = !sender.on;
 }
 
-#pragma mark - Internal method
+#pragma mark - Convenience method
 
 - (void)CP_newPhotoSequence;
 {

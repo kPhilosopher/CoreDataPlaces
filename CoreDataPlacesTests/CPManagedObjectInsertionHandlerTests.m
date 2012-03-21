@@ -10,9 +10,7 @@
 #import "CPConstants.h"
 #import "CPManagedObjectInsertionHandler.h"
 #import "CPPlacesRefinedElement.h"
-#import "CPPhotosRefinedElement.h"
 #import "Place.h"
-#import "Photo.h"
 
 
 @interface CPManagedObjectInsertionHandlerTests ()
@@ -45,9 +43,7 @@
 	[super dealloc];
 }
 
-#pragma mark - Tests
-
-// All code under test must be linked into the Unit Test bundle
+#pragma mark - Setup / Tear down
 
 - (void)setUp;
 {
@@ -68,11 +64,13 @@
     if (fileExists) 
     {
 		BOOL success = [fileManager removeItemAtURL:path error:&error];
-		//        BOOL success = [fileManager removeItemAtPath:path error:&error];
+//        BOOL success = [fileManager removeItemAtPath:path error:&error];
         if (!success) NSLog(@"Error: %@", [error localizedDescription]);
     }
 	[super tearDown];
 }
+
+#pragma mark - managedObjectContext test
 
 - (void)testTheManagedObjectContext;
 {
@@ -96,13 +94,11 @@
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
 	fetchRequest.fetchBatchSize = 20;
-//	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"placeID like %@",placeID];
 	[fetchRequest setSortDescriptors:nil];
 	
 	
 	NSError *error2 = nil;
 	NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error2];
-//	NSUInteger returnedObjectCount = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
 	if (fetchedObjects && !error)
 	{
 		NSLog(@"++++++");
@@ -124,7 +120,9 @@
 	}
 }
 
-- (void)test_insertPlacesRefinedElement;
+#pragma mark - insertPlacesRefinedElement test
+
+- (void)testMethod_insertPlacesRefinedElement;
 {
 	//create places refined elements
 	CPPlacesRefinedElement *place01 = [[CPPlacesRefinedElement alloc] init];
@@ -149,10 +147,6 @@
 	STAssertTrue([self.insertionHandler insertRefinedElement:place02] == YES,@"CPManagedObjectInsertionHandler method insertRefinedElement failed.");
 	STAssertTrue([self.insertionHandler insertRefinedElement:place03] == YES,@"CPManagedObjectInsertionHandler method insertRefinedElement failed.");
 	STAssertTrue([self.insertionHandler insertRefinedElement:place04] == YES,@"CPManagedObjectInsertionHandler method insertRefinedElement failed.");
-	
-//	int count = 2;
-//	NSLog([@"place" stringByAppendingFormat:@"%.2d",count]);
-	
 	
 	NSError *error = nil;
 	//check if the elements are inserted into the core data correctly.
@@ -196,7 +190,6 @@
 	}
 	else
 	{
-//		NSLog(@"%@ %@", [error2 localizedDescription], [error2 localizedFailureReason]);
 		STFail(@"%@ %@", [error2 localizedDescription], [error2 localizedFailureReason]);
 	}
 }
@@ -205,26 +198,6 @@
 {
 	STAssertFalse([self.insertionHandler insertRefinedElement:nil], @"nil insertion should return a nil");
 }
-
-- (void)test_insertPlacesRefinedElement_corruptedData;
-{
-	//test different situations.
-}
-
-- (void)test_insertPhotosRefinedElement;
-{
-	//create photos refined element.
-	CPPhotosRefinedElement *place01 = [[CPPhotosRefinedElement alloc] init];
-	place01.title = @"place01";
-	place01.subtitle = @"subtitle of place01";
-	place01.rawElement = [NSDictionary dictionaryWithObjectsAndKeys:@"place01ID",CPPlaceID, nil];
-//	place01.comparable = 
-	
-	//call the method to insert the elements.
-	
-	//check if the elements are inserted into the Core Data.
-}
-
 
 #pragma mark - Core Data stack
 

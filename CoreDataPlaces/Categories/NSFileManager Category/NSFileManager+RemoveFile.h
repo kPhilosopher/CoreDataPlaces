@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface NSFileManager (RemoveFile)
 
 #pragma mark - Class method

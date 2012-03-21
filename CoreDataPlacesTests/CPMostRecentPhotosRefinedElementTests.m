@@ -6,14 +6,20 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPMostRecentPhotosRefinedElementTests-Internal.h"
+#import "CPMostRecentPhotosRefinedElementTests.h"
 #import "CPPhotoInterfacing.h"
+#import "CPRefinedElement.h"
 
 
 @interface CPMostRecentPhotosRefinedElementTests()
 {
 	CPRefinedElement *CP_mostRecentPhotosRefinedElement;
 }
+
+#pragma mark - Property
+
+@property (retain) CPRefinedElement *mostRecentPhotosRefinedElement;
+
 @end
 
 #pragma mark -
@@ -44,7 +50,7 @@
 	self.mostRecentPhotosRefinedElement = nil;
 }
 
-#pragma mark - compare Test
+#pragma mark - compare test
 
 - (void)testMethod_compare_01;
 {

@@ -8,7 +8,7 @@
 
 #import "CPCoreDataPhotosRefinary.h"
 #import "CPRefinedElement.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 
 
 @implementation CPCoreDataPhotosRefinary

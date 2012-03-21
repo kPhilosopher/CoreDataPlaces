@@ -9,6 +9,7 @@
 #import "CPRefinary.h"
 #import "CPRefinedElement.h"
 
+
 @implementation CPRefinary
 
 #pragma mark - Instance method
@@ -28,6 +29,8 @@
 	}
 	return refinedElements;
 }
+
+#pragma mark - Instance method to be overridden
 
 - (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
 { 

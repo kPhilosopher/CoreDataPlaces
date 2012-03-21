@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-#import "CPMostRecentPhotosRefinaryTests-Internal.h"
-#import "CPPhotoInterfacing.h"
+#import "CPMostRecentPhotosRefinaryTests.h"
 #import "Photo.h"
+#import "CPRefinedElement.h"
+#import "CPMostRecentPhotosRefinary.h"
 #import <OCMock/OCMock.h>
 
 
@@ -24,7 +25,22 @@
 	NSString *CP_inputTitle;
 	NSString *CP_inputSubtitle;
 }
+
+#pragma mark - Property
+
+@property (retain) CPRefinedElement *mostRecentPhotosRefinedElement;
+@property (retain) CPMostRecentPhotosRefinary *refinary;
+@property (retain) id mockPhoto;
+@property (retain) NSDate *inputDate;
+@property (assign) NSInteger hour;
+@property (assign) NSInteger minute;
+@property (assign) NSInteger second;
+@property (copy) NSString *inputTitle;
+@property (copy) NSString *inputSubtitle;
+
 @end
+
+#pragma mark -
 
 @implementation CPMostRecentPhotosRefinaryTests
 
@@ -74,7 +90,7 @@
 	self.second = 0;
 }
 
-#pragma mark - refinedElementsWithRawElements Test
+#pragma mark - refinedElementsWithRawElements test
 
 - (void)testMethod_refinedElementsWithRawElements_01;
 {
@@ -177,7 +193,7 @@
 	}
 }
 
-#pragma mark - setComparableForRefinedElement Test
+#pragma mark - setComparableForRefinedElement test
 
 - (void)testMethod_setComparableForRefinedElement_01;
 {
@@ -249,7 +265,7 @@
 	STAssertNil(self.mostRecentPhotosRefinedElement.comparable,@"");
 }
 
-#pragma mark - setTitleAndSubtitleForRefinedElement Test
+#pragma mark - setTitleAndSubtitleForRefinedElement test
 
 - (void)testMethod_setTitleAndSubtitleForRefinedElement_01;
 {
@@ -290,7 +306,7 @@
 }
 
 
-#pragma mark - Internal method
+#pragma mark - Convenience method
 
 - (void)CP_setupForInputDateAndMockPhoto;
 {

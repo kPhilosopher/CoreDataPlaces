@@ -9,7 +9,6 @@
 #import "CPTabBarController.h"
 #import "CPTopPlacesTableViewController.h"
 #import "CPCoreDataTableViewController.h"
-//#import "CPCoreDataPhotosTableViewController.h"
 
 
 @interface CPTabBarController()
@@ -58,20 +57,11 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 	self = [self init];
 	if (self) {
 		self.title = @"Lists";
+		self.view.accessibilityLabel = CPTabBarViewAccessibilityLabel;
 		self.managedObjectContext = managedObjectContext;
 		[self CP_setup];
 	}
 	return self;
-}
-
-- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-		
-		self.view.accessibilityLabel = CPTabBarViewAccessibilityLabel;
-    }
-    return self;
 }
 
 #pragma mark - View lifecycle
@@ -122,7 +112,6 @@ NSString *CPTabBarViewAccessibilityLabel = @"Tab bar";
 {
 	self.topPlacesTableViewController = [CPTopPlacesTableViewController topPlacesTableViewControllerWithManagedObjectContext:self.managedObjectContext];
 	self.mostRecentPhotosTableViewController = [CPCoreDataTableViewController mostRecentPhotosTableViewControllerWithManageObjectContext:self.managedObjectContext];
-//	self.favoritesTableViewController = [[[CPFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain managedObjectContext:self.managedObjectContext customSettingsDictionary:nil] autorelease];
 	self.favoritesTableViewController = [CPCoreDataTableViewController favoritePlacesTableViewControllerWithManageObjectContext:self.managedObjectContext];
 }
 -(void)RD_pushViewControllersToNavigationViewControllers;

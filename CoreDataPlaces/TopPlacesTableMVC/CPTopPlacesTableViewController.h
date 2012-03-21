@@ -9,9 +9,9 @@
 #import "CPIndexedTableViewController.h"
 
 
-@interface CPTopPlacesTableViewController : CPIndexedTableViewController
-
 extern NSString *CPTopPlacesTableViewAccessibilityLabel;
+
+@interface CPTopPlacesTableViewController : CPIndexedTableViewController
 
 #pragma mark - Factory method
 

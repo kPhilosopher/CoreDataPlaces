@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Jinwoo Baek. All rights reserved.
 //
 
-// !!!:a table view controller that utilizes an object that complies to this protocol must comply to CPTableViewControllerDataMutating.
-
 #import <Foundation/Foundation.h>
 
 

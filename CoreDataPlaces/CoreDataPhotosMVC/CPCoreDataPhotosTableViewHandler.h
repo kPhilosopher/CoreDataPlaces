@@ -8,6 +8,7 @@
 
 #import "CPPhotosTitleForHeaderTableViewHandler.h"
 
+
 @interface CPCoreDataPhotosTableViewHandler : CPPhotosTitleForHeaderTableViewHandler
 
 @end

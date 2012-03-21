@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FlickrFetcher.h"
 
+
 @interface CPFlickrDataHandler : NSObject
 
 #pragma mark - Instance method

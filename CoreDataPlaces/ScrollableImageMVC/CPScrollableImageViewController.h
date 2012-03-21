@@ -13,10 +13,10 @@
 @class Place;
 @class CPPhotosRefinedElement;
 
-@interface CPScrollableImageViewController : UIViewController <UIScrollViewDelegate, UISplitViewControllerDelegate>
-
 extern NSString *CPScrollableImageViewAccessibilityLabel;
 extern NSString *CPFavoriteSwitchAccessibilityLabel;
+
+@interface CPScrollableImageViewController : UIViewController <UIScrollViewDelegate, UISplitViewControllerDelegate>
 
 #pragma mark - Property
 

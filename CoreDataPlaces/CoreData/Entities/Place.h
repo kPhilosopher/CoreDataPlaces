@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+
 @class Photo;
 
 @interface Place : NSManagedObject
@@ -27,6 +28,8 @@
 - (void)checkPhotosToEnsureFavoritePlace;
 
 @end
+
+#pragma mark -
 
 @interface Place (CoreDataGeneratedAccessors)
 

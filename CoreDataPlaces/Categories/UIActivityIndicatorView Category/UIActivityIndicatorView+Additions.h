@@ -14,6 +14,9 @@
 #pragma mark - Class method
 
 + (UIActivityIndicatorView *)activityIndicatorOnKIFTestableViewWithView:(UIView *)view;
+
+#pragma mark - Instance method
+
 - (void)removeKIFAndActivityIndicatorView;
 
 @end

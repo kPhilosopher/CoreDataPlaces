@@ -6,7 +6,6 @@
 //  Copyright (c) 2011 Jinwoo Baek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "KIFTestScenario.h"
 
 

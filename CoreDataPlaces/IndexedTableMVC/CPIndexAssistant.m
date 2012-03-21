@@ -7,10 +7,6 @@
 //
 
 #import "CPIndexAssistant.h"
-#import "CPRefinary.h"
-#import "CPDataIndexer.h"
-#import "CPTableViewHandler.h"
-#import "CPRefinedElement.h"
 
 
 @interface CPIndexAssistant()

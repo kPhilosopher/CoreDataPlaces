@@ -8,7 +8,6 @@
 
 #import "CPIndexedTableViewController.h"
 #import "CPIndexAssistant.h"
-#import "CPRefinedElement.h"
 #import "CPRefinary.h"
 #import "CPDataIndexer.h"
 #import "CPTableViewHandler.h"
@@ -61,16 +60,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewWillAppear:(BOOL)animated;
-{
-	[super viewDidAppear:animated];
-	if (self.selectedIndexPath  && [self.tableView indexPathsForVisibleRows])
-	{
-		[self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-		self.selectedIndexPath = nil;
-	}
-}
-
 - (void)dealloc
 {
 	[CP_listOfRawElements release];
@@ -82,6 +71,16 @@
 	[CP_managedObjectContext release];
 	[CP_selectedIndexPath release];
 	[super dealloc];
+}
+
+- (void)viewWillAppear:(BOOL)animated;
+{
+	[super viewDidAppear:animated];
+	if (self.selectedIndexPath  && [self.tableView indexPathsForVisibleRows])
+	{
+		[self.tableView scrollToRowAtIndexPath:self.selectedIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+		self.selectedIndexPath = nil;
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -152,7 +151,6 @@
 	if (self.dataIndexer && self.refinary && self.refinedElementType && self.listOfRawElements) 
 	{
 		NSArray *refinedElements = [self.refinary refinedElementsWithGivenRefinedElementType:self.refinedElementType rawElements:self.listOfRawElements];
-//		[self setTheElementSections:[self.dataIndexer indexedSectionsOfRefinedElements:refinedElements]];
 		self.indexedRefinedElementSections = [self.dataIndexer indexedSectionsOfRefinedElements:refinedElements];
 		[self.tableView reloadData];
 	}

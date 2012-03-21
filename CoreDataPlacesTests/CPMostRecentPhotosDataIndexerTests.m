@@ -8,10 +8,9 @@
 
 // !!!: Testing using CPMostRecentPhotosRefinedElement
 
-#import "CPMostRecentPhotosDataIndexerTests-Internal.h"
+#import "CPMostRecentPhotosDataIndexerTests.h"
 #import "CPPhotosDataIndexer.h"
 #import "CPRefinedElement.h"
-#import "Photo.h"
 
 
 @interface CPMostRecentPhotosDataIndexerTests()
@@ -20,6 +19,13 @@
 	NSMutableArray *CP_listOfRawTestData;
 	NSMutableArray *CP_listOfTestInput;
 }
+
+#pragma mark - Property
+
+@property (retain) CPPhotosDataIndexer *dataIndexer;
+@property (retain) NSMutableArray *listOfRawTestData;
+@property (retain) NSMutableArray *listOfTestInput;
+
 @end
 
 #pragma mark -
@@ -57,7 +63,7 @@
 	self.listOfTestInput = nil;
 }
 
-#pragma mark - indexedSectionsOfRefinedElements Test
+#pragma mark - indexedSectionsOfRefinedElements test
 
 - (void)testMethod_indexedSectionsOfRefinedElements_01;
 {
@@ -163,7 +169,7 @@
 	}
 }
 
-#pragma mark - sectionCountAndSetSectionNumberForElementsInArray Test
+#pragma mark - sectionCountAndSetSectionNumberForElementsInArray test
 
 - (void)testMethod_sectionsCountAndSetSectionNumberForElementsInArray_01;
 {
@@ -252,7 +258,7 @@
 	}
 }
 
-#pragma mark - sortTheElementsInSectionArrayAndAddToArrayOfSections Test
+#pragma mark - sortTheElementsInSectionArrayAndAddToArrayOfSections test
 
 - (void)testMethod_sortTheElementsInSectionArrayAndAddToArrayOfSections_01;
 {
@@ -297,7 +303,7 @@
 	}
 }
 
-#pragma mark - Helper method
+#pragma mark - Convenience method
 
 - (void)CP_setupListOfTestInputAtIndex:(NSInteger)index;
 {

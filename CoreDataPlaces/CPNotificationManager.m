@@ -11,20 +11,20 @@
 
 static CPNotificationManager *sharedNotificationManager = nil;
 
-@interface CPNotificationManager ()
-
 extern NSString *CPAlertTitle;
 extern NSString *CPAlertMessage;
+
+@interface CPNotificationManager ()
 
 @end
 
 #pragma mark -
 
-@implementation CPNotificationManager
-
 NSString *CPAlertTitle = @"Cannot Obtain Data";
 NSString *CPAlertMessage = @"We couldn't get the data from Flickr";
 NSString *CPNetworkErrorOccuredNotification = @"NetworkErrorOccured";
+
+@implementation CPNotificationManager
 
 #pragma mark - Class method
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface NSNumber (Additions)
 
 #pragma mark - Class method

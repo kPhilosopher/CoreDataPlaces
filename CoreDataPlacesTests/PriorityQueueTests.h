@@ -12,6 +12,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "JBBPriorityQueue.h"
 
+
 @interface PriorityQueueTests : SenTestCase
 
 @end

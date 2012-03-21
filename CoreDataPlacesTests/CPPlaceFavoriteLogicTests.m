@@ -7,9 +7,8 @@
 //
 
 #import "CPPlaceFavoriteLogicTests.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 #import "Place.h"
-#import "NSFileManager+RemoveFile.h"
 
 
 @interface CPPlaceFavoriteLogicTests ()
@@ -39,7 +38,7 @@
 	[super dealloc];
 }
 
-#pragma mark - Tests
+#pragma mark - Setup / Tear down
 
 - (void)setUp;
 {
@@ -51,7 +50,6 @@
 	//delete the sqlite file
 	NSURL *path = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataPlaces.sqlite"];
 	
-	//TOOD: use the file delete category.
 //	[NSFileManager removeFileAtPath:[path path]];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
@@ -81,6 +79,8 @@
 //	
 //}
 
+#pragma mark - ChangingFavoriteStatusOfPhotoInAPlace test
+
 - (void)testChangingFavoriteStatusOfPhotoInAPlace
 {
 	Place *place = (Place *)[NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
@@ -91,8 +91,6 @@
 	photo.isFavorite = [NSNumber numberWithBool:YES];
 	
 	STAssertTrue([place.hasFavoritePhoto isEqualToNumber:[NSNumber numberWithBool:YES]],@"The place's boolean for favorite photo should be yes.");
-	
-	
 }
 
 #pragma mark - Core Data stack

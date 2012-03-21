@@ -10,7 +10,7 @@
 #import "CPIndexedTableViewController.h"
 #import "CPRefinedElement.h"
 #import "CPScrollableImageViewController.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 
 
 @implementation CPCoreDataPhotosTableViewHandler

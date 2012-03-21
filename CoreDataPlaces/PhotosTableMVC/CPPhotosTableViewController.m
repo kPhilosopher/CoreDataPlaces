@@ -14,7 +14,6 @@
 #import "CPIndexAssistant.h"
 #import "CPPlacesRefinedElement.h"
 #import "CPFlickrDataHandler.h"
-#import "Place.h"
 #import "CPNotificationManager.h"
 #import "UIActivityIndicatorView+Additions.h"
 
@@ -100,7 +99,7 @@ NSString *CPPhotosListViewAccessibilityLabel = @"Picture list table";
 	self.activityIndicator.superview.center = CGPointMake(self.navigationController.view.bounds.size.width/2, self.navigationController.view.bounds.size.height/2);
 }
 
-#pragma mark - Internal method
+#pragma mark - Convenience method
 
 - (void)CP_setupPhotosListWithPlaceID:(NSString *)placeID;
 {

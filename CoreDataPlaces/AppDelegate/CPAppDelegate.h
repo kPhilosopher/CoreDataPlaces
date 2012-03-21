@@ -13,9 +13,9 @@
 @class CPTabBarController;
 @class CPScrollableImageViewController;
 
-@interface CPAppDelegate : UIResponder <UIApplicationDelegate>
-
 extern NSString *CPTitleOfScrollableViewController;
+
+@interface CPAppDelegate : UIResponder <UIApplicationDelegate>
 
 #pragma mark - Property
 

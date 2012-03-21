@@ -11,11 +11,11 @@
 
 @class Place;
 
-@interface CPCoreDataTableViewController : CPIndexedTableViewController
-
 extern NSString *CPFavoritePhotosTableViewAccessibilityLabel;
 extern NSString *CPMostRecentPhotosTableViewAccessibilityLabel;
 extern NSString *CPFavoritePlacesTableViewAccessibilityLabel;
+
+@interface CPCoreDataTableViewController : CPIndexedTableViewController
 
 #pragma mark - Property
 

@@ -29,6 +29,7 @@
 		
 		CPManagedObjectInsertionHandler *managedObjectInsertionHandler = [[CPManagedObjectInsertionHandler alloc] initWithManagedObjectContext:indexedTableViewController.managedObjectContext];
 		Place *currentPlace = [managedObjectInsertionHandler placeWithPlaceRefinedElement:photosTableViewController.placeRefinedElement];
+		[managedObjectInsertionHandler release]; managedObjectInsertionHandler = nil;
 		
 		CPScrollableImageViewController *scrollableImageViewController = [CPScrollableImageViewController sharedInstance];
 		[scrollableImageViewController setupNewPhotoWithPhotoRefinedElement:photosRefinedElement place:currentPlace];

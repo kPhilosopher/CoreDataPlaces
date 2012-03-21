@@ -11,7 +11,7 @@
 #import "CPPlacesRefinedElement.h"
 #import "CPPhotosRefinedElement.h"
 #import "Place.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 
 
 @interface CPManagedObjectInsertionHandler ()
@@ -96,13 +96,11 @@
 			NSDate *uploadDate = [NSDate dateWithTimeIntervalSince1970:[secondsBetween1970AndUpload intValue]];
 			photoToDisplay.timeOfUpload = uploadDate;
 			
-			NSLog(@"about to save: inserted %d registered %d deleted %d", self.managedObjectContext.insertedObjects.count, self.managedObjectContext.registeredObjects.count, self.managedObjectContext.deletedObjects.count);
 			if (![self.managedObjectContext save:&error])
 			{
 				//handle the error.
 				NSLog(@"%@ %@", [error localizedDescription], [error localizedFailureReason]);
 			}
-			NSLog(@"after save: inserted %d registered %d deleted %d", self.managedObjectContext.insertedObjects.count, self.managedObjectContext.registeredObjects.count, self.managedObjectContext.deletedObjects.count);
 		}
 		else if (error)
 		{

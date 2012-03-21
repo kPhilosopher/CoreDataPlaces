@@ -11,6 +11,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
+
 @interface CPPlaceFavoriteLogicTests : SenTestCase
 
 #pragma mark --Core Data

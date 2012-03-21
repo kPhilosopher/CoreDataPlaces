@@ -11,7 +11,6 @@
 #import "FlickrFetcher+TestHelper.h"
 #import "NSFileManager+RemoveFile.h"
 #import "NSString+DirectoryFinder.h"
-#import <UIKit/UIKit.h>
 
 
 @interface CPImageCacheHandlerTests ()
@@ -21,6 +20,13 @@
 	UIImage *CP_imageInUniquePath;
 	NSString *CP_imageLocation;
 }
+
+#pragma mark - Property
+
+@property (copy) NSString *uniquePath;
+@property (retain) UIImage *imageInUniquePath;
+@property (copy) NSString *imageLocation;
+
 @end
 
 #pragma mark -
@@ -43,7 +49,7 @@
 	[super dealloc];
 }
 
-#pragma mark - Setup teardown
+#pragma mark - Setup / Tear down
 
 - (void)setUp;
 {
@@ -66,7 +72,6 @@
 
 - (void)tearDown;
 {
-    // Tear-down code here.
 	[NSFileManager removeFileAtPath:self.uniquePath];
 	
 	if (self.imageInUniquePath)
@@ -77,10 +82,9 @@
     [super tearDown];
 }
 
-#pragma mark - Tests
+#pragma mark - cacheImage test
 
-// All code under test is in the iOS Application
-- (void)test_cacheImage;
+- (void)testMethod_cacheImage;
 {
 	STAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:self.uniquePath], @"there shouldn't be any files there.");
 	
@@ -90,7 +94,7 @@
 	STAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:self.uniquePath], @"there should be a file there");
 }
 
-- (void)test_getCachedImageWithFileAlreadyInCache;
+- (void)testMethod_getCachedImageWithFileAlreadyInCache;
 {
 	//write into the cache an image that is different from what you get from Flickr using the self.imageLocation.
 	NSDictionary *photoDictionary = [FlickrFetcher anyFlickPhotoDictionary];
@@ -108,7 +112,7 @@
 	STAssertTrue(returnedImage.size.height == imageToBeReturned.size.height,@"The images' height should be the same.");
 }
 
-- (void)test_getCachedImageWithFileNotInCache;
+- (void)testMethod_getCachedImageWithFileNotInCache;
 {
 	//get the image to compare it to the UIImage returned by the api.
 	NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageLocation]];
@@ -122,7 +126,9 @@
 	STAssertTrue(returnedImage.size.height == imageToBeReturned.size.height,@"The images' height should be the same.");
 }
 
-- (void)test_deleteCacheImage;
+#pragma mark - deleteCacheImage test
+
+- (void)testMethod_deleteCacheImage;
 {
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.imageLocation]];

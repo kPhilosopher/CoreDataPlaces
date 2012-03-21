@@ -10,7 +10,7 @@
 #import "NSNumber+Additions.h"
 #import "NSDate+Additions.h"
 #import "CPRefinedElement.h"
-#import "Photo+Logic.h"
+#import "Photo.h"
 
 
 @implementation CPFavoritePhotosRefinary

@@ -8,6 +8,7 @@
 
 #import "NSNumber+Additions.h"
 
+
 @implementation NSNumber (Additions)
 
 #pragma mark - Class method

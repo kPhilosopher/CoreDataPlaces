@@ -32,6 +32,8 @@
 	return [activityIndicator autorelease];
 }
 
+#pragma mark - Instance method
+
 - (void)removeKIFAndActivityIndicatorView;
 {
 	[self retain]; [self autorelease];

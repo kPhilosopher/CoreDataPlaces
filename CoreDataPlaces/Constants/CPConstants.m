@@ -9,9 +9,9 @@
 #import "CPConstants.h"
 
 
-@implementation CPConstants
-
-NSString * const CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker";
+NSString *CPActivityIndicatorMarkerForKIF = @"Activity indicator for KIF marker";
 NSString *CPPlaceID = @"place_id";
+
+@implementation CPConstants
 
 @end

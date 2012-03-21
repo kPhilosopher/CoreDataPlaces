@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface NSString (FindCharacterInSet)
 
-#pragma mark - Public method
+#pragma mark - Instance method
 
 - (BOOL)enumerateStringToDetermineTheExistanceOfCharacterInSet:(NSCharacterSet *)aSet;
 

@@ -8,6 +8,7 @@
 
 #import "NSString+TitleExtraction.h"
 
+
 @implementation NSString (TitleExtraction)
 
 #pragma mark - Class method
@@ -17,7 +18,7 @@
 	return [NSCharacterSet characterSetWithCharactersInString:@","];
 }
 
-#pragma mark - Public method
+#pragma mark - Instance method
 
 - (NSString *)initialStringWithDelimiterSet:(NSCharacterSet *)aSet;
 {

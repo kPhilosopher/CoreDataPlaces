@@ -8,6 +8,7 @@
 
 #import "NSString+DirectoryFinder.h"
 
+
 @implementation NSString (DirectoryFinder)
 
 #pragma mark - Class method

@@ -11,9 +11,7 @@
 #import "CPCoreDataPhotosTableViewHandler.h"
 #import "CPMostRecentPhotosRefinary.h"
 #import "CPFavoritePhotosRefinary.h"
-#import "CPRefinedElement.h"
 #import "CPIndexAssistant.h"
-#import "Photo+Logic.h"
 #import "Place.h"
 #import "NSDate+Additions.h"
 #import "CPFavoritePlacesRefinary.h"
@@ -64,7 +62,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	CPPlacesRefinedElement *refinedElementType = [[[CPPlacesRefinedElement alloc] init] autorelease];
 	CPIndexAssistant *indexAssistant = [[[CPIndexAssistant alloc] initWithRefinary:refinary dataIndexer:dataIndexer tableViewHandler:tableViewHandler refinedElementType:refinedElementType] autorelease];
 	
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
 	fetchRequest.entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:managedObjectContext];
 	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"hasFavoritePhoto == %@",[NSNumber numberWithBool:YES]];
 	fetchRequest.fetchBatchSize = 20;
@@ -168,7 +166,7 @@ const int CPMaximumHoursForMostRecentPhoto = 48;
 	}
 }
 
-#pragma mark - Internal method
+#pragma mark - Convenience method
 
 - (void)CP_fetchRawElementsThenIndex;
 {

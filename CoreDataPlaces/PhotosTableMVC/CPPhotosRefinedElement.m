@@ -7,7 +7,7 @@
 //
 
 #import "CPPhotosRefinedElement.h"
-#import "Place.h"
+
 
 @interface CPPhotosRefinedElement ()
 {
@@ -23,7 +23,6 @@
 #pragma mark - Synthesize
 
 @synthesize largePhotoURL = CP_largePhotoURL;
-
 
 #pragma mark - Object lifecycle
 

@@ -12,6 +12,8 @@
 
 @implementation Photo
 
+#pragma mark - Dynamic
+
 @dynamic isFavorite;
 @dynamic photoURL;
 @dynamic subtitle;

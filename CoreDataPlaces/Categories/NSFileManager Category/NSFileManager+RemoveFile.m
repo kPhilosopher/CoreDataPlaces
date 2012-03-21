@@ -8,6 +8,7 @@
 
 #import "NSFileManager+RemoveFile.h"
 
+
 @implementation NSFileManager (RemoveFile)
 
 #pragma mark - Class method

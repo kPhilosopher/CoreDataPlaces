@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface NSString (TitleExtraction)
 
 #pragma mark - Class method
 
 + (NSCharacterSet *)characterSetWithComma;
 
-#pragma mark - Public method
+#pragma mark - Instance method
 
 - (NSString *)initialStringWithDelimiterSet:(NSCharacterSet *)aSet;
 

@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CPNotificationManager : NSObject
 
 extern NSString *CPNetworkErrorOccuredNotification;
+
+@interface CPNotificationManager : NSObject
 
 #pragma mark - Class method
 

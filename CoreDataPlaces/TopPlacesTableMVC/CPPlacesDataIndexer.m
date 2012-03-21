@@ -12,6 +12,8 @@
 
 @implementation CPPlacesDataIndexer
 
+#pragma mark - Overriding method
+
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 {
 	for (CPRefinedElement *refinedElement in temporaryDataElements)

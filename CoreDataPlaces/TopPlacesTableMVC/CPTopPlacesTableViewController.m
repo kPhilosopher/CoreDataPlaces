@@ -31,28 +31,13 @@
 
 #pragma mark -
 
-@implementation CPTopPlacesTableViewController
-
 NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
+
+@implementation CPTopPlacesTableViewController
 
 #pragma mark - Synthesize
 
 @synthesize activityIndicator = CP_activityIndicator;
-
-#pragma mark - Initialization
-
-- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-{
-	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
-    if (self)
-	{
-		self.title = @"Top Places";
-		self.tableView.accessibilityLabel = CPTopPlacesTableViewAccessibilityLabel;
-		
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_setupTopPlacesList)] autorelease];
-	}
-    return self;
-}
 
 #pragma mark - Factory method
 
@@ -67,6 +52,21 @@ NSString *CPTopPlacesTableViewAccessibilityLabel = @"Top places table";
 	CPTopPlacesTableViewController *topPlacesTableViewController = [[CPTopPlacesTableViewController alloc] initWithStyle:UITableViewStylePlain indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
 	
 	return [topPlacesTableViewController autorelease];
+}
+
+#pragma mark - Initialization
+
+- (id)initWithStyle:(UITableViewStyle)style indexAssitant:(CPIndexAssistant *)indexAssistant managedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+{
+	self = [super initWithStyle:style indexAssitant:indexAssistant managedObjectContext:managedObjectContext];
+    if (self)
+	{
+		self.title = @"Top Places";
+		self.tableView.accessibilityLabel = CPTopPlacesTableViewAccessibilityLabel;
+		
+		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(CP_setupTopPlacesList)] autorelease];
+	}
+    return self;
 }
 
 #pragma mark - View lifecycle

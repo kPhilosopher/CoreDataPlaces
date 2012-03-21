@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface CPTabBarController : UITabBarController
-
 extern NSString *CPTabBarViewAccessibilityLabel;
+
+@interface CPTabBarController : UITabBarController
 
 #pragma mark - Property
 

@@ -8,7 +8,10 @@
 
 #import "PriorityQueueTests.h"
 
+
 @implementation PriorityQueueTests
+
+#pragma mark - Setup / Tear down
 
 - (void)setUp
 {
@@ -19,6 +22,8 @@
 {
 	
 }
+
+#pragma mark - Priority Queue test
 
 - (void)testAscendingPriorityQueue
 {

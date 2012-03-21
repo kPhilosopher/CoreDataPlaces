@@ -12,6 +12,8 @@
 
 @implementation Place
 
+#pragma mark - Dynamic
+
 @dynamic category;
 @dynamic hasFavoritePhoto;
 @dynamic placeID;

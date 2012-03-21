@@ -15,6 +15,8 @@
 
 @interface CPRefinary : NSObject
 
+#pragma mark - Instance method
+
 - (NSArray *)refinedElementsWithGivenRefinedElementType:(CPRefinedElement *)refinedElement rawElements:(NSArray *)rawElements;
 - (void)setComparableForRefinedElement:(CPRefinedElement *)refinedElement;
 - (void)setTitleAndSubtitleForRefinedElement:(CPRefinedElement *)refinedElement;

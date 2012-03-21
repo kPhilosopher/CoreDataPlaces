@@ -13,6 +13,8 @@
 
 @interface CPDataIndexer : NSObject
 
+#pragma mark - Instance method
+
 - (NSMutableArray *)indexedSectionsOfRefinedElements:(NSArray *)refinedElements;
 - (NSInteger)sectionsCountAndSetSectionNumberForElementsInArray:(NSMutableArray *)temporaryDataElements;
 - (void)sortTheElementsInSectionArray:(NSMutableArray *)unsortedSection andAddToArrayOfSections:(NSMutableArray *)indexedSections;
