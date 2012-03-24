@@ -5,7 +5,7 @@ These projects were initiated by the Stanford University’s CS193P, [iPhone App
 ![Workflow](https://github.com/kPhilosopher/CoreDataPlaces/raw/master/Readme/workflow_of_repo.png)
 
 
-[GraphCalculator](https://github.com/kPhilosopher/graphCalculator_test) was the first project. GraphCalculator is a simple two screen application that ushered me to dip my toes into Objective-C and iOS application development. This project gave me a glimpse to the syntax of Objective-C, Xcode, and the cocoa framework.
+[GraphCalculator](https://github.com/kPhilosopher/graphCalculator_test) was the first project. GraphCalculator is a simple two screen application that ushered me into Objective-C and iOS application development. This project gave me a glimpse to the syntax of Objective-C, Xcode, and the cocoa framework.
 
 [Places](https://github.com/kPhilosopher/Places) and [CoreDataPlaces](https://github.com/kPhilosopher/CoreDataPlaces) were completed after GraphCalculator. The main difference between the two part project is the mechanism of persistence. Places uses NSUserDefaults while CoreDataPlaces uses Core Data. Whilst following the lectures supplied by Stanford, I also attempted to experiment with the suggestions detailed in *Clean Code: A Handbook of Agile Software Craftsmanship* and *The Pragmatic Programmer: From Journeyman to Master*.
 
@@ -15,7 +15,7 @@ Core Data Places
 
 The CoreDataPlaces application allows the user to navigate through the recent pictures taken in the top places designated by Flickr. The [Flickr API](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/Flickr/FlickrFetcher.h) is provided by Stanford. The specifications to this assignment can be found on the [CS193P page](http://www.stanford.edu/class/cs193p/cgi-bin/drupal/downloads-2010-fall). 
 
-In user's perspective, CoreDataPlaces has three tabs with Top, Most Recents, and Favorites. The applications is constituted with five custom UITableViewControllers and one UIViewController with UIScrollView as its main view. These controllers reside in UINavigationControllers and a custom UITabBarController allowing navigation between the model-view-controllers (MVC). The five custom UITableViewController are subclasses of [CPIndexedViewController](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/IndexedTableMVC/CPIndexedTableViewController.h). On top of subclassing, it utilizes three strategy objects to optimize code reuse. 
+In the user's perspective, CoreDataPlaces has three tabs with Top, Most Recents, and Favorites photos. The application is constituted with five custom UITableViewControllers and one UIViewController with UIScrollView as its main view. These controllers reside in UINavigationControllers and a custom UITabBarController allowing navigation between the model-view-controllers (MVC). The five custom UITableViewController are subclasses of [CPIndexedViewController](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/IndexedTableMVC/CPIndexedTableViewController.h). On top of subclassing, it utilizes three strategy objects to optimize code reuse. 
 
 ----
 
