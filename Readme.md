@@ -2,14 +2,13 @@ Demo Applications
 ===
 These projects were initiated by the Stanford University’s CS193P, [iPhone Application Development class](http://www.stanford.edu/class/cs193p/cgi-bin/drupal/downloads-2010-fall). There are __two__ projects, in __three__ repositories. 
 
-![Workflow](https://github.com/kPhilosopher/CoreDataPlaces/raw/master/Readme/workflow_of_repo.png
+![Workflow](https://github.com/kPhilosopher/CoreDataPlaces/raw/master/Readme/workflow_of_repo.png)
 
 
 [GraphCalculator](https://github.com/kPhilosopher/graphCalculator_test) was the first project. GraphCalculator is a simple two screen application that allowed me to dip my toes into Objective-C and iOS application development. This project gave me a glimpse to the syntax of Objective-C, Xcode, and the cocoa framework.
 
-[Places](https://github.com/kPhilosopher/Places) and [CoreDataPlaces](https://github.com/kPhilosopher/CoreDataPlaces) were completed after the GraphCalculator. The main difference between the two part project is the mechanism of persistance. Places uses NSUserDefaults while CoreDataPlaces uses Core Data. Whilst following the lectures supplied by Stanford, I also attempted to experiment with the suggestions detailed in *Clean Code: A Handbook of Agile Software Craftsmanship* and *The Pragmatic Programmer: From Journeyman to Master*.
+[Places](https://github.com/kPhilosopher/Places) and [CoreDataPlaces](https://github.com/kPhilosopher/CoreDataPlaces) were completed after GraphCalculator. The main difference between the two part project is the mechanism of persistance. Places uses NSUserDefaults while CoreDataPlaces uses Core Data. Whilst following the lectures supplied by Stanford, I also attempted to experiment with the suggestions detailed in *Clean Code: A Handbook of Agile Software Craftsmanship* and *The Pragmatic Programmer: From Journeyman to Master*.
 
----
 
 Core Data Places
 ---
