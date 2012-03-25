@@ -15,7 +15,7 @@ Core Data Places
 
 The CoreDataPlaces application allows the user to navigate through the recent pictures taken in the top places designated by Flickr. The [Flickr API](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/Flickr/FlickrFetcher.h) is provided by Stanford. The specifications to this assignment can be found on the [CS193P page](http://www.stanford.edu/class/cs193p/cgi-bin/drupal/downloads-2010-fall). 
 
-In the user's perspective, CoreDataPlaces has three tabs with Top, Most Recents, and Favorites photos. The application is constituted with five custom UITableViewControllers and one UIViewController with UIScrollView as its main view. These controllers reside in UINavigationControllers and a custom UITabBarController allowing navigation between the model-view-controllers (MVC). The five custom UITableViewController are subclasses of [CPIndexedViewController](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/IndexedTableMVC/CPIndexedTableViewController.h). On top of subclassing, it utilizes three strategy objects to optimize code reuse. 
+In the user's perspective, CoreDataPlaces has three tabs with Top, Most Recents, and Favorites photos. The application is constituted with five custom UITableViewControllers and one UIViewController with UIScrollView as its main view. These controllers reside in UINavigationControllers and a custom UITabBarController allowing navigation between the model-view-controllers (MVC). The five custom UITableViewController are subclasses of [CPIndexedViewController](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/IndexedTableMVC/CPIndexedTableViewController.h). On top of inheritance, it utilizes three strategy objects to optimize code reuse. 
 
 ----
 
@@ -46,7 +46,7 @@ Attempts
 - [Core Data implementation with SQLite database](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/AppDelegate/CPAppDelegate.m)
 - [Image cache with NSFileManager](https://github.com/kPhilosopher/CoreDataPlaces/blob/master/CoreDataPlaces/ScrollableImageMVC/CPImageCacheHandler.m)
 <br /><br />
-- [Utilization of NSZombie](https://github.com/kPhilosopher/CoreDataPlaces)
+- Utilization of NSZombie
 - [nib/xib file based UI design](https://github.com/kPhilosopher/graphCalculator_test/tree/master/GraphCalculator)
 <br /><br />
 - TDD -> Refactoring development cycle - [Production code](https://github.com/kPhilosopher/CoreDataPlaces/tree/master/CoreDataPlaces/CoreDataPhotosMVC), [Test code (MostRecentPhotos files)](https://github.com/kPhilosopher/CoreDataPlaces/tree/master/CoreDataPlacesTests)
